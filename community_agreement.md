@@ -89,4 +89,4 @@ Community contributions are preserved when applicable, but may be modified or re
 By contributing to or using this branch, you confirm that you understand its experimental nature.
 
 ### Do you accept full responsibility for your actions within this environment?
-                        ------Accept & Decline------
+                                -Accept & Decline-
