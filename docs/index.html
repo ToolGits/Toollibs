@@ -2,56 +2,288 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Toollibs</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0d1117;
+      color: #f0f6fc;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 100px 20px;
+      text-align: center;
+
+      background:
+      linear-gradient(
+        135deg,
+        #111827,
+        #0d1117
+      );
+
+      border-bottom: 1px solid #1f2937;
+    }
+
+    header h1 {
+      font-size: 72px;
+      font-weight: 800;
+      margin-bottom: 20px;
+
+      background: linear-gradient(
+        90deg,
+        #58a6ff,
+        #7ee787
+      );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      color: #9ca3af;
+      font-size: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 50px 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    section {
+      background-color: #161b22;
+
+      border:
+      1px solid #21262d;
+
+      border-radius: 16px;
+
+      padding: 25px;
+
+      transition: 0.2s ease;
+    }
+
+    section:hover {
+      transform: translateY(-4px);
+      border-color: #58a6ff;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 24px;
+      color: #58a6ff;
+    }
+
+    p {
+      color: #c9d1d9;
+    }
+
+    ul {
+      padding-left: 20px;
+      color: #c9d1d9;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #7ee787;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hero-buttons {
+      margin-top: 35px;
+    }
+
+    .button {
+      display: inline-block;
+
+      padding: 12px 24px;
+
+      border-radius: 10px;
+
+      background-color: #238636;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 600;
+
+      margin: 5px;
+
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #2ea043;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 30px 20px;
+
+      text-align: center;
+
+      border-top: 1px solid #1f2937;
+
+      color: #8b949e;
+    }
+
+    .tagline {
+      margin-top: 15px;
+      color: #7d8590;
+      font-size: 16px;
+    }
+
+  </style>
 </head>
+
 <body>
 
-  <p>
-  Open-source modular C++ framework library
-  maintained by community and author.
-</p>
+  <header>
+
+    <h1>Toollibs</h1>
+
+    <p>
+      Open-source modular C++ framework library
+      focused on tools, utilities and scalable systems.
+    </p>
+
+    <p class="tagline">
+      Lightweight. Modular. Community-driven.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a
+        class="button"
+        href="https://github.com/enzobobdevvideos04-ctrl/Toollibs"
+      >
+        GitHub Repository
+      </a>
+
+    </div>
+
+  </header>
 
   <main>
-    <section>
-      <h2>What is Toollibs?</h2>
-      <p>
-        Toollibs is an open-source C++ library that provides tools,
-        utilities, and modular systems for developers.
-      </p>
-    </section>
 
-    <section>
-      <h2>Modules</h2>
-      <ul>
-        <li>Core</li>
-        <li>File System (FS)</li>
-        <li>Input System</li>
-        <li>Math Tools</li>
-        <li>Plugin System</li>
-      </ul>
-    </section>
+    <div class="grid">
 
-    <section>
-      <h2>License</h2>
-      <p>MIT License - open-source and free to use.</p>
-    </section>
+      <section>
 
-    <section>
-      <h2>Links</h2>
-      <p>
-        <a href="https://github.com/enzobobdevvideos04-ctrl/Toollibs">
-          GitHub Repository
-        </a>
-      </p>
-    </section>
+        <h2>About Toollibs</h2>
+
+        <p>
+          Toollibs is a modular C++ framework library designed
+          for developers who need scalable and reusable systems.
+        </p>
+
+      </section>
+
+      <section>
+
+        <h2>Modules</h2>
+
+        <ul>
+          <li>Core System</li>
+          <li>File System (FS)</li>
+          <li>Input System</li>
+          <li>Math Tools</li>
+          <li>Plugin System</li>
+          <li>Logger System</li>
+        </ul>
+
+      </section>
+
+      <section>
+
+        <h2>Community Branch</h2>
+
+        <p>
+          Toollibs includes a dedicated community branch
+          for experiments, prototypes and new ideas.
+        </p>
+
+      </section>
+
+      <section>
+
+        <h2>Project Status</h2>
+
+        <p>
+          Toollibs is currently in active development.
+          The main branch contains the official stable structure.
+        </p>
+
+      </section>
+
+      <section>
+
+        <h2>License</h2>
+
+        <p>
+          Toollibs is distributed under the MIT License,
+          allowing free usage, modification and distribution.
+        </p>
+
+      </section>
+
+      <section>
+
+        <h2>Open-source</h2>
+
+        <p>
+          Contributions, pull requests and community ideas
+          are welcome in the Toollibs ecosystem.
+        </p>
+
+      </section>
+
+    </div>
+
   </main>
 
   <footer>
-  <p>
-    Toollibs © Open-source project under MIT License
-  </p>
-</footer>
+
+    <p>
+      Toollibs © 2026 — Open-source project maintained
+      by enzobobdevvideos04-ctrl
+    </p>
+
+  </footer>
 
 </body>
 </html>
