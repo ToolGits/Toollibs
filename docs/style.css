@@ -13,32 +13,58 @@ body {
   line-height: 1.6;
 }
 
+/* =========================
+   NAVBAR
+========================= */
+
 nav {
+
   display: flex;
 
   justify-content: center;
 
-  gap: 25px;
+  align-items: center;
 
-  padding: 20px;
+  gap: 35px;
+
+  padding: 18px 20px;
 
   background-color: #111827;
 
   border-bottom: 1px solid #1f2937;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 1000;
+
 }
 
 nav a {
+
   color: #f0f6fc;
 
   text-decoration: none;
 
   font-weight: 600;
 
+  font-size: 16px;
+
   transition: 0.2s ease;
+
+  padding: 8px 14px;
+
+  border-radius: 8px;
+
 }
 
 nav a:hover {
+
   color: #58a6ff;
+
+  background-color: rgba(88, 166, 255, 0.08);
+
 }
 
 /* =========================
