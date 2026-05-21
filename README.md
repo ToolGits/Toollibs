@@ -1,50 +1,55 @@
-# Toollibs Community 🌍
+# Toollibs
 
-Experimental branch of Toollibs for testing ideas, prototypes, and community contributions.
+Toollibs is a modular collection of reusable C++ libraries designed to provide simple, lightweight, and structured tools for software development.
 
----
-
-## ⚠️ Warning
-
-This branch is:
-- Unstable
-- Experimental
-- Not official
-- Subject to change or removal at any time
+It can be used as a base for games, emulators, system tools, and general-purpose applications.
 
 ---
 
-## 🧠 Purpose
+## 🔧 Modules
 
-- Test new ideas
-- Experiment with systems
-- Explore alternative implementations
-- Community-driven development
-
----
-
-## 🌿 Branches
-
-- `main` → official and stable Toollibs
-- `community` → experimental sandbox
+- core: logging, basic utilities, and system helpers
+- graphics: simple rendering and pixel manipulation
+- input: keyboard, mouse, and controller handling
+- audio: basic sound and audio system
+- fs: file system utilities
+- math: mathematical helpers and structures
+- plugins: modular extension system
 
 ---
 
-## 📌 Start here
+## 🎯 Goal
 
-Read:
-- community_docs.md (official community documentation)
-- community_agreement.md (Agreement for the community, important)
+To build a clean, reusable, and modular C++ toolkit that can serve as a foundation for different types of projects.
 
 ---
 
-## 📜 License
+## 🌍 Community Project
 
-MIT License
+Toollibs is an open project built for the community.
+
+Everyone is welcome to:
+- contribute ideas
+- improve code
+- create new modules
+- build bases and tools
+- experiment freely
+- help expand the project in any direction
+
+This project is meant to be a space for creativity, collaboration, and learning.
 
 ---
 
-## 👤 Credits
+## 🚀 Status
 
-Toollibs by:
-- enzobobdevvideos04-ctrl (GitBob)
+Early development 🚧
+
+---
+
+## 🛠 Build
+
+```bash
+mkdir build
+cd build
+cmake ..
+make
