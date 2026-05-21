@@ -1,36 +1,239 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #0f0f0f;
-  color: #ffffff;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
+
+body {
+  background-color: #0d1117;
+  color: #f0f6fc;
+
+  font-family: 'Inter', sans-serif;
+
+  line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header {
+  padding: 100px 20px;
   text-align: center;
-  padding: 40px;
-  background-color: #1a1a1a;
+
+  background:
+  linear-gradient(
+    135deg,
+    #111827,
+    #0d1117
+  );
+
+  border-bottom: 1px solid #1f2937;
 }
+
+header h1 {
+  font-size: 72px;
+  font-weight: 800;
+
+  margin-bottom: 20px;
+
+  background: linear-gradient(
+    90deg,
+    #58a6ff,
+    #7ee787
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+header p {
+  color: #9ca3af;
+
+  font-size: 20px;
+
+  max-width: 700px;
+
+  margin: auto;
+}
+
+.tagline {
+  margin-top: 15px;
+
+  color: #7d8590;
+
+  font-size: 16px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.hero-buttons {
+  margin-top: 35px;
+}
+
+.button {
+  display: inline-block;
+
+  padding: 12px 24px;
+
+  border-radius: 10px;
+
+  background-color: #238636;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+  margin: 5px;
+
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  background-color: #2ea043;
+
+  transform: translateY(-2px);
+}
+
+/* =========================
+   MAIN
+========================= */
 
 main {
-  padding: 20px;
+  max-width: 1100px;
+
+  margin: auto;
+
+  padding: 50px 20px;
 }
+
+.grid {
+  display: grid;
+
+  grid-template-columns:
+  repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  );
+
+  gap: 25px;
+}
+
+/* =========================
+   SECTIONS
+========================= */
 
 section {
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #1c1c1c;
-  border-radius: 8px;
+  background-color: #161b22;
+
+  border:
+  1px solid #21262d;
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  transition: 0.2s ease;
+
+  box-shadow:
+  0 0 0 rgba(0, 0, 0, 0);
 }
+
+section:hover {
+  transform: translateY(-4px);
+
+  border-color: #58a6ff;
+
+  box-shadow:
+  0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+  margin-bottom: 15px;
+
+  font-size: 24px;
+
+  color: #58a6ff;
+}
+
+p {
+  color: #c9d1d9;
+}
+
+/* =========================
+   LISTS
+========================= */
+
+ul {
+  padding-left: 20px;
+
+  color: #c9d1d9;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+strong {
+  color: #ffffff;
+}
+
+/* =========================
+   LINKS
+========================= */
 
 a {
-  color: #4da3ff;
+  color: #7ee787;
+
   text-decoration: none;
+
+  font-weight: 600;
 }
 
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 footer {
+  margin-top: 60px;
+
+  padding: 30px 20px;
+
   text-align: center;
-  padding: 20px;
-  background-color: #1a1a1a;
-  margin-top: 30px;
+
+  border-top: 1px solid #1f2937;
+
+  color: #8b949e;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 70px 20px;
+  }
+
+  header h1 {
+    font-size: 52px;
+  }
+
+  header p {
+    font-size: 18px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
 }
