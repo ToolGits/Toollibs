@@ -9,7 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
 
@@ -62,6 +65,41 @@
       margin: auto;
     }
 
+    .tagline {
+      margin-top: 15px;
+      color: #7d8590;
+      font-size: 16px;
+    }
+
+    .hero-buttons {
+      margin-top: 35px;
+    }
+
+    .button {
+      display: inline-block;
+
+      padding: 12px 24px;
+
+      border-radius: 10px;
+
+      background-color: #238636;
+
+      color: white;
+
+      text-decoration: none;
+
+      font-weight: 600;
+
+      margin: 5px;
+
+      transition: 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: #2ea043;
+      transform: translateY(-2px);
+    }
+
     main {
       max-width: 1100px;
       margin: auto;
@@ -70,7 +108,7 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
     }
 
@@ -108,7 +146,11 @@
     }
 
     li {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    strong {
+      color: #ffffff;
     }
 
     a {
@@ -121,35 +163,6 @@
       text-decoration: underline;
     }
 
-    .hero-buttons {
-      margin-top: 35px;
-    }
-
-    .button {
-      display: inline-block;
-
-      padding: 12px 24px;
-
-      border-radius: 10px;
-
-      background-color: #238636;
-
-      color: white;
-
-      text-decoration: none;
-
-      font-weight: 600;
-
-      margin: 5px;
-
-      transition: 0.2s ease;
-    }
-
-    .button:hover {
-      background-color: #2ea043;
-      transform: translateY(-2px);
-    }
-
     footer {
       margin-top: 60px;
       padding: 30px 20px;
@@ -159,12 +172,6 @@
       border-top: 1px solid #1f2937;
 
       color: #8b949e;
-    }
-
-    .tagline {
-      margin-top: 15px;
-      color: #7d8590;
-      font-size: 16px;
     }
 
   </style>
@@ -207,61 +214,66 @@
         <h2>About Toollibs</h2>
 
         <p>
-          Toollibs is a modular C++ framework library designed
-          for developers who need scalable and reusable systems.
+          Toollibs is a modular open-source C++ framework
+          library designed for developers who need scalable,
+          reusable and lightweight systems.
         </p>
 
       </section>
 
       <section>
 
-  <h2>Main Modules</h2>
+        <h2>Main Modules</h2>
 
-  <ul>
-    <li>
-      <strong>core</strong>:
-      logging, basic utilities, and system helpers
-    </li>
+        <ul>
 
-    <li>
-      <strong>graphics</strong>:
-      simple rendering and pixel manipulation
-    </li>
+          <li>
+            <strong>core</strong>:
+            logging, basic utilities, and system helpers
+          </li>
 
-    <li>
-      <strong>input</strong>:
-      keyboard, mouse, and controller handling
-    </li>
+          <li>
+            <strong>graphics</strong>:
+            simple rendering and pixel manipulation
+          </li>
 
-    <li>
-      <strong>audio</strong>:
-      basic sound and audio system
-    </li>
+          <li>
+            <strong>input</strong>:
+            keyboard, mouse, and controller handling
+          </li>
 
-    <li>
-      <strong>fs</strong>:
-      file system utilities
-    </li>
+          <li>
+            <strong>audio</strong>:
+            basic sound and audio system
+          </li>
 
-    <li>
-      <strong>math</strong>:
-      mathematical helpers and structures
-    </li>
+          <li>
+            <strong>fs</strong>:
+            file system utilities
+          </li>
 
-    <li>
-      <strong>plugins</strong>:
-      modular extension system
-    </li>
-    
-  </ul>
+          <li>
+            <strong>math</strong>:
+            mathematical helpers and structures
+          </li>
 
-</section>
+          <li>
+            <strong>plugins</strong>:
+            modular extension system
+          </li>
+
+        </ul>
+
+      </section>
+
+      <section>
 
         <h2>Community Branch</h2>
 
         <p>
-          Toollibs includes a dedicated community branch
-          for experiments, prototypes and new ideas.
+          Toollibs includes a dedicated experimental
+          community branch for prototypes, testing,
+          new ideas and alternative implementations.
         </p>
 
       </section>
