@@ -65,7 +65,7 @@ int main()
             break;
 
         case '0':
-            i = size; // força saída do loop
+            i = size;
             break;
         }
     }
