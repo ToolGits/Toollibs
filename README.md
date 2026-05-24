@@ -37,19 +37,3 @@ Everyone is welcome to:
 - help expand the project in any direction
 
 This project is meant to be a space for creativity, collaboration, and learning.
-
----
-
-## 🚀 Status
-
-Early development 🚧
-
----
-
-## 🛠 Build
-
-```bash
-mkdir build
-cd build
-cmake ..
-make
