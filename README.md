@@ -37,3 +37,50 @@ Everyone is welcome to:
 - help expand the project in any direction
 
 This project is meant to be a space for creativity, collaboration, and learning.
+
+## 📦 Build
+
+### 🐧 Linux
+
+```bash
+git clone https://github.com/enzobobdevvideos04-ctrl/Toollibs.git
+cd Toollibs
+
+g++ core/mainlogger.cpp platform/platform.cpp input/input_simulation.cpp -o mainlogger
+
+./mainlogger
+
+### 🪟 Windows (MinGW)
+
+Bash
+git clone https://github.com/enzobobdevvideos04-ctrl/Toollibs.git
+cd Toollibs
+
+g++ core\mainlogger.cpp platform\platform.cpp input\input_simulation.cpp -o mainlogger.exe
+
+mainlogger.exe
+
+---
+
+# 🤝 Contributing
+
+```md id="contrib_clean"
+## 🤝 Contributing
+
+We welcome contributions to Toollibs!
+
+1. Fork the repository  
+2. Clone your fork  
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/Toollibs.git
+Create a new branch
+Bash
+git checkout -b my-feature
+Make your changes
+Commit
+Bash
+git commit -m "Add my feature"
+Push
+Bash
+git push origin my-feature
+Open a Pull Request
