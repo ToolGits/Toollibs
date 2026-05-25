@@ -6,15 +6,15 @@ namespace fs = std::filesystem;
 
 int main()
 {
-    Toollibs::Logger::Info("Starting Toollibs...");
+    Toollibs::Logger::Info("Checking Toollibs...");
 
-    if (!fs::exists("../input"))
+    if (!fs::exists("input"))
     {
         Toollibs::Logger::Error("Input module verification failed");
         return 1;
     }
 
-    if (!fs::exists("../input/input_simulation.cpp"))
+    if (!fs::exists("input/input_simulation.cpp"))
     {
         Toollibs::Logger::Error("Input module verification failed");
         return 1;
@@ -22,7 +22,7 @@ int main()
 
     Toollibs::Logger::Info("Input module initialized");
 
-    Toollibs::Logger::Info("Toollibs initialized successfully");
+    Toollibs::Logger::Info("Toollibs verification completed successfully");
 
     return 0;
 }
