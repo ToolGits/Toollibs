@@ -49,3 +49,7 @@ cd Toollibs
 g++ core/mainlogger.cpp platform/platform.cpp input/input_simulation.cpp -o mainlogger
 
 ./mainlogger
+
+### Windows
+
+a
