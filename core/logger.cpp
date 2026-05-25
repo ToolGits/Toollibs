@@ -1,5 +1,5 @@
-#include "logger.hpp"
 #include "platform.hpp"
+#include "logger.hpp"
 
 #include <iostream>
 #include <ctime>
