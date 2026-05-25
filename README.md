@@ -50,6 +50,43 @@ g++ core/mainlogger.cpp platform/platform.cpp input/input_simulation.cpp -o main
 
 ./mainlogger
 
-### Windows
+---
 
-a
+🪟 Windows (MinGW)
+git clone https://github.com/enzobobdevvideos04-ctrl/Toollibs.git
+cd Toollibs
+
+g++ core\mainlogger.cpp platform\platform.cpp input\input_simulation.cpp -o mainlogger.exe
+
+mainlogger.exe
+
+---
+
+# 🤝 Contributing (separado mesmo, padrão correto)
+
+```md id="contrib_clean"
+## 🤝 Contributing
+
+We welcome contributions to Toollibs!
+
+1. Fork the repository  
+2. Clone your fork  
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/Toollibs.git
+Create a new branch
+
+---
+
+git checkout -b my-feature
+Make your changes
+Commit
+
+---
+
+git commit -m "Add my feature"
+Push
+
+---
+
+git push origin my-feature
+Open a Pull Request
