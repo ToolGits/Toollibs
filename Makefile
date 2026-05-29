@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
 
-SRC = core/logger.cpp platform/platform.cpp core/mainlogger.cpp math/math.cpp
+SRC = core/logger.cpp platform/platform.cpp core/mainlogger.cpp math/math.cpp graphics/graphics.cpp
 
 ARCH := $(shell uname -m)
 

@@ -1,5 +1,6 @@
 #include "logger.hpp"
 #include "math/math.hpp"
+#include "graphics/graphics.hpp"
 
 #include <filesystem>
 
@@ -40,6 +41,32 @@ int main()
     {
         Toollibs::Logger::Warning("Math module incomplete or missing");
     }
+
+// =========================
+// Graphics module check
+// =========================
+if (!fs::exists("graphics/graphics.hpp") ||
+    !fs::exists("graphics/graphics.cpp"))
+{
+    Toollibs::Logger::Warning("Graphics module incomplete or missing");
+}
+else
+{
+    Toollibs::Logger::Info("Graphics module detected");
+
+    Toollibs::Graphics::Init();
+
+    Toollibs::Graphics::Color black{0, 0, 0};
+    Toollibs::Graphics::Color white{255, 255, 255};
+
+    Toollibs::Graphics::Clear(black);
+    Toollibs::Graphics::DrawPixel(10, 10, white);
+
+    Toollibs::Graphics::Shutdown();
+
+    Toollibs::Logger::Debug("Graphics module runtime test executed");
+}
+
 
     Toollibs::Logger::Info("Toollibs verification completed successfully");
 
