@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall
 
 SRC = core/logger.cpp platform/platform.cpp core/mainlogger.cpp
-OUT = mainlogger
+OUT = bin/mainlogger
 
 ARCH := $(shell uname -m)
 
