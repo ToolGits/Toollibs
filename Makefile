@@ -2,7 +2,6 @@ CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 
 SRC = core/logger.cpp platform/platform.cpp core/mainlogger.cpp
-OUT = bin/mainlogger
 
 ARCH := $(shell uname -m)
 
@@ -22,8 +21,10 @@ else
     PLATFORM = Unknown
 endif
 
+OUT = bin/$(ARCH)/mainlogger
+
 all:
-	@mkdir -p bin
+	@mkdir -p bin/$(ARCH)
 	@echo "Building Toollibs for $(PLATFORM)"
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
 
