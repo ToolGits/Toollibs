@@ -1,6 +1,5 @@
 #include "logger.hpp"
 #include "math/math.hpp"
-#include "math/math.cpp"
 
 #include <filesystem>
 
