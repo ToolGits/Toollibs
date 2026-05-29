@@ -1,0 +1,53 @@
+# =====================================================
+#  Makefile Template - Toollibs
+#  Generic C++ Build System (C++17 + Auto Architecture)
+# =====================================================
+
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall
+
+# =========================
+# EDIT HERE
+# =========================
+
+SRC = main.cpp
+OUT = bin/app
+
+# =========================
+# Architecture detection
+# =========================
+
+ARCH := $(shell uname -m)
+
+ifeq ($(ARCH),x86_64)
+    PLATFORM = PC (x86_64)
+else ifeq ($(ARCH),i386)
+    PLATFORM = PC (x86)
+else ifeq ($(ARCH),i686)
+    PLATFORM = PC (x86)
+else ifeq ($(ARCH),aarch64)
+    PLATFORM = ARM64 (Android)
+else ifeq ($(ARCH),armv7l)
+    PLATFORM = ARM32 (Android)
+else ifeq ($(ARCH),armv6l)
+    PLATFORM = ARM32 (Android)
+else
+    PLATFORM = Unknown
+endif
+
+# =========================
+# Build rules
+# =========================
+
+all:
+        @echo "Building Toollibs Template for $(PLATFORM)"
+        $(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
+
+run:
+        @echo "Running on $(PLATFORM)"
+        ./$(OUT)
+
+clean:
+        rm -f $(OUT)
+
+#This is a TEMPLATE; none of this actually exists and is meant to be edited and used to compile other things.
