@@ -32,9 +32,7 @@ int main()
         Toollibs::Math::Vec2 a{1.0f, 2.0f};
         Toollibs::Math::Vec2 b{3.0f, 4.0f};
 
-        auto result = Toollibs::Math::Add(a, b);
-
-        Toollibs::Logger::Debug("Math test executed");
+        Toollibs::Math::Add(a, b);
 
         Toollibs::Logger::Debug("Math module runtime test executed");
     }
