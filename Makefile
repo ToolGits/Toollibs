@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 
 SRC = core/logger.cpp platform/platform.cpp core/mainlogger.cpp
 OUT = bin/mainlogger
@@ -23,6 +23,7 @@ else
 endif
 
 all:
+	@mkdir -p bin
 	@echo "Building Toollibs for $(PLATFORM)"
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT)
 
@@ -31,4 +32,4 @@ run:
 	./$(OUT)
 
 clean:
-	rm -f $(OUT)
+	rm -rf bin
