@@ -11,7 +11,7 @@ CXXFLAGS = -std=c++17 -Wall
 # =========================
 
 SRC = main.cpp
-OUT = app
+OUT = bin/app
 
 # =========================
 # Architecture detection
