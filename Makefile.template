@@ -1,6 +1,7 @@
 # =====================================================
 #  Makefile Template - Toollibs
 #  Generic C++ Build System (C++17 + Auto Architecture)
+#                   [Outdated!!]
 # =====================================================
 
 CXX = g++
