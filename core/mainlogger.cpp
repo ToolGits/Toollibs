@@ -34,11 +34,13 @@ int main()
 
         auto result = Toollibs::Math::Add(a, b);
 
+        Toollibs::Logger::Debug("Math test executed");
+
         Toollibs::Logger::Debug("Math module runtime test executed");
     }
     else
     {
-        Toollibs::Logger::Warn("Math module incomplete or missing");
+        Toollibs::Logger::Warning("Math module incomplete or missing");
     }
 
     Toollibs::Logger::Info("Toollibs verification completed successfully");
