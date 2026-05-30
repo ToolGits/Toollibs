@@ -295,3 +295,22 @@ footer {
 nav a {
   color: #f0f6fc !important;
 }
+
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.tested {
+    background: #22c55e;
+    color: white;
+}
+
+.compatible {
+    background: #3b82f6;
+    color: white;
+}
