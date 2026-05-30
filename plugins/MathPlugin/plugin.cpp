@@ -11,9 +11,9 @@ namespace Toollibs::Plugin {
         float a = 10.0f;
         float b = 5.0f;
 
-        float add = Toollibs::Math::Add(a, b);
-        float sub = Toollibs::Math::Sub(a, b);
-        float scale = Toollibs::Math::Scale(a, 2.0f);
+        Toollibs::Math::Vec2 add = Toollibs::Math::Add(a, b);
+Toollibs::Math::Vec2 sub = Toollibs::Math::Sub(a, b);
+Toollibs::Math::Vec2 scale = Toollibs::Math::Scale(a, 2.0f);
 
         Toollibs::Logger::Debug("Add test executed");
         Toollibs::Logger::Debug("Sub test executed");
