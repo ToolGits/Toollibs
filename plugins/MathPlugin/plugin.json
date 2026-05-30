@@ -1,0 +1,7 @@
+{
+  "name": "MathPlugin",
+  "version": "1.0",
+  "author": "Toollibs",
+  "description": "Provides math test utilities using Toollibs Math module",
+  "entry": "plugin.cpp"
+}
