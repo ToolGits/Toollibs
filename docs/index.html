@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -25,28 +26,27 @@
     <a href="devices.html">Devices</a>
   </nav>
 
-  <!-- STABLE BANNER -->
-  <div style="
+  <!-- RELEASE BANNER -->
+  <div id="releaseBanner" style="
     text-align:center;
-    padding:10px;
-    background:#238636;
+    padding:12px;
     color:white;
     font-weight:700;
     letter-spacing:1px;
-  ">
-    STABLE VERSION — v2.0 Forgelibs
-  </div>
+    transition:0.3s ease;
+  "></div>
 
+  <!-- HERO -->
   <header class="hero">
 
     <h1>Toollibs</h1>
 
     <p class="subtitle">
-      Open-source modular C++ framework for tools, utilities and scalable systems.
+      Modular open-source C++ framework for tools, utilities and scalable systems.
     </p>
 
     <p class="tagline">
-      Lightweight · Modular · Community-driven · Multi-platform
+      Lightweight · Modular · Community-driven · Cross-platform · Runtime Ready
     </p>
 
     <div class="hero-buttons">
@@ -55,12 +55,15 @@
          href="https://github.com/enzobobdevvideos04-ctrl/Toollibs"
          target="_blank"
          rel="noopener noreferrer">
-        GitHub Repository
+        GitHub
       </a>
 
-      <a class="button"
-         href="downloads.html">
-        Download MainLogger
+      <a class="button" href="downloads.html">
+        Downloads
+      </a>
+
+      <a class="button" href="changelog.html">
+        Changelog
       </a>
 
     </div>
@@ -71,62 +74,73 @@
 
     <div class="grid">
 
+      <!-- STATUS -->
       <section>
 
-        <h2>About Toollibs</h2>
+        <h2>Project Status</h2>
+
+        <span class="badge tested">STABLE v2.0</span>
 
         <p>
-          Toollibs is a modular open-source C++ framework designed for reusable
-          components, system utilities and scalable development.
+          Toollibs Forgelibs is the first stable release of the framework,
+          introducing plugins, math system and multi-platform builds.
         </p>
 
       </section>
 
+      <!-- ABOUT -->
       <section>
 
-        <h2>v2.0 Forgelibs</h2>
+        <h2>About</h2>
 
         <p>
-          First stable release of the framework introducing plugins, improved
-          logging system and multi-architecture support.
+          Toollibs is a modular C++ framework designed for reusable components,
+          system utilities, runtime tools and scalable architecture.
         </p>
 
       </section>
 
+      <!-- CORE MODULES -->
       <section>
 
         <h2>Core Modules</h2>
 
         <ul>
-
-          <li><strong>core</strong> — logging and runtime system</li>
+          <li><strong>core</strong> — logging + runtime system</li>
+          <li><strong>math</strong> — vector + math engine</li>
           <li><strong>graphics</strong> — rendering utilities</li>
-          <li><strong>input</strong> — device input handling</li>
-          <li><strong>math</strong> — vector and math utilities</li>
-          <li><strong>plugins</strong> — extensibility system</li>
-
+          <li><strong>input</strong> — device input system</li>
+          <li><strong>plugins</strong> — extensibility layer</li>
         </ul>
 
       </section>
 
+      <!-- VERSION SYSTEM -->
       <section>
 
-        <h2>Project Status</h2>
+        <h2>Version System</h2>
+
+        <span class="badge compatible">v2.0 Forgelibs</span>
+        <span class="badge tested">v2.1 BigBrowserToollibs</span>
 
         <p>
-          Toollibs is now in a stable release state (v2.0 Forgelibs).
-          Future updates will focus on improvements and plugins.
+          The framework now supports codename-based versioning and live runtime UI updates
+          through the web system.
         </p>
 
       </section>
 
+      <!-- DEV STATUS -->
       <section>
 
-        <h2>Community</h2>
+        <h2>Development System</h2>
 
-        <p>
-          Contributions, ideas and experiments are welcome through GitHub.
-        </p>
+        <ul>
+          <li>Live release countdown engine</li>
+          <li>Automatic version switching (v2.0 → v2.1)</li>
+          <li>Dynamic changelog generation</li>
+          <li>Runtime UI updates</li>
+        </ul>
 
       </section>
 
@@ -135,12 +149,104 @@
   </main>
 
   <footer>
-
-    <p>
-      Toollibs © 2026 — Forgelibs Stable Release
-    </p>
-
+    <p>Toollibs © 2026 — Open-source C++ Framework</p>
   </footer>
 
+  <!-- RELEASE ENGINE + AUTO SYSTEM -->
+  <script>
+
+    const updateTime = new Date("2026-06-02T20:00:00").getTime();
+
+    function createAutoChangelog() {
+
+      if (localStorage.getItem("v21_changelog_created")) return;
+
+      const container = document.querySelector(".grid");
+
+      const section = document.createElement("section");
+
+      section.innerHTML = `
+        <h2>v2.1 BigBrowserToollibs</h2>
+
+        <span class="badge tested">AUTO GENERATED</span>
+        <span class="badge compatible">LIVE UPDATE</span>
+
+        <ul>
+          <li>Automatic release system activated</li>
+          <li>Dynamic UI transition engine enabled</li>
+          <li>Live version switching (v2.0 → v2.1)</li>
+          <li>Auto changelog generation system introduced</li>
+        </ul>
+      `;
+
+      container.prepend(section);
+
+      localStorage.setItem("v21_changelog_created", "true");
+    }
+
+    function applyV21Mode() {
+
+      const banner = document.getElementById("releaseBanner");
+
+      banner.innerHTML = "🚀 BIG BROWSER UPDATE LIVE — v2.1 BigBrowserToollibs";
+      banner.style.background = "#dc2626";
+      banner.style.boxShadow = "0 0 25px rgba(220,38,38,0.6)";
+
+      document.title = "Toollibs v2.1 BigBrowserToollibs";
+
+      const subtitle = document.querySelector(".subtitle");
+      if (subtitle) {
+        subtitle.textContent =
+          "Next-generation framework with live update engine and runtime UI system.";
+      }
+
+      const tagline = document.querySelector(".tagline");
+      if (tagline) {
+        tagline.textContent =
+          "Lightweight · Modular · Community-driven · LIVE SYSTEM";
+      }
+
+      createAutoChangelog();
+    }
+
+    function updateSystem() {
+
+      const now = Date.now();
+      const diff = updateTime - now;
+
+      const banner = document.getElementById("releaseBanner");
+
+      if (diff <= 0) {
+        applyV21Mode();
+        return;
+      }
+
+      const seconds = Math.floor(diff / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      let text;
+
+      if (days > 0) text = `${days}d ${hours % 24}h`;
+      else if (hours > 0) text = `${hours}h ${minutes % 60}m`;
+      else if (minutes > 0) text = `${minutes}m ${seconds % 60}s`;
+      else text = `${seconds}s`;
+
+      if (diff < 3600 * 1000) {
+        banner.style.background = "#f59e0b";
+        banner.innerHTML = `🔥 UPDATE SOON — v2.1 BigBrowserToollibs<br>${text}`;
+      } else {
+        banner.style.background = "#238636";
+        banner.innerHTML = `STABLE — v2.0 Forgelibs<br>Next update in: ${text}`;
+      }
+    }
+
+    setInterval(updateSystem, 1000);
+    updateSystem();
+
+  </script>
+
 </body>
+
 </html>
