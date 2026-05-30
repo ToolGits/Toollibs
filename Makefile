@@ -8,7 +8,6 @@ CORE_SRC = core/logger.cpp core/mainlogger.cpp platform/platform.cpp
 MATH_SRC = math/math.cpp
 GRAPHICS_SRC = graphics/graphics.cpp
 PLUGIN_SRC = plugins/MathPlugin/plugin.cpp
-INPUT_SRC = input/input_simulation.cpp
 
 SRC = $(CORE_SRC) $(MATH_SRC) $(GRAPHICS_SRC) $(PLUGIN_SRC) $(INPUT_SRC)
 

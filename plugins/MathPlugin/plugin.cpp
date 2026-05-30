@@ -8,16 +8,16 @@ namespace Toollibs::Plugin {
     {
         Toollibs::Logger::Info("MathPlugin started...");
 
-        float a = 10.0f;
-        float b = 5.0f;
+        Toollibs::Math::Vec2 a{10.0f, 5.0f};
+        Toollibs::Math::Vec2 b{3.0f, 2.0f};
 
-        Toollibs::Math::Vec2 add = Toollibs::Math::Add(a, b);
-Toollibs::Math::Vec2 sub = Toollibs::Math::Sub(a, b);
-Toollibs::Math::Vec2 scale = Toollibs::Math::Scale(a, 2.0f);
+        auto add = Toollibs::Math::Add(a, b);
+        auto sub = Toollibs::Math::Sub(a, b);
+        auto scale = Toollibs::Math::Scale(a, 2.0f);
 
-        Toollibs::Logger::Debug("Add test executed");
-        Toollibs::Logger::Debug("Sub test executed");
-        Toollibs::Logger::Debug("Scale test executed");
+        Toollibs::Logger::Debug("Add operation executed");
+        Toollibs::Logger::Debug("Sub operation executed");
+        Toollibs::Logger::Debug("Scale operation executed");
 
         Toollibs::Logger::Info("MathPlugin finished successfully");
     }
