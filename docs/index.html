@@ -153,100 +153,114 @@
   </footer>
 
   <!-- RELEASE ENGINE + AUTO SYSTEM -->
-  <script>
+<script>
 
-    const updateTime = new Date("2026-06-02T20:00:00").getTime();
+document.addEventListener("DOMContentLoaded", () => {
 
-    function createAutoChangelog() {
+  const versionData = {
+    current: "v2.0",
+    next: "v2.1 BigBrowserToollibs",
+    releaseTime: new Date("2026-06-02T20:00:00").getTime()
+  };
 
-      if (localStorage.getItem("v21_changelog_created")) return;
+  function generateAutoChangelog() {
 
-      const container = document.querySelector(".grid");
+    if (localStorage.getItem("v21_changelog_created")) return;
 
-      const section = document.createElement("section");
+    const changelog = [
+      "Automatic release system activated",
+      "Live version switching engine enabled",
+      "Dynamic UI update system introduced",
+      "Runtime frontend mutation support added",
+      "Automatic changelog generator system enabled",
+      "Persistent version state tracking implemented",
+      "Web-based framework evolution system activated"
+    ];
 
-      section.innerHTML = `
-        <h2>v2.1 BigBrowserToollibs</h2>
+    const container = document.querySelector(".grid");
+    if (!container) return;
 
-        <span class="badge tested">AUTO GENERATED</span>
-        <span class="badge compatible">LIVE UPDATE</span>
+    const section = document.createElement("section");
 
-        <ul>
-          <li>Automatic release system activated</li>
-          <li>Dynamic UI transition engine enabled</li>
-          <li>Live version switching (v2.0 → v2.1)</li>
-          <li>Auto changelog generation system introduced</li>
-        </ul>
-      `;
+    section.innerHTML = `
+      <h2>${versionData.next}</h2>
+      <span class="badge tested">AUTO GENERATED</span>
+      <span class="badge compatible">LIVE SYSTEM</span>
+      <ul>
+        ${changelog.map(item => `<li>${item}</li>`).join("")}
+      </ul>
+    `;
 
-      container.prepend(section);
+    container.prepend(section);
 
-      localStorage.setItem("v21_changelog_created", "true");
-    }
+    localStorage.setItem("v21_changelog_created", "true");
+  }
 
-    function applyV21Mode() {
+  function switchToV21() {
 
-      const banner = document.getElementById("releaseBanner");
+    document.title = "Toollibs " + versionData.next;
 
-      banner.innerHTML = "🚀 BIG BROWSER UPDATE LIVE — v2.1 BigBrowserToollibs";
+    const banner = document.getElementById("releaseBanner");
+
+    if (banner) {
+      banner.innerHTML = `🚀 ${versionData.next} — LIVE`;
       banner.style.background = "#dc2626";
-      banner.style.boxShadow = "0 0 25px rgba(220,38,38,0.6)";
-
-      document.title = "Toollibs v2.1 BigBrowserToollibs";
-
-      const subtitle = document.querySelector(".subtitle");
-      if (subtitle) {
-        subtitle.textContent =
-          "Next-generation framework with live update engine and runtime UI system.";
-      }
-
-      const tagline = document.querySelector(".tagline");
-      if (tagline) {
-        tagline.textContent =
-          "Lightweight · Modular · Community-driven · LIVE SYSTEM";
-      }
-
-      createAutoChangelog();
     }
 
-    function updateSystem() {
+    const subtitle = document.querySelector(".subtitle");
 
-      const now = Date.now();
-      const diff = updateTime - now;
-
-      const banner = document.getElementById("releaseBanner");
-
-      if (diff <= 0) {
-        applyV21Mode();
-        return;
-      }
-
-      const seconds = Math.floor(diff / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const days = Math.floor(hours / 24);
-
-      let text;
-
-      if (days > 0) text = `${days}d ${hours % 24}h`;
-      else if (hours > 0) text = `${hours}h ${minutes % 60}m`;
-      else if (minutes > 0) text = `${minutes}m ${seconds % 60}s`;
-      else text = `${seconds}s`;
-
-      if (diff < 3600 * 1000) {
-        banner.style.background = "#f59e0b";
-        banner.innerHTML = `🔥 UPDATE SOON — v2.1 BigBrowserToollibs<br>${text}`;
-      } else {
-        banner.style.background = "#238636";
-        banner.innerHTML = `STABLE — v2.0 Forgelibs<br>Next update in: ${text}`;
-      }
+    if (subtitle) {
+      subtitle.textContent =
+        "Framework upgraded with live runtime update engine and automatic changelog system.";
     }
 
-    setInterval(updateSystem, 1000);
-    updateSystem();
+    generateAutoChangelog();
+  }
 
-  </script>
+  function updateEngine() {
 
+    const now = Date.now();
+    const diff = versionData.releaseTime - now;
+
+    const banner = document.getElementById("releaseBanner");
+
+    if (!banner) return;
+
+    if (diff <= 0) {
+
+      if (!localStorage.getItem("v21_active")) {
+
+        localStorage.setItem("v21_active", "true");
+
+        switchToV21();
+
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+
+      }
+
+      return;
+    }
+
+    const seconds = Math.floor(diff / 1000);
+
+    banner.innerHTML = `STABLE ${versionData.current} — Next update in ${seconds}s`;
+    banner.style.background = "#238636";
+  }
+
+  // start engine
+  setInterval(updateEngine, 1000);
+  updateEngine();
+
+  // restore state
+  if (localStorage.getItem("v21_active") === "true") {
+    switchToV21();
+  }
+
+});
+
+</script>
 </body>
 
 </html>
