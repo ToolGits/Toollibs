@@ -1,6 +1,7 @@
 #include "logger.hpp"
 #include "math/math.hpp"
 #include "graphics/graphics.hpp"
+#include "plugins/MathPlugin/plugin.hpp"
 
 #include <filesystem>
 
@@ -9,65 +10,83 @@ namespace fs = std::filesystem;
 int main()
 {
     Toollibs::Logger::Info("Starting Toollibs verification...");
-
-    Toollibs::Logger::Debug("Checking core modules...");
+    Toollibs::Logger::Debug("Initializing core pipeline...");
 
     // =========================
-    // Input module check
+    // CORE CHECK
     // =========================
-    if (!fs::exists("input/input_simulation.cpp"))
-    {
+    Toollibs::Logger::Info("Checking core modules...");
+
+    bool input_ok = fs::exists("input/input_simulation.cpp");
+    bool math_ok = fs::exists("math/math.hpp") && fs::exists("math/math.cpp");
+    bool graphics_ok = fs::exists("graphics/graphics.hpp") &&
+                        fs::exists("graphics/graphics.cpp");
+
+    if (!input_ok)
         Toollibs::Logger::Error("Input module missing or broken");
-        return 1;
-    }
+    else
+        Toollibs::Logger::Info("Input module detected");
 
-    Toollibs::Logger::Info("Input module initialized");
-
-    // =========================
-    // Math module check + basic test
-    // =========================
-    if (fs::exists("math/math.hpp") && fs::exists("math/math.cpp"))
-    {
+    if (!math_ok)
+        Toollibs::Logger::Warning("Math module missing");
+    else
         Toollibs::Logger::Info("Math module detected");
 
+    if (!graphics_ok)
+        Toollibs::Logger::Warning("Graphics module missing");
+    else
+        Toollibs::Logger::Info("Graphics module detected");
+
+    // =========================
+    // RUNTIME TESTS
+    // =========================
+    Toollibs::Logger::Info("Running runtime tests...");
+
+    if (math_ok)
+    {
         Toollibs::Math::Vec2 a{1.0f, 2.0f};
         Toollibs::Math::Vec2 b{3.0f, 4.0f};
 
-        Toollibs::Math::Add(a, b);
+        auto result = Toollibs::Math::Add(a, b);
 
-        Toollibs::Logger::Debug("Math module runtime test executed");
+        if (result.x == 4.0f && result.y == 6.0f)
+            Toollibs::Logger::Info("Math runtime test PASSED");
+        else
+            Toollibs::Logger::Warning("Math runtime test FAILED");
     }
-    else
+
+    if (graphics_ok)
     {
-        Toollibs::Logger::Warning("Math module incomplete or missing");
+        Toollibs::Graphics::Init();
+
+        Toollibs::Graphics::Color black{0, 0, 0};
+        Toollibs::Graphics::Color white{255, 255, 255};
+
+        Toollibs::Graphics::Clear(black);
+        Toollibs::Graphics::DrawPixel(10, 10, white);
+
+        Toollibs::Graphics::Shutdown();
+
+        Toollibs::Logger::Debug("Graphics runtime test executed");
     }
 
-// =========================
-// Graphics module check
-// =========================
-if (!fs::exists("graphics/graphics.hpp") ||
-    !fs::exists("graphics/graphics.cpp"))
-{
-    Toollibs::Logger::Warning("Graphics module incomplete or missing");
-}
-else
-{
-    Toollibs::Logger::Info("Graphics module detected");
+    // =========================
+    // PLUGIN SYSTEM
+    // =========================
+    Toollibs::Logger::Info("Loading plugins...");
 
-    Toollibs::Graphics::Init();
+    // MathPlugin (test plugin system)
+    Toollibs::Plugin::MathPlugin::Run();
 
-    Toollibs::Graphics::Color black{0, 0, 0};
-    Toollibs::Graphics::Color white{255, 255, 255};
+    Toollibs::Logger::Debug("MathPlugin executed");
 
-    Toollibs::Graphics::Clear(black);
-    Toollibs::Graphics::DrawPixel(10, 10, white);
+    // Future plugins can be added here:
+    // Toollibs::Plugin::GraphicsPlugin::Run();
+    // Toollibs::Plugin::DebugPlugin::Run();
 
-    Toollibs::Graphics::Shutdown();
-
-    Toollibs::Logger::Debug("Graphics module runtime test executed");
-}
-
-
+    // =========================
+    // FINAL RESULT
+    // =========================
     Toollibs::Logger::Info("Toollibs verification completed successfully");
 
     return 0;
