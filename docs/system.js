@@ -3,29 +3,44 @@ async function checkSystemMode() {
     const res = await fetch("./maintenance.json", { cache: "no-store" });
     const data = await res.json();
 
-    if (data.mode === "maintenance") {
-      window.location.href = "maintenance.html";
+    if (!data || !data.active || !data[data.active]) {
+      console.warn("Invalid maintenance.json structure");
       return;
     }
 
-    if (data.mode === "degraded") {
-      console.warn("Toollibs degraded mode:", data.reason);
+    const state = data[data.active];
+
+    if (state.mode === "maintenance") {
+      const code = state.code || "503";
+      window.location.href = "maintenance.html?code=" + code;
+      return;
+    }
+
+    if (state.mode === "degraded") {
+      console.warn("Toollibs degraded mode:", state.code || "unknown");
     }
 
   } catch (e) {
-    console.error("Failed to check system mode");
+    console.error("Failed to check system mode", e);
   }
 }
 
 window.onerror = function(message, source, lineno, colno, error) {
-  console.error("Fatal error:", message);
+  console.error("Fatal error detected:", message);
 
   fetch("./maintenance.json", { cache: "no-store" })
     .then(r => r.json())
     .then(data => {
-      if (data.mode !== "maintenance") {
-        console.warn("System unstable detected");
+      if (data && data.active && data[data.active]) {
+        const state = data[data.active];
+
+        if (state.mode !== "maintenance") {
+          console.warn("System instability detected");
+        }
       }
+    })
+    .catch(() => {
+      console.error("Cannot fetch maintenance.json during error handling");
     });
 
   return false;
