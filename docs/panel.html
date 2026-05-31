@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Toollibs Admin Panel</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .box {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    .danger {
+      background: #c0392b;
+      color: white;
+    }
+
+    .ok {
+      background: #2ecc71;
+      color: black;
+    }
+
+    .warn {
+      background: #f39c12;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+function checkAuth() {
+  const session = JSON.parse(localStorage.getItem("toollibs_admin"));
+
+  if (!session || !session.auth) {
+    window.location.href = "admin.html";
+    return;
+  }
+
+  const limit = 1000 * 60 * 30; // 30 min
+  if (Date.now() - session.time > limit) {
+    localStorage.removeItem("toollibs_admin");
+    window.location.href = "admin.html";
+  }
+}
+
+checkAuth();
+</script>
+
+<div class="box">
+
+  <h1>Toollibs Control Panel</h1>
+
+  <p>System Status Control</p>
+
+  <button class="ok" onclick="setMode('normal')">Normal</button>
+  <button class="warn" onclick="setMode('degraded')">Degraded</button>
+  <button class="danger" onclick="setMode('maintenance')">Maintenance</button>
+
+  <hr>
+
+  <button onclick="logout()">Logout</button>
+
+</div>
+
+<script>
+function logout() {
+  localStorage.removeItem("toollibs_admin");
+  window.location.href = "admin.html";
+}
+
+function setMode(mode) {
+  alert("Would set maintenance.json active = " + mode);
+}
+</script>
+
+</body>
+</html>
