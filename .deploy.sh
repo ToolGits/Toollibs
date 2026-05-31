@@ -20,7 +20,7 @@ echo "[2/5] Preparing docs/downloads..."
 mkdir -p "$DOCS_DIR"
 
 echo "[3/5] Cleaning old builds..."
-rm -f "$DOCS_DIR"/*
+rm -f "$DOCS_DIR"/*-"$ARCH"
 
 echo "[4/5] Deploying executables..."
 
