@@ -72,7 +72,7 @@ re: clean all
 # DEPLOY
 # =========================
 
-deploy:
+deploy: all
 	@echo "=================================="
 	@echo "Toollibs Deploy Starting..."
 	@echo "=================================="
