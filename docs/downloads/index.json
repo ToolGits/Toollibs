@@ -1,5 +1,8 @@
 [
   "cpu_info-aarch64",
+  "cpu_info-x86_64",
   "gpu_info-aarch64",
-  "mainlogger-aarch64"
+  "gpu_info-x86_64",
+  "mainlogger-aarch64",
+  "mainlogger-x86_64"
 ]
