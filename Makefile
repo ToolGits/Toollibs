@@ -38,7 +38,7 @@ prepare:
 # =========================
 # MAIN BUILD
 # =========================
-mainlogger: prepare
+mainlogger: prepare $(SRC)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET)
 
 # =========================
