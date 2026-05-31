@@ -52,7 +52,7 @@ tools: prepare
 # =========================
 # FULL BUILD
 # =========================
-all: mainlogger tools
+all: prepare mainlogger tools
 
 # =========================
 # RUN
