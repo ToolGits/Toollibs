@@ -1,15 +1,18 @@
 {
-  "status": {
+  "active": "normal",
+
+  "normal": {
+    "mode": "normal"
+  },
+
+  "maintenance": {
     "mode": "maintenance",
     "code": "503",
     "reason": "Unstable deployment"
   },
-  "normal": {
-    "mode": "normal"
-  },
+
   "degraded": {
     "mode": "degraded",
     "code": "500"
-  },
-  "active": "normal"
+  }
 }
