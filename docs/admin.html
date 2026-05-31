@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Toollibs Admin</title>
+</head>
+<body>
+
+  <h1>Admin Login</h1>
+
+  <input id="key" placeholder="Enter key">
+  <button onclick="login()">Login</button>
+
+  <script>
+    const ADMIN_HASH = "8b1c1d2f6f1d2a8b9c4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6";
+
+    async function sha256(text) {
+      const msgBuffer = new TextEncoder().encode(text);
+      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    async function login() {
+      const input = document.getElementById("key").value;
+      const hash = await sha256(input);
+
+      if (hash === ADMIN_HASH) {
+        localStorage.setItem("toollibs_admin", JSON.stringify({
+          auth: true,
+          time: Date.now()
+        }));
+
+        window.location.href = "panel.html";
+      } else {
+        alert("Invalid key");
+      }
+    }
+  </script>
+
+</body>
+</html>
