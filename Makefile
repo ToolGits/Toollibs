@@ -67,3 +67,13 @@ clean:
 	rm -rf bin
 
 re: clean all
+
+# =========================
+# DEPLOY
+# =========================
+
+deploy:
+	@echo "=================================="
+	@echo "Toollibs Deploy Starting..."
+	@echo "=================================="
+	@./.deploy.sh
