@@ -36,19 +36,14 @@
 
       <!-- STATUS -->
       <section>
-
         <h2>Current Status</h2>
-
         <p>Toollibs v2.0 Forgelibs is a stable release.</p>
         <p>MainLogger builds are available for multiple architectures.</p>
-
       </section>
 
       <!-- SOURCE -->
       <section>
-
         <h2>Source Code</h2>
-
         <p>Access the full Toollibs framework source code.</p>
 
         <a class="button"
@@ -57,23 +52,19 @@
            rel="noopener noreferrer">
           GitHub Repository
         </a>
-
       </section>
 
       <!-- DOWNLOADS -->
       <section>
-
         <h2>Smart Downloads (Auto Architecture)</h2>
 
-        <p id="archInfo">Detecting your system...</p>
+        <p id="archInfo">Detecting system architecture...</p>
 
         <div id="downloadsList">Loading...</div>
-
       </section>
 
       <!-- ARCHITECTURES -->
       <section>
-
         <h2>Supported Architectures</h2>
 
         <ul>
@@ -82,7 +73,6 @@
           <li>ARM64 / aarch64 (modern devices)</li>
           <li>ARM32 / armv7l / armv6l (legacy Android devices)</li>
         </ul>
-
       </section>
 
     </div>
@@ -94,24 +84,48 @@
   </footer>
 
   <script>
+
+    // =========================
+    // ARCH DETECTION
+    // =========================
     function detectArch() {
       const ua = navigator.userAgent.toLowerCase();
 
       if (ua.includes("aarch64") || ua.includes("arm64")) return "aarch64";
-      if (ua.includes("arm")) return "armv7l";
-      if (ua.includes("x86_64") || ua.includes("win64") || ua.includes("amd64")) return "x86_64";
+      if (ua.includes("armv7l")) return "aarch64";
+      if (ua.includes("arm")) return "aarch64";
+
+      if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64")) return "x86_64";
       if (ua.includes("i386") || ua.includes("i686")) return "x86";
 
       return "unknown";
     }
 
+    // =========================
+    // NORMALIZATION
+    // =========================
+    function normalizeArch(arch) {
+      if (arch === "armv7l" || arch === "arm") return "aarch64";
+      if (arch === "arm64") return "aarch64";
+      if (arch === "amd64") return "x86_64";
+      return arch;
+    }
+
+    // =========================
+    // LOAD DOWNLOADS
+    // =========================
     async function loadDownloads() {
+
       const container = document.getElementById("downloadsList");
       const archInfo = document.getElementById("archInfo");
 
-      const arch = detectArch();
+      let arch = normalizeArch(detectArch());
 
-      archInfo.innerHTML = `Detected architecture: <b>${arch}</b>`;
+      if (arch === "unknown") {
+        archInfo.innerHTML = "Architecture: unknown (showing all builds)";
+      } else {
+        archInfo.innerHTML = `Detected architecture: <b>${arch}</b>`;
+      }
 
       try {
         const res = await fetch("./downloads/index.json");
@@ -122,10 +136,8 @@
         for (const file of files) {
 
           if (arch !== "unknown") {
-  if (!file.includes(arch)) {
-    continue;
-  }
-}
+            if (!file.endsWith(`-${arch}`)) continue;
+          }
 
           html += `
             <a class="button" href="downloads/${file}" download>
@@ -139,11 +151,13 @@
         container.innerHTML = html;
 
       } catch (e) {
+        console.error(e);
         container.innerHTML = "Failed to load downloads.";
       }
     }
 
     loadDownloads();
+
   </script>
 
 </body>
