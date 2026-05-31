@@ -39,13 +39,8 @@
 
         <h2>Current Status</h2>
 
-        <p>
-          Toollibs v2.0 Forgelibs is a stable release.
-        </p>
-
-        <p>
-          MainLogger builds are available for multiple architectures.
-        </p>
+        <p>Toollibs v2.0 Forgelibs is a stable release.</p>
+        <p>MainLogger builds are available for multiple architectures.</p>
 
       </section>
 
@@ -54,9 +49,7 @@
 
         <h2>Source Code</h2>
 
-        <p>
-          Access the full Toollibs framework source code.
-        </p>
+        <p>Access the full Toollibs framework source code.</p>
 
         <a class="button"
            href="https://github.com/enzobobdevvideos04-ctrl/Toollibs"
@@ -70,27 +63,11 @@
       <!-- DOWNLOADS -->
       <section>
 
-        <h2>MainLogger Downloads</h2>
+        <h2>Smart Downloads (Auto Architecture)</h2>
 
-        <p>
-          Download stable binaries by architecture.
-        </p>
+        <p id="archInfo">Detecting your system...</p>
 
-        <ul>
-
-          <li>
-            <a class="button" href="downloads/mainlogger-x86_64" download>
-              MainLogger (x86_64)
-            </a>
-          </li>
-
-          <li>
-            <a class="button" href="downloads/mainlogger-arm64" download>
-              MainLogger (ARM64)
-            </a>
-          </li>
-
-        </ul>
+        <div id="downloadsList">Loading...</div>
 
       </section>
 
@@ -115,6 +92,58 @@
   <footer>
     <p>Toollibs © 2026</p>
   </footer>
+
+  <script>
+    function detectArch() {
+      const ua = navigator.userAgent.toLowerCase();
+
+      if (ua.includes("aarch64") || ua.includes("arm64")) return "aarch64";
+      if (ua.includes("arm")) return "armv7l";
+      if (ua.includes("x86_64") || ua.includes("win64") || ua.includes("amd64")) return "x86_64";
+      if (ua.includes("i386") || ua.includes("i686")) return "x86";
+
+      return "unknown";
+    }
+
+    async function loadDownloads() {
+      const container = document.getElementById("downloadsList");
+      const archInfo = document.getElementById("archInfo");
+
+      const arch = detectArch();
+
+      archInfo.innerHTML = `Detected architecture: <b>${arch}</b>`;
+
+      try {
+        const res = await fetch("./downloads/index.json");
+        const files = await res.json();
+
+        let html = "<div class='download-grid'>";
+
+        for (const file of files) {
+
+          // filtro inteligente por arquitetura
+          if (arch !== "unknown" && !file.includes(arch)) {
+            continue;
+          }
+
+          html += `
+            <a class="button" href="downloads/${file}" download>
+              ${file}
+            </a>
+          `;
+        }
+
+        html += "</div>";
+
+        container.innerHTML = html;
+
+      } catch (e) {
+        container.innerHTML = "Failed to load downloads.";
+      }
+    }
+
+    loadDownloads();
+  </script>
 
 </body>
 </html>
