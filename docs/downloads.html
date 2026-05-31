@@ -121,10 +121,11 @@
 
         for (const file of files) {
 
-          // filtro inteligente por arquitetura
-          if (arch !== "unknown" && !file.includes(arch)) {
-            continue;
-          }
+          if (arch !== "unknown") {
+  if (!file.includes(arch)) {
+    continue;
+  }
+}
 
           html += `
             <a class="button" href="downloads/${file}" download>
