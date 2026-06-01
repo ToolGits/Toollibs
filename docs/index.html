@@ -26,16 +26,6 @@
     <a href="devices.html">Devices</a>
   </nav>
 
-  <!-- RELEASE BANNER -->
-  <div id="releaseBanner" style="
-    text-align:center;
-    padding:12px;
-    color:white;
-    font-weight:700;
-    letter-spacing:1px;
-    transition:0.3s ease;
-  "></div>
-
   <!-- HERO -->
   <header class="hero">
 
@@ -79,11 +69,11 @@
 
         <h2>Project Status</h2>
 
-        <span class="badge tested">STABLE v2.0</span>
+        <span class="badge tested">v2.1 BIGBROWSERTOOLLIBS</span>
 
         <p>
-          Toollibs Forgelibs is the first stable release of the framework,
-          introducing plugins, math system and multi-platform builds.
+          Toollibs is actively evolving with a full ecosystem including
+          backend services, deployment system and multi-platform builds.
         </p>
 
       </section>
@@ -115,32 +105,33 @@
 
       </section>
 
+      <!-- ECOSYSTEM -->
+      <section>
+
+        <h2>Toollibs Ecosystem</h2>
+
+        <ul>
+          <li><strong>ToollibsServer</strong> — backend API system</li>
+          <li><strong>Toollibs Deploy System</strong> — automated build distributor</li>
+          <li><strong>Toollibs-workstation</strong> — development environment (Debian)</li>
+          <li><strong>cpu_info / gpu_info</strong> — Linux hardware tools</li>
+          <li><strong>Website</strong> — documentation + downloads + changelog</li>
+        </ul>
+
+      </section>
+
       <!-- VERSION SYSTEM -->
       <section>
 
         <h2>Version System</h2>
 
-        <span class="badge compatible">v2.0 Forgelibs</span>
+        <span class="badge stable">v2.0 Forgelibs</span>
         <span class="badge tested">v2.1 BigBrowserToollibs</span>
 
         <p>
-          The framework now supports codename-based versioning and live runtime UI updates
-          through the web system.
+          The framework uses codename-based versioning with ecosystem-wide integration
+          between backend, tools and website.
         </p>
-
-      </section>
-
-      <!-- DEV STATUS -->
-      <section>
-
-        <h2>Development System</h2>
-
-        <ul>
-          <li>Live release countdown engine</li>
-          <li>Automatic version switching (v2.0 → v2.1)</li>
-          <li>Dynamic changelog generation</li>
-          <li>Runtime UI updates</li>
-        </ul>
 
       </section>
 
@@ -152,117 +143,6 @@
     <p>Toollibs © 2026 — Open-source C++ Framework</p>
   </footer>
 
-  <!-- RELEASE ENGINE + AUTO SYSTEM -->
-<script>
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const versionData = {
-    current: "v2.0",
-    next: "v2.1 BigBrowserToollibs",
-    releaseTime: new Date("2026-06-01T16:00:00").getTime()
-  };
-
-  function generateAutoChangelog() {
-
-    if (localStorage.getItem("v21_changelog_created")) return;
-
-    const changelog = [
-      "Automatic release system activated",
-      "Live version switching engine enabled",
-      "Dynamic UI update system introduced",
-      "Runtime frontend mutation support added",
-      "Automatic changelog generator system enabled",
-      "Persistent version state tracking implemented",
-      "Web-based framework evolution system activated"
-    ];
-
-    const container = document.querySelector(".grid");
-    if (!container) return;
-
-    const section = document.createElement("section");
-
-    section.innerHTML = `
-      <h2>${versionData.next}</h2>
-      <span class="badge tested">AUTO GENERATED</span>
-      <span class="badge compatible">LIVE SYSTEM</span>
-      <ul>
-        ${changelog.map(item => `<li>${item}</li>`).join("")}
-      </ul>
-    `;
-
-    container.prepend(section);
-
-    localStorage.setItem("v21_changelog_created", "true");
-  }
-
-  function switchToV21() {
-
-    document.title = "Toollibs " + versionData.next;
-
-    const banner = document.getElementById("releaseBanner");
-
-    if (banner) {
-      banner.innerHTML = `🚀 ${versionData.next} — LIVE`;
-      banner.style.background = "#dc2626";
-    }
-
-    const subtitle = document.querySelector(".subtitle");
-
-    if (subtitle) {
-      subtitle.textContent =
-        "Framework upgraded with live runtime update engine and automatic changelog system.";
-    }
-
-    generateAutoChangelog();
-  }
-
-  function updateEngine() {
-
-    const now = Date.now();
-    const diff = versionData.releaseTime - now;
-
-    const banner = document.getElementById("releaseBanner");
-
-    if (!banner) return;
-
-    if (diff <= 0) {
-
-      if (!localStorage.getItem("v21_active")) {
-
-        localStorage.setItem("v21_active", "true");
-
-        switchToV21();
-
-        setTimeout(() => {
-          location.reload();
-        }, 3000);
-
-      }
-
-      return;
-    }
-
-    const seconds = Math.floor(diff / 1000);
-
-    banner.innerHTML = `STABLE ${versionData.current} — Next update in ${seconds}s`;
-    banner.style.background = "#238636";
-  }
-
-  // start engine
-  setInterval(updateEngine, 1000);
-  updateEngine();
-
-  // restore state
-  if (localStorage.getItem("v21_active") === "true") {
-    switchToV21();
-  }
-
-});
-
-</script>
-
  <script src="system.js"></script>
 </body>
-
 </html>
