@@ -1,42 +1,119 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Toollibs Admin</title>
-</head>
-<body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Toollibs Admin</title>
 
-  <h1>Admin Login</h1>
+<link rel="stylesheet" href="style.css">
 
-  <input id="key" placeholder="Enter key">
-  <button onclick="login()">Login</button>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <script>
-    const ADMIN_HASH = "1115f527313bce07997ffd3b5097c9434cb3a18dcdac75d01a153cc7c7ef4faf";
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    async function sha256(text) {
-      const msgBuffer = new TextEncoder().encode(text);
-      const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+</head><body><div class="login-card">
+
+    <h1 style="text-align:center; margin-bottom:10px;">
+        Toollibs Admin
+    </h1>
+
+    <p style="text-align:center; margin-bottom:25px;">
+        BigBrowserToollibs v2.1
+    </p>
+
+    <input
+        id="key"
+        type="password"
+        placeholder="Enter admin key"
+        onkeydown="if(event.key==='Enter') login()"
+    >
+
+    <button
+        class="button"
+        style="width:100%; margin-top:15px;"
+        onclick="login()"
+    >
+        Login
+    </button>
+
+    <p
+        id="status"
+        style="
+            text-align:center;
+            margin-top:15px;
+            color:#8b949e;
+        "
+    ></p>
+
+</div>
+
+<script>
+
+const ADMIN_HASH =
+"1115f527313bce07997ffd3b5097c9434cb3a18dcdac75d01a153cc7c7ef4faf";
+
+async function sha256(text) {
+
+    const msgBuffer =
+    new TextEncoder().encode(text);
+
+    const hashBuffer =
+    await crypto.subtle.digest(
+        "SHA-256",
+        msgBuffer
+    );
+
+    const hashArray =
+    Array.from(
+        new Uint8Array(hashBuffer)
+    );
+
+    return hashArray
+    .map(b =>
+        b.toString(16)
+        .padStart(2, "0")
+    )
+    .join("");
+}
+
+async function login() {
+
+    const input =
+    document.getElementById("key").value;
+
+    const status =
+    document.getElementById("status");
+
+    status.textContent = "Checking key...";
+
+    const hash =
+    await sha256(input);
+
+    if (hash === ADMIN_HASH) {
+
+        localStorage.setItem(
+            "toollibs_admin",
+            JSON.stringify({
+                auth: true,
+                time: Date.now()
+            })
+        );
+
+        status.textContent =
+        "Access granted";
+
+        setTimeout(() => {
+            window.location.href =
+            "panel.html";
+        }, 500);
+
+    } else {
+
+        status.textContent =
+        "Invalid key";
     }
+}
 
-    async function login() {
-      const input = document.getElementById("key").value;
-      const hash = await sha256(input);
-
-      if (hash === ADMIN_HASH) {
-        localStorage.setItem("toollibs_admin", JSON.stringify({
-          auth: true,
-          time: Date.now()
-        }));
-
-        window.location.href = "panel.html";
-      } else {
-        alert("Invalid key");
-      }
-    }
-  </script>
+</script>
 
 </body>
 </html>
