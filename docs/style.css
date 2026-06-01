@@ -521,3 +521,81 @@ flex-wrap: wrap;
 grid-template-columns: 1fr;
 }
 }
+
+/* =========================
+   CHANGELOG CARDS SYSTEM
+========================= */
+
+.changelog-card {
+  margin-bottom: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: var(--transition);
+}
+
+.changelog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 20px;
+  cursor: pointer;
+
+  background: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+.changelog-header:hover {
+  background: rgba(88, 166, 255, 0.08);
+}
+
+.changelog-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.arrow {
+  font-size: 18px;
+  color: var(--blue);
+  transition: 0.2s ease;
+}
+
+.badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.badge.new {
+  background: #22c55e;
+  color: white;
+}
+
+.badge.stable {
+  background: #3b82f6;
+  color: white;
+}
+
+.badge.planned {
+  background: #f59e0b;
+  color: black;
+}
+
+.changelog-content {
+  display: none;
+  padding: 18px 25px;
+}
+
+.changelog-card.open .changelog-content {
+  display: block;
+}
+
+.changelog-card.open .arrow {
+  transform: rotate(90deg);
+}
