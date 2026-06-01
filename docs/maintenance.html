@@ -1,46 +1,64 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maintenance - Toollibs</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <title>System Status</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body><div class="login-card">
 
-    <h1 style="text-align:center; margin-bottom:15px;">
-        🛠️ Maintenance
-    </h1>
+<body>
 
-    <p style="text-align:center; margin-bottom:25px;">
-        Toollibs is currently under maintenance.
-    </p>
+<div class="login-card" style="text-align:center;">
 
-    <p style="text-align:center; color:#8b949e;">
-        Some services may be unavailable while updates are being applied.
-    </p>
+  <h1 id="title">Loading...</h1>
 
-    <div style="margin-top:25px; text-align:center;">
-        <a href="/" class="button">
-            Return Home
-        </a>
-    </div>
+  <p id="desc" style="margin-top:10px; color:#8b949e;"></p>
 
-    <p style="
-        text-align:center;
-        margin-top:20px;
-        font-size:14px;
-        color:#7d8590;
-    ">
-        Toollibs • Maintenance Mode
-    </p>
+  <button class="button" onclick="goHome()" style="margin-top:20px;">
+    Return Home
+  </button>
 
 </div>
+
+<script>
+
+async function loadStatus() {
+
+  const res = await fetch("maintenance.json");
+  const data = await res.json();
+
+  const mode = data.active;
+
+  const title = document.getElementById("title");
+  const desc = document.getElementById("desc");
+
+  if (mode === "maintenance") {
+
+    title.textContent = "🔴 Maintenance Mode";
+    desc.textContent = data.maintenance.reason;
+
+  }
+
+  else if (mode === "degraded") {
+
+    title.textContent = "🟡 Degraded Mode";
+    desc.textContent = "System is partially unstable.";
+
+  }
+
+  else {
+
+    window.location.href = "index.html";
+  }
+}
+
+function goHome() {
+  window.location.href = "index.html";
+}
+
+loadStatus();
+
+</script>
 
 </body>
 </html>
