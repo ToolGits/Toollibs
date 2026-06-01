@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -36,14 +37,23 @@
 
       <!-- STATUS -->
       <section>
+
         <h2>Current Status</h2>
-        <p>Toollibs v2.0 Forgelibs is a stable release.</p>
-        <p>MainLogger builds are available for multiple architectures.</p>
+
+        <span class="badge tested">v2.1 BigBrowserToollibs</span>
+
+        <p>
+          Toollibs is actively evolving with multi-platform builds,
+          backend services and automated deployment system.
+        </p>
+
       </section>
 
       <!-- SOURCE -->
       <section>
+
         <h2>Source Code</h2>
+
         <p>Access the full Toollibs framework source code.</p>
 
         <a class="button"
@@ -52,27 +62,32 @@
            rel="noopener noreferrer">
           GitHub Repository
         </a>
+
       </section>
 
-      <!-- DOWNLOADS -->
+      <!-- SMART DOWNLOADS -->
       <section>
-        <h2>Smart Downloads (Auto Architecture)</h2>
+
+        <h2>Smart Downloads</h2>
 
         <p id="archInfo">Detecting system architecture...</p>
 
-        <div id="downloadsList">Loading...</div>
+        <div id="downloadsList">Loading builds...</div>
+
       </section>
 
-      <!-- ARCHITECTURES -->
+      <!-- ARCH SUPPORT -->
       <section>
+
         <h2>Supported Architectures</h2>
 
         <ul>
-          <li>x86_64 (64-bit PCs)</li>
-          <li>x86 / i386 / i686 (32-bit PCs)</li>
-          <li>ARM64 / aarch64 (modern devices)</li>
-          <li>ARM32 / armv7l / armv6l (legacy Android devices)</li>
+          <li>x86_64 — 64-bit desktops and laptops</li>
+          <li>x86 / i386 — 32-bit systems</li>
+          <li>aarch64 — modern ARM 64-bit devices</li>
+          <li>armv7l — ARM 32-bit legacy devices</li>
         </ul>
+
       </section>
 
     </div>
@@ -80,7 +95,7 @@
   </main>
 
   <footer>
-    <p>Toollibs © 2026</p>
+    <p>Toollibs © 2026 — Open-source C++ Framework</p>
   </footer>
 
   <script>
@@ -91,24 +106,27 @@
     function detectArch() {
       const ua = navigator.userAgent.toLowerCase();
 
-      if (ua.includes("aarch64") || ua.includes("arm64")) return "aarch64";
-      if (ua.includes("armv7l")) return "aarch64";
-      if (ua.includes("arm")) return "aarch64";
+      if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64")) {
+        return "x86_64";
+      }
 
-      if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64")) return "x86_64";
-      if (ua.includes("i386") || ua.includes("i686")) return "x86";
+      if (ua.includes("i386") || ua.includes("i686")) {
+        return "x86";
+      }
+
+      if (ua.includes("aarch64") || ua.includes("arm64")) {
+        return "aarch64";
+      }
+
+      if (ua.includes("armv7l")) {
+        return "armv7l";
+      }
+
+      if (ua.includes("arm")) {
+        return "armv7l";
+      }
 
       return "unknown";
-    }
-
-    // =========================
-    // NORMALIZATION
-    // =========================
-    function normalizeArch(arch) {
-      if (arch === "armv7l" || arch === "arm") return "aarch64";
-      if (arch === "arm64") return "aarch64";
-      if (arch === "amd64") return "x86_64";
-      return arch;
     }
 
     // =========================
@@ -119,10 +137,10 @@
       const container = document.getElementById("downloadsList");
       const archInfo = document.getElementById("archInfo");
 
-      let arch = normalizeArch(detectArch());
+      const arch = detectArch();
 
       if (arch === "unknown") {
-        archInfo.innerHTML = "Architecture: unknown (showing all builds)";
+        archInfo.innerHTML = "Architecture: unknown — showing all available builds";
       } else {
         archInfo.innerHTML = `Detected architecture: <b>${arch}</b>`;
       }
@@ -135,8 +153,14 @@
 
         for (const file of files) {
 
+          // FILTRO INTELIGENTE
           if (arch !== "unknown") {
-            if (!file.endsWith(`-${arch}`)) continue;
+
+            const match =
+              file.endsWith(`-${arch}`) ||
+              file.includes(arch);
+
+            if (!match) continue;
           }
 
           html += `
@@ -160,6 +184,8 @@
 
   </script>
 
- <script src="system.js"></script>
+  <!-- SYSTEM CONTROL LAYER -->
+  <script src="system.js"></script>
+
 </body>
 </html>
