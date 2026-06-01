@@ -3,22 +3,14 @@
 <head>
 
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Toollibs Changelog</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 
@@ -29,11 +21,8 @@
   <nav>
 
     <a href="index.html">Home</a>
-
     <a href="downloads.html">Downloads</a>
-
     <a href="changelog.html">Changelog</a>
-
     <a href="devices.html">Devices</a>
 
   </nav>
@@ -42,118 +31,122 @@
 
     <h1>Changelog</h1>
 
-    <p>
-      Development history and project updates.
-    </p>
+    <p>Development history and project updates.</p>
 
   </header>
 
   <main>
 
-    <div class="grid">
+    <!-- v2.0 -->
+    <div class="changelog-card" onclick="toggleCard(this)">
 
-      <section>
+      <div class="changelog-header">
 
-        <h2>v0.1 Alpha</h2>
+        <div class="changelog-title">
+          <span class="arrow">›</span>
+          v2.0 "Forgelibs"
+          <span class="badge stable">STABLE</span>
+        </div>
+
+      </div>
+
+      <div class="changelog-content">
 
         <ul>
-
-          <li>Initial Toollibs structure</li>
-
-          <li>Community branch created</li>
-
-          <li>Website created</li>
-
-          <li>Project branding started</li>
-
-          <li>Documentation organized</li>
-
+          <li>First stable release of Toollibs framework</li>
+          <li>Plugin system base introduced</li>
+          <li>MainLogger upgraded with improved runtime verification</li>
+          <li>Graphics and Input modules finalized</li>
+          <li>Multi-architecture builds (x86_64, ARM64, ARM32, x86)</li>
+          <li>Public downloads system implemented</li>
+          <li>Devices compatibility page introduced</li>
+          <li>Website restructured for stable release workflow</li>
+          <li>Introduction of codename versioning system</li>
         </ul>
 
-      </section>
+      </div>
 
-<section>
-  <h2>v1.0 Beta</h2>
+    </div>
 
-  <ul>
-    <li>Global Logger System implemented</li>
-    <li>Toollibs structure reformulated</li>
-    <li>Input module verification system added</li>
-    <li>Website reformulated</li>
-  </ul>
-</section>
 
-<section>
+    <!-- v1.1 -->
+    <div class="changelog-card" onclick="toggleCard(this)">
 
-  <h2>v1.1 Beta</h2>
+      <div class="changelog-header">
 
-  <ul>
+        <div class="changelog-title">
+          <span class="arrow">›</span>
+          v1.1 Beta
+          <span class="badge">LEGACY</span>
+        </div>
 
-    <li>Math module added</li>
+      </div>
 
-    <li>Vec2 structure implemented</li>
+      <div class="changelog-content">
 
-    <li>Basic math operations added (Add, Sub, Scale)</li>
+        <ul>
+          <li>Math module added</li>
+          <li>Vec2 structure implemented</li>
+          <li>Graphics module added</li>
+          <li>Logger system improvements</li>
+          <li>Multi-architecture build output added</li>
+        </ul>
 
-    <li>Distance and Length functions added</li>
+      </div>
 
-    <li>Graphics module added</li>
+    </div>
 
-    <li>Color and Pixel structures implemented</li>
 
-    <li>MainLogger module verification system improved</li>
+    <!-- v1.0 -->
+    <div class="changelog-card" onclick="toggleCard(this)">
 
-    <li>Math module verification integrated into MainLogger</li>
+      <div class="changelog-header">
 
-    <li>Graphics module verification integrated into MainLogger</li>
+        <div class="changelog-title">
+          <span class="arrow">›</span>
+          v1.0 Beta
+          <span class="badge">LEGACY</span>
+        </div>
 
-    <li>Runtime module testing added to MainLogger</li>
+      </div>
 
-    <li>Multi-architecture build output added (bin/ARCH)</li>
+      <div class="changelog-content">
 
-    <li>Makefile improved with -Wextra and -O2</li>
+        <ul>
+          <li>Global Logger System implemented</li>
+          <li>Toollibs structure reformulated</li>
+          <li>Input module verification system added</li>
+          <li>Website reformulated</li>
+        </ul>
 
-    <li>Automatic architecture detection improved</li>
+      </div>
 
-    <li>Maintained Toollibs as a fully independent and cross-platform project</li>
+    </div>
 
-    <li>Working on providing downloadable Toollibs executables through the website (completed)</li>
-    
-    <li>Logger diagnostic output expanded with Debug and Warning levels</li>
 
-  </ul>
+    <!-- v0.1 -->
+    <div class="changelog-card" onclick="toggleCard(this)">
 
-</section>
+      <div class="changelog-header">
 
-<section>
+        <div class="changelog-title">
+          <span class="arrow">›</span>
+          v0.1 Alpha
+          <span class="badge">LEGACY</span>
+        </div>
 
-  <h2>v2.0 Forgelibs (Stable Release)</h2>
+      </div>
 
-  <ul>
+      <div class="changelog-content">
 
-    <li>First stable release of Toollibs framework</li>
+        <ul>
+          <li>Initial Toollibs structure</li>
+          <li>Community branch created</li>
+          <li>Website created</li>
+          <li>Project branding started</li>
+        </ul>
 
-    <li>Plugin system base introduced</li>
-
-    <li>MainLogger upgraded with smarter detection and improved runtime verification</li>
-
-    <li>Math system now in real usage across modules and plugins</li>
-
-    <li>Graphics and Input modules finalized for stable integration</li>
-
-    <li>Multi-architecture builds (x86_64, ARM64, ARM32, x86)</li>
-
-    <li>Public downloads system implemented</li>
-
-    <li>Devices compatibility page introduced</li>
-
-    <li>Website restructured for stable release workflow</li>
-
-    <li>Beginning of the era of codenames in versions, replacing traditional numeric-only versioning</li>
-
-  </ul>
-
-</section>
+      </div>
 
     </div>
 
@@ -161,12 +154,30 @@
 
   <footer>
 
-    <p>
-      Toollibs © 2026
-    </p>
+    <p>Toollibs © 2026</p>
 
   </footer>
- 
- <script src="system.js"></script>
+
+<script>
+function toggleCard(el) {
+  el.classList.toggle("open");
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const cards = document.querySelectorAll(".changelog-card");
+
+  if (cards.length > 0) {
+
+    const latest = cards[0];
+    latest.classList.add("open");
+
+    const arrow = latest.querySelector(".arrow");
+    if (arrow) arrow.textContent = "^";
+  }
+
+});
+</script>
+
 </body>
 </html>
