@@ -30,3 +30,39 @@ window.onerror = function(message) {
 };
 
 checkSystemMode();
+
+async function registerDevice() {
+  let deviceId = localStorage.getItem(
+    "toollibs_device_id"
+  );
+
+  if (!deviceId) {
+    deviceId = crypto.randomUUID();
+
+    localStorage.setItem(
+      "toollibs_device_id",
+      deviceId
+    );
+  }
+
+  try {
+    await fetch(
+      "http://192.168.1.19:3000/register-device",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          id: deviceId,
+          platform: navigator.platform,
+          arch: navigator.userAgent
+        })
+      }
+    );
+  } catch (e) {
+    console.error("Counter unavailable");
+  }
+}
+
+registerDevice();

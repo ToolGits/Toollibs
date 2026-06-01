@@ -1,95 +1,235 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Toollibs Admin Panel</title>
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Inter, sans-serif;
-      background: #0b0b0b;
-      color: #fff;
-      padding: 20px;
-    }
+<title>Toollibs Panel</title><link rel="preconnect"
+      href="https://fonts.googleapis.com"><link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"><link rel="stylesheet"
+      href="style.css"></head><body><nav><a href="index.html">Home</a>
+<a href="downloads.html">Downloads</a>
+<a href="devices.html">Devices</a>
+<a href="changelog.html">Changelog</a>
 
-    .box {
-      max-width: 800px;
-      margin: auto;
-    }
+</nav><header><h1>Toollibs Control Panel</h1><p>
+Administrative dashboard for Toollibs.
+</p></header><main><div class="grid"><section><h2>System Status</h2><p id="systemStatus">
+Loading...
+</p><p id="systemCode">
+Loading...
+</p></section><section><h2>Registered Devices</h2><p id="deviceCount">
+Loading...
+</p></section><section><h2>Administration</h2><button onclick="logout()">
+Logout
+</button></section><section><h2>Server Information</h2><p>
+ToollibsServer API
+</p><p id="serverStatus">
+Checking...
+</p></section><section><h2>Registered Devices List</h2><div id="deviceList">
+Loading devices...
+</div></section></div></main><footer><p>
+Toollibs © 2026
+</p></footer><script src="system.js"></script><script>
 
-    button {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    .danger {
-      background: #c0392b;
-      color: white;
-    }
-
-    .ok {
-      background: #2ecc71;
-      color: black;
-    }
-
-    .warn {
-      background: #f39c12;
-      color: black;
-    }
-  </style>
-</head>
-
-<body>
-
-<script>
 function checkAuth() {
-  const session = JSON.parse(localStorage.getItem("toollibs_admin"));
+
+  const session =
+    JSON.parse(
+      localStorage.getItem(
+        "toollibs_admin"
+      )
+    );
 
   if (!session || !session.auth) {
-    window.location.href = "admin.html";
+
+    window.location.href =
+      "admin.html";
+
     return;
   }
 
-  const limit = 1000 * 60 * 30; // 30 min
-  if (Date.now() - session.time > limit) {
-    localStorage.removeItem("toollibs_admin");
-    window.location.href = "admin.html";
+  const limit =
+    1000 * 60 * 30;
+
+  if (
+    Date.now() -
+    session.time >
+    limit
+  ) {
+
+    localStorage.removeItem(
+      "toollibs_admin"
+    );
+
+    window.location.href =
+      "admin.html";
+  }
+}
+
+function logout() {
+
+  localStorage.removeItem(
+    "toollibs_admin"
+  );
+
+  window.location.href =
+    "admin.html";
+}
+
+async function loadSystemStatus() {
+
+  try {
+
+    const res =
+      await fetch(
+        "./maintenance.json",
+        {
+          cache: "no-store"
+        }
+      );
+
+    const data =
+      await res.json();
+
+    document
+      .getElementById(
+        "systemStatus"
+      )
+      .innerText =
+      "Mode: " +
+      data.mode;
+
+    document
+      .getElementById(
+        "systemCode"
+      )
+      .innerText =
+      "Code: " +
+      (
+        data.code ||
+        "None"
+      );
+
+  } catch {
+
+    document
+      .getElementById(
+        "systemStatus"
+      )
+      .innerText =
+      "Unknown";
+
+    document
+      .getElementById(
+        "systemCode"
+      )
+      .innerText =
+      "Unavailable";
+  }
+}
+
+async function loadDevices() {
+
+  try {
+
+    const res =
+      await fetch(
+        "http://192.168.1.19:3000/stats"
+      );
+
+    const data =
+      await res.json();
+
+    document
+      .getElementById(
+        "deviceCount"
+      )
+      .innerText =
+      data.devices;
+
+    document
+      .getElementById(
+        "serverStatus"
+      )
+      .innerText =
+      "Online";
+
+    let html = "";
+
+    for (
+      const device
+      of data.list
+    ) {
+
+      const date =
+        new Date(
+          device.firstSeen
+        )
+        .toLocaleString();
+
+      html += `
+
+      <div class="device-card">
+
+      <b>ID</b><br>
+      ${device.id}
+
+      <br><br>
+
+      <b>Platform</b><br>
+      ${device.platform || "Unknown"}
+
+      <br><br>
+
+      <b>First Seen</b><br>
+      ${date}
+
+      </div>
+
+      `;
+    }
+
+    document
+      .getElementById(
+        "deviceList"
+      )
+      .innerHTML =
+      html;
+
+  } catch {
+
+    document
+      .getElementById(
+        "serverStatus"
+      )
+      .innerText =
+      "Offline";
+
+    document
+      .getElementById(
+        "deviceList"
+      )
+      .innerHTML =
+      "Failed to load devices.";
   }
 }
 
 checkAuth();
-</script>
 
-<div class="box">
+loadSystemStatus();
 
-  <h1>Toollibs Control Panel</h1>
+loadDevices();
 
-  <p>System Status Control</p>
+setInterval(
+  loadSystemStatus,
+  10000
+);
 
-  <button class="ok" onclick="setMode('normal')">Normal</button>
-  <button class="warn" onclick="setMode('degraded')">Degraded</button>
-  <button class="danger" onclick="setMode('maintenance')">Maintenance</button>
+setInterval(
+  loadDevices,
+  10000
+);
 
-  <hr>
-
-  <button onclick="logout()">Logout</button>
-
-</div>
-
-<script>
-function logout() {
-  localStorage.removeItem("toollibs_admin");
-  window.location.href = "admin.html";
-}
-
-function setMode(mode) {
-  alert("Would set maintenance.json active = " + mode);
-}
-</script>
-
-</body>
+</script></body>
 </html>
