@@ -1,105 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maintenance - Toollibs</title>
 
-  <title>Service Unavailable</title>
+<link rel="stylesheet" href="style.css">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Inter, sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    .box {
-      max-width: 600px;
-      padding: 20px;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      opacity: 0.7;
-      line-height: 1.6;
-    }
-
-    .code {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 10px 15px;
-      background: #1f1f1f;
-      border-radius: 8px;
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
-
-    .spinner {
-      margin: 30px auto;
-      width: 40px;
-      height: 40px;
-      border: 4px solid #333;
-      border-top: 4px solid #ffffff;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .small {
-      margin-top: 15px;
-      font-size: 12px;
-      opacity: 0.5;
-    }
-  </style>
 </head>
+<body><div class="login-card">
 
-<body>
+    <h1 style="text-align:center; margin-bottom:15px;">
+        🛠️ Maintenance
+    </h1>
 
-  <div class="box">
-
-    <h1>Service Unavailable</h1>
-
-    <div class="spinner"></div>
-
-    <p>
-      The Toollibs service is temporarily unavailable.
-      Please try again later.
+    <p style="text-align:center; margin-bottom:25px;">
+        BigBrowserToollibs is currently under maintenance.
     </p>
 
-    <div class="code" id="errorCode">
-      Error 503
+    <p style="text-align:center; color:#8b949e;">
+        Some services may be unavailable while updates are being applied.
+    </p>
+
+    <div style="margin-top:25px; text-align:center;">
+        <a href="/" class="button">
+            Return Home
+        </a>
     </div>
 
-    <div class="small">
-      Toollibs system status page
-    </div>
+    <p style="
+        text-align:center;
+        margin-top:20px;
+        font-size:14px;
+        color:#7d8590;
+    ">
+        Toollibs • Maintenance Mode
+    </p>
 
-  </div>
-
-  <script>
-    function getCodeFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("code") || "503";
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const code = getCodeFromURL();
-      document.getElementById("errorCode").textContent = "Error " + code;
-    });
-  </script>
+</div>
 
 </body>
 </html>
