@@ -19,51 +19,86 @@
 <body>
 
   <nav>
-
     <a href="index.html">Home</a>
     <a href="downloads.html">Downloads</a>
     <a href="changelog.html">Changelog</a>
     <a href="devices.html">Devices</a>
-
   </nav>
 
   <header>
-
     <h1>Changelog</h1>
-
     <p>Development history and project updates.</p>
-
   </header>
 
   <main>
+
+    <!-- v2.1 -->
+    <div class="changelog-card open" onclick="toggleCard(this)">
+
+      <div class="changelog-header">
+        <div class="changelog-title">
+          <span class="arrow">^</span>
+          v2.1 "BigBrowserToollibs"
+          <span class="badge tested">LATEST</span>
+        </div>
+      </div>
+
+      <div class="changelog-content">
+        <ul>
+          <li>Improved MainLogger framework</li>
+          <li>New CPU detection system</li>
+          <li>New GPU detection system</li>
+          <li>Driver detection support added</li>
+          <li>Improved hardware information reporting</li>
+
+          <li><strong>Public Tools:</strong> cpu_info, gpu_info</li>
+
+          <li><strong>Website:</strong> full redesign + changelog system upgrade</li>
+          <li>Downloads page reworked with architecture system</li>
+          <li>Maintenance mode integration improved</li>
+
+          <li><strong>Downloads:</strong> multi-arch system (x86, x86_64, ARM, aarch64)</li>
+          <li>Automatic binary index generation</li>
+
+          <li><strong>Backend:</strong> ToollibsServer introduced (Node.js)</li>
+          <li>Device counter system added</li>
+
+          <li><strong>Deploy System:</strong> Toollibs Deploy System introduced</li>
+          <li>make deploy automation</li>
+          <li>.deploy.sh pipeline system</li>
+
+          <li><strong>Workstation:</strong> Toollibs-workstation (Debian)</li>
+          <li>CPU/GPU tools integrated locally</li>
+
+          <li><strong>Infrastructure:</strong> JSON config + maintenance modes</li>
+        </ul>
+      </div>
+
+    </div>
+
 
     <!-- v2.0 -->
     <div class="changelog-card" onclick="toggleCard(this)">
 
       <div class="changelog-header">
-
         <div class="changelog-title">
           <span class="arrow">›</span>
           v2.0 "Forgelibs"
           <span class="badge stable">STABLE</span>
         </div>
-
       </div>
 
       <div class="changelog-content">
-
         <ul>
           <li>First stable release of Toollibs framework</li>
           <li>Plugin system base introduced</li>
-          <li>MainLogger upgraded with improved runtime verification</li>
+          <li>MainLogger upgraded with runtime verification</li>
           <li>Graphics and Input modules finalized</li>
-          <li>Multi-architecture builds (x86_64, ARM64, ARM32, x86)</li>
-          <li>Public downloads system implemented</li>
-          <li>Devices compatibility page introduced</li>
-          <li>Website restructured for stable release workflow</li>
-          <li>Introduction of codename versioning system</li>
+          <li>Multi-architecture builds implemented</li>
+          <li>Public downloads system introduced</li>
+          <li>Devices compatibility page added</li>
+          <li>Website restructured for stable workflow</li>
         </ul>
-
       </div>
 
     </div>
@@ -73,25 +108,21 @@
     <div class="changelog-card" onclick="toggleCard(this)">
 
       <div class="changelog-header">
-
         <div class="changelog-title">
           <span class="arrow">›</span>
           v1.1 Beta
           <span class="badge">LEGACY</span>
         </div>
-
       </div>
 
       <div class="changelog-content">
-
         <ul>
           <li>Math module added</li>
           <li>Vec2 structure implemented</li>
           <li>Graphics module added</li>
           <li>Logger system improvements</li>
-          <li>Multi-architecture build output added</li>
+          <li>Multi-architecture support started</li>
         </ul>
-
       </div>
 
     </div>
@@ -101,24 +132,20 @@
     <div class="changelog-card" onclick="toggleCard(this)">
 
       <div class="changelog-header">
-
         <div class="changelog-title">
           <span class="arrow">›</span>
           v1.0 Beta
           <span class="badge">LEGACY</span>
         </div>
-
       </div>
 
       <div class="changelog-content">
-
         <ul>
           <li>Global Logger System implemented</li>
-          <li>Toollibs structure reformulated</li>
+          <li>Toollibs structure created</li>
           <li>Input module verification system added</li>
-          <li>Website reformulated</li>
+          <li>Website initial version</li>
         </ul>
-
       </div>
 
     </div>
@@ -128,24 +155,20 @@
     <div class="changelog-card" onclick="toggleCard(this)">
 
       <div class="changelog-header">
-
         <div class="changelog-title">
           <span class="arrow">›</span>
           v0.1 Alpha
           <span class="badge">LEGACY</span>
         </div>
-
       </div>
 
       <div class="changelog-content">
-
         <ul>
           <li>Initial Toollibs structure</li>
           <li>Community branch created</li>
           <li>Website created</li>
           <li>Project branding started</li>
         </ul>
-
       </div>
 
     </div>
@@ -153,29 +176,36 @@
   </main>
 
   <footer>
-
     <p>Toollibs © 2026</p>
-
   </footer>
 
 <script>
 function toggleCard(el) {
   el.classList.toggle("open");
+  updateArrows();
+}
+
+function updateArrows() {
+  document.querySelectorAll(".changelog-card").forEach(card => {
+    const arrow = card.querySelector(".arrow");
+    if (!arrow) return;
+
+    if (card.classList.contains("open")) {
+      arrow.textContent = "^";
+    } else {
+      arrow.textContent = "›";
+    }
+  });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-
   const cards = document.querySelectorAll(".changelog-card");
 
   if (cards.length > 0) {
-
-    const latest = cards[0];
-    latest.classList.add("open");
-
-    const arrow = latest.querySelector(".arrow");
-    if (arrow) arrow.textContent = "^";
+    cards[0].classList.add("open");
   }
 
+  updateArrows();
 });
 </script>
 
