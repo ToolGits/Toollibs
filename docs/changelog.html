@@ -39,6 +39,7 @@
     <div class="changelog-title">
       <span class="arrow">›</span>
       v2.1.2 "LoggerPatch"
+      <span class="badge tested">LATEST</span>
     </div>
   </div>
 
@@ -61,7 +62,7 @@
         <div class="changelog-title">
           <span class="arrow">^</span>
           v2.1 "BigBrowserToollibs"
-          <span class="badge tested">LATEST</span>
+          <span class="badge stable">STABLE</span>
         </div>
       </div>
 
@@ -224,6 +225,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".changelog-card");
 
   if (cards.length > 0) {
+    cards.forEach(c => c.classList.remove("open"));
+
     cards[0].classList.add("open");
   }
 
