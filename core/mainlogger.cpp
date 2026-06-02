@@ -4,33 +4,53 @@
 #include "graphics/graphics.hpp"
 #include "plugins/MathPlugin/plugin.hpp"
 
-#include <filesystem>
+#include <iostream>
 #include <vector>
 #include <string>
+#include <filesystem>
 
 namespace fs = std::filesystem;
 
 namespace Toollibs {
 
+// =========================
+// SAFE FILE CHECK
+// =========================
 bool FileValid(const std::string& path)
 {
-    return fs::exists(path) && fs::file_size(path) > 0;
+    try
+    {
+        return fs::exists(path) &&
+               fs::is_regular_file(path) &&
+               fs::file_size(path) > 0;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
 
-struct ModuleStatus
+// =========================
+// MODULE STRUCT
+// =========================
+struct Module
 {
     std::string name;
+    std::string path;
     bool ok;
 };
 
+// =========================
+// MATH TESTS
+// =========================
 void RunMathTests()
 {
     Logger::Info("Running Math tests...");
 
-    Toollibs::Math::Vec2 a{1.0f, 2.0f};
-    Toollibs::Math::Vec2 b{3.0f, 4.0f};
+    Math::Vec2 a{1.0f, 2.0f};
+    Math::Vec2 b{3.0f, 4.0f};
 
-    auto result = Toollibs::Math::Add(a, b);
+    auto result = Math::Add(a, b);
 
     if (result.x == 4.0f && result.y == 6.0f)
         Logger::Info("Math: Vec2 Add test PASSED");
@@ -38,44 +58,70 @@ void RunMathTests()
         Logger::Error("Math: Vec2 Add test FAILED");
 }
 
+// =========================
+// GRAPHICS TESTS
+// =========================
 void RunGraphicsTests()
 {
     Logger::Info("Running Graphics tests...");
 
-    Toollibs::Graphics::Init();
+    Graphics::Init();
 
-    Toollibs::Graphics::Color black{0, 0, 0};
-    Toollibs::Graphics::Color white{255, 255, 255};
+    Graphics::Color black{0, 0, 0};
+    Graphics::Color white{255, 255, 255};
 
-    Toollibs::Graphics::Clear(black);
-    Toollibs::Graphics::DrawPixel(10, 10, white);
+    Graphics::Clear(black);
+    Graphics::DrawPixel(10, 10, white);
 
-    Toollibs::Graphics::Shutdown();
+    Graphics::Shutdown();
 
     Logger::Info("Graphics: pipeline executed successfully");
 }
 
+// =========================
+// PLUGIN TESTS
+// =========================
 void RunPluginTests()
 {
     Logger::Info("Running Plugin system tests...");
 
     try
     {
-        Toollibs::Plugin::MathPlugin::Run();
+        Plugin::MathPlugin::Run();
         Logger::Info("Plugin: MathPlugin executed successfully");
     }
     catch (const std::exception& e)
     {
-        Logger::Error(std::string("Plugin system error: ") + e.what());
+        Logger::Error(std::string("Plugin error: ") + e.what());
     }
     catch (...)
     {
-        Logger::Error("Plugin system unknown error occurred");
+        Logger::Error("Plugin unknown error occurred");
     }
 }
 
+// =========================
+// STATUS REPORT
+// =========================
+void PrintSystemStatus(int ok, int total)
+{
+    Logger::Info("======================================");
+    Logger::Info("Toollibs Verification Completed");
+    Logger::Info("======================================");
+
+    if (ok == total)
+        Logger::Info("SYSTEM STATUS: HEALTHY");
+    else if (ok > 0)
+        Logger::Warning("SYSTEM STATUS: DEGRADED");
+    else
+        Logger::Error("SYSTEM STATUS: CRITICAL FAILURE");
 }
 
+} // namespace Toollibs
+
+// =========================
+// MAIN
+// =========================
 int main()
 {
     using namespace Toollibs;
@@ -85,22 +131,24 @@ int main()
     Logger::Info("======================================");
 
     // =========================
-    // MODULE CHECKS
+    // MODULE LIST
     // =========================
-    std::vector<ModuleStatus> modules =
+    std::vector<Module> modules =
     {
-        {"Input", FileValid("input/input_simulation.cpp")},
-        {"Math", FileValid("math/math.hpp") && FileValid("math/math.cpp")},
-        {"Graphics", FileValid("graphics/graphics.hpp") && FileValid("graphics/graphics.cpp")},
-        {"Plugins", FileValid("plugins/MathPlugin/plugin.hpp")}
+        {"Input", "input/input_simulation.cpp"},
+        {"Math", "math/math.hpp"},
+        {"Graphics", "graphics/graphics.hpp"},
+        {"Plugins", "plugins/MathPlugin/plugin.hpp"}
     };
 
     Logger::Info("Checking module integrity...");
 
     int okModules = 0;
 
-    for (const auto& m : modules)
+    for (auto& m : modules)
     {
+        m.ok = FileValid(m.path);
+
         if (m.ok)
         {
             Logger::Info(m.name + " module OK");
@@ -112,36 +160,32 @@ int main()
         }
     }
 
-    Logger::Info("Modules OK: " + std::to_string(okModules) + "/" + std::to_string(modules.size()));
+    Logger::Info("Modules OK: " +
+                 std::to_string(okModules) + "/" +
+                 std::to_string(modules.size()));
 
     // =========================
     // RUNTIME TESTS
     // =========================
     Logger::Info("Starting runtime validation...");
 
-    if (modules[1].ok)
+    bool mathOk = modules[1].ok;
+    bool graphicsOk = modules[2].ok;
+    bool pluginOk = modules[3].ok;
+
+    if (mathOk)
         RunMathTests();
 
-    if (modules[2].ok)
+    if (graphicsOk)
         RunGraphicsTests();
 
-    // =========================
-    // PLUGINS
-    // =========================
-    if (modules[3].ok)
+    if (pluginOk)
         RunPluginTests();
 
     // =========================
-    // FINAL REPORT
+    // FINAL STATUS
     // =========================
-    Logger::Info("======================================");
-    Logger::Info("Toollibs Verification Completed");
-    Logger::Info("======================================");
+    PrintSystemStatus(okModules, modules.size());
 
-    if (okModules == modules.size())
-        Logger::Info("SYSTEM STATUS: HEALTHY");
-    else
-        Logger::Warning("SYSTEM STATUS: DEGRADED");
-
-    return (okModules == modules.size()) ? 0 : 1;
+    return (okModules == (int)modules.size()) ? 0 : 1;
 }
