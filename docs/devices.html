@@ -1,189 +1,188 @@
-<!DOCTYPE html><html lang="en">
-<head>  <meta charset="UTF-8">  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Toollibs Devices</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >  <link rel="stylesheet" href="style.css"></head><body>  <nav><a href="index.html">Home</a>
-<a href="downloads.html">Downloads</a>
-<a href="changelog.html">Changelog</a>
-<a href="devices.html">Devices</a>
-  </nav>  <header><h1>Devices</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-  Tested devices and compatible platforms for Toollibs.
-</p>
+<head>
 
-  </header>  <main><div class="grid">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <section>
+  <title>Toollibs Devices</title>
 
-    <h2>📱 Cell Phones</h2>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <h3>✓ Tested Devices</h3>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <ul>
+  <link rel="stylesheet" href="style.css">
 
-      <li>✓ Samsung Galaxy Grand Prime</li>
+</head>
 
-      <li>✓ Samsung Galaxy A05</li>
+<body>
 
-    </ul>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="downloads.html">Downloads</a>
+    <a href="changelog.html">Changelog</a>
+    <a href="devices.html">Devices</a>
+  </nav>
 
-    <span class="badge tested">TESTED</span>
+  <header>
 
-    <h3>+ Compatible Devices</h3>
+    <h1>Device Compatibility</h1>
 
-    <ul>
+    <p>
+      Toollibs compatibility matrix across tested, supported and unknown platforms.
+    </p>
 
-      <li>+ Samsung Galaxy A Series</li>
+  </header>
 
-      <li>+ Motorola Moto G Series</li>
+  <main>
 
-      <li>+ Xiaomi Redmi Series</li>
+    <div class="grid">
 
-      <li>+ Other Android devices</li>
+      <!-- MOBILE -->
+      <section>
 
-    </ul>
+        <h2>📱 Mobile Devices</h2>
 
-    <span class="badge compatible">COMPATIBLE</span>
+        <span class="badge tested">TESTED</span>
 
-  </section>
+        <h3>Verified Devices</h3>
+        <ul>
+          <li>Samsung Galaxy Grand Prime</li>
+          <li>Samsung Galaxy A05</li>
+        </ul>
 
-  <section>
+        <h3>Expected Compatibility</h3>
+        <ul>
+          <li>Samsung Galaxy A Series</li>
+          <li>Motorola Moto G Series</li>
+          <li>Xiaomi Redmi Series</li>
+          <li>Other Android ARM devices</li>
+        </ul>
 
-    <h2>📟 Tablets</h2>
+        <h3>Status Notes</h3>
+        <span class="badge unknown">UNKNOWN</span>
+        <p>Some low-end or custom ROM devices have not been fully tested.</p>
 
-    <h3>✓ Tested Devices</h3>
+      </section>
 
-    <ul>
+      <!-- TABLETS -->
+      <section>
 
-      <li>✓ Positivo Vision Tab 7</li>
+        <h2>📟 Tablets</h2>
 
-    </ul>
+        <span class="badge tested">TESTED</span>
 
-    <span class="badge tested">TESTED</span>
+        <h3>Verified Devices</h3>
+        <ul>
+          <li>Positivo Vision Tab 7</li>
+        </ul>
 
-    <h3>+ Compatible Devices</h3>
+        <h3>Expected Compatibility</h3>
+        <ul>
+          <li>Samsung Galaxy Tab Series</li>
+          <li>Lenovo Tab Series</li>
+          <li>Other Android tablets</li>
+        </ul>
 
-    <ul>
+        <h3>Status Notes</h3>
+        <span class="badge unknown">UNKNOWN</span>
+        <p>Some older tablet architectures still require testing.</p>
 
-      <li>+ Samsung Galaxy Tab Series</li>
+      </section>
 
-      <li>+ Lenovo Tab Series</li>
+      <!-- LAPTOPS -->
+      <section>
 
-      <li>+ Other Android Tablets</li>
+        <h2>💻 Laptops</h2>
 
-    </ul>
+        <span class="badge tested">TESTED</span>
 
-    <span class="badge compatible">COMPATIBLE</span>
+        <h3>Verified Devices</h3>
+        <ul>
+          <li>AMD C-70 Notebook (Arch Linux)</li>
+        </ul>
 
-  </section>
+        <h3>Expected Compatibility</h3>
+        <ul>
+          <li>Intel-based systems</li>
+          <li>AMD-based systems</li>
+          <li>Linux distributions</li>
+          <li>Windows systems (MinGW builds)</li>
+        </ul>
 
-  <section>
+        <h3>Status Notes</h3>
+        <span class="badge unknown">UNKNOWN</span>
+        <p>Performance on very low-end hardware is still under evaluation.</p>
 
-    <h2>💻 Notebooks</h2>
+      </section>
 
-    <h3>✓ Tested Devices</h3>
+      <!-- DESKTOP -->
+      <section>
 
-    <ul>
+        <h2>🖥️ Desktop Systems</h2>
 
-      <li>✓ AMD C-70 Notebook (Arch Linux)</li>
+        <span class="badge compatible">SUPPORTED</span>
 
-    </ul>
+        <ul>
+          <li>x86_64 architectures</li>
+          <li>x86 32-bit systems</li>
+          <li>Linux desktops</li>
+          <li>Windows desktops</li>
+        </ul>
 
-    <span class="badge tested">TESTED</span>
+        <h3>Status Notes</h3>
+        <span class="badge unknown">UNKNOWN</span>
+        <p>Some exotic or legacy systems are not yet validated.</p>
 
-    <h3>+ Compatible Devices</h3>
+      </section>
 
-    <ul>
+      <!-- SMART TV -->
+      <section>
 
-      <li>+ Intel-based Notebooks</li>
+        <h2>📺 Smart TV</h2>
 
-      <li>+ AMD-based Notebooks</li>
+        <span class="badge tested">TESTED</span>
 
-      <li>+ Linux Notebooks</li>
+        <h3>Verified Devices</h3>
+        <ul>
+          <li>LG webOS TV</li>
+        </ul>
 
-      <li>+ Windows Notebooks</li>
+        <h3>Expected Compatibility</h3>
+        <ul>
+          <li>Smart TVs with modern browser support</li>
+        </ul>
 
-    </ul>
+        <h3>Status Notes</h3>
+        <span class="badge unknown">UNKNOWN</span>
+        <p>Other TV operating systems are not yet validated.</p>
 
-    <span class="badge compatible">COMPATIBLE</span>
+      </section>
 
-  </section>
+      <!-- LEGEND -->
+      <section>
 
-  <section>
+        <h2>ℹ️ Compatibility Legend</h2>
 
-    <h2>🖥️ PCs</h2>
+        <ul>
+          <li><span class="badge tested">TESTED</span> Fully verified through execution</li>
+          <li><span class="badge compatible">SUPPORTED</span> Expected to work based on architecture</li>
+          <li><span class="badge unknown">UNKNOWN</span> Not yet evaluated or tested</li>
+        </ul>
 
-    <h3>+ Compatible Devices</h3>
+      </section>
 
-    <ul>
+    </div>
 
-      <li>+ x86_64 Desktop Systems</li>
+  </main>
 
-      <li>+ x86 Desktop Systems</li>
-
-      <li>+ Linux PCs</li>
-
-      <li>+ Windows PCs</li>
-
-    </ul>
-
-    <span class="badge compatible">COMPATIBLE</span>
-
-  </section>
-
-  <section>
-
-    <h2>📺 Smart TVs</h2>
-
-    <h3>✓ Tested Devices</h3>
-
-    <ul>
-
-      <li>✓ LG webOS TV</li>
-
-    </ul>
-
-    <span class="badge tested">TESTED</span>
-
-    <h3>+ Compatible Devices</h3>
-
-    <ul>
-
-      <li>+ Other Smart TVs with functional browser support</li>
-
-    </ul>
-
-    <span class="badge compatible">COMPATIBLE</span>
-
-  </section>
-
-  <section>
-
-    <h2>ℹ️ Compatibility Notes</h2>
-
-    <ul>
-
-      <li>✓ Tested devices were successfully used with Toollibs.</li>
-
-      <li>+ Compatible devices are expected to work based on architecture or browser support.</li>
-
-      <li>X Unsupported devices are currently unknown.</li>
-
-    </ul>
-
-  </section>
-
-</div>
-
-  </main>  <footer><p>
-  Toollibs © 2026
-</p>
-
+  <footer>
+    <p>Toollibs © 2026 — Open-source C++ Framework Ecosystem</p>
   </footer>
 
   <script src="system.js"></script>
- 
+
 </body>
 </html>
