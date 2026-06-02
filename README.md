@@ -1,39 +1,125 @@
 # Toollibs
 
-Toollibs is a modular collection of reusable C++ libraries designed to provide simple, lightweight, and structured tools for software development.
+Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
 
-It can be used as a base for games, emulators, system tools, and general-purpose applications.
+It goes beyond a simple library collection — providing a **build system, runtime verification pipeline, plugin architecture, and automated deployment system**.
+
+---
+
+## 🚀 Core Philosophy
+
+Toollibs is built around a simple idea:
+
+> Build modular systems, verify at runtime, and deploy automatically across architectures.
+
+It focuses on:
+
+- Clean modular design
+- Cross-platform compilation (Linux + Windows support)
+- Lightweight system architecture
+- Developer-friendly tooling
+
+---
+
+## 🧠 Key Features
+
+- ⚙️ Multi-architecture build system (x86_64, ARM, etc.)
+- 🧪 Runtime verification pipeline (mainlogger system)
+- 🧩 Plugin system for extensibility
+- 📦 Automated deployment system (website integration)
+- 💻 Linux-focused system tools (CPU/GPU modules)
+- 🌐 Download + version distribution via web interface
 
 ---
 
 ## 🔧 Modules
 
-- core: logging, basic utilities, and system helpers
-- graphics: simple rendering and pixel manipulation
-- input: keyboard, mouse, and controller handling
-- audio: basic sound and audio system
-- fs: file system utilities
-- math: mathematical helpers and structures
-- plugins: modular extension system
+- **core** → logging system, runtime control, base utilities
+- **math** → mathematical helpers and vector structures
+- **graphics** → lightweight rendering utilities
+- **input** → input handling (keyboard, mouse, controller)
+- **fs** → file system utilities
+- **plugins** → modular extension system
+
+---
+
+## 🏗️ Build System
+
+Toollibs uses a Makefile-based build pipeline:
+
+- Supports multi-architecture builds
+- Separates Linux-specific modules (cpu_info, gpu_info)
+- Generates structured binaries per platform
+
+Example output:
+bin/x86_64/mainlogger bin/aarch64/cpu_info
+
+---
+
+## 🌐 Deployment System
+
+Toollibs includes an automated deployment pipeline:
+
+- Builds are automatically packaged
+- Binaries are distributed to a web directory
+- Generates `index.json` for downloads
+- Powers the official Toollibs website
+
+---
+
+## 🧪 Runtime Verification
+
+Each build can be validated using the MainLogger system:
+
+- Module integrity checks
+- Math, graphics, and plugin tests
+- System health report (HEALTHY / DEGRADED)
+
+---
+
+## 🌍 Platforms
+
+- Linux (primary development platform)
+- Windows (via MinGW for main modules)
+- Termux (experimental support)
 
 ---
 
 ## 🎯 Goal
 
-To build a clean, reusable, and modular C++ toolkit that can serve as a foundation for different types of projects.
+To build a **modern, modular, and automated C++ ecosystem** that can serve as a foundation for:
+
+- system tools
+- game frameworks
+- plugin-based applications
+- lightweight engines
 
 ---
 
-## 🌍 Community Project
+## 📜 History
 
-Toollibs is an open project built for the community.
+Toollibs evolved from an earlier discontinued project called **ServerHub**.
 
-Everyone is welcome to:
-- contribute ideas
-- improve code
-- create new modules
-- build bases and tools
-- experiment freely
-- help expand the project in any direction
+It was rebuilt to focus on:
+- stability
+- structure
+- continuous development
+- real deployment workflow
 
-This project is meant to be a space for creativity, collaboration, and learning.
+---
+
+## 🌱 Community
+
+This is an open project built for learning, experimentation, and contribution.
+
+You are welcome to:
+- contribute code
+- suggest improvements
+- build modules
+- fork and experiment freely
+
+---
+
+## ⚡ License
+
+MIT License
