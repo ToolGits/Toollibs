@@ -4,7 +4,6 @@
 #include "graphics/graphics.hpp"
 #include "plugins/MathPlugin/plugin.hpp"
 
-#include <iostream>
 #include <vector>
 #include <string>
 #include <filesystem>
@@ -41,7 +40,7 @@ struct Module
 };
 
 // =========================
-// MATH TESTS
+// MATH TEST
 // =========================
 void RunMathTests()
 {
@@ -59,7 +58,7 @@ void RunMathTests()
 }
 
 // =========================
-// GRAPHICS TESTS
+// GRAPHICS TEST
 // =========================
 void RunGraphicsTests()
 {
@@ -79,7 +78,7 @@ void RunGraphicsTests()
 }
 
 // =========================
-// PLUGIN TESTS
+// PLUGIN TEST
 // =========================
 void RunPluginTests()
 {
@@ -103,7 +102,7 @@ void RunPluginTests()
 // =========================
 // STATUS REPORT
 // =========================
-void PrintSystemStatus(int ok, int total)
+void PrintStatus(int ok, int total)
 {
     Logger::Info("======================================");
     Logger::Info("Toollibs Verification Completed");
@@ -135,10 +134,10 @@ int main()
     // =========================
     std::vector<Module> modules =
     {
-        {"Input", "input/input_simulation.cpp"},
-        {"Math", "math/math.hpp"},
-        {"Graphics", "graphics/graphics.hpp"},
-        {"Plugins", "plugins/MathPlugin/plugin.hpp"}
+        {"Input", "input/input_simulation.cpp", false},
+        {"Math", "math/math.hpp", false},
+        {"Graphics", "graphics/graphics.hpp", false},
+        {"Plugins", "plugins/MathPlugin/plugin.hpp", false}
     };
 
     Logger::Info("Checking module integrity...");
@@ -152,7 +151,7 @@ int main()
         if (m.ok)
         {
             Logger::Info(m.name + " module OK");
-            okModules++;
+            ++okModules;
         }
         else
         {
@@ -169,9 +168,9 @@ int main()
     // =========================
     Logger::Info("Starting runtime validation...");
 
-    bool mathOk = modules[1].ok;
-    bool graphicsOk = modules[2].ok;
-    bool pluginOk = modules[3].ok;
+    const bool mathOk = modules[1].ok;
+    const bool graphicsOk = modules[2].ok;
+    const bool pluginOk = modules[3].ok;
 
     if (mathOk)
         RunMathTests();
@@ -185,7 +184,7 @@ int main()
     // =========================
     // FINAL STATUS
     // =========================
-    PrintSystemStatus(okModules, modules.size());
+    PrintStatus(okModules, static_cast<int>(modules.size()));
 
-    return (okModules == (int)modules.size()) ? 0 : 1;
+    return (okModules == static_cast<int>(modules.size())) ? 0 : 1;
 }
