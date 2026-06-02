@@ -129,15 +129,16 @@
 
           if (file === "index.json") continue;
 
-          let show = true;
+          let show = false;
 
-          if (arch !== "unknown") {
+if (arch === "unknown") {
+  show = true;
+} else {
+  const isLinux = file.endsWith(`-${arch}`);
+  const isWindows = file.endsWith(`-${arch}.exe`);
 
-            const isLinux = file.endsWith(`-${arch}`);
-            const isWindows = file.endsWith(`-${arch}.exe`);
-
-            show = isLinux || isWindows;
-          }
+  show = isLinux || isWindows;
+}
 
           if (!show) continue;
 
