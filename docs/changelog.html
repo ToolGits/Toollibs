@@ -224,9 +224,22 @@ function updateArrows() {
 window.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".changelog-card");
 
-  if (cards.length > 0) {
-    cards.forEach(c => c.classList.remove("open"));
+  cards.forEach(c => c.classList.remove("open"));
 
+  let latestCard = null;
+
+  cards.forEach(card => {
+    const badge = card.querySelector(".badge.tested");
+
+    if (badge && badge.textContent.trim() === "LATEST") {
+      latestCard = card;
+    }
+  });
+
+  if (latestCard) {
+    latestCard.classList.add("open");
+  } else if (cards.length > 0) {
+    // FALLBACK
     cards[0].classList.add("open");
   }
 
