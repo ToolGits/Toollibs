@@ -1,93 +1,147 @@
 #include "logger.hpp"
+
 #include "math/math.hpp"
 #include "graphics/graphics.hpp"
 #include "plugins/MathPlugin/plugin.hpp"
 
 #include <filesystem>
+#include <vector>
+#include <string>
 
 namespace fs = std::filesystem;
 
+namespace Toollibs {
+
+bool FileValid(const std::string& path)
+{
+    return fs::exists(path) && fs::file_size(path) > 0;
+}
+
+struct ModuleStatus
+{
+    std::string name;
+    bool ok;
+};
+
+void RunMathTests()
+{
+    Logger::Info("Running Math tests...");
+
+    Toollibs::Math::Vec2 a{1.0f, 2.0f};
+    Toollibs::Math::Vec2 b{3.0f, 4.0f};
+
+    auto result = Toollibs::Math::Add(a, b);
+
+    if (result.x == 4.0f && result.y == 6.0f)
+        Logger::Info("Math: Vec2 Add test PASSED");
+    else
+        Logger::Error("Math: Vec2 Add test FAILED");
+}
+
+void RunGraphicsTests()
+{
+    Logger::Info("Running Graphics tests...");
+
+    Toollibs::Graphics::Init();
+
+    Toollibs::Graphics::Color black{0, 0, 0};
+    Toollibs::Graphics::Color white{255, 255, 255};
+
+    Toollibs::Graphics::Clear(black);
+    Toollibs::Graphics::DrawPixel(10, 10, white);
+
+    Toollibs::Graphics::Shutdown();
+
+    Logger::Info("Graphics: pipeline executed successfully");
+}
+
+void RunPluginTests()
+{
+    Logger::Info("Running Plugin system tests...");
+
+    try
+    {
+        Toollibs::Plugin::MathPlugin::Run();
+        Logger::Info("Plugin: MathPlugin executed successfully");
+    }
+    catch (const std::exception& e)
+    {
+        Logger::Error(std::string("Plugin system error: ") + e.what());
+    }
+    catch (...)
+    {
+        Logger::Error("Plugin system unknown error occurred");
+    }
+}
+
+}
+
 int main()
 {
-    Toollibs::Logger::Info("Starting Toollibs verification...");
-    Toollibs::Logger::Debug("Initializing core pipeline...");
+    using namespace Toollibs;
+
+    Logger::Info("======================================");
+    Logger::Info("Toollibs Verification Pipeline Start");
+    Logger::Info("======================================");
 
     // =========================
-    // CORE CHECK
+    // MODULE CHECKS
     // =========================
-    Toollibs::Logger::Info("Checking core modules...");
+    std::vector<ModuleStatus> modules =
+    {
+        {"Input", FileValid("input/input_simulation.cpp")},
+        {"Math", FileValid("math/math.hpp") && FileValid("math/math.cpp")},
+        {"Graphics", FileValid("graphics/graphics.hpp") && FileValid("graphics/graphics.cpp")},
+        {"Plugins", FileValid("plugins/MathPlugin/plugin.hpp")}
+    };
 
-    bool input_ok = fs::exists("input/input_simulation.cpp");
-    bool math_ok = fs::exists("math/math.hpp") && fs::exists("math/math.cpp");
-    bool graphics_ok = fs::exists("graphics/graphics.hpp") &&
-                        fs::exists("graphics/graphics.cpp");
+    Logger::Info("Checking module integrity...");
 
-    if (!input_ok)
-        Toollibs::Logger::Error("Input module missing or broken");
-    else
-        Toollibs::Logger::Info("Input module detected");
+    int okModules = 0;
 
-    if (!math_ok)
-        Toollibs::Logger::Warning("Math module missing");
-    else
-        Toollibs::Logger::Info("Math module detected");
+    for (const auto& m : modules)
+    {
+        if (m.ok)
+        {
+            Logger::Info(m.name + " module OK");
+            okModules++;
+        }
+        else
+        {
+            Logger::Error(m.name + " module MISSING or INVALID");
+        }
+    }
 
-    if (!graphics_ok)
-        Toollibs::Logger::Warning("Graphics module missing");
-    else
-        Toollibs::Logger::Info("Graphics module detected");
+    Logger::Info("Modules OK: " + std::to_string(okModules) + "/" + std::to_string(modules.size()));
 
     // =========================
     // RUNTIME TESTS
     // =========================
-    Toollibs::Logger::Info("Running runtime tests...");
+    Logger::Info("Starting runtime validation...");
 
-    if (math_ok)
-    {
-        Toollibs::Math::Vec2 a{1.0f, 2.0f};
-        Toollibs::Math::Vec2 b{3.0f, 4.0f};
+    if (modules[1].ok)
+        RunMathTests();
 
-        auto result = Toollibs::Math::Add(a, b);
-
-        if (result.x == 4.0f && result.y == 6.0f)
-            Toollibs::Logger::Info("Math runtime test PASSED");
-        else
-            Toollibs::Logger::Warning("Math runtime test FAILED");
-    }
-
-    if (graphics_ok)
-    {
-        Toollibs::Graphics::Init();
-
-        Toollibs::Graphics::Color black{0, 0, 0};
-        Toollibs::Graphics::Color white{255, 255, 255};
-
-        Toollibs::Graphics::Clear(black);
-        Toollibs::Graphics::DrawPixel(10, 10, white);
-
-        Toollibs::Graphics::Shutdown();
-
-        Toollibs::Logger::Debug("Graphics runtime test executed");
-    }
+    if (modules[2].ok)
+        RunGraphicsTests();
 
     // =========================
-    // PLUGIN SYSTEM
+    // PLUGINS
     // =========================
-    Toollibs::Logger::Info("Loading plugins...");
-
-    // MathPlugin (test plugin system)
-    Toollibs::Plugin::MathPlugin::Run();
-
-    Toollibs::Logger::Debug("MathPlugin executed");
-
-    // Future plugins can be added here:
-    // Toollibs::Plugin::GraphicsPlugin::Run();
-    // Toollibs::Plugin::DebugPlugin::Run();
+    if (modules[3].ok)
+        RunPluginTests();
 
     // =========================
-    // FINAL RESULT
+    // FINAL REPORT
     // =========================
-    Toollibs::Logger::Info("Toollibs verification completed successfully");
+    Logger::Info("======================================");
+    Logger::Info("Toollibs Verification Completed");
+    Logger::Info("======================================");
 
-    return 0;
+    if (okModules == modules.size())
+        Logger::Info("SYSTEM STATUS: HEALTHY");
+    else
+        Logger::Warning("SYSTEM STATUS: DEGRADED");
+
+    return (okModules == modules.size()) ? 0 : 1;
 }
