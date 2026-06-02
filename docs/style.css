@@ -1,5 +1,5 @@
 /* ========================================
-BIGBROWSER TOOLLIBS STYLE.CSS v2.1
+BIGBROWSER TOOLLIBS STYLE.CSS
 Modern UI Edition
 ======================================== */
 
@@ -447,6 +447,18 @@ color: white;
 .compatible {
 background: #3b82f6;
 color: white;
+}
+
+.badge.unknown {
+  background-color: #2b2f3a;
+  color: #c7c7c7;
+  border: 1px solid #3a3f4b;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: inline-block;
 }
 
 /* ========================================
