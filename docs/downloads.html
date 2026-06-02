@@ -1,8 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,7 +14,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -35,23 +34,18 @@
 
     <div class="grid">
 
-      <!-- STATUS -->
       <section>
-
         <h2>Current Status</h2>
 
-        <span class="badge tested">v2.1 BigBrowserToollibs</span>
+        <span class="badge tested">Latest Build Available</span>
 
         <p>
           Toollibs is actively evolving with multi-platform builds,
           backend services and automated deployment system.
         </p>
-
       </section>
 
-      <!-- SOURCE -->
       <section>
-
         <h2>Source Code</h2>
 
         <p>Access the full Toollibs framework source code.</p>
@@ -62,10 +56,8 @@
            rel="noopener noreferrer">
           GitHub Repository
         </a>
-
       </section>
 
-      <!-- SMART DOWNLOADS -->
       <section>
 
         <h2>Smart Downloads</h2>
@@ -76,18 +68,16 @@
 
       </section>
 
-      <!-- ARCH SUPPORT -->
       <section>
-
         <h2>Supported Architectures</h2>
 
         <ul>
           <li>x86_64 — 64-bit desktops and laptops</li>
-          <li>x86 / i386 — 32-bit systems</li>
+          <li>x86 — 32-bit systems</li>
           <li>aarch64 — modern ARM 64-bit devices</li>
           <li>armv7l — ARM 32-bit legacy devices</li>
+          <li><b>Windows builds available (x86_64 only)</b></li>
         </ul>
-
       </section>
 
     </div>
@@ -106,25 +96,10 @@
     function detectArch() {
       const ua = navigator.userAgent.toLowerCase();
 
-      if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64")) {
-        return "x86_64";
-      }
-
-      if (ua.includes("i386") || ua.includes("i686")) {
-        return "x86";
-      }
-
-      if (ua.includes("aarch64") || ua.includes("arm64")) {
-        return "aarch64";
-      }
-
-      if (ua.includes("armv7l")) {
-        return "armv7l";
-      }
-
-      if (ua.includes("arm")) {
-        return "armv7l";
-      }
+      if (ua.includes("armv7l")) return "armv7l";
+      if (ua.includes("aarch64") || ua.includes("arm64")) return "aarch64";
+      if (ua.includes("i386") || ua.includes("i686")) return "x86";
+      if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64")) return "x86_64";
 
       return "unknown";
     }
@@ -139,11 +114,10 @@
 
       const arch = detectArch();
 
-      if (arch === "unknown") {
-        archInfo.innerHTML = "Architecture: unknown — showing all available builds";
-      } else {
-        archInfo.innerHTML = `Detected architecture: <b>${arch}</b>`;
-      }
+      archInfo.innerHTML =
+        arch === "unknown"
+          ? "Architecture: unknown — showing all builds"
+          : `Detected architecture: <b>${arch}</b>`;
 
       try {
         const res = await fetch("./downloads/index.json");
@@ -153,15 +127,19 @@
 
         for (const file of files) {
 
-          // FILTRO INTELIGENTE
+          if (file === "index.json") continue;
+
+          let show = true;
+
           if (arch !== "unknown") {
 
-            const match =
-              file.endsWith(`-${arch}`) ||
-              file.includes(arch);
+            const isLinux = file.endsWith(`-${arch}`);
+            const isWindows = file.endsWith(`-${arch}.exe`);
 
-            if (!match) continue;
+            show = isLinux || isWindows;
           }
+
+          if (!show) continue;
 
           html += `
             <a class="button" href="downloads/${file}" download>
