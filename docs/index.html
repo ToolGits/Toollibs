@@ -1,23 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Toollibs</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
 
+    :root {
+      --c0: #0a0a0f;
+      --c1: #10101a;
+      --c2: #16162a;
+      --accent: #4f8ef7;
+      --accent2: #7c5fff;
+      --text: #e8e8f0;
+      --muted: #6b6b88;
+      --border: rgba(79, 142, 247, 0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--c0);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    canvas#bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      gap: 2rem;
+      padding: 1.1rem 2.5rem;
+      background: rgba(10, 10, 15, 0.7);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      animation: navSlide 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes navSlide {
+      from { transform: translateY(-100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.25s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    nav a:hover { color: var(--text); }
+    nav a:hover::after { width: 100%; }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin: 0 0 1.25rem;
+      background: linear-gradient(135deg, #fff 30%, var(--accent) 70%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: heroTitle 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+    }
+
+    @keyframes heroTitle {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0)  scale(1); }
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin: 0 auto 0.75rem;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin: 0 auto 2.5rem;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.7s both;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(79, 142, 247, 0.08);
+      transition: background 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(79,142,247,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .button:hover {
+      border-color: rgba(79, 142, 247, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(79, 142, 247, 0.18);
+    }
+
+    .button:hover::before { opacity: 1; }
+    .button:active { transform: translateY(0); }
+
+    main {
+      position: relative;
+      z-index: 1;
+      padding: 4rem 2rem 6rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    section {
+      background: var(--c1);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      transition: border-color 0.3s, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+      opacity: 0;
+      transform: translateY(36px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    section.visible {
+      animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(36px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    section:hover {
+      border-color: rgba(79, 142, 247, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(79,142,247,0.08);
+    }
+
+    section:hover::before { opacity: 1; }
+
+    section h2 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 1rem;
+    }
+
+    section p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin: 0.5rem 0 0;
+    }
+
+    section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+    }
+
+    section ul li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    section ul li:last-child { border-bottom: none; }
+
+    section:hover ul li { color: rgba(232, 232, 240, 0.75); }
+
+    section ul li strong {
+      color: var(--text);
+      font-weight: 600;
+      min-width: 100px;
+      display: inline-block;
+    }
+
+    section ul li::before {
+      content: '—';
+      color: rgba(79,142,247,0.4);
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      margin: 0 0.35rem 0.75rem 0;
+      border: 1px solid;
+      animation: badgePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes badgePop {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .badge.stable {
+      color: #4ade80;
+      background: rgba(74, 222, 128, 0.08);
+      border-color: rgba(74, 222, 128, 0.25);
+    }
+
+    .badge.tested {
+      color: var(--accent);
+      background: rgba(79, 142, 247, 0.08);
+      border-color: rgba(79, 142, 247, 0.25);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle, rgba(79, 142, 247, 0.06) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      transition: left 0.08s, top 0.08s;
+    }
+  </style>
 </head>
-
 <body>
+  <canvas id="bg"></canvas>
+  <div class="cursor-glow" id="glow"></div>
 
   <nav>
     <a href="index.html">Home</a>
@@ -26,75 +343,51 @@
     <a href="devices.html">Devices</a>
   </nav>
 
-  <!-- HERO -->
   <header class="hero">
-
     <h1>Toollibs</h1>
-
     <p class="subtitle">
       Modular open-source C++ framework for tools, systems and scalable architecture.
     </p>
-
     <p class="tagline">
       Lightweight · Modular · Cross-platform · Runtime-driven · Ecosystem-based
     </p>
-
     <div class="hero-buttons">
-
       <a class="button"
          href="https://github.com/enzobobdevvideos04-ctrl/Toollibs"
          target="_blank"
          rel="noopener noreferrer">
         GitHub
       </a>
-
       <a class="button" href="downloads.html">
         Downloads
       </a>
-
       <a class="button" href="changelog.html">
         Changelog
       </a>
-
     </div>
-
   </header>
 
   <main>
-
     <div class="grid">
-
-      <!-- STATUS -->
       <section>
-
         <h2>Project Status</h2>
-
         <span class="badge tested">v2.1 BigBrowserToollibs</span>
-
         <p>
           Toollibs is actively evolving into a full ecosystem with multi-platform builds,
           runtime verification and automated deployment system.
         </p>
-
       </section>
 
-      <!-- ABOUT -->
       <section>
-
         <h2>About</h2>
-
         <p>
           Toollibs is a modular C++ framework designed to provide reusable components,
           system utilities, plugin-based architecture and development tools for scalable projects.
         </p>
-
       </section>
 
-      <!-- CORE MODULES -->
       <section>
-
         <h2>Core Modules</h2>
-
         <ul>
           <li><strong>core</strong> — logging system + runtime control</li>
           <li><strong>math</strong> — vector and math utilities</li>
@@ -103,14 +396,10 @@
           <li><strong>fs</strong> — filesystem utilities</li>
           <li><strong>plugins</strong> — extensibility system</li>
         </ul>
-
       </section>
 
-      <!-- ECOSYSTEM -->
       <section>
-
         <h2>Toollibs Ecosystem</h2>
-
         <ul>
           <li><strong>ToollibsServer</strong> — backend/API system</li>
           <li><strong>Deploy System</strong> — automated build & distribution pipeline</li>
@@ -118,26 +407,18 @@
           <li><strong>cpu_info / gpu_info</strong> — Linux hardware inspection tools</li>
           <li><strong>Web Platform</strong> — documentation, downloads and changelog system</li>
         </ul>
-
       </section>
 
-      <!-- VERSION SYSTEM -->
       <section>
-
         <h2>Version System</h2>
-
         <span class="badge stable">v2.0 Forgelibs</span>
         <span class="badge tested">v2.1 BigBrowserToollibs</span>
-
         <p>
           Toollibs uses a codename-based versioning system introduced in the stable era,
           integrating backend, tools and web platform into a unified ecosystem.
         </p>
-
       </section>
-
     </div>
-
   </main>
 
   <footer>
@@ -145,6 +426,86 @@
   </footer>
 
   <script src="system.js"></script>
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let W, H, dots = [];
 
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function mkDot() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.4,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        a: Math.random()
+      };
+    }
+
+    function initDots() {
+      dots = Array.from({ length: 90 }, mkDot);
+    }
+
+    function drawDots() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0) d.x = W;
+        if (d.x > W) d.x = 0;
+        if (d.y < 0) d.y = H;
+        if (d.y > H) d.y = 0;
+
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+          const dx = d.x - b.x, dy = d.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.strokeStyle = `rgba(79,142,247,${0.12 * (1 - dist / 130)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+
+        ctx.fillStyle = `rgba(79,142,247,${d.a * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(drawDots);
+    }
+
+    window.addEventListener('resize', () => { resize(); initDots(); });
+    resize();
+    initDots();
+    drawDots();
+
+    const glow = document.getElementById('glow');
+    window.addEventListener('mousemove', e => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = Array.from(el.parentElement.children).indexOf(el) * 90;
+          setTimeout(() => el.classList.add('visible'), delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('section').forEach(s => observer.observe(s));
+  </script>
 </body>
 </html>
