@@ -52,7 +52,7 @@ Toollibs uses a Makefile-based build pipeline:
 - Generates structured binaries per platform
 
 Example output:
-bin/x86_64/mainlogger bin/aarch64/cpu_info
+bin/x86_64/mainlogger bin/windows_x86_64/mainlogger bin/aarch64/cpu_info bin/x86_64/gpu_info
 
 ---
 
@@ -81,7 +81,7 @@ Each build can be validated using the MainLogger system:
 
 - Linux (primary development platform)
 - Windows (via MinGW for main modules)
-- Termux (experimental support)
+- Termux / Android (experimental support)
 
 ---
 
@@ -122,4 +122,4 @@ You are welcome to:
 
 ## ⚡ License
 
-MIT License
+The license that Toollibs uses is the MIT License (Copyright © 2026)
