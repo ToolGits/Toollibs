@@ -156,6 +156,26 @@ nav a:hover {
   color: var(--accent);
 }
 
+.page-header {
+  text-align: center;
+  padding: 80px 20px 40px;
+}
+
+.page-header h1 {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 /* =========================
    BUTTONS
 ========================= */
