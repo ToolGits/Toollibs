@@ -1,0 +1,246 @@
+/* ================================
+TOOLLIBS MODERN OVERLAY
+================================ */
+
+/* ROOT */
+:root {
+  --c0: #0a0a0f;
+  --c1: #10101a;
+  --accent: #4f8ef7;
+  --accent2: #7c5fff;
+  --text: #e8e8f0;
+  --muted: #6b6b88;
+  --border: rgba(79, 142, 247, 0.15);
+}
+
+/* RESET SAFE */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* BODY overlay */
+body {
+  margin: 0;
+  background: var(--c0);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND CANVAS */
+canvas#bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* CURSOR GLOW */
+.cursor-glow {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(79,142,247,0.06), transparent 70%);
+  transform: translate(-50%, -50%);
+}
+
+/* ================================
+NAV
+================================ */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  gap: 2rem;
+  padding: 1.1rem 2.5rem;
+
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+
+  z-index: 100;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: 0.25s;
+}
+
+nav a:hover {
+  color: var(--text);
+}
+
+/* ================================
+HERO
+================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  padding: 8rem 2rem 4rem;
+  z-index: 1;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 800;
+
+  background: linear-gradient(135deg, #fff 30%, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.tagline {
+  margin-top: 1rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ================================
+BUTTONS
+================================ */
+
+.hero-buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 0.65rem 1.6rem;
+  border-radius: 6px;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+
+  color: var(--text);
+  text-decoration: none;
+
+  background: rgba(79, 142, 247, 0.08);
+  border: 1px solid var(--border);
+
+  transition: 0.25s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(79, 142, 247, 0.5);
+}
+
+/* ================================
+CARDS
+================================ */
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+section {
+  background: var(--c1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  padding: 1.5rem;
+
+  transition: 0.25s;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+section:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+/* ================================
+TEXT
+================================ */
+
+section h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  margin-bottom: 1rem;
+}
+
+section p,
+section li {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* ================================
+BADGES
+================================ */
+
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.badge.stable {
+  background: rgba(74,222,128,0.15);
+  color: #4ade80;
+}
+
+.badge.tested {
+  background: rgba(79,142,247,0.15);
+  color: var(--accent);
+}
+
+/* ================================
+FOOTER
+================================ */
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
