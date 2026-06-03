@@ -7,9 +7,10 @@ int main()
 {
     std::cout << "=== TOOLLIBS CPU INFO ===\n\n";
 
-    std::cout << "CPU: " << CPU::GetName() << "\n";
-    std::cout << "Vendor: " << CPU::GetVendor() << "\n";
-    std::cout << "Cores: " << CPU::GetCores() << "\n";
+    std::cout << "CPU     : " << CPU::GetName() << "\n";
+    std::cout << "Vendor  : " << CPU::GetVendor() << "\n";
+    std::cout << "Cores   : " << CPU::GetCores() << "\n";
+    std::cout << "Threads : " << CPU::GetThreads() << "\n";
 
     return 0;
 }
