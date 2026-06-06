@@ -11,7 +11,9 @@ namespace POP
 {
     void Initialize()
     {
-        std::cout << "[POP] Initialized." << std::endl;
+        std::cout
+            << "[POP] Initialized."
+            << std::endl;
     }
 
     void GenerateGitKeeps(const char* rootPath)
@@ -43,7 +45,65 @@ namespace POP
 
     void GitAdd()
     {
-        std::cout << "[POP] Running git add ." << std::endl;
+        std::cout
+            << "[POP] Running git add ."
+            << std::endl;
+
         std::system("git add .");
+    }
+
+    void GitCommit()
+    {
+        std::cout
+            << "[POP] Creating commit..."
+            << std::endl;
+
+        std::system(
+            "git commit -m \"POP automated update\""
+        );
+    }
+
+    void GitPushPrompt()
+    {
+        char choice;
+
+        std::cout
+            << "[POP] Push changes to remote? [y/N]: ";
+
+        std::cin >> choice;
+
+        if (choice == 'y' || choice == 'Y')
+        {
+            std::cout
+                << "[POP] Running git push..."
+                << std::endl;
+
+            std::system("git push");
+        }
+        else
+        {
+            std::cout
+                << "[POP] Push cancelled."
+                << std::endl;
+        }
+    }
+
+    void Run()
+    {
+        std::cout
+            << "[POP] Starting workflow..."
+            << std::endl;
+
+        GenerateGitKeeps(".");
+
+        GitAdd();
+
+        GitCommit();
+
+        GitPushPrompt();
+
+        std::cout
+            << "[POP] Workflow completed."
+            << std::endl;
     }
 }
