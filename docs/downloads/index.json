@@ -5,5 +5,8 @@
   "gpu_info-x86_64",
   "mainlogger-aarch64",
   "mainlogger-x86_64",
-  "pop-aarch64"
+  "mainlogger-x86_64.exe",
+  "pop-aarch64",
+  "pop-x86_64",
+  "pop-x86_64.exe"
 ]
