@@ -1,0 +1,7 @@
+{
+  "name": "POP",
+  "version": "1.0",
+  "author": "Toollibs",
+  "description": "Development automation plugin for Toollibs",
+  "entry": "plugin.cpp"
+}
