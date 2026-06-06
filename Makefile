@@ -10,7 +10,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
 ARCH := $(shell uname -m)
 
 BUILD_DIR = bin/$(ARCH)
-BUILD_DIR_WIN = bin/windows_$(ARCH)
+BUILD_DIR_WIN = bin/windows_x86_64
 
 # =========================
 # SOURCES (CORE FRAMEWORK)
