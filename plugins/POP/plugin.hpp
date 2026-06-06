@@ -4,8 +4,16 @@
 namespace POP
 {
     void Initialize();
+
     void GenerateGitKeeps(const char* rootPath);
+
     void GitAdd();
+
+    void GitCommit();
+
+    void GitPushPrompt();
+
+    void Run();
 }
 
 #endif
