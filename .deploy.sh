@@ -27,8 +27,7 @@ rm -f "$DOCS_DIR"/*.exe
 
 echo "[4/6] Deploying Linux executables..."
 
-# Linux binaries
-for bin in mainlogger cpu_info gpu_info; do
+for bin in mainlogger cpu_info gpu_info pop; do
   if [ -f "$BUILD_DIR/$bin" ]; then
     cp "$BUILD_DIR/$bin" "$DOCS_DIR/$bin-$ARCH"
   fi
@@ -36,16 +35,15 @@ done
 
 echo "[5/6] Deploying Windows binaries (if available)..."
 
-# Windows binaries (optional)
 if [ -d "$BUILD_DIR_WIN" ]; then
-  for bin in mainlogger.exe; do
+  for bin in mainlogger.exe pop.exe; do
     if [ -f "$BUILD_DIR_WIN/$bin" ]; then
       cp "$BUILD_DIR_WIN/$bin" "$DOCS_DIR/${bin%.exe}-$ARCH.exe"
     fi
   done
 fi
 
-echo "[6/6] Generating downloads index.json..."
+echo "[6/6] Generating index.json..."
 
 INDEX_FILE="$DOCS_DIR/index.json"
 
@@ -72,7 +70,7 @@ done
 echo "" >> "$INDEX_FILE"
 echo "]" >> "$INDEX_FILE"
 
-echo "=========================================="
+echo "==========================================="
 echo "Deploy completed successfully!"
 echo "Architecture: $ARCH"
 echo "Linux build: $BUILD_DIR"
@@ -80,4 +78,4 @@ echo "Windows build: $BUILD_DIR_WIN"
 echo "Output: $DOCS_DIR"
 echo ""
 echo "Powered by Toollibs & Toollibs-workstation"
-echo "=========================================="
+echo "==========================================="
