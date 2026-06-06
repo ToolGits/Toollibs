@@ -1,5 +1,5 @@
 CXX = g++
-	
+
 MINGW = x86_64-w64-mingw32-g++
 
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
@@ -23,10 +23,15 @@ PLUGIN_SRC = plugins/MathPlugin/plugin.cpp
 SRC = $(CORE_SRC) $(MATH_SRC) $(GRAPHICS_SRC) $(PLUGIN_SRC)
 
 # =========================
-# LINUX-ONLY TOOLS
+# TOOLS (LINUX)
 # =========================
 CPU_SRC = platform/linux/cpu.cpp platform/linux/cpu_info.cpp
 GPU_SRC = platform/linux/gpu.cpp platform/linux/gpu_info.cpp
+
+# =========================
+# POP PLUGIN TOOL
+# =========================
+POP_SRC = plugins/POP/plugin.cpp plugins/POP/pop_main.cpp
 
 # =========================
 # TARGETS (LINUX)
@@ -34,11 +39,13 @@ GPU_SRC = platform/linux/gpu.cpp platform/linux/gpu_info.cpp
 MAIN_TARGET = $(BUILD_DIR)/mainlogger
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
+POP_TARGET = $(BUILD_DIR)/pop
 
 # =========================
 # TARGETS (WINDOWS)
 # =========================
 MAIN_TARGET_WIN = $(BUILD_DIR_WIN)/mainlogger.exe
+POP_TARGET_WIN = $(BUILD_DIR_WIN)/pop.exe
 
 # =========================
 # PREPARE
@@ -48,32 +55,46 @@ prepare:
 	@mkdir -p $(BUILD_DIR_WIN)
 
 # =========================
-# LINUX BUILD (CORE)
+# LINUX BUILD CORE
 # =========================
 mainlogger: prepare $(SRC)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET)
 
 # =========================
-# LINUX TOOLS ONLY
+# LINUX TOOLS
 # =========================
 tools: prepare
-	@echo "Building Linux-only tools (cpu_info, gpu_info)..."
+	@echo "Building Linux tools..."
 
 	$(CXX) $(CXXFLAGS) $(CPU_SRC) -o $(CPU_TARGET)
 	$(CXX) $(CXXFLAGS) $(GPU_SRC) -o $(GPU_TARGET)
 
 # =========================
-# WINDOWS BUILD (MAIN ONLY)
+# POP (LINUX)
+# =========================
+pop: prepare
+	@echo "Building POP (Linux)..."
+	$(CXX) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET)
+
+# =========================
+# WINDOWS BUILD CORE
 # =========================
 windows: prepare
-	@echo "Building Windows binaries ($(ARCH))..."
+	@echo "Building Windows binaries..."
 
 	$(MINGW) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET_WIN)
 
 # =========================
+# POP (WINDOWS)
+# =========================
+pop_windows: prepare
+	@echo "Building POP (Windows)..."
+	$(MINGW) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET_WIN)
+
+# =========================
 # FULL BUILD
 # =========================
-all: prepare mainlogger tools windows
+all: prepare mainlogger tools windows pop pop_windows
 
 # =========================
 # RUN
@@ -90,7 +111,7 @@ clean:
 re: clean all
 
 # =========================
-# DEPLOY SYSTEM
+# DEPLOY
 # =========================
 deploy: all
 	@echo "=================================="
