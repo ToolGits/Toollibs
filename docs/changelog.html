@@ -33,11 +33,48 @@
 
   <main>
 
-<!-- v2.3 --><div class="changelog-card" onclick="toggleCard(this)">  <div class="changelog-header">
+<!-- v2.4 --><div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">^</span>
+      v2.4 "HorizonDroid"
+      <span class="badge tested">LATEST</span>
+    </div>
+  </div>  <div class="changelog-content">
+    <ul>  <li>Official Android platform support introduced</li>
+
+  <li><strong>Android Platform:</strong> new platform/android subsystem</li>
+  <li>Android support expanded beyond experimental status</li>
+  <li>Support for aarch64, ARMv7l and ARMv6l devices</li>
+
+  <li><strong>New Tool:</strong> battery_info</li>
+  <li>Battery status reporting support added</li>
+  <li>Battery health information support</li>
+  <li>Battery temperature reporting</li>
+  <li>Battery voltage reporting</li>
+  <li>Battery technology detection</li>
+
+  <li><strong>Build System:</strong> Makefile improvements</li>
+  <li>Automatic MinGW detection</li>
+  <li>Better ARM and Android build support</li>
+  <li>Improved multi-architecture workflow</li>
+
+  <li><strong>Deploy System:</strong> battery_info deployment support</li>
+  <li>Download index generation improvements</li>
+
+  <li><strong>Project Direction:</strong> Android promoted to official platform support</li>
+
+  <li>General code cleanup and infrastructure improvements</li>
+
+</ul>
+
+  </div></div>
+
+<!-- v2.3 -->
+<div class="changelog-card" onclick="toggleCard(this)">  <div class="changelog-header">
     <div class="changelog-title">
       <span class="arrow">›</span>
       v2.3 "CPUnix"
-      <span class="badge tested">LATEST</span>
+      <span class="badge stable">STABLE</span>
     </div>
   </div>  <div class="changelog-content">
     <ul>  <li>Major improvements to cpu_info utility</li>
