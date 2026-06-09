@@ -78,10 +78,9 @@ Each build can be validated using the MainLogger system:
 ---
 
 ## 🌍 Platforms
-
 - Linux (primary development platform)
 - Windows (via MinGW for main modules)
-- Termux / Android (experimental support)
+- Android (Official support for aarch64, ARMv7l and ARMv6l)
 
 ---
 
