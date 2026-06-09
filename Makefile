@@ -1,202 +1,224 @@
 CXX = g++
-
 MINGW = x86_64-w64-mingw32-g++
 
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
 
-=========================
-
-ARCH DETECTION
-
-=========================
+# ============================================================
+# ARCHITECTURE DETECTION
+# ============================================================
 
 ARCH := $(shell uname -m)
 
 BUILD_DIR = bin/$(ARCH)
 BUILD_DIR_WIN = bin/windows_x86_64
 
-=========================
-
-TOOLCHAIN DETECTION
-
-=========================
-
+# Detect MinGW automatically
 HAS_MINGW := $(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes)
 
-=========================
-
-SOURCES (CORE FRAMEWORK)
-
-=========================
+# ============================================================
+# CORE FRAMEWORK
+# ============================================================
 
 CORE_SRC = core/logger.cpp core/mainlogger.cpp platform/platform.cpp
 MATH_SRC = math/math.cpp
 GRAPHICS_SRC = graphics/graphics.cpp
 PLUGIN_SRC = plugins/MathPlugin/plugin.cpp
 
-SRC = $(CORE_SRC) $(MATH_SRC) $(GRAPHICS_SRC) $(PLUGIN_SRC)
+SRC = \
+	$(CORE_SRC) \
+	$(MATH_SRC) \
+	$(GRAPHICS_SRC) \
+	$(PLUGIN_SRC)
 
-=========================
+# ============================================================
+# LINUX TOOLS
+# ============================================================
 
-TOOLS (LINUX)
+CPU_SRC = \
+	platform/linux/cpu.cpp \
+	platform/linux/cpu_info.cpp
 
-=========================
+GPU_SRC = \
+	platform/linux/gpu.cpp \
+	platform/linux/gpu_info.cpp
 
-CPU_SRC = platform/linux/cpu.cpp platform/linux/cpu_info.cpp
-GPU_SRC = platform/linux/gpu.cpp platform/linux/gpu_info.cpp
+# ============================================================
+# ANDROID TOOLS
+# ============================================================
 
-=========================
+BATTERY_SRC = \
+	platform/android/battery.cpp \
+	platform/android/battery_info.cpp
 
-TOOLS (ANDROID)
+# ============================================================
+# POP PLUGIN
+# ============================================================
 
-=========================
+POP_SRC = \
+	plugins/POP/plugin.cpp \
+	plugins/POP/pop_main.cpp
 
-BATTERY_SRC = platform/android/battery.cpp platform/android/battery_info.cpp
-
-=========================
-
-POP PLUGIN TOOL
-
-=========================
-
-POP_SRC = plugins/POP/plugin.cpp plugins/POP/pop_main.cpp
-
-=========================
-
-TARGETS (LINUX / ANDROID)
-
-=========================
+# ============================================================
+# TARGETS (LINUX / ANDROID)
+# ============================================================
 
 MAIN_TARGET = $(BUILD_DIR)/mainlogger
+
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
 BATTERY_TARGET = $(BUILD_DIR)/battery_info
+
 POP_TARGET = $(BUILD_DIR)/pop
 
-=========================
-
-TARGETS (WINDOWS)
-
-=========================
+# ============================================================
+# TARGETS (WINDOWS)
+# ============================================================
 
 MAIN_TARGET_WIN = $(BUILD_DIR_WIN)/mainlogger.exe
 POP_TARGET_WIN = $(BUILD_DIR_WIN)/pop.exe
 
-=========================
-
-PREPARE
-
-=========================
+# ============================================================
+# PREPARE
+# ============================================================
 
 prepare:
-@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
 
-ifeq ($(HAS_MINGW),yes)
-@mkdir -p $(BUILD_DIR_WIN)
-endif
-
-=========================
-
-LINUX BUILD CORE
-
-=========================
+# ============================================================
+# CORE BUILD
+# ============================================================
 
 mainlogger: prepare $(SRC)
-$(CXX) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET)
+	$(CXX) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET)
 
-=========================
+# ============================================================
+# PLATFORM TOOLS
+# ============================================================
 
-PLATFORM TOOLS
+cpu_info: prepare
+	$(CXX) $(CXXFLAGS) $(CPU_SRC) -o $(CPU_TARGET)
 
-=========================
+gpu_info: prepare
+	$(CXX) $(CXXFLAGS) $(GPU_SRC) -o $(GPU_TARGET)
 
-tools: prepare
-@echo "Building platform tools..."
+battery_info: prepare
+	$(CXX) $(CXXFLAGS) $(BATTERY_SRC) -o $(BATTERY_TARGET)
 
-$(CXX) $(CXXFLAGS) $(CPU_SRC) -o $(CPU_TARGET)
-$(CXX) $(CXXFLAGS) $(GPU_SRC) -o $(GPU_TARGET)
-$(CXX) $(CXXFLAGS) $(BATTERY_SRC) -o $(BATTERY_TARGET)
+tools: cpu_info gpu_info battery_info
 
-=========================
-
-POP (LINUX)
-
-=========================
+# ============================================================
+# POP
+# ============================================================
 
 pop: prepare
-@echo "Building POP (Linux)..."
-$(CXX) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET)
+	@echo "Building POP..."
+	$(CXX) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET)
 
-=========================
-
-WINDOWS BUILD CORE
-
-=========================
+# ============================================================
+# WINDOWS BUILD
+# ============================================================
 
 windows: prepare
 ifeq ($(HAS_MINGW),yes)
-@echo "Building Windows binaries..."
-$(MINGW) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET_WIN)
+	@mkdir -p $(BUILD_DIR_WIN)
+	@echo "Building Windows binaries..."
+	$(MINGW) $(CXXFLAGS) $(SRC) -o $(MAIN_TARGET_WIN)
 else
-@echo "MinGW not found. Skipping Windows build."
+	@echo "Toollibs: MinGW not found, skipping Windows build."
 endif
 
-=========================
-
-POP (WINDOWS)
-
-=========================
+# ============================================================
+# WINDOWS POP
+# ============================================================
 
 pop_windows: prepare
 ifeq ($(HAS_MINGW),yes)
-@echo "Building POP (Windows)..."
-$(MINGW) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET_WIN)
+	@mkdir -p $(BUILD_DIR_WIN)
+	@echo "Building POP (Windows)..."
+	$(MINGW) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET_WIN)
 else
-@echo "MinGW not found. Skipping Windows POP build."
+	@echo "Toollibs: MinGW not found, skipping Windows POP build."
 endif
 
-=========================
+# ============================================================
+# BUILD GROUPS
+# ============================================================
 
-FULL BUILD
+linux: mainlogger cpu_info gpu_info pop
 
-=========================
+android: battery_info
 
-all: prepare mainlogger tools pop
+all: prepare mainlogger tools pop windows pop_windows
 
-ifeq ($(HAS_MINGW),yes)
-all: windows pop_windows
-else
-$(info Toollibs: MinGW not found, Windows builds disabled)
-endif
-
-=========================
-
-RUN
-
-=========================
+# ============================================================
+# RUN
+# ============================================================
 
 run: mainlogger
-@$(MAIN_TARGET)
+	@$(MAIN_TARGET)
 
-=========================
+run_cpu:
+	@$(CPU_TARGET)
 
-CLEAN
+run_gpu:
+	@$(GPU_TARGET)
 
-=========================
+run_battery:
+	@$(BATTERY_TARGET)
+
+run_pop:
+	@$(POP_TARGET)
+
+# ============================================================
+# INFORMATION
+# ============================================================
+
+info:
+	@echo "===================================="
+	@echo "Toollibs Build Information"
+	@echo "===================================="
+	@echo "Architecture : $(ARCH)"
+	@echo "Build Dir    : $(BUILD_DIR)"
+	@echo "Windows Dir  : $(BUILD_DIR_WIN)"
+	@echo "MinGW Found  : $(HAS_MINGW)"
+	@echo "===================================="
+
+# ============================================================
+# CLEAN
+# ============================================================
 
 clean:
-rm -rf bin
+	rm -rf bin
 
 re: clean all
 
-=========================
-
-DEPLOY
-
-=========================
+# ============================================================
+# DEPLOY
+# ============================================================
 
 deploy: all
-@echo "=================================="
-@echo "Toollibs Deploy Starting..."
-@echo "=================================="
-@./.deploy.sh
+	@echo "=================================="
+	@echo "Toollibs Deploy Starting..."
+	@echo "=================================="
+	@./.deploy.sh
+
+# ============================================================
+# HELP
+# ============================================================
+
+help:
+	@echo "Toollibs Build Targets"
+	@echo ""
+	@echo "make mainlogger"
+	@echo "make cpu_info"
+	@echo "make gpu_info"
+	@echo "make battery_info"
+	@echo "make pop"
+	@echo "make windows"
+	@echo "make pop_windows"
+	@echo "make linux"
+	@echo "make android"
+	@echo "make all"
+	@echo "make deploy"
+	@echo "make clean"
+	@echo "make info"
