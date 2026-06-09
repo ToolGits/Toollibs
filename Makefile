@@ -29,6 +29,11 @@ CPU_SRC = platform/linux/cpu.cpp platform/linux/cpu_info.cpp
 GPU_SRC = platform/linux/gpu.cpp platform/linux/gpu_info.cpp
 
 # =========================
+# TOOLS (ANDROID)
+# =========================
+BATTERY_SRC = platform/android/battery.cpp platform/android/battery_info.cpp
+
+# =========================
 # POP PLUGIN TOOL
 # =========================
 POP_SRC = plugins/POP/plugin.cpp plugins/POP/pop_main.cpp
@@ -40,6 +45,7 @@ MAIN_TARGET = $(BUILD_DIR)/mainlogger
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
 POP_TARGET = $(BUILD_DIR)/pop
+BATTERY_TARGET = $(BUILD_DIR)/battery_info
 
 # =========================
 # TARGETS (WINDOWS)
@@ -68,6 +74,7 @@ tools: prepare
 
 	$(CXX) $(CXXFLAGS) $(CPU_SRC) -o $(CPU_TARGET)
 	$(CXX) $(CXXFLAGS) $(GPU_SRC) -o $(GPU_TARGET)
+	$(CXX) $(CXXFLAGS) $(BATTERY_SRC) -o $(BATTERY_TARGET)
 
 # =========================
 # POP (LINUX)
