@@ -33,11 +33,55 @@
 
   <main>
 
-<!-- v2.4 --><div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
+<!-- v2.4.5 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">^</span>
-      v2.4 "HorizonDroid"
+      <span class="arrow">v</span>
+      v2.4.5 "FortunaHorizon3g"
       <span class="badge tested">LATEST</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+    <ul>
+
+      <li><strong>New Infrastructure:</strong> Toollibs-sync introduced</li>
+
+      <li><strong>Android Ecosystem:</strong> Toollibs Local Android introduced</li>
+
+      <li>Android ecosystem expanded internally and externally</li>
+
+      <li><strong>Android Research Program:</strong> Samsung Galaxy Grand Prime SM-G530H (fortunave3g) adopted as an official testing device</li>
+
+      <li>Real-device Android testing workflow established</li>
+
+      <li>Android data collection workflow established</li>
+
+      <li><strong>Toollibs-workstation:</strong> ADB and android-tools integrated</li>
+
+      <li>System application cataloging workflow introduced</li>
+
+      <li>SPenSdk3.apk documentation and analysis workflow established</li>
+
+      <li>Android experimentation and development workflow improved</li>
+
+      <li>Foundation for future Android platform research created</li>
+
+      <li>General HorizonDroid ecosystem improvements</li>
+
+    </ul>
+  </div>
+
+</div>
+
+<!-- v2.4 -->
+<div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">></span>
+      v2.4 "HorizonDroid"
+      <span class="badge stable">STABLE</span>
     </div>
   </div>  <div class="changelog-content">
     <ul>  <li>Official Android platform support introduced</li>
@@ -72,7 +116,7 @@
 <!-- v2.3 -->
 <div class="changelog-card" onclick="toggleCard(this)">  <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">›</span>
+      <span class="arrow">></span>
       v2.3 "CPUnix"
       <span class="badge stable">STABLE</span>
     </div>
@@ -101,7 +145,7 @@
 
   <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">›</span>
+      <span class="arrow">></span>
       v2.1.2 "LoggerPatch"
       <span class="badge stable">STABLE</span>
     </div>
@@ -124,7 +168,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">^</span>
+          <span class="arrow">></span>
           v2.1 "BigBrowserToollibs"
           <span class="badge stable">STABLE</span>
         </div>
@@ -169,7 +213,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">›</span>
+          <span class="arrow">></span>
           v2.0 "Forgelibs"
           <span class="badge stable">STABLE</span>
         </div>
@@ -196,7 +240,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">›</span>
+          <span class="arrow">></span>
           v1.1 Beta
           <span class="badge">LEGACY</span>
         </div>
@@ -220,7 +264,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">›</span>
+          <span class="arrow">></span>
           v1.0 Beta
           <span class="badge">LEGACY</span>
         </div>
@@ -243,7 +287,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">›</span>
+          <span class="arrow">></span>
           v0.1 Alpha
           <span class="badge">LEGACY</span>
         </div>
@@ -278,9 +322,9 @@ function updateArrows() {
     if (!arrow) return;
 
     if (card.classList.contains("open")) {
-      arrow.textContent = "^";
+      arrow.textContent = "v";
     } else {
-      arrow.textContent = "›";
+      arrow.textContent = ">";
     }
   });
 }
