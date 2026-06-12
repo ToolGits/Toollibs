@@ -19,7 +19,6 @@ bool isSafePath(const std::string& path)
     {
         fsys::path p = fsys::weakly_canonical(path);
 
-        // bloqueia path malicioso básico
         std::string str = p.string();
 
         if (str.find("..") != std::string::npos)
