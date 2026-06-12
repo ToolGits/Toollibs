@@ -1,4 +1,5 @@
 [
+  "audio_player-aarch64",
   "battery_info-aarch64",
   "battery_info-x86_64",
   "cpu_info-aarch64",
