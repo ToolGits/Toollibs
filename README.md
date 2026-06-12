@@ -30,6 +30,7 @@ It focuses on:
 - 💻 Linux-focused system tools (CPU/GPU modules)
 - 🌐 Download + version distribution via web interface
 - 📱 Official Android support available + battery_info to check your battery status
+- 👨‍💻 Mini **Terminal Emulator** FS Emulated CMD, fs module tool
 
 ---
 
