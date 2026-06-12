@@ -133,7 +133,7 @@ int main()
         {
             auto items = listDir(cmd[1]);
             for (auto& i : items)
-                std::cout << i.path << "\n";
+                std::cout << i.name << "\n";
         }
 
         // =========================
