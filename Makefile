@@ -64,6 +64,13 @@ POP_SRC = \
 
 FS_SRC = fs/fs_emucmd.cpp fs/fs.cpp
 
+# =========================
+# AUDIO
+# =========================
+
+AUDIO_SRC = audio/audio.cpp
+AUDIO_PLAYER_SRC = audio/audio_player.cpp
+
 # ============================================================
 # TARGETS (LINUX / ANDROID)
 # ============================================================
@@ -74,6 +81,7 @@ FS_TARGET = $(BUILD_DIR)/fs_emucmd
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
 BATTERY_TARGET = $(BUILD_DIR)/battery_info
+AUDIO_PLAYER_TARGET = $(BUILD_DIR)/audio_player
 
 POP_TARGET = $(BUILD_DIR)/pop
 
@@ -112,7 +120,7 @@ gpu_info: prepare
 battery_info: prepare
 	$(CXX) $(CXXFLAGS) $(BATTERY_SRC) -o $(BATTERY_TARGET)
 
-tools: cpu_info gpu_info battery_info
+tools: cpu_info gpu_info battery_info audio_player
 
 # ============================================================
 # POP
@@ -129,6 +137,16 @@ pop: prepare
 
 fs_emucmd: prepare
 	$(CXX) $(CXXFLAGS) $(FS_SRC) -o $(FS_TARGET)
+
+# ============================================================
+# AUDIO PLAYER
+# ============================================================
+
+audio_player: prepare
+	$(CXX) $(CXXFLAGS) \
+	$(AUDIO_SRC) \
+	$(AUDIO_PLAYER_SRC) \
+	-o $(AUDIO_PLAYER_TARGET)
 
 # ============================================================
 # WINDOWS BUILD
@@ -171,11 +189,11 @@ endif
 # BUILD GROUPS
 # ============================================================
 
-linux: mainlogger cpu_info gpu_info pop fs_emucmd
+linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player
 
 android: battery_info
 
-all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player
 
 # ============================================================
 # RUN
@@ -198,6 +216,9 @@ run_pop:
 
 run_fs_emucmd:
 	@$(FS_TARGET)
+
+run_audio:
+	@$(AUDIO_PLAYER_TARGET)
 
 # ============================================================
 # INFORMATION
@@ -255,3 +276,5 @@ help:
 	@echo "make fs_emucmd"
 	@echo "make fs_emucmd_windows"
 	@echo "make run_fs_emucmd"
+	@echo "make audio_player"
+	@echo "make run_audio"
