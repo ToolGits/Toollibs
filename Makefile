@@ -59,11 +59,18 @@ POP_SRC = \
 	plugins/POP/pop_main.cpp
 
 # ============================================================
+# FS EMULATED CMD
+# ============================================================
+
+FS_SRC = fs/fs_emucmd.cpp
+
+# ============================================================
 # TARGETS (LINUX / ANDROID)
 # ============================================================
 
 MAIN_TARGET = $(BUILD_DIR)/mainlogger
 
+FS_TARGET = $(BUILD_DIR)/fs_emucmd
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
 BATTERY_TARGET = $(BUILD_DIR)/battery_info
@@ -74,6 +81,7 @@ POP_TARGET = $(BUILD_DIR)/pop
 # TARGETS (WINDOWS)
 # ============================================================
 
+FS_TARGET_WIN = $(BUILD_DIR_WIN)/fs_emucmd.exe
 MAIN_TARGET_WIN = $(BUILD_DIR_WIN)/mainlogger.exe
 POP_TARGET_WIN = $(BUILD_DIR_WIN)/pop.exe
 
@@ -114,6 +122,14 @@ pop: prepare
 	@echo "Building POP..."
 	$(CXX) $(CXXFLAGS) $(POP_SRC) -o $(POP_TARGET)
 
+
+# ============================================================
+# FS EMULATED CMD Linux
+# ============================================================
+
+fs_emucmd: prepare
+	$(CXX) $(CXXFLAGS) $(FS_SRC) -o $(FS_TARGET)
+
 # ============================================================
 # WINDOWS BUILD
 # ============================================================
@@ -140,15 +156,26 @@ else
 	@echo "Toollibs: MinGW not found, skipping Windows POP build."
 endif
 
+
+# ============================================================
+# WINDOWS FS EMULATED CMD
+# ============================================================
+
+fs_emucmd_windows: prepare
+ifeq ($(HAS_MINGW),yes)
+	@mkdir -p $(BUILD_DIR_WIN)
+	$(MINGW) $(CXXFLAGS) $(FS_SRC) -o $(FS_TARGET_WIN)
+endif
+
 # ============================================================
 # BUILD GROUPS
 # ============================================================
 
-linux: mainlogger cpu_info gpu_info pop
+linux: mainlogger cpu_info gpu_info pop fs_emucmd
 
 android: battery_info
 
-all: prepare mainlogger tools pop windows pop_windows
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows
 
 # ============================================================
 # RUN
@@ -168,6 +195,9 @@ run_battery:
 
 run_pop:
 	@$(POP_TARGET)
+
+run_fs_emucmd:
+	@$(FS_TARGET)
 
 # ============================================================
 # INFORMATION
@@ -222,3 +252,6 @@ help:
 	@echo "make deploy"
 	@echo "make clean"
 	@echo "make info"
+	@echo "make fs_emucmd"
+	@echo "make fs_emucmd_windows"
+	@echo "make run_fs_emucmd"
