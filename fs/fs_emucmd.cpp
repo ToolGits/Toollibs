@@ -133,7 +133,7 @@ int main()
         {
             auto items = listDir(cmd[1]);
             for (auto& i : items)
-                std::cout << i << "\n";
+                std::cout << i.path << "\n";
         }
 
         // =========================
@@ -211,7 +211,7 @@ int main()
         // =========================
         else if (cmd[0] == "cd" && cmd.size() >= 2)
         {
-            if (cd(cmd[1]))
+            if (toollibs::fs::setCurrentPath(cmd[1]))
                 std::cout << GREEN << "[OK] Changed directory\n" << RESET;
             else
                 std::cout << RED << "[FAIL] Invalid path\n" << RESET;
