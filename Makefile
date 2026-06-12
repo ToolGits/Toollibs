@@ -62,7 +62,7 @@ POP_SRC = \
 # FS EMULATED CMD
 # ============================================================
 
-FS_SRC = fs/fs_emucmd.cpp
+FS_SRC = fs/fs_emucmd.cpp fs/fs.cpp
 
 # ============================================================
 # TARGETS (LINUX / ANDROID)
