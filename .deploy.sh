@@ -7,7 +7,7 @@ echo "=================================="
 ARCH=$(uname -m)
 
 BUILD_DIR="bin/$ARCH"
-BUILD_DIR_WIN="bin/windows_$ARCH"
+BUILD_DIR_WIN="bin/windows_x86_64"
 
 DOCS_DIR="docs/downloads"
 
@@ -27,18 +27,18 @@ rm -f "$DOCS_DIR"/*.exe
 
 echo "[4/6] Deploying Linux executables..."
 
-for bin in mainlogger cpu_info gpu_info battery_info pop; do
+for bin in mainlogger cpu_info gpu_info battery_info pop fs_emucmd; do
   if [ -f "$BUILD_DIR/$bin" ]; then
     cp "$BUILD_DIR/$bin" "$DOCS_DIR/$bin-$ARCH"
   fi
 done
 
-echo "[5/6] Deploying Windows binaries (if available)..."
+echo "[5/6] Deploying Windows binaries (x86_64 ARCH)..."
 
 if [ -d "$BUILD_DIR_WIN" ]; then
-  for bin in mainlogger.exe pop.exe; do
+  for bin in mainlogger.exe pop.exe fs_emucmd.exe; do
     if [ -f "$BUILD_DIR_WIN/$bin" ]; then
-      cp "$BUILD_DIR_WIN/$bin" "$DOCS_DIR/${bin%.exe}-$ARCH.exe"
+      cp "$BUILD_DIR_WIN/$bin" "$DOCS_DIR/$bin"
     fi
   done
 fi
