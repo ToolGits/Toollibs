@@ -24,7 +24,8 @@ bool paste(const std::string& from, const std::string& to);
 bool rename(const std::string& oldPath, const std::string& newPath);
 bool move(const std::string& from, const std::string& to);
 
-bool cd(const std::string& path);
+std::string currentPath();
+bool setCurrentPath(const std::string& path);
 
 }
 }
