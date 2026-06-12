@@ -1,15 +1,15 @@
 #include "audio.hpp"
-
 #include <iostream>
-#include <vector>
+#include <string>
 
 #ifdef __ANDROID__
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
-#else
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
+#include <SLES/OpenSLES.h>
+#include <SLES/OpenSLES_Android.h>
+#include <android/log.h>
 #endif
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <sndfile.h>
 
@@ -22,15 +22,15 @@
 namespace toollibs {
 
 // =========================
-// STATIC STATE
+// STATE
 // =========================
 
 bool Audio::initialized = false;
-static Mix_Music* sdlMusic = nullptr;
-static std::string currentPath;
+static Mix_Music* musicHandle = nullptr;
+static std::string currentFile;
 
 // =========================
-// INIT
+// INIT (LINUX + ANDROID)
 // =========================
 
 bool Audio::init() {
@@ -50,12 +50,76 @@ bool Audio::init() {
 
     initialized = true;
 
-    std::cout << "[Audio] System ready (SDL backend)\n";
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "ToollibsAudio", "Audio system initialized (Android)");
+#else
+    std::cout << "[Audio] System ready (Linux SDL backend)\n";
+#endif
+
     return true;
 }
 
 // =========================
-// LOAD AUDIO
+// DETECT EXTENSION
+// =========================
+
+static std::string getExt(const std::string& path) {
+    size_t pos = path.find_last_of(".");
+    if (pos == std::string::npos) return "";
+    return path.substr(pos);
+}
+
+// =========================
+// LOAD DECODER LAYER
+// =========================
+
+static bool loadWav(const std::string& path) {
+    SF_INFO info;
+    SNDFILE* file = sf_open(path.c_str(), SFM_READ, &info);
+    if (!file) return false;
+
+    std::vector<float> buffer(info.frames * info.channels);
+    sf_readf_float(file, buffer.data(), info.frames);
+    sf_close(file);
+
+    std::cout << "[Audio] WAV loaded (libsndfile)\n";
+    return true;
+}
+
+static bool loadOgg(const std::string& path) {
+
+    int channels, sampleRate;
+    short* output = nullptr;
+
+    int samples = stb_vorbis_decode_filename(
+        path.c_str(),
+        &channels,
+        &sampleRate,
+        &output
+    );
+
+    if (samples <= 0) return false;
+
+    free(output);
+
+    std::cout << "[Audio] OGG loaded (stb_vorbis)\n";
+    return true;
+}
+
+static bool loadMp3(const std::string& path) {
+
+    mp3dec_ex_t dec;
+    if (mp3dec_ex_open(&dec, path.c_str(), MP3D_SEEK_TO_SAMPLE))
+        return false;
+
+    mp3dec_ex_close(&dec);
+
+    std::cout << "[Audio] MP3 loaded (minimp3)\n";
+    return true;
+}
+
+// =========================
+// LOAD
 // =========================
 
 bool Audio::load(const std::string& path) {
@@ -63,37 +127,44 @@ bool Audio::load(const std::string& path) {
     if (!initialized)
         return false;
 
-    currentPath = path;
+    currentFile = path;
 
-    if (sdlMusic) {
-        Mix_FreeMusic(sdlMusic);
-        sdlMusic = nullptr;
+    std::string ext = getExt(path);
+
+    if (ext == ".wav") {
+        loadWav(path);
     }
-
-    // SDL_mixer handles formats internally
-    sdlMusic = Mix_LoadMUS(path.c_str());
-
-    if (!sdlMusic) {
-        std::cout << "[Audio] Failed to load: " << path << "\n";
+    else if (ext == ".ogg") {
+        loadOgg(path);
+    }
+    else if (ext == ".mp3") {
+        loadMp3(path);
+    }
+    else {
+        std::cout << "[Audio] Unsupported format\n";
         return false;
     }
 
-    std::cout << "[Audio] Loaded: " << path << "\n";
-    return true;
+    if (musicHandle)
+        Mix_FreeMusic(musicHandle);
+
+    musicHandle = Mix_LoadMUS(path.c_str());
+
+    return musicHandle != nullptr;
 }
 
 // =========================
-// PLAY
+// PLAYBACK (SDL BACKEND)
 // =========================
 
 void Audio::play() {
 
-    if (!sdlMusic) {
+    if (!musicHandle) {
         std::cout << "[Audio] No audio loaded\n";
         return;
     }
 
-    Mix_PlayMusic(sdlMusic, 1);
+    Mix_PlayMusic(musicHandle, 1);
 }
 
 // =========================
@@ -101,8 +172,6 @@ void Audio::play() {
 // =========================
 
 void Audio::pause() {
-
-    if (!initialized) return;
 
     if (Mix_PausedMusic())
         Mix_ResumeMusic();
@@ -115,18 +184,15 @@ void Audio::pause() {
 // =========================
 
 void Audio::stop() {
-
-    if (!initialized) return;
-
     Mix_HaltMusic();
 }
 
 // =========================
-// IS LOADED
+// STATUS
 // =========================
 
 bool Audio::isLoaded() {
-    return sdlMusic != nullptr;
+    return musicHandle != nullptr;
 }
 
 // =========================
@@ -135,12 +201,9 @@ bool Audio::isLoaded() {
 
 void Audio::shutdown() {
 
-    if (!initialized)
-        return;
-
-    if (sdlMusic) {
-        Mix_FreeMusic(sdlMusic);
-        sdlMusic = nullptr;
+    if (musicHandle) {
+        Mix_FreeMusic(musicHandle);
+        musicHandle = nullptr;
     }
 
     Mix_CloseAudio();
@@ -148,7 +211,11 @@ void Audio::shutdown() {
 
     initialized = false;
 
+#ifdef __ANDROID__
+    __android_log_print(ANDROID_LOG_INFO, "ToollibsAudio", "Audio shutdown");
+#else
     std::cout << "[Audio] Shutdown complete\n";
+#endif
 }
 
 }
