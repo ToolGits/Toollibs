@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +25,6 @@
     <a href="devices.html">Devices</a>
   </nav>
 
-<div class="page-header">
 <div class="page-header">
   <h1>Downloads</h1>
   <p>Download Toollibs binaries, releases and source code.</p>
@@ -98,10 +96,14 @@
     function detectArch() {
       const ua = navigator.userAgent.toLowerCase();
 
-      if (ua.includes("armv7l")) return "armv7l";
-      if (ua.includes("aarch64") || ua.includes("arm64")) return "aarch64";
-      if (ua.includes("i386") || ua.includes("i686")) return "x86";
-      if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64")) return "x86_64";
+if (ua.includes("arm64") || ua.includes("aarch64"))
+    return "aarch64";
+
+if (ua.includes("i386") || ua.includes("i686"))
+    return "x86";
+
+if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
+    return "x86_64";
 
       return "unknown";
     }
@@ -137,7 +139,7 @@ if (arch === "unknown") {
   show = true;
 } else {
   const isLinux = file.endsWith(`-${arch}`);
-  const isWindows = file.endsWith(`-${arch}.exe`);
+  const isWindows = file.endsWith(`-x86_64.exe`);
 
   show = isLinux || isWindows;
 }
@@ -150,6 +152,11 @@ if (arch === "unknown") {
             </a>
           `;
         }
+
+if (html === "<div class='download-grid'>")
+{
+    html += "<p>No compatible builds found.</p>";
+}
 
         html += "</div>";
 
