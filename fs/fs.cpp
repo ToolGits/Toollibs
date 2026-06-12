@@ -105,16 +105,20 @@ bool move(const std::string& from, const std::string& to) {
     }
 }
 
-// ---------------- CD ----------------
+std::string currentPath()
+{
+    return fsys::current_path().string();
+}
 
-bool cd(const std::string& path) {
-    try {
+bool setCurrentPath(const std::string& path)
+{
+    try
+    {
         fsys::current_path(path);
         return true;
-    } catch (...) {
+    }
+    catch (...)
+    {
         return false;
     }
-}
-
-}
 }
