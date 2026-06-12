@@ -1,44 +1,27 @@
-#pragma once
+#ifndef TOOLLIBS_AUDIO_HPP
+#define TOOLLIBS_AUDIO_HPP
 
 #include <string>
 
-namespace toollibs::audio
-{
+namespace toollibs {
 
-enum class AudioFormat
-{
-    Unknown,
-    WAV,
-    OGG,
-    MP3
-};
-
-class Audio
-{
+class Audio {
 public:
+    static bool init();
+    static void shutdown();
 
-    Audio();
+    static bool load(const std::string& path);
+    static void play();
+    static void pause();
+    static void stop();
 
-    bool load(const std::string& path);
-
-    void play();
-    void pause();
-    void stop();
-
-    void setVolume(int volume);
-
-    bool isLoaded() const;
-
-    AudioFormat getFormat() const;
-
-    std::string getPath() const;
+    static bool isLoaded();
 
 private:
-
-    std::string m_path;
-    AudioFormat m_format;
-    int m_volume;
-    bool m_loaded;
+    static bool initialized;
+    static void* music;
 };
 
 }
+
+#endif
