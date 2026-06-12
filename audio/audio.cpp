@@ -1,91 +1,78 @@
 #include "audio.hpp"
 
-#include <filesystem>
-#include <cstdlib>
-#include <algorithm>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
-namespace fs = std::filesystem;
+#include <iostream>
 
-namespace toollibs::audio
-{
+namespace toollibs {
 
-Audio::Audio()
-    : m_format(AudioFormat::Unknown),
-      m_volume(100),
-      m_loaded(false)
-{
+bool Audio::initialized = false;
+void* Audio::music = nullptr;
+
+bool Audio::init() {
+    if (initialized) return true;
+
+    if (SDL_Init(SDL_INIT_AUDIO) < 0) {
+        std::cerr << "SDL_Init failed: " << SDL_GetError() << "\n";
+        return false;
+    }
+
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+        std::cerr << "Mix_OpenAudio failed: " << Mix_GetError() << "\n";
+        return false;
+    }
+
+    initialized = true;
+    return true;
 }
 
-bool Audio::load(const std::string& path)
-{
-    if (!fs::exists(path))
+void Audio::shutdown() {
+    if (music) {
+        Mix_FreeMusic((Mix_Music*)music);
+        music = nullptr;
+    }
+
+    Mix_CloseAudio();
+    SDL_Quit();
+    initialized = false;
+}
+
+bool Audio::load(const std::string& path) {
+    if (!initialized) init();
+
+    if (music) {
+        Mix_FreeMusic((Mix_Music*)music);
+        music = nullptr;
+    }
+
+    music = Mix_LoadMUS(path.c_str());
+
+    if (!music) {
+        std::cerr << "Failed to load audio: " << Mix_GetError() << "\n";
         return false;
-
-    auto ext = fs::path(path).extension().string();
-
-    std::transform(
-        ext.begin(),
-        ext.end(),
-        ext.begin(),
-        ::tolower
-    );
-
-    if (ext == ".wav")
-        m_format = AudioFormat::WAV;
-    else if (ext == ".ogg")
-        m_format = AudioFormat::OGG;
-    else if (ext == ".mp3")
-        m_format = AudioFormat::MP3;
-    else
-        return false;
-
-    m_path = path;
-    m_loaded = true;
+    }
 
     return true;
 }
 
-void Audio::play()
-{
-    if (!m_loaded)
-        return;
-
-    std::string cmd;
-
-    cmd =
-        "ffplay -nodisp -autoexit \"" +
-        m_path +
-        "\" >/dev/null 2>&1";
-
-    std::system(cmd.c_str());
+void Audio::play() {
+    if (!music) return;
+    Mix_PlayMusic((Mix_Music*)music, 1);
 }
 
-void Audio::pause()
-{
+void Audio::pause() {
+    if (Mix_PlayingMusic()) {
+        Mix_PauseMusic();
+    }
 }
 
-void Audio::stop()
-{
+void Audio::stop() {
+    Mix_HaltMusic();
 }
 
-void Audio::setVolume(int volume)
-{
-    m_volume = volume;
-}
-
-bool Audio::isLoaded() const
-{
-    return m_loaded;
-}
-
-AudioFormat Audio::getFormat() const
-{
-    return m_format;
-}
-
-std::string Audio::getPath() const
-{
-    return m_path;
+bool Audio::isLoaded() {
+    return music != nullptr;
 }
 
 }
