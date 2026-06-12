@@ -33,14 +33,58 @@
 
   <main>
 
+<!-- v2.5 -->
+<div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▼</span>
+      v2.5 "Fortunav3.0egg.log"
+      <span class="badge tested">LATEST</span>
+    </div>
+  </div>  <div class="changelog-content">
+    <ul>  <li><strong>FileSystem Module officially released</strong></li>
+
+  <li>New fs_emucmd utility introduced</li>
+
+  <li><strong>Filesystem Commands:</strong></li>
+  <li>help</li>
+  <li>list</li>
+  <li>read</li>
+  <li>write</li>
+  <li>mkdir</li>
+  <li>remove</li>
+  <li>exit</li>
+
+  <li><strong>FileSystem Improvements:</strong></li>
+  <li>Safe path protection added</li>
+  <li>Restricted directory protection added</li>
+  <li>Improved listDir implementation</li>
+  <li>Improved filesystem error handling</li>
+  <li>Fallback protection system introduced</li>
+
+  <li><strong>Build System:</strong></li>
+  <li>Linux build support for fs_emucmd</li>
+  <li>Windows x86_64 build support for fs_emucmd</li>
+
+  <li><strong>Deploy System:</strong></li>
+  <li>fs_emucmd integrated into deployment pipeline</li>
+  <li>Automatic binary deployment support added</li>
+
+  <li><strong>Project Milestone:</strong></li>
+  <li>FileSystem subsystem promoted to stable status</li>
+  <li>Final major release of the Toollibs v2.x generation</li>
+
+</ul>
+
+  </div></div>
+
 <!-- v2.4.5 -->
-<div class="changelog-card open" onclick="toggleCard(this)">
+<div class="changelog-card" onclick="toggleCard(this)">
 
   <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">v</span>
+      <span class="arrow">▶</span>
       v2.4.5 "FortunaHorizon3g"
-      <span class="badge tested">LATEST</span>
+      <span class="badge stable">STABLE</span>
     </div>
   </div>
 
@@ -79,7 +123,7 @@
 <!-- v2.4 -->
 <div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">></span>
+      <span class="arrow">▶</span>
       v2.4 "HorizonDroid"
       <span class="badge stable">STABLE</span>
     </div>
@@ -116,7 +160,7 @@
 <!-- v2.3 -->
 <div class="changelog-card" onclick="toggleCard(this)">  <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">></span>
+      <span class="arrow">▶</span>
       v2.3 "CPUnix"
       <span class="badge stable">STABLE</span>
     </div>
@@ -145,9 +189,9 @@
 
   <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">></span>
+      <span class="arrow">▶</span>
       v2.1.2 "LoggerPatch"
-      <span class="badge stable">STABLE</span>
+      <span class="badge">LEGACY</span>
     </div>
   </div>
 
@@ -168,9 +212,9 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">></span>
+          <span class="arrow">▶</span>
           v2.1 "BigBrowserToollibs"
-          <span class="badge stable">STABLE</span>
+          <span class="badge">LEGACY</span>
         </div>
       </div>
 
@@ -213,9 +257,9 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">></span>
+          <span class="arrow">▶</span>
           v2.0 "Forgelibs"
-          <span class="badge stable">STABLE</span>
+          <span class="badge">LEGACY</span>
         </div>
       </div>
 
@@ -240,7 +284,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">></span>
+          <span class="arrow">▶</span>
           v1.1 Beta
           <span class="badge">LEGACY</span>
         </div>
@@ -264,7 +308,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">></span>
+          <span class="arrow">▶</span>
           v1.0 Beta
           <span class="badge">LEGACY</span>
         </div>
@@ -287,7 +331,7 @@
 
       <div class="changelog-header">
         <div class="changelog-title">
-          <span class="arrow">></span>
+          <span class="arrow">▶</span>
           v0.1 Alpha
           <span class="badge">LEGACY</span>
         </div>
@@ -322,10 +366,10 @@ function updateArrows() {
     if (!arrow) return;
 
     if (card.classList.contains("open")) {
-      arrow.textContent = "v";
-    } else {
-      arrow.textContent = ">";
-    }
+    arrow.textContent = "▼";
+} else {
+    arrow.textContent = "▶";
+}
   });
 }
 
