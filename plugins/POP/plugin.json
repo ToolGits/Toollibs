@@ -3,5 +3,6 @@
   "version": "1.0",
   "author": "Toollibs",
   "description": "Development automation plugin for Toollibs. Generates .gitkeep files, stages changes, creates automatic commits and optionally pushes updates.",
-  "entry": "plugin.cpp"
+  "entry": "pop_main.cpp",
+  "type": "executable"
 }
