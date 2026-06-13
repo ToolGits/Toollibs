@@ -19,14 +19,19 @@ static bool endsWith(const std::string& s, const std::string& suf) {
 }
 
 // =========================
-// SCANNER
+// SCANNER SAFE
 // =========================
 
-std::vector<std::string> scanAudio(const std::string& path) {
+static std::vector<std::string> scanAudio(const std::string& path) {
 
     std::vector<std::string> files;
 
-    for (auto& entry : fs::directory_iterator(path)) {
+    if (!fs::exists(path)) {
+        std::cout << "[Audio] Folder not found: " << path << "\n";
+        return files;
+    }
+
+    for (const auto& entry : fs::directory_iterator(path)) {
 
         if (!entry.is_regular_file())
             continue;
@@ -47,7 +52,7 @@ std::vector<std::string> scanAudio(const std::string& path) {
 // UI
 // =========================
 
-void header() {
+static void header() {
     std::cout <<
 R"(
 
@@ -59,7 +64,7 @@ R"(
 )";
 }
 
-void menu() {
+static void menu() {
     std::cout <<
 R"(
 ┌──────────── MENU ────────────┐
@@ -80,7 +85,7 @@ int main() {
     toollibs::Audio audio;
 
     if (!audio.init()) {
-        std::cout << "Audio init failed!\n";
+        std::cout << "[Audio] Failed to initialize system\n";
         return 1;
     }
 
@@ -102,14 +107,13 @@ int main() {
             std::cout << "\n[AUDIO FILES]\n";
 
             if (files.empty()) {
-                std::cout << "No audio found.\n";
+                std::cout << "No audio files found.\n\n";
+            } else {
+                for (size_t i = 0; i < files.size(); i++) {
+                    std::cout << " [" << i << "] " << files[i] << "\n";
+                }
+                std::cout << "\n";
             }
-
-            for (size_t i = 0; i < files.size(); i++) {
-                std::cout << " [" << i << "] " << files[i] << "\n";
-            }
-
-            std::cout << "\n";
         }
 
         else if (opt == 2) {
@@ -138,7 +142,8 @@ int main() {
 
         else if (opt == 3) {
 
-            std::cout << "■ Stop\n";
+            std::cout << "■ Stopping audio...\n";
+
             audio.stop();
         }
 
@@ -146,6 +151,10 @@ int main() {
 
             std::cout << "Bye!\n";
             break;
+        }
+
+        else {
+            std::cout << "Invalid option\n";
         }
 
         std::this_thread::sleep_for(
