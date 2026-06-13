@@ -56,9 +56,9 @@ std::vector<std::string> scanAudio(const std::string& path) {
 
         std::string file = entry.path().string();
 
-        if (file.ends_with(".wav") ||
-            file.ends_with(".ogg") ||
-            file.ends_with(".mp3")) {
+    if (endsWith(file, ".wav") ||
+        endsWith(file, ".ogg") ||
+        endsWith(file, ".mp3"))
 
             files.push_back(file);
         }
@@ -73,7 +73,7 @@ std::vector<std::string> scanAudio(const std::string& path) {
 
 int main() {
 
-    Audio audio;
+    toollibs::Audio audio;
     audio.init();
 
     std::string path = "./audio_files";
