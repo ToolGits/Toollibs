@@ -1,3 +1,8 @@
+static bool endsWith(const std::string& str, const std::string& suffix) {
+    if (str.size() < suffix.size()) return false;
+    return str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
+
 #include "audio.hpp"
 #include <iostream>
 #include <string>
@@ -122,24 +127,25 @@ static bool loadMp3(const std::string& path) {
 // LOAD
 // =========================
 
-bool Audio::load(const std::string& path) {
+std::vector<std::string> scanAudio(const std::string& path) {
+    std::vector<std::string> files;
 
-    if (!initialized)
-        return false;
+    for (auto& entry : fs::directory_iterator(path)) {
 
-    currentFile = path;
+        if (!entry.is_regular_file())
+            continue;
 
-    std::string ext = getExt(path);
+        std::string file = entry.path().string();
 
-    if (ext == ".wav") {
-        loadWav(path);
+        if (endsWith(file, ".wav") ||
+            endsWith(file, ".ogg") ||
+            endsWith(file, ".mp3")) {
+            files.push_back(file);
+        }
     }
-    else if (ext == ".ogg") {
-        loadOgg(path);
-    }
-    else if (ext == ".mp3") {
-        loadMp3(path);
-    }
+
+    return files;
+}
     else {
         std::cout << "[Audio] Unsupported format\n";
         return false;
@@ -158,19 +164,9 @@ bool Audio::load(const std::string& path) {
 // =========================
 
 void Audio::play(const std::string& file) {
-      if (!musicHandle) {
-        std::cout << "[Audio] No audio loaded\n";
-        return;
-    }
+    load(file);
 
-    Mix_PlayMusic(musicHandle, 1);
-  }
-}
-
-    if (!musicHandle) {
-        std::cout << "[Audio] No audio loaded\n";
-        return;
-    }
+    if (!musicHandle) return;
 
     Mix_PlayMusic(musicHandle, 1);
 }
