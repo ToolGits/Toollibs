@@ -7,6 +7,9 @@ namespace toollibs {
 
 class Audio {
 public:
+    static void play(const std::string& file);
+};
+public:
     static bool init();
     static void shutdown();
 
