@@ -63,7 +63,10 @@ POP_SRC = \
 # FS EMULATED CMD
 # ============================================================
 
-FS_SRC = fs/fs_emucmd.cpp fs/fs.cpp
+FS_EMUCMD_SRC = \
+    fs/fs.cpp \
+    fs/replxx/replxx.cxx \
+    fs/fs_emucmd.cpp
 
 # =========================
 # AUDIO SOURCES
