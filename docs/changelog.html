@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,76 +11,147 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
- <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="style-modern.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-modern.css">
 
+  <style>
+    /* =========================
+       EXTRA ANIMATIONS LAYER
+    ========================= */
+
+    .changelog-card {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .changelog-card:nth-child(1) { animation-delay: 0.05s; }
+    .changelog-card:nth-child(2) { animation-delay: 0.1s; }
+    .changelog-card:nth-child(3) { animation-delay: 0.15s; }
+    .changelog-card:nth-child(4) { animation-delay: 0.2s; }
+    .changelog-card:nth-child(5) { animation-delay: 0.25s; }
+    .changelog-card:nth-child(6) { animation-delay: 0.3s; }
+    .changelog-card:nth-child(7) { animation-delay: 0.35s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .changelog-content {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: scaleY(0.98);
+      transform-origin: top;
+      transition: all 0.35s ease;
+    }
+
+    .changelog-card.open .changelog-content {
+      max-height: 2000px;
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .changelog-card.open .arrow {
+      transform: rotate(0deg);
+    }
+
+    .changelog-card:not(.open) .arrow {
+      transform: rotate(-90deg);
+    }
+
+    .changelog-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(79,142,247,0.08);
+    }
+
+    .badge.tested {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    }
+
+  </style>
 </head>
 
 <body>
-  <canvas id="bg"></canvas>
-  <div class="cursor-glow" id="glow"></div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="downloads.html">Downloads</a>
-    <a href="changelog.html">Changelog</a>
-    <a href="devices.html">Devices</a>
-  </nav>
+<canvas id="bg"></canvas>
+<div class="cursor-glow" id="glow"></div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="downloads.html">Downloads</a>
+  <a href="changelog.html">Changelog</a>
+  <a href="devices.html">Devices</a>
+</nav>
 
 <div class="page-header">
   <h1>Version History</h1>
   <p>Development history, release milestones and framework evolution.</p>
 </div>
 
-  <main>
+<main>
 
 <!-- v2.5 -->
-<div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
+<div class="changelog-card open" onclick="toggleCard(this)">
+  <div class="changelog-header">
     <div class="changelog-title">
-      <span class="arrow">▼</span>
+      <span class="arrow">▶</span>
       v2.5 "Fortunav3.0egg.log"
       <span class="badge tested">LATEST</span>
     </div>
-  </div>  <div class="changelog-content">
-    <ul>  <li><strong>FileSystem Module officially released</strong></li>
+  </div>
+  <div class="changelog-content">
+    <ul>
+      <li><strong>FileSystem Module officially released</strong></li>
+      <li>New fs_emucmd utility introduced</li>
 
-  <li>New fs_emucmd utility introduced</li>
+      <li><strong>Filesystem Commands:</strong></li>
+      <li>help</li>
+      <li>list</li>
+      <li>read</li>
+      <li>write</li>
+      <li>mkdir</li>
+      <li>remove</li>
+      <li>exit</li>
 
-  <li><strong>Filesystem Commands:</strong></li>
-  <li>help</li>
-  <li>list</li>
-  <li>read</li>
-  <li>write</li>
-  <li>mkdir</li>
-  <li>remove</li>
-  <li>exit</li>
+      <li><strong>FileSystem Improvements:</strong></li>
+      <li>Safe path protection added</li>
+      <li>Restricted directory protection added</li>
+      <li>Improved listDir implementation</li>
+      <li>Improved filesystem error handling</li>
+      <li>Fallback protection system introduced</li>
 
-  <li><strong>FileSystem Improvements:</strong></li>
-  <li>Safe path protection added</li>
-  <li>Restricted directory protection added</li>
-  <li>Improved listDir implementation</li>
-  <li>Improved filesystem error handling</li>
-  <li>Fallback protection system introduced</li>
+      <li><strong>Build System:</strong></li>
+      <li>Linux build support for fs_emucmd</li>
+      <li>Windows x86_64 build support for fs_emucmd</li>
 
-  <li><strong>Build System:</strong></li>
-  <li>Linux build support for fs_emucmd</li>
-  <li>Windows x86_64 build support for fs_emucmd</li>
+      <li><strong>Deploy System:</strong></li>
+      <li>fs_emucmd integrated into deployment pipeline</li>
+      <li>Automatic binary deployment support added</li>
 
-  <li><strong>Deploy System:</strong></li>
-  <li>fs_emucmd integrated into deployment pipeline</li>
-  <li>Automatic binary deployment support added</li>
-
-  <li><strong>Project Milestone:</strong></li>
-  <li>FileSystem subsystem promoted to stable status</li>
-  <li>Final major release of the Toollibs v2.x generation</li>
-
-</ul>
-
-  </div></div>
+      <li><strong>Project Milestone:</strong></li>
+      <li>FileSystem subsystem promoted to stable status</li>
+      <li>Final major release of the Toollibs v2.x generation</li>
+    </ul>
+  </div>
+</div>
 
 <!-- v2.4.5 -->
 <div class="changelog-card" onclick="toggleCard(this)">
-
   <div class="changelog-header">
     <div class="changelog-title">
       <span class="arrow">▶</span>
@@ -89,106 +159,57 @@
       <span class="badge stable">STABLE</span>
     </div>
   </div>
-
   <div class="changelog-content">
     <ul>
-
       <li><strong>New Infrastructure:</strong> Toollibs-sync introduced</li>
-
       <li><strong>Android Ecosystem:</strong> Toollibs Local Android introduced</li>
-
       <li>Android ecosystem expanded internally and externally</li>
-
-      <li><strong>Android Research Program:</strong> Samsung Galaxy Grand Prime SM-G530H (fortunave3g) adopted as an official testing device</li>
-
+      <li><strong>Android Research Program:</strong> Samsung Galaxy Grand Prime SM-G530H (fortunave3g) adopted as official testing device</li>
       <li>Real-device Android testing workflow established</li>
-
       <li>Android data collection workflow established</li>
-
-      <li><strong>Toollibs-workstation:</strong> ADB and android-tools integrated</li>
-
-      <li>System application cataloging workflow introduced</li>
-
-      <li>SPenSdk3.apk documentation and analysis workflow established</li>
-
-      <li>Android experimentation and development workflow improved</li>
-
-      <li>Foundation for future Android platform research created</li>
-
-      <li>General HorizonDroid ecosystem improvements</li>
-
     </ul>
   </div>
-
 </div>
 
 <!-- v2.4 -->
-<div class="changelog-card open" onclick="toggleCard(this)">  <div class="changelog-header">
+<div class="changelog-card" onclick="toggleCard(this)">
+  <div class="changelog-header">
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4 "HorizonDroid"
       <span class="badge stable">STABLE</span>
     </div>
-  </div>  <div class="changelog-content">
-    <ul>  <li>Official Android platform support introduced</li>
-
-  <li><strong>Android Platform:</strong> new platform/android subsystem</li>
-  <li>Android support expanded beyond experimental status</li>
-  <li>Support for aarch64, ARMv7l and ARMv6l devices</li>
-
-  <li><strong>New Tool:</strong> battery_info</li>
-  <li>Battery status reporting support added</li>
-  <li>Battery health information support</li>
-  <li>Battery temperature reporting</li>
-  <li>Battery voltage reporting</li>
-  <li>Battery technology detection</li>
-
-  <li><strong>Build System:</strong> Makefile improvements</li>
-  <li>Automatic MinGW detection</li>
-  <li>Better ARM and Android build support</li>
-  <li>Improved multi-architecture workflow</li>
-
-  <li><strong>Deploy System:</strong> battery_info deployment support</li>
-  <li>Download index generation improvements</li>
-
-  <li><strong>Project Direction:</strong> Android promoted to official platform support</li>
-
-  <li>General code cleanup and infrastructure improvements</li>
-
-</ul>
-
-  </div></div>
+  </div>
+  <div class="changelog-content">
+    <ul>
+      <li>Official Android platform support introduced</li>
+      <li>Battery_info tool added</li>
+      <li>Multi-architecture build system improved</li>
+      <li>Android platform promoted to stable</li>
+    </ul>
+  </div>
+</div>
 
 <!-- v2.3 -->
-<div class="changelog-card" onclick="toggleCard(this)">  <div class="changelog-header">
+<div class="changelog-card" onclick="toggleCard(this)">
+  <div class="changelog-header">
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.3 "CPUnix"
       <span class="badge stable">STABLE</span>
     </div>
-  </div>  <div class="changelog-content">
-    <ul>  <li>Major improvements to cpu_info utility</li>
-  <li>Enhanced Linux CPU detection accuracy</li>
-  <li>Improved platform/linux subsystem</li>
-  <li>Better CPU information parsing and reporting</li>
-  <li>Internal code cleanup and optimization</li>
-
-  <li><strong>Linux Tools:</strong> cpu_info upgraded</li>
-
-  <li><strong>Platform Layer:</strong> Linux platform integration improved</li>
-  <li>Refined Linux-specific detection routines</li>
-
-  <li><strong>Toollibs-workstation:</strong> development workflow improvements</li>
-
-  <li>General stability and maintenance updates</li>
-
-</ul>
-
-  </div></div>
+  </div>
+  <div class="changelog-content">
+    <ul>
+      <li>CPU detection improvements</li>
+      <li>Linux subsystem optimization</li>
+      <li>Toollibs workstation improvements</li>
+    </ul>
+  </div>
+</div>
 
 <!-- v2.1.2 -->
 <div class="changelog-card" onclick="toggleCard(this)">
-
   <div class="changelog-header">
     <div class="changelog-title">
       <span class="arrow">▶</span>
@@ -196,90 +217,49 @@
       <span class="badge">LEGACY</span>
     </div>
   </div>
-
   <div class="changelog-content">
     <ul>
-      <li>Improved MainLogger verification pipeline</li>
-      <li>More precise module integrity checks</li>
-      <li>Enhanced runtime test accuracy</li>
-      <li>Better plugin system validation handling</li>
-      <li>Improved logging consistency and structure</li>
+      <li>MainLogger verification pipeline improved</li>
+      <li>Logging consistency fixes</li>
     </ul>
   </div>
-
 </div>
 
-    <!-- v2.1 -->
-    <div class="changelog-card open" onclick="toggleCard(this)">
-
-      <div class="changelog-header">
-        <div class="changelog-title">
-          <span class="arrow">▶</span>
-          v2.1 "BigBrowserToollibs"
-          <span class="badge">LEGACY</span>
-        </div>
-      </div>
-
-      <div class="changelog-content">
-        <ul>
-          <li>Improved MainLogger framework</li>
-          <li>New CPU detection system</li>
-          <li>New GPU detection system</li>
-          <li>Driver detection support added</li>
-          <li>Improved hardware information reporting</li>
-
-          <li><strong>Public Tools:</strong> cpu_info, gpu_info</li>
-
-          <li><strong>Website:</strong> full redesign + changelog system upgrade</li>
-          <li>Downloads page reworked with architecture system</li>
-          <li>Maintenance mode integration improved</li>
-
-          <li><strong>Downloads:</strong> multi-arch system (x86, x86_64, ARM, aarch64)</li>
-          <li>Automatic binary index generation</li>
-
-          <li><strong>Backend:</strong> ToollibsServer introduced (Node.js)</li>
-          <li>Device counter system added</li>
-
-          <li><strong>Deploy System:</strong> Toollibs Deploy System introduced</li>
-          <li>make deploy automation</li>
-          <li>.deploy.sh pipeline system</li>
-
-          <li><strong>Workstation:</strong> Toollibs-workstation (Debian)</li>
-          <li>CPU/GPU tools integrated locally</li>
-
-          <li><strong>Infrastructure:</strong> JSON config + maintenance modes</li>
-        </ul>
-      </div>
-
+<!-- v2.1 -->
+<div class="changelog-card" onclick="toggleCard(this)">
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v2.1 "BigBrowserToollibs"
+      <span class="badge">LEGACY</span>
     </div>
+  </div>
+  <div class="changelog-content">
+    <ul>
+      <li>CPU/GPU tools introduced</li>
+      <li>Downloads system reworked</li>
+      <li>Multi-architecture system added</li>
+    </ul>
+  </div>
+</div>
 
-
-    <!-- v2.0 -->
-    <div class="changelog-card" onclick="toggleCard(this)">
-
-      <div class="changelog-header">
-        <div class="changelog-title">
-          <span class="arrow">▶</span>
-          v2.0 "Forgelibs"
-          <span class="badge">LEGACY</span>
-        </div>
-      </div>
-
-      <div class="changelog-content">
-        <ul>
-          <li>First stable release of Toollibs framework</li>
-          <li>Plugin system base introduced</li>
-          <li>MainLogger upgraded with runtime verification</li>
-          <li>Graphics and Input modules finalized</li>
-          <li>Multi-architecture builds implemented</li>
-          <li>Public downloads system introduced</li>
-          <li>Devices compatibility page added</li>
-          <li>Website restructured for stable workflow</li>
-        </ul>
-      </div>
-
+<!-- v2.0 -->
+<div class="changelog-card" onclick="toggleCard(this)">
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v2.0 "Forgelibs"
+      <span class="badge">LEGACY</span>
     </div>
-
+  </div>
+  <div class="changelog-content">
+    <ul>
+      <li>First stable release of Toollibs framework</li>
+      <li>Plugin system introduced</li>
+      <li>Graphics/Input finalized</li>
+    </ul>
+  </div>
+</div>
 
     <!-- v1.1 -->
     <div class="changelog-card" onclick="toggleCard(this)">
@@ -350,11 +330,11 @@
 
     </div>
 
-  </main>
+</main>
 
-  <footer>
-    <p>Toollibs © 2026</p>
-  </footer>
+<footer>
+  <p>Toollibs © 2026</p>
+</footer>
 
 <script>
 function toggleCard(el) {
@@ -367,33 +347,21 @@ function updateArrows() {
     const arrow = card.querySelector(".arrow");
     if (!arrow) return;
 
-    if (card.classList.contains("open")) {
-    arrow.textContent = "▼";
-} else {
-    arrow.textContent = "▶";
-}
+    arrow.textContent = card.classList.contains("open") ? "▼" : "▶";
   });
 }
 
 window.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".changelog-card");
 
+  // keep latest open
+  let latest = document.querySelector(".badge.tested")?.closest(".changelog-card");
+
   cards.forEach(c => c.classList.remove("open"));
 
-  let latestCard = null;
-
-  cards.forEach(card => {
-    const badge = card.querySelector(".badge.tested");
-
-    if (badge && badge.textContent.trim() === "LATEST") {
-      latestCard = card;
-    }
-  });
-
-  if (latestCard) {
-    latestCard.classList.add("open");
+  if (latest) {
+    latest.classList.add("open");
   } else if (cards.length > 0) {
-    // FALLBACK
     cards[0].classList.add("open");
   }
 
@@ -401,6 +369,7 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
- <script src="system.js"></script>
+<script src="system.js"></script>
+
 </body>
 </html>
