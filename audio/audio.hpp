@@ -12,6 +12,7 @@ public:
 
     static bool load(const std::string& path);
     static void play(const std::string& file);
+
     static void pause();
     static void stop();
 
