@@ -14,7 +14,7 @@
 #include <sndfile.h>
 
 #define STB_VORBIS_HEADER_ONLY
-#include "stb_vorbis.c"
+#include "stb_vorbis.h"
 
 #define MINIMP3_IMPLEMENTATION
 #include "minimp3_ex.h"
