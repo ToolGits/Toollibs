@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <string>
-#include "../../audio/audio.hpp"
+
+#include "audio/audio.hpp"
 
 using namespace toollibs;
 
@@ -22,7 +23,7 @@ Java_com_toollibs_audio_ToollibsAudio_init(JNIEnv*, jclass) {
 JNIEXPORT void JNICALL
 Java_com_toollibs_audio_ToollibsAudio_load(JNIEnv* env, jclass, jstring path) {
 
-    const char* cpath = env->GetStringUTFChars(path, 0);
+    const char* cpath = env->GetStringUTFChars(path, nullptr);
 
     Audio::load(std::string(cpath));
 
@@ -34,8 +35,13 @@ Java_com_toollibs_audio_ToollibsAudio_load(JNIEnv* env, jclass, jstring path) {
 // =========================
 
 JNIEXPORT void JNICALL
-Java_com_toollibs_audio_ToollibsAudio_play(JNIEnv*, jclass) {
-    Audio::play();
+Java_com_toollibs_audio_ToollibsAudio_play(JNIEnv* env, jclass, jstring path) {
+
+    const char* cpath = env->GetStringUTFChars(path, nullptr);
+
+    Audio::play(std::string(cpath));
+
+    env->ReleaseStringUTFChars(path, cpath);
 }
 
 // =========================
