@@ -157,7 +157,15 @@ bool Audio::load(const std::string& path) {
 // PLAYBACK (SDL BACKEND)
 // =========================
 
-void Audio::play() {
+void Audio::play(const std::string& file) {
+      if (!musicHandle) {
+        std::cout << "[Audio] No audio loaded\n";
+        return;
+    }
+
+    Mix_PlayMusic(musicHandle, 1);
+  }
+}
 
     if (!musicHandle) {
         std::cout << "[Audio] No audio loaded\n";
