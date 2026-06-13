@@ -72,7 +72,6 @@ FS_SRC = fs/fs_emucmd.cpp fs/fs.cpp
 AUDIO_SRC = audio/audio.cpp
 AUDIO_PLAYER_SRC = audio/audio_player.cpp
 AUDIO_LIBS = -lsndfile -lSDL2_mixer -lSDL2
-AUDIO_SRC += audio/stb_vorbis.c
 
 # ============================================================
 # ANDROID NDK CONFIG
