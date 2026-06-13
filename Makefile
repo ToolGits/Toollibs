@@ -11,6 +11,7 @@ ARCH := $(shell uname -m)
 
 BUILD_DIR = bin/$(ARCH)
 BUILD_DIR_WIN = bin/windows_x86_64
+BUILD_DIR_ANDROID = bin/android
 
 # Detect MinGW automatically
 HAS_MINGW := $(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes)
@@ -65,11 +66,21 @@ POP_SRC = \
 FS_SRC = fs/fs_emucmd.cpp fs/fs.cpp
 
 # =========================
-# AUDIO
+# AUDIO SOURCES
 # =========================
 
 AUDIO_SRC = audio/audio.cpp
 AUDIO_PLAYER_SRC = audio/audio_player.cpp
+AUDIO_LIBS = -lsndfile -lSDL2_mixer -lSDL2
+
+# ============================================================
+# ANDROID NDK CONFIG
+# ============================================================
+
+NDK = $(HOME)/Android/Sdk/ndk/25.2.9519653
+ANDROID_API = 24
+
+CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
 
 # ============================================================
 # TARGETS (LINUX / ANDROID)
@@ -81,7 +92,8 @@ FS_TARGET = $(BUILD_DIR)/fs_emucmd
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
 BATTERY_TARGET = $(BUILD_DIR)/battery_info
-AUDIO_PLAYER_TARGET = $(BUILD_DIR)/audio_player
+AUDIO_PLAYER_LINUX_TARGET = $(BUILD_DIR)/audio_player
+AUDIO_PLAYER_ANDROID_TARGET = $(BUILD_DIR_ANDROID)/android_audio_player
 
 POP_TARGET = $(BUILD_DIR)/pop
 
@@ -99,6 +111,8 @@ POP_TARGET_WIN = $(BUILD_DIR_WIN)/pop.exe
 
 prepare:
 	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR_ANDROID)
+	@mkdir -p $(BUILD_DIR_WIN)
 
 # ============================================================
 # CORE BUILD
@@ -120,7 +134,7 @@ gpu_info: prepare
 battery_info: prepare
 	$(CXX) $(CXXFLAGS) $(BATTERY_SRC) -o $(BATTERY_TARGET)
 
-tools: cpu_info gpu_info battery_info audio_player
+tools: cpu_info gpu_info battery_info audio_player android_audio_player
 
 # ============================================================
 # POP
@@ -142,11 +156,21 @@ fs_emucmd: prepare
 # AUDIO PLAYER
 # ============================================================
 
-audio_player: prepare
+audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
+	@echo "Building Linux audio player..."
 	$(CXX) $(CXXFLAGS) \
 	$(AUDIO_SRC) \
 	$(AUDIO_PLAYER_SRC) \
-	-o $(AUDIO_PLAYER_TARGET)
+	$(AUDIO_LIBS) \
+	-o $(AUDIO_PLAYER_LINUX_TARGET)
+
+android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
+	@echo "Building Android audio player..."
+	$(CLANGXX) $(CXXFLAGS) \
+	$(AUDIO_SRC) \
+	platform/android/audio_android.cpp \
+	-o $(AUDIO_PLAYER_ANDROID_TARGET) \
+	-landroid -llog
 
 # ============================================================
 # WINDOWS BUILD
@@ -191,9 +215,9 @@ endif
 
 linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player
 
-android: battery_info
+android: battery_info android_audio_player
 
-all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player
 
 # ============================================================
 # RUN
@@ -217,8 +241,11 @@ run_pop:
 run_fs_emucmd:
 	@$(FS_TARGET)
 
-run_audio:
-	@$(AUDIO_PLAYER_TARGET)
+run_audio_linux:
+	@$(AUDIO_PLAYER_LINUX_TARGET)
+
+run_audio_android:
+	@echo "Android binary: $(AUDIO_PLAYER_ANDROID_TARGET)"
 
 # ============================================================
 # INFORMATION
@@ -277,4 +304,5 @@ help:
 	@echo "make fs_emucmd_windows"
 	@echo "make run_fs_emucmd"
 	@echo "make audio_player"
-	@echo "make run_audio"
+	@echo "make run_audio_linux"
+	@echo "make run_audio_android"
