@@ -7,14 +7,11 @@ namespace toollibs {
 
 class Audio {
 public:
-    static void play(const std::string& file);
-};
-public:
     static bool init();
     static void shutdown();
 
     static bool load(const std::string& path);
-    static void play();
+    static void play(const std::string& file);
     static void pause();
     static void stop();
 
@@ -22,7 +19,6 @@ public:
 
 private:
     static bool initialized;
-    static void* music;
 };
 
 }
