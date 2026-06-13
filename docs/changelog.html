@@ -105,13 +105,59 @@
 
 <main>
 
+<!-- v3.0 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v3.0 "Harmonic Duality"
+      <span class="badge new">EXPANSION</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+    <ul>
+
+      <li>Major expansion and refinement of Toollibs stable ecosystem</li>
+      <li>Audio module elevated as central system focus of the framework</li>
+
+      <li><strong>Audio System:</strong></li>
+      <li>Unified multi-format playback pipeline (WAV / OGG / MP3)</li>
+      <li>Improved decoder integration (SDL2 + libsndfile + stb_vorbis + minimp3)</li>
+      <li>More stable cross-platform audio behavior across Linux systems</li>
+      <li>Optimized memory handling for decoded audio buffers</li>
+      <li>Improved playback consistency across backend layers</li>
+
+      <li><strong>Audio Player Android:</strong></li>
+      <li>Native Android audio implementation introduced</li>
+      <li>ToollibsAudio.java bridge layer for JNI communication</li>
+      <li>audio_backend.cpp unified backend abstraction layer</li>
+      <li>audio_android.cpp Android-specific audio pipeline</li>
+      <li>Support for aarch64 mobile architecture (ARM64)</li>
+      <li>NDK integration for native compilation and performance optimization</li>
+      <li>Hybrid audio system (SDL2 + OpenSL ES readiness layer)</li>
+      <li>Improved latency handling for mobile playback</li>
+      <li>Cross-platform audio parity improvements (Linux ↔ Android)</li>
+
+      <li><strong>Website Layer:</strong></li>
+      <li>Changelog UI upgraded to fully animated expandable system</li>
+      <li>Improved visual interaction (glow, transitions, motion layering)</li>
+      <li>Better readability and version navigation experience</li>
+      <li>Performance improvements in card rendering and toggle animation</li>
+
+    </ul>
+  </div>
+
+</div>
+
 <!-- v2.5 -->
 <div class="changelog-card open" onclick="toggleCard(this)">
   <div class="changelog-header">
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.5 "Fortunav3.0egg.log"
-      <span class="badge tested">LATEST</span>
+      <span class="badge">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -156,7 +202,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4.5 "FortunaHorizon3g"
-      <span class="badge stable">STABLE</span>
+      <span class="badge">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -177,7 +223,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4 "HorizonDroid"
-      <span class="badge stable">STABLE</span>
+      <span class="badge">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -196,7 +242,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.3 "CPUnix"
-      <span class="badge stable">STABLE</span>
+      <span class="badge">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
