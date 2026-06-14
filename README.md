@@ -27,7 +27,8 @@ Experimental branch of Toollibs for testing ideas, prototypes, and community con
 ## 🌿 Branches
 
 - `main` → official and stable Toollibs
-- `community` → experimental sandbox
+- `community` → LEGACY branch
+- `nightly` → Development and experimental production
 
 ---
 
