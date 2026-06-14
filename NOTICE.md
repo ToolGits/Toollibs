@@ -1,7 +1,5 @@
 # NOTICE
 
----
-
 Toollibs Community Branch Deprecation Notice
 
 Date: 14/06/2026
