@@ -40,10 +40,13 @@ The "nightly" branch will be used for:
 
 ## Branch Status
 
-Branch| Status
-main| Stable / Official
-nightly| Experimental / Active
-community| Legacy / Archived
+Branch | Status
+
+main | Stable / Official
+
+nightly | Experimental / Active
+
+community | Legacy / Archived
 
 Legacy Preservation
 
