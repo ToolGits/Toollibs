@@ -153,7 +153,7 @@ pop: prepare
 # ============================================================
 
 fs_emucmd: prepare
-	$(CXX) $(CXXFLAGS) $(FS_SRC) -o $(FS_TARGET)
+	$(CXX) $(CXXFLAGS) $(FS_EMUCMD_SRC) -o $(FS_TARGET)
 
 # ============================================================
 # AUDIO PLAYER
