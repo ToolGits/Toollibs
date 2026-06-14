@@ -53,35 +53,35 @@ extern "C" {
  * building the DLL so that proper symbols are exported.
  */
 #if defined( _WIN32 ) && ! defined( REPLXX_STATIC )
-#        ifdef REPLXX_BUILDING_DLL
-#                define REPLXX_IMPEXP __declspec( dllexport )
-#        else
-#                define REPLXX_IMPEXP __declspec( dllimport )
-#        endif
+#	ifdef REPLXX_BUILDING_DLL
+#		define REPLXX_IMPEXP __declspec( dllexport )
+#	else
+#		define REPLXX_IMPEXP __declspec( dllimport )
+#	endif
 #else
-#        define REPLXX_IMPEXP /**/
+#	define REPLXX_IMPEXP /**/
 #endif
 
 /*! \brief Color definitions to use in highlighter callbacks.
  */
 typedef enum {
-        REPLXX_COLOR_BLACK         = 0,
-        REPLXX_COLOR_RED           = 1,
-        REPLXX_COLOR_GREEN         = 2,
-        REPLXX_COLOR_BROWN         = 3,
-        REPLXX_COLOR_BLUE          = 4,
-        REPLXX_COLOR_MAGENTA       = 5,
-        REPLXX_COLOR_CYAN          = 6,
-        REPLXX_COLOR_LIGHTGRAY     = 7,
-        REPLXX_COLOR_GRAY          = 8,
-        REPLXX_COLOR_BRIGHTRED     = 9,
-        REPLXX_COLOR_BRIGHTGREEN   = 10,
-        REPLXX_COLOR_YELLOW        = 11,
-        REPLXX_COLOR_BRIGHTBLUE    = 12,
-        REPLXX_COLOR_BRIGHTMAGENTA = 13,
-        REPLXX_COLOR_BRIGHTCYAN    = 14,
-        REPLXX_COLOR_WHITE         = 15,
-        REPLXX_COLOR_DEFAULT       = 1u << 16u
+	REPLXX_COLOR_BLACK         = 0,
+	REPLXX_COLOR_RED           = 1,
+	REPLXX_COLOR_GREEN         = 2,
+	REPLXX_COLOR_BROWN         = 3,
+	REPLXX_COLOR_BLUE          = 4,
+	REPLXX_COLOR_MAGENTA       = 5,
+	REPLXX_COLOR_CYAN          = 6,
+	REPLXX_COLOR_LIGHTGRAY     = 7,
+	REPLXX_COLOR_GRAY          = 8,
+	REPLXX_COLOR_BRIGHTRED     = 9,
+	REPLXX_COLOR_BRIGHTGREEN   = 10,
+	REPLXX_COLOR_YELLOW        = 11,
+	REPLXX_COLOR_BRIGHTBLUE    = 12,
+	REPLXX_COLOR_BRIGHTMAGENTA = 13,
+	REPLXX_COLOR_BRIGHTCYAN    = 14,
+	REPLXX_COLOR_WHITE         = 15,
+	REPLXX_COLOR_DEFAULT       = 1u << 16u
 } ReplxxColor;
 
 enum { REPLXX_KEY_BASE         = 0x0010ffff + 1 };
@@ -139,83 +139,83 @@ enum { REPLXX_KEY_ABORT        = REPLXX_KEY_META( REPLXX_KEY_CONTROL( 'M' ) ) };
 /*! \brief List of built-in actions that act upon user input.
  */
 typedef enum {
-        REPLXX_ACTION_INSERT_CHARACTER,
-        REPLXX_ACTION_NEW_LINE,
-        REPLXX_ACTION_DELETE_CHARACTER_UNDER_CURSOR,
-        REPLXX_ACTION_DELETE_CHARACTER_LEFT_OF_CURSOR,
-        REPLXX_ACTION_KILL_TO_END_OF_LINE,
-        REPLXX_ACTION_KILL_TO_BEGINING_OF_LINE,
-        REPLXX_ACTION_KILL_TO_END_OF_WORD,
-        REPLXX_ACTION_KILL_TO_BEGINING_OF_WORD,
-        REPLXX_ACTION_KILL_TO_END_OF_SUBWORD,
-        REPLXX_ACTION_KILL_TO_BEGINING_OF_SUBWORD,
-        REPLXX_ACTION_KILL_TO_WHITESPACE_ON_LEFT,
-        REPLXX_ACTION_YANK,
-        REPLXX_ACTION_YANK_CYCLE,
-        REPLXX_ACTION_YANK_LAST_ARG,
-        REPLXX_ACTION_MOVE_CURSOR_TO_BEGINING_OF_LINE,
-        REPLXX_ACTION_MOVE_CURSOR_TO_END_OF_LINE,
-        REPLXX_ACTION_MOVE_CURSOR_ONE_WORD_LEFT,
-        REPLXX_ACTION_MOVE_CURSOR_ONE_WORD_RIGHT,
-        REPLXX_ACTION_MOVE_CURSOR_ONE_SUBWORD_LEFT,
-        REPLXX_ACTION_MOVE_CURSOR_ONE_SUBWORD_RIGHT,
-        REPLXX_ACTION_MOVE_CURSOR_LEFT,
-        REPLXX_ACTION_MOVE_CURSOR_RIGHT,
-        REPLXX_ACTION_LINE_NEXT,
-        REPLXX_ACTION_LINE_PREVIOUS,
-        REPLXX_ACTION_HISTORY_MOVE_NEXT,
-        REPLXX_ACTION_HISTORY_MOVE_PREVIOUS,
-        REPLXX_ACTION_HISTORY_FIRST,
-        REPLXX_ACTION_HISTORY_LAST,
-        REPLXX_ACTION_HISTORY_RESTORE,
-        REPLXX_ACTION_HISTORY_RESTORE_CURRENT,
-        REPLXX_ACTION_HISTORY_INCREMENTAL_SEARCH,
-        REPLXX_ACTION_HISTORY_SEEDED_INCREMENTAL_SEARCH,
-        REPLXX_ACTION_HISTORY_COMMON_PREFIX_SEARCH,
-        REPLXX_ACTION_HINT_NEXT,
-        REPLXX_ACTION_HINT_PREVIOUS,
-        REPLXX_ACTION_CAPITALIZE_WORD,
-        REPLXX_ACTION_LOWERCASE_WORD,
-        REPLXX_ACTION_UPPERCASE_WORD,
-        REPLXX_ACTION_CAPITALIZE_SUBWORD,
-        REPLXX_ACTION_LOWERCASE_SUBWORD,
-        REPLXX_ACTION_UPPERCASE_SUBWORD,
-        REPLXX_ACTION_TRANSPOSE_CHARACTERS,
-        REPLXX_ACTION_TOGGLE_OVERWRITE_MODE,
+	REPLXX_ACTION_INSERT_CHARACTER,
+	REPLXX_ACTION_NEW_LINE,
+	REPLXX_ACTION_DELETE_CHARACTER_UNDER_CURSOR,
+	REPLXX_ACTION_DELETE_CHARACTER_LEFT_OF_CURSOR,
+	REPLXX_ACTION_KILL_TO_END_OF_LINE,
+	REPLXX_ACTION_KILL_TO_BEGINING_OF_LINE,
+	REPLXX_ACTION_KILL_TO_END_OF_WORD,
+	REPLXX_ACTION_KILL_TO_BEGINING_OF_WORD,
+	REPLXX_ACTION_KILL_TO_END_OF_SUBWORD,
+	REPLXX_ACTION_KILL_TO_BEGINING_OF_SUBWORD,
+	REPLXX_ACTION_KILL_TO_WHITESPACE_ON_LEFT,
+	REPLXX_ACTION_YANK,
+	REPLXX_ACTION_YANK_CYCLE,
+	REPLXX_ACTION_YANK_LAST_ARG,
+	REPLXX_ACTION_MOVE_CURSOR_TO_BEGINING_OF_LINE,
+	REPLXX_ACTION_MOVE_CURSOR_TO_END_OF_LINE,
+	REPLXX_ACTION_MOVE_CURSOR_ONE_WORD_LEFT,
+	REPLXX_ACTION_MOVE_CURSOR_ONE_WORD_RIGHT,
+	REPLXX_ACTION_MOVE_CURSOR_ONE_SUBWORD_LEFT,
+	REPLXX_ACTION_MOVE_CURSOR_ONE_SUBWORD_RIGHT,
+	REPLXX_ACTION_MOVE_CURSOR_LEFT,
+	REPLXX_ACTION_MOVE_CURSOR_RIGHT,
+	REPLXX_ACTION_LINE_NEXT,
+	REPLXX_ACTION_LINE_PREVIOUS,
+	REPLXX_ACTION_HISTORY_MOVE_NEXT,
+	REPLXX_ACTION_HISTORY_MOVE_PREVIOUS,
+	REPLXX_ACTION_HISTORY_FIRST,
+	REPLXX_ACTION_HISTORY_LAST,
+	REPLXX_ACTION_HISTORY_RESTORE,
+	REPLXX_ACTION_HISTORY_RESTORE_CURRENT,
+	REPLXX_ACTION_HISTORY_INCREMENTAL_SEARCH,
+	REPLXX_ACTION_HISTORY_SEEDED_INCREMENTAL_SEARCH,
+	REPLXX_ACTION_HISTORY_COMMON_PREFIX_SEARCH,
+	REPLXX_ACTION_HINT_NEXT,
+	REPLXX_ACTION_HINT_PREVIOUS,
+	REPLXX_ACTION_CAPITALIZE_WORD,
+	REPLXX_ACTION_LOWERCASE_WORD,
+	REPLXX_ACTION_UPPERCASE_WORD,
+	REPLXX_ACTION_CAPITALIZE_SUBWORD,
+	REPLXX_ACTION_LOWERCASE_SUBWORD,
+	REPLXX_ACTION_UPPERCASE_SUBWORD,
+	REPLXX_ACTION_TRANSPOSE_CHARACTERS,
+	REPLXX_ACTION_TOGGLE_OVERWRITE_MODE,
 #ifndef _WIN32
-        REPLXX_ACTION_VERBATIM_INSERT,
-        REPLXX_ACTION_SUSPEND,
+	REPLXX_ACTION_VERBATIM_INSERT,
+	REPLXX_ACTION_SUSPEND,
 #endif
-        REPLXX_ACTION_BRACKETED_PASTE,
-        REPLXX_ACTION_CLEAR_SCREEN,
-        REPLXX_ACTION_CLEAR_SELF,
-        REPLXX_ACTION_REPAINT,
-        REPLXX_ACTION_COMPLETE_LINE,
-        REPLXX_ACTION_COMPLETE_NEXT,
-        REPLXX_ACTION_COMPLETE_PREVIOUS,
-        REPLXX_ACTION_COMMIT_LINE,
-        REPLXX_ACTION_ABORT_LINE,
-        REPLXX_ACTION_SEND_EOF
+	REPLXX_ACTION_BRACKETED_PASTE,
+	REPLXX_ACTION_CLEAR_SCREEN,
+	REPLXX_ACTION_CLEAR_SELF,
+	REPLXX_ACTION_REPAINT,
+	REPLXX_ACTION_COMPLETE_LINE,
+	REPLXX_ACTION_COMPLETE_NEXT,
+	REPLXX_ACTION_COMPLETE_PREVIOUS,
+	REPLXX_ACTION_COMMIT_LINE,
+	REPLXX_ACTION_ABORT_LINE,
+	REPLXX_ACTION_SEND_EOF
 } ReplxxAction;
 
 /*! \brief Possible results of key-press handler actions.
  */
 typedef enum {
-        REPLXX_ACTION_RESULT_CONTINUE, /*!< Continue processing user input. */
-        REPLXX_ACTION_RESULT_RETURN,   /*!< Return user input entered so far. */
-        REPLXX_ACTION_RESULT_BAIL      /*!< Stop processing user input, returns nullptr from the \e input() call. */
+	REPLXX_ACTION_RESULT_CONTINUE, /*!< Continue processing user input. */
+	REPLXX_ACTION_RESULT_RETURN,   /*!< Return user input entered so far. */
+	REPLXX_ACTION_RESULT_BAIL      /*!< Stop processing user input, returns nullptr from the \e input() call. */
 } ReplxxActionResult;
 
 typedef struct ReplxxStateTag {
-        char const* text;
-        int cursorPosition;
+	char const* text;
+	int cursorPosition;
 } ReplxxState;
 
 typedef struct Replxx Replxx;
 typedef struct ReplxxHistoryScan ReplxxHistoryScan;
 typedef struct ReplxxHistoryEntryTag {
-        char const* timestamp;
-        char const* text;
+	char const* timestamp;
+	char const* text;
 } ReplxxHistoryEntry;
 
 /*! \brief Create Replxx library resource holder.
@@ -482,4 +482,165 @@ REPLXX_IMPEXP void replxx_set_completion_count_cutoff( Replxx*, int count );
 
 /*! \brief Set maximum number of displayed hint rows.
  */
-REPLXX_IMPEXP void replxx_set_max_hint_rows( Replxx*, int count
+REPLXX_IMPEXP void replxx_set_max_hint_rows( Replxx*, int count );
+
+/*! \brief Set a delay before hint are shown after user stopped typing..
+ *
+ * \param milliseconds - a number of milliseconds to wait before showing hints.
+ */
+REPLXX_IMPEXP void replxx_set_hint_delay( Replxx*, int milliseconds );
+
+/*! \brief Set tab completion behavior.
+ *
+ * \param val - use double tab to invoke completions (if != 0).
+ */
+REPLXX_IMPEXP void replxx_set_double_tab_completion( Replxx*, int val );
+
+/*! \brief Set tab completion behavior.
+ *
+ * \param val - invoke completion even if user input is empty (if != 0).
+ */
+REPLXX_IMPEXP void replxx_set_complete_on_empty( Replxx*, int val );
+
+/*! \brief Set tab completion behavior.
+ *
+ * \param val - beep if completion is ambiguous (if != 0).
+ */
+REPLXX_IMPEXP void replxx_set_beep_on_ambiguous_completion( Replxx*, int val );
+
+/*! \brief Set complete next/complete previous behavior.
+ *
+ * COMPLETE_NEXT/COMPLETE_PREVIOUS actions have two modes of operations,
+ * in case when a partial completion is possible complete only partial part (`false` setting)
+ * or complete first proposed completion fully (`true` setting).
+ * The default is to complete fully (a `true` setting - complete immediately).
+ *
+ * \param val - complete immediately.
+ */
+REPLXX_IMPEXP void replxx_set_immediate_completion( Replxx*, int val );
+
+/*! \brief Set history duplicate entries behaviour.
+ *
+ * \param val - should history contain only unique entries?
+ */
+REPLXX_IMPEXP void replxx_set_unique_history( Replxx*, int val );
+
+/*! \brief Disable output coloring.
+ *
+ * \param val - if set to non-zero disable output colors.
+ */
+REPLXX_IMPEXP void replxx_set_no_color( Replxx*, int val );
+
+/*! \brief Enable/disable (prompt width) indent for multiline entry.
+ *
+ * \param val - if set to non-zero then multiline indent will be enabled.
+ */
+REPLXX_IMPEXP void replxx_set_indent_multiline( Replxx*, int val );
+
+/*! \brief Set maximum number of entries in history list.
+ */
+REPLXX_IMPEXP void replxx_set_max_history_size( Replxx*, int len );
+REPLXX_IMPEXP ReplxxHistoryScan* replxx_history_scan_start( Replxx* );
+REPLXX_IMPEXP void replxx_history_scan_stop( Replxx*, ReplxxHistoryScan* );
+REPLXX_IMPEXP int replxx_history_scan_next( Replxx*, ReplxxHistoryScan*, ReplxxHistoryEntry* );
+
+/*! \brief Synchronize REPL's history with given file.
+ *
+ * Synchronizing means loading existing history from given file,
+ * merging it with current history sorted by timestamps,
+ * saving merged version to given file,
+ * keeping merged version as current REPL's history.
+ *
+ * This call is an equivalent of calling:
+ * replxx_history_save( rx, "some-file" );
+ * replxx_history_load( rx, "some-file" );
+ *
+ * \param filename - a path to the file with which REPL's current history should be synchronized.
+ * \return 0 iff history file was successfully created, -1 otherwise.
+ */
+REPLXX_IMPEXP int replxx_history_sync( Replxx*, const char* filename );
+
+/*! \brief Save REPL's history into given file.
+ *
+ * Saving means loading existing history from given file,
+ * merging it with current history sorted by timestamps,
+ * saving merged version to given file,
+ * keeping original (NOT merged) version as current REPL's history.
+ *
+ * \param filename - a path to the file where REPL's history should be saved.
+ * \return 0 iff history file was successfully created, -1 otherwise.
+ */
+REPLXX_IMPEXP int replxx_history_save( Replxx*, const char* filename );
+
+/*! \brief Load REPL's history from given file.
+ *
+ * \param filename - a path to the file which contains REPL's history that should be loaded.
+ * \return 0 iff history file was successfully opened, -1 otherwise.
+ */
+REPLXX_IMPEXP int replxx_history_load( Replxx*, const char* filename );
+
+/*! \brief Clear REPL's in-memory history.
+ */
+REPLXX_IMPEXP void replxx_history_clear( Replxx* );
+REPLXX_IMPEXP void replxx_clear_screen( Replxx* );
+#ifdef __REPLXX_DEBUG__
+void replxx_debug_dump_print_codes(void);
+#endif
+/* the following is extension to the original linenoise API */
+REPLXX_IMPEXP int replxx_install_window_change_handler( Replxx* );
+REPLXX_IMPEXP void replxx_enable_bracketed_paste( Replxx* );
+REPLXX_IMPEXP void replxx_disable_bracketed_paste( Replxx* );
+
+/*! \brief Combine two color definitions to get encompassing color definition.
+ *
+ * To be used only for combining foreground and background colors.
+ *
+ * \param color1 - first input color.
+ * \param color2 - second input color.
+ * \return A new color definition that represent combined input colors.
+ */
+ReplxxColor replxx_color_combine( ReplxxColor color1, ReplxxColor color2 );
+
+/*! \brief Transform foreground color definition into a background color definition.
+ *
+ * \param color - an input foreground color definition.
+ * \return A background color definition that is a transformed input \e color.
+ */
+ReplxxColor replxx_color_bg( ReplxxColor color );
+
+/*! \brief Add `bold` attribute to color definition.
+ *
+ * \param color - an input color definition.
+ * \return A new color definition with bold attribute set.
+ */
+ReplxxColor replxx_color_bold( ReplxxColor color );
+
+/*! \brief Add `underline` attribute to color definition.
+ *
+ * \param color - an input color definition.
+ * \return A new color definition with underline attribute set.
+ */
+ReplxxColor replxx_color_underline( ReplxxColor color );
+
+/*! \brief Create a new grayscale color of given brightness level.
+ *
+ * \param level - a brightness level for new color, must be between 0 (darkest) and 23 (brightest).
+ * \return A new grayscale color of a given brightest \e level.
+ */
+ReplxxColor replxx_color_grayscale( int level );
+
+/*! \brief Create a new color in 6×6×6 RGB color space from base component levels.
+ *
+ * \param red - a red (of RGB) component level, must be 0 and 5.
+ * \param green - a green (of RGB) component level, must be 0 and 5.
+ * \param blue - a blue (of RGB) component level, must be 0 and 5.
+ * \return A new color in 6×6×6 RGB color space.
+ */
+ReplxxColor replxx_color_rgb666( int red, int green, int blue );
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __REPLXX_H */
+
