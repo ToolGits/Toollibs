@@ -77,6 +77,8 @@ int main()
 {
     replxx::Replxx rx;
 
+rx.history_load("fs_history.txt");
+
 std::vector<std::string> commands = {
     "help",
     "mkdir",
@@ -143,6 +145,11 @@ if (!cinput)
 }
 
 input = cinput;
+
+if (!input.empty() && input != "exit")
+{
+    rx.history_add(input);
+}
 
         auto cmd = split(input);
         if (cmd.empty()) continue;
@@ -298,6 +305,8 @@ input = cinput;
             std::cout << RED << "Unknown command. type 'help'\n" << RESET;
         }
     }
+
+    rx.history_save("fs_history.txt");
 
     return 0;
 }
