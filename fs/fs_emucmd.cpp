@@ -3,6 +3,7 @@
 #endif
 
 #include "fs/fs.hpp"
+#include "replxx/replxx.hxx"
 
 #include <iostream>
 #include <string>
@@ -74,6 +75,46 @@ std::string getPath()
 // =========================
 int main()
 {
+    replxx::Replxx rx;
+
+std::vector<std::string> commands = {
+    "help",
+    "mkdir",
+    "list",
+    "remove",
+    "copy",
+    "paste",
+    "rename",
+    "move",
+    "read",
+    "write",
+    "cd",
+    "clear",
+    "exit"
+};
+
+rx.set_completion_callback(
+    [&commands](
+        std::string const& input,
+        int& contextLen
+    )
+{
+        std::vector<replxx::Replxx::Completion> result;
+
+        for (auto const& cmd : commands)
+        {
+            if (cmd.rfind(input, 0) == 0)
+            {
+                result.emplace_back(cmd);
+            }
+        }
+
+        contextLen = static_cast<int>(input.size());
+
+        return result;
+    }
+);
+
 #ifdef _WIN32
     enableANSI();
 #endif
@@ -87,9 +128,21 @@ int main()
 
     while (true)
     {
-        std::cout << CYAN << "fs:" << getPath() << "> " << RESET;
+        std::string prompt =
+    std::string(CYAN) +
+    "fs:" +
+    getPath() +
+    "> " +
+    RESET;
 
-        std::getline(std::cin, input);
+char const* cinput = rx.input(prompt.c_str());
+
+if (!cinput)
+{
+    break;
+}
+
+input = cinput;
 
         auto cmd = split(input);
         if (cmd.empty()) continue;
