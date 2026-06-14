@@ -77,7 +77,7 @@ int main()
 {
     replxx::Replxx rx;
 
-rx.history_load("fs_history.txt");
+rx.history_load(".fs_history.txt");
 
 std::vector<std::string> commands = {
     "help",
@@ -306,7 +306,7 @@ if (!input.empty() && input != "exit")
         }
     }
 
-    rx.history_save("fs_history.txt");
+    rx.history_save(".fs_history.txt");
 
     return 0;
 }
