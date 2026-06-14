@@ -6,11 +6,12 @@ Experimental branch of Toollibs for testing ideas, prototypes, and community con
 
 ## ⚠️ Warning
 
-This branch is:
-- Unstable
-- Experimental
-- Not official
-- Subject to change or removal at any time
+- This branch has been completely discontinued; we are moving to another branch.
+
+- This branch is legacy, but since we don't want to lose part of Toollibs' history, we're not going to delete and replace everything in the community branch for the sake of memories (:
+
+- READ NOTICE.md as well for more information and details.
+
 
 ---
 
