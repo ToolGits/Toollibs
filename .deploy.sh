@@ -8,6 +8,7 @@ ARCH=$(uname -m)
 
 BUILD_DIR="bin/$ARCH"
 BUILD_DIR_WIN="bin/windows_x86_64"
+BUILD_DIR_ANDROID="bin/android"
 
 DOCS_DIR="docs/downloads"
 
@@ -39,6 +40,16 @@ if [ -d "$BUILD_DIR_WIN" ]; then
   for bin in mainlogger.exe pop.exe fs_emucmd.exe; do
     if [ -f "$BUILD_DIR_WIN/$bin" ]; then
       cp "$BUILD_DIR_WIN/$bin" "$DOCS_DIR/$bin"
+    fi
+  done
+fi
+
+echo "[5.5/6] Deploying Android binaries..."
+
+if [ -d "$BUILD_DIR_ANDROID" ]; then
+  for bin in android_audio_player; do
+    if [ -f "$BUILD_DIR_ANDROID/$bin" ]; then
+      cp "$BUILD_DIR_ANDROID/$bin" "$DOCS_DIR/$bin-android"
     fi
   done
 fi
@@ -75,6 +86,7 @@ echo "Deploy completed successfully!"
 echo "Architecture: $ARCH"
 echo "Linux build: $BUILD_DIR"
 echo "Windows build: $BUILD_DIR_WIN"
+echo "Android build: $BUILD_DIR_ANDROID"
 echo "Output: $DOCS_DIR"
 echo ""
 echo "Powered by Toollibs & Toollibs-workstation"
