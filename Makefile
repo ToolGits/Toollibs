@@ -93,9 +93,6 @@ AUDIO_PLAYER_SRC = audio/audio_player.cpp
 AUDIO_LIBS := $(shell pkg-config --libs sndfile sdl2 SDL2_mixer)
 AUDIO_CFLAGS := $(shell pkg-config --cflags sndfile sdl2 SDL2_mixer)
 
-CXXFLAGS += -DTOOLLIBS_LINUX
-CXXFLAGS += -DTOOLLIBS_ANDROID
-
 # ============================================================
 # ANDROID NDK CONFIG
 # ============================================================
@@ -191,7 +188,7 @@ fs_emucmd: prepare
 
 audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 	@echo "Building Linux audio player..."
-	$(CXX) $(CXXFLAGS) -DTOOLLIBS_LINUX \
+	$(CXX) $(CXXFLAGS) \
 	$(AUDIO_CFLAGS) \
 	$(AUDIO_SRC) \
 	$(AUDIO_PLAYER_SRC) \
@@ -200,7 +197,7 @@ audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 
 android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
 	@echo "Building Android audio player..."
-	$(CLANGXX) $(CXXFLAGS) -DTOOLLIBS_ANDROID \
+	$(CLANGXX) $(CXXFLAGS) \
 	$(AUDIO_SRC) \
 	platform/android/audio_android.cpp \
 	-o $(AUDIO_PLAYER_ANDROID_TARGET) \

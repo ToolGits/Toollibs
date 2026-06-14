@@ -1,16 +1,18 @@
 [
   "audio_player-aarch64",
+  "audio_player-x86_64",
   "battery_info-aarch64",
   "battery_info-x86_64",
   "cpu_info-aarch64",
   "cpu_info-x86_64",
   "fs_emucmd-aarch64",
+  "fs_emucmd-x86_64",
   "gpu_info-aarch64",
   "gpu_info-x86_64",
   "mainlogger-aarch64",
-  "mainlogger-x86_64",
   "mainlogger.exe",
+  "mainlogger-x86_64",
   "pop-aarch64",
-  "pop-x86_64",
-  "pop.exe"
+  "pop.exe",
+  "pop-x86_64"
 ]

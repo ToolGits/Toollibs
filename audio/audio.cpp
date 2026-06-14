@@ -3,12 +3,8 @@
 #include <iostream>
 #include <string>
 
-#if defined(TOOLLIBS_ANDROID)
-
-#else
-    #include <SDL2/SDL.h>
-    #include <SDL2/SDL_mixer.h>
-#endif
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 namespace toollibs {
 
