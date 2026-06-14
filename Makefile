@@ -90,7 +90,8 @@ REPLXX_SRC = \
 
 AUDIO_SRC = audio/audio.cpp
 AUDIO_PLAYER_SRC = audio/audio_player.cpp
-AUDIO_LIBS = -lsndfile -lSDL2_mixer -lSDL2
+AUDIO_LIBS := $(shell pkg-config --libs sndfile sdl2 SDL2_mixer)
+AUDIO_CFLAGS := $(shell pkg-config --cflags sndfile sdl2 SDL2_mixer)
 
 # ============================================================
 # ANDROID NDK CONFIG
@@ -178,6 +179,7 @@ fs_emucmd: prepare
 audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 	@echo "Building Linux audio player..."
 	$(CXX) $(CXXFLAGS) \
+	$(AUDIO_CFLAGS) \
 	$(AUDIO_SRC) \
 	$(AUDIO_PLAYER_SRC) \
 	$(AUDIO_LIBS) \
