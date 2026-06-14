@@ -65,8 +65,27 @@ POP_SRC = \
 
 FS_EMUCMD_SRC = \
     fs/fs.cpp \
-    fs/replxx/replxx.cxx \
     fs/fs_emucmd.cpp
+
+FS_EMUCMD_SRC_WIN = \
+    $(FS_EMUCMD_SRC) \
+    fs/replxx/windows.cxx
+
+REPLXX_SRC = \
+    fs/replxx/replxx.cxx \
+    fs/replxx/replxx_impl.cxx \
+    fs/replxx/history.cxx \
+    fs/replxx/prompt.cxx \
+    fs/replxx/terminal.cxx \
+    fs/replxx/conversion.cxx \
+    fs/replxx/escape.cxx \
+    fs/replxx/util.cxx \
+    fs/replxx/wcwidth.cpp \
+    fs/replxx/ConvertUTF.cpp
+
+ifeq ($(OS),Windows_NT)
+REPLXX_SRC += fs/replxx/windows.cxx
+endif
 
 # =========================
 # AUDIO SOURCES
@@ -153,7 +172,7 @@ pop: prepare
 # ============================================================
 
 fs_emucmd: prepare
-	$(CXX) $(CXXFLAGS) $(FS_EMUCMD_SRC) -o $(FS_TARGET)
+	$(CXX) $(CXXFLAGS) $(FS_EMUCMD_SRC) $(REPLXX_SRC) -o $(FS_TARGET)
 
 # ============================================================
 # AUDIO PLAYER
@@ -209,7 +228,7 @@ endif
 fs_emucmd_windows: prepare
 ifeq ($(HAS_MINGW),yes)
 	@mkdir -p $(BUILD_DIR_WIN)
-	$(MINGW) $(CXXFLAGS) $(FS_SRC) -o $(FS_TARGET_WIN)
+	$(MINGW) $(CXXFLAGS) $(FS_EMUCMD_SRC) -o $(FS_TARGET_WIN)
 endif
 
 # ============================================================
