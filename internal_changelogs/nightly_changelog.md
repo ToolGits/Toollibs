@@ -4,10 +4,11 @@
 
 14/06/2026
 
-+ Created nightly branch
-+ Community branch moved to Legacy status
-+ Added NOTICE.md to community branch
-+ Started FontsFirst development
++ [✓] Created nightly branch
++ [✓] Community branch moved to Legacy status
++ [✓] Added NOTICE.md to community branch
++ [✓] Started FontsFirst development
++ [WIP] Create font.hpp and font.cpp files in graphics/
 
 ## Fonts
 
