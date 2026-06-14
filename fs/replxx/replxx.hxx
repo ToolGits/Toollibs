@@ -483,7 +483,7 @@ public:
          */
         void emulate_key_press( char32_t code );
 
-        /*! \brief Invoke built-in action handler.
+        /*! \brief Invoke built-in action handler. */
          *
          * \pre This method can be called only from key-press handler.
          *
