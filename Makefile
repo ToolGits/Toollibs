@@ -97,7 +97,17 @@ AUDIO_CFLAGS := $(shell pkg-config --cflags sndfile sdl2 SDL2_mixer)
 # ANDROID NDK CONFIG
 # ============================================================
 
-NDK = $(HOME)/Android/Sdk/ndk/25.2.9519653
+NDK_BASE := $(HOME)/Android/Sdk/ndk
+
+NDK_VERSION := $(shell \
+    ls $(NDK_BASE) 2>/dev/null | sort -V | tail -n 1)
+
+ifeq ($(NDK_VERSION),)
+$(error NDK not found in $(NDK_BASE))
+endif
+
+NDK := $(NDK_BASE)/$(NDK_VERSION)
+
 ANDROID_API = 24
 
 CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
