@@ -69,6 +69,7 @@ FS_EMUCMD_SRC = \
 
 FS_EMUCMD_SRC_WIN = \
     $(FS_EMUCMD_SRC) \
+    $(REPLXX_SRC) \
     fs/replxx/windows.cxx
 
 REPLXX_SRC = \
@@ -82,10 +83,6 @@ REPLXX_SRC = \
     fs/replxx/util.cxx \
     fs/replxx/wcwidth.cpp \
     fs/replxx/ConvertUTF.cpp
-
-ifeq ($(OS),Windows_NT)
-REPLXX_SRC += fs/replxx/windows.cxx
-endif
 
 # =========================
 # AUDIO SOURCES
@@ -228,7 +225,7 @@ endif
 fs_emucmd_windows: prepare
 ifeq ($(HAS_MINGW),yes)
 	@mkdir -p $(BUILD_DIR_WIN)
-	$(MINGW) $(CXXFLAGS) $(FS_EMUCMD_SRC) -o $(FS_TARGET_WIN)
+	$(MINGW) $(CXXFLAGS) $(FS_EMUCMD_SRC_WIN) -o $(FS_TARGET_WIN)
 endif
 
 # ============================================================
