@@ -3,7 +3,7 @@
 #endif
 
 #include "fs/fs.hpp"
-#include "replxx/replxx.hxx"
+#include "fs/replxx/replxx.hxx"
 
 #include <iostream>
 #include <string>
