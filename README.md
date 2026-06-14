@@ -1,126 +1,86 @@
-# Toollibs
+# Toollibs Nightly 🌙
 
-Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
-
-It goes beyond a simple library collection — providing a **build system, runtime verification pipeline, plugin architecture, and automated deployment system**.
+The official experimental development branch of Toollibs.
 
 ---
 
-## 🚀 Core Philosophy
+## ⚠️ Warning!
 
-Toollibs is built around a simple idea:
+This branch is:
 
-> Build modular systems, verify at runtime, and deploy automatically across architectures.
-
-It focuses on:
-
-- Clean modular design
-- Cross-platform compilation (Linux + Windows support)
-- Lightweight system architecture
-- Developer-friendly tooling
+- Experimental
+- Unstable
+- Under active development
+- Subject to breaking changes
+- Not recommended for production use
 
 ---
 
-## 🧠 Key Features
+## 🚀 Purpose
 
-- ⚙️ Multi-architecture build system (x86_64, ARM, etc.)
-- 🧪 Runtime verification pipeline (mainlogger system)
-- 🧩 Plugin system for extensibility
-- 📦 Automated deployment system (website integration)
-- 💻 Linux-focused system tools (CPU/GPU modules)
-- 🌐 Download + version distribution via web interface
-- 📱 Official Android support available + battery_info to check your battery status
-- 👨‍💻 Mini **Terminal Emulator** FS Emulated CMD, fs module tool
+The Nightly branch is where new Toollibs features are developed before reaching the stable branch.
 
----
+Examples:
 
-## 🔧 Modules
-
-- **core** → logging system, runtime control, base utilities
-- **math** → mathematical helpers and vector structures
-- **graphics** → lightweight rendering utilities
-- **input** → input handling (keyboard, mouse, controller)
-- **fs** → file system utilities
-- **plugins** → modular extension system
+- New modules
+- New platform support
+- Internal redesigns
+- Experimental APIs
+- Future Toollibs releases
 
 ---
 
-## 🏗️ Build System
+## 🧪 Current Development
 
-Toollibs uses a Makefile-based build pipeline:
+Toollibs v3.2 — FontsFirst
 
-- Supports multi-architecture builds
-- Separates Linux-specific modules (cpu_info, gpu_info)
-- Generates structured binaries per platform
+Current focus:
 
-Example output:
-bin/x86_64/mainlogger bin/windows_x86_64/mainlogger bin/aarch64/cpu_info bin/x86_64/gpu_info
-
----
-
-## 🌐 Deployment System
-
-Toollibs includes an automated deployment pipeline:
-
-- Builds are automatically packaged
-- Binaries are distributed to a web directory
-- Generates `index.json` for downloads
-- Powers the official Toollibs website
+- Toollibs Font System
+- Font Registry
+- Font Loading
+- Font Management
+- Graphics Module Expansion
 
 ---
 
-## 🧪 Runtime Verification
+## 🌿 Branches
 
-Each build can be validated using the MainLogger system:
-
-- Module integrity checks
-- Math, graphics, and plugin tests
-- System health report (HEALTHY / DEGRADED)
+- "main" → Stable / Official Toollibs
+- "nightly" → Experimental Development
+- "community" → Legacy Archive
 
 ---
 
-## 🌍 Platforms
-- Linux (primary development platform)
-- Windows (via MinGW for main modules)
-- Android (Official support for aarch64, ARMv7l and ARMv6l)
+## 📜 Development Philosophy
+
+Features are developed in Nightly first.
+
+Once stable and tested, they may be merged into the official Toollibs release.
+
+Not every Nightly feature is guaranteed to reach the stable branch.
 
 ---
 
-## 🎯 Goal
+## 📌 Documentation
 
-To build a **modern, modular, and automated C++ ecosystem** that can serve as a foundation for:
+Read:
 
-- system tools
-- game frameworks
-- plugin-based applications
-- lightweight engines
+- NIGHTLY_CHANGELOG.md
+- NOTICE.md (Community branch)
 
 ---
 
-## 📜 History
+## 📜 License
 
-Toollibs evolved from an earlier discontinued project called **ServerHub**.
-
-It was rebuilt to focus on:
-- stability
-- structure
-- continuous development
-- real deployment workflow
+Toollibs uses the license: MIT License
 
 ---
 
-## 🌱 Community
+## 👤 Credits
 
-This is an open project built for learning, experimentation, and contribution.
+Toollibs Framework Ecosystem
 
-You are welcome to:
-- contribute code
-- suggest improvements
-- build modules
-- fork and experiment freely
+Maintained by:
 
----
-
-## ⚡ License
-
-The license that Toollibs uses is the MIT License (Copyright © 2026)
+- enzobobdevvideos04-ctrl (GitBob)
