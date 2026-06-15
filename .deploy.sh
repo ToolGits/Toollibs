@@ -28,7 +28,7 @@ rm -f "$DOCS_DIR"/*.exe
 
 echo "[4/6] Deploying Linux executables..."
 
-for bin in mainlogger cpu_info gpu_info battery_info pop fs_emucmd audio_player; do
+for bin in mainlogger cpu_info gpu_info battery_info pop fs_emucmd audio_player font_preview; do
   if [ -f "$BUILD_DIR/$bin" ]; then
     cp "$BUILD_DIR/$bin" "$DOCS_DIR/$bin-$ARCH"
   fi
