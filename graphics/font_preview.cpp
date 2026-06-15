@@ -2,7 +2,10 @@
 
 #include <iostream>
 
-int main(int argc, char** argv) {
+int main(
+    int argc,
+    char** argv
+) {
 
     if (argc < 2) {
 
@@ -13,25 +16,20 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    std::string font_path = argv[1];
-
-    std::string output =
-        "font-preview.png";
-
     toollibs::FontRenderer renderer;
 
-    if (!renderer.render_preview(
-        font_path,
-        output
-    )) {
+    if (
+        !renderer.render_preview(
+            argv[1],
+            "preview.png"
+        )
+    ) {
 
         return 1;
     }
 
     std::cout
-        << "Generated: "
-        << output
-        << "\n";
+        << "Generated preview.png\n";
 
     return 0;
 }
