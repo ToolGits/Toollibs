@@ -8,7 +8,7 @@
 + [✓] Community branch moved to Legacy status
 + [✓] Added NOTICE.md to community branch
 + [✓] Started FontsFirst development
-+ [WIP] Create font.hpp and font.cpp files in graphics/
++ [WIP] Create font_renderer.hpp and font_preview.cpp files in graphics/
 
 ## Fonts
 
