@@ -1,6 +1,6 @@
 # Toollibs
 
-![Version](https://img.shields.io/badge/version-v3.2-FontsFirst-blue)
+![Version](https://img.shields.io/badge/version-v3.2-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
 ![Status](https://img.shields.io/badge/status-stable-brightgreen)
