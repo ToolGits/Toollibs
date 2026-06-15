@@ -106,25 +106,30 @@ FONT_PREVIEW_TARGET = \
 
 FONT_PREVIEW_LIBS = \
  -lfreetype
-
 # ============================================================
 # ANDROID NDK CONFIG
 # ============================================================
 
 NDK_BASE := $(HOME)/Android/Sdk/ndk
 
-NDK_VERSION := $(shell \
-    ls $(NDK_BASE) 2>/dev/null | sort -V | tail -n 1)
+NDK_VERSION := $(shell 
+ls $(NDK_BASE) 2>/dev/null | sort -V | tail -n 1)
 
-ifeq ($(NDK_VERSION),)
-$(error NDK not found in $(NDK_BASE))
-endif
+ifneq ($(NDK_VERSION),)
 
 NDK := $(NDK_BASE)/$(NDK_VERSION)
 
 ANDROID_API = 24
 
 CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
+
+HAS_NDK = yes
+
+else
+
+HAS_NDK = no
+
+endif
 
 # ============================================================
 # TARGETS (LINUX / ANDROID)
@@ -211,12 +216,19 @@ audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 	-o $(AUDIO_PLAYER_LINUX_TARGET)
 
 android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
-	@echo "Building Android audio player..."
-	$(CLANGXX) $(CXXFLAGS) \
-	$(AUDIO_SRC) \
-	platform/android/audio_android.cpp \
-	-o $(AUDIO_PLAYER_ANDROID_TARGET) \
-	-landroid -llog
+ifeq ($(HAS_NDK),yes)
+@echo "Building Android audio player..."
+
+$(CLANGXX) $(CXXFLAGS) \
+$(AUDIO_SRC) \
+platform/android/audio_android.cpp \
+-o $(AUDIO_PLAYER_ANDROID_TARGET) \
+-landroid -llog
+
+else
+@echo "Toollibs: Android NDK not found."
+@echo "Skipping android_audio_player build."
+endif
 
 # ============================================================
 # FONT PREVIEW BUILD
