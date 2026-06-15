@@ -93,6 +93,20 @@ AUDIO_PLAYER_SRC = audio/audio_player.cpp
 AUDIO_LIBS := $(shell pkg-config --libs sndfile sdl2 SDL2_mixer)
 AUDIO_CFLAGS := $(shell pkg-config --cflags sndfile sdl2 SDL2_mixer)
 
+# =========================
+# FONT PREVIEW
+# =========================
+
+FONT_PREVIEW_SRC = \
+ graphics/font_renderer.cpp \
+ graphics/font_preview.cpp
+
+FONT_PREVIEW_TARGET = \
+ $(BUILD_DIR)/font_preview
+
+FONT_PREVIEW_LIBS = \
+ -lfreetype
+
 # ============================================================
 # ANDROID NDK CONFIG
 # ============================================================
@@ -118,6 +132,7 @@ CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android
 
 MAIN_TARGET = $(BUILD_DIR)/mainlogger
 
+FONT_PREVIVEW_TARGET = $(BUILD_DIR)/font_preview
 FS_TARGET = $(BUILD_DIR)/fs_emucmd
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
@@ -202,6 +217,16 @@ android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
 	platform/android/audio_android.cpp \
 	-o $(AUDIO_PLAYER_ANDROID_TARGET) \
 	-landroid -llog
+
+# ============================================================
+# FONT PREVIEW BUILD
+# ============================================================
+
+font_preview: prepare
+	$(CXX) $(CXXFLAGS) \
+	$(FONT_PREVIEW_SRC) \
+	$(FONT_PREVIEW_LIBS) \
+	-o $(FONT_PREVIEW_TARGET)
 
 # ============================================================
 # WINDOWS BUILD
