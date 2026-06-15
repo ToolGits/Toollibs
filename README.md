@@ -1,4 +1,4 @@
-# Toollibs Nightly 🌙
+# 🌙 Toollibs Nightly 🌙
 
 The official experimental development branch of Toollibs.
 
@@ -89,4 +89,4 @@ Toollibs website
 
 Website maintained by:
 
-- vncuu & enzobobdevvideos04-ctrl (GitBob)
+- vncuu & enzobobdevvideos04-ctrl (Vncuu & GitBob)
