@@ -1,6 +1,6 @@
 # Toollibs Nightly Changelog
 
-> [3.2-dev] FontsFirst
+# [3.2-dev] FontsFirst
 
 Initialization: 14/06/2026
 
