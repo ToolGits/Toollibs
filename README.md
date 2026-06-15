@@ -5,7 +5,7 @@ The official experimental development branch of Toollibs.
 ![Version](https://img.shields.io/badge/version-v3.2-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
-![Status](https://img.shields.io/badge/status-stable-brightgreen)
+![Status](https://img.shields.io/badge/status-unstable-red)
 ![Linux](https://img.shields.io/badge/Linux-Supported-orange)
 ![Windows](https://img.shields.io/badge/Windows-Supported-blue)
 ![Android](https://img.shields.io/badge/Android-Supported-success)
