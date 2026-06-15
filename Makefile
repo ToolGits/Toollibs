@@ -222,7 +222,7 @@ platform/android/audio_android.cpp \
 
 else
 @echo "Toollibs: Android NDK not found."
-@echo "Skipping android_audio_player build."
+	@echo "Skipping android_audio_player build."
 endif
 
 # ============================================================
