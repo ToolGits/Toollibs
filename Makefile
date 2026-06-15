@@ -112,7 +112,7 @@ FONT_PREVIEW_LIBS = \
 
 NDK_BASE := $(HOME)/Android/Sdk/ndk
 
-NDK_VERSION := $(shell 
+NDK_VERSION := $(shell) 
 ls $(NDK_BASE) 2>/dev/null | sort -V | tail -n 1)
 
 ifneq ($(NDK_VERSION),)
