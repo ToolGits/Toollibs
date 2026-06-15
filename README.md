@@ -2,6 +2,19 @@
 
 The official experimental development branch of Toollibs.
 
+![Version](https://img.shields.io/badge/version-v3.2-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
+![Status](https://img.shields.io/badge/status-stable-brightgreen)
+![Linux](https://img.shields.io/badge/Linux-Supported-orange)
+![Windows](https://img.shields.io/badge/Windows-Supported-blue)
+![Android](https://img.shields.io/badge/Android-Supported-success)
+![Forks](https://img.shields.io/github/forks/enzobobdevvideos04-ctrl/Toollibs)
+![Issues](https://img.shields.io/github/issues/enzobobdevvideos04-ctrl/Toollibs)
+![Main](https://img.shields.io/badge/main-stable-brightgreen)
+![Nightly](https://img.shields.io/badge/nightly-active-orange)
+![Community](https://img.shields.io/badge/community-legacy-lightgrey)
+
 ---
 
 ## ⚠️ Warning!
