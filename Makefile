@@ -323,6 +323,7 @@ info:
 	@echo "Windows Dir  : $(BUILD_DIR_WIN)"
 	@echo "Android Dir  : $(BUILD_DIR_ANDROID)"
 	@echo "MinGW Found  : $(HAS_MINGW)"
+	@echo "NDK Found    : $(HAS_NDK)"
 	@echo "===================================="
 
 # ============================================================
