@@ -9,6 +9,9 @@
 ![Android](https://img.shields.io/badge/Android-Supported-success)
 ![Forks](https://img.shields.io/github/forks/enzobobdevvideos04-ctrl/Toollibs)
 ![Issues](https://img.shields.io/github/issues/enzobobdevvideos04-ctrl/Toollibs)
+![Main](https://img.shields.io/badge/main-stable-brightgreen)
+![Nightly](https://img.shields.io/badge/nightly-active-orange)
+![Community](https://img.shields.io/badge/community-legacy-lightgrey)
 
 Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
 
