@@ -104,8 +104,9 @@ FONT_PREVIEW_SRC = \
 FONT_PREVIEW_TARGET = \
  $(BUILD_DIR)/font_preview
 
-FONT_PREVIEW_LIBS = \
- -lfreetype
+FREETYPE_CFLAGS := $(shell pkg-config --cflags freetype2)
+FREETYPE_LIBS := $(shell pkg-config --libs freetype2)
+
 # ============================================================
 # ANDROID NDK CONFIG
 # ============================================================
@@ -230,10 +231,11 @@ endif
 # ============================================================
 
 font_preview: prepare
-	$(CXX) $(CXXFLAGS) \
-	$(FONT_PREVIEW_SRC) \
-	$(FONT_PREVIEW_LIBS) \
-	-o $(FONT_PREVIEW_TARGET)
+$(CXX) $(CXXFLAGS) \
+$(FREETYPE_CFLAGS) \
+$(FONT_PREVIEW_SRC) \
+$(FREETYPE_LIBS) \
+-o $(FONT_PREVIEW_TARGET)
 
 # ============================================================
 # WINDOWS BUILD
