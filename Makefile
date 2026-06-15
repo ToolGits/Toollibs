@@ -110,11 +110,6 @@ FONT_PREVIEW_LIBS = \
 # ANDROID NDK CONFIG
 # ============================================================
 
-NDK_BASE := $(HOME)/Android/Sdk/ndk
-
-NDK_VERSION := $(shell) 
-ls $(NDK_BASE) 2>/dev/null | sort -V | tail -n 1)
-
 ifneq ($(NDK_VERSION),)
 
 NDK := $(NDK_BASE)/$(NDK_VERSION)
