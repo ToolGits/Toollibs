@@ -2,7 +2,7 @@
 
 [3.2-dev] FontsFirst
 
-14/06/2026
+Initialization: 14/06/2026
 
 + [✓] Created nightly branch
 + [✓] Community branch moved to Legacy status
