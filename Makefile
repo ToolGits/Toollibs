@@ -231,11 +231,11 @@ endif
 # ============================================================
 
 font_preview: prepare
-$(CXX) $(CXXFLAGS) \
-$(FREETYPE_CFLAGS) \
-$(FONT_PREVIEW_SRC) \
-$(FREETYPE_LIBS) \
--o $(FONT_PREVIEW_TARGET)
+	$(CXX) $(CXXFLAGS) \
+	$(FREETYPE_CFLAGS) \
+	$(FONT_PREVIEW_SRC) \
+	$(FREETYPE_LIBS) \
+	-o $(FONT_PREVIEW_TARGET)
 
 # ============================================================
 # WINDOWS BUILD
