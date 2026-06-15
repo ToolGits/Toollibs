@@ -10,7 +10,7 @@
 + [✓] Started FontsFirst development
 + [✓] Create font_renderer.hpp and font_preview.cpp files in graphics/
 + [✓] Error-free compilation
-+ [X] Compilation without warnings
++ [×] Compilation without warnings
 
 ## Fonts
 
