@@ -93,18 +93,25 @@ AUDIO_PLAYER_SRC = audio/audio_player.cpp
 AUDIO_LIBS := $(shell pkg-config --libs sndfile sdl2 SDL2_mixer)
 AUDIO_CFLAGS := $(shell pkg-config --cflags sndfile sdl2 SDL2_mixer)
 
+# =========================
+# FONT PREVIEW
+# =========================
+
+FONT_PREVIEW_SRC = \
+ graphics/font_renderer.cpp \
+ graphics/font_preview.cpp
+
+FONT_PREVIEW_TARGET = \
+ $(BUILD_DIR)/font_preview
+
+FREETYPE_CFLAGS := $(shell pkg-config --cflags freetype2)
+FREETYPE_LIBS := $(shell pkg-config --libs freetype2)
+
 # ============================================================
 # ANDROID NDK CONFIG
 # ============================================================
 
-NDK_BASE := $(HOME)/Android/Sdk/ndk
-
-NDK_VERSION := $(shell \
-    ls $(NDK_BASE) 2>/dev/null | sort -V | tail -n 1)
-
-ifeq ($(NDK_VERSION),)
-$(error NDK not found in $(NDK_BASE))
-endif
+ifneq ($(NDK_VERSION),)
 
 NDK := $(NDK_BASE)/$(NDK_VERSION)
 
@@ -112,12 +119,21 @@ ANDROID_API = 24
 
 CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
 
+HAS_NDK = yes
+
+else
+
+HAS_NDK = no
+
+endif
+
 # ============================================================
 # TARGETS (LINUX / ANDROID)
 # ============================================================
 
 MAIN_TARGET = $(BUILD_DIR)/mainlogger
 
+FONT_PREVIVEW_TARGET = $(BUILD_DIR)/font_preview
 FS_TARGET = $(BUILD_DIR)/fs_emucmd
 CPU_TARGET = $(BUILD_DIR)/cpu_info
 GPU_TARGET = $(BUILD_DIR)/gpu_info
@@ -196,12 +212,30 @@ audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 	-o $(AUDIO_PLAYER_LINUX_TARGET)
 
 android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
-	@echo "Building Android audio player..."
-	$(CLANGXX) $(CXXFLAGS) \
-	$(AUDIO_SRC) \
-	platform/android/audio_android.cpp \
-	-o $(AUDIO_PLAYER_ANDROID_TARGET) \
-	-landroid -llog
+ifeq ($(HAS_NDK),yes)
+@echo "Building Android audio player..."
+
+$(CLANGXX) $(CXXFLAGS) \
+$(AUDIO_SRC) \
+platform/android/audio_android.cpp \
+-o $(AUDIO_PLAYER_ANDROID_TARGET) \
+-landroid -llog
+
+else
+@echo "Toollibs: Android NDK not found."
+	@echo "Skipping android_audio_player build."
+endif
+
+# ============================================================
+# FONT PREVIEW BUILD
+# ============================================================
+
+font_preview: prepare
+	$(CXX) $(CXXFLAGS) \
+	$(FREETYPE_CFLAGS) \
+	$(FONT_PREVIEW_SRC) \
+	$(FREETYPE_LIBS) \
+	-o $(FONT_PREVIEW_TARGET)
 
 # ============================================================
 # WINDOWS BUILD
@@ -244,11 +278,11 @@ endif
 # BUILD GROUPS
 # ============================================================
 
-linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player
+linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player font_preview
 
 android: battery_info android_audio_player
 
-all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player font_preview
 
 # ============================================================
 # RUN
@@ -278,6 +312,9 @@ run_audio_linux:
 run_audio_android:
 	@echo "Android binary: $(AUDIO_PLAYER_ANDROID_TARGET)"
 
+run_font_preview:
+	@$(FONT_PREVIEW_TARGET)
+
 # ============================================================
 # INFORMATION
 # ============================================================
@@ -291,6 +328,7 @@ info:
 	@echo "Windows Dir  : $(BUILD_DIR_WIN)"
 	@echo "Android Dir  : $(BUILD_DIR_ANDROID)"
 	@echo "MinGW Found  : $(HAS_MINGW)"
+	@echo "NDK Found    : $(HAS_NDK)"
 	@echo "===================================="
 
 # ============================================================
@@ -338,3 +376,5 @@ help:
 	@echo "make audio_player"
 	@echo "make run_audio_linux"
 	@echo "make run_audio_android"
+	@echo "make font_preview"
+	@echo "make run_font_preview"
