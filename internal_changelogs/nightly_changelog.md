@@ -1,6 +1,6 @@
 # Toollibs Nightly Changelog
 
-[3.2-dev] FontsFirst
+> [3.2-dev] FontsFirst
 
 Initialization: 14/06/2026
 
@@ -16,4 +16,4 @@ Initialization: 14/06/2026
 
 - Everything is going well, with just a few warnings, but we can rule out any instability
 
-- FontsFirst v3.1 may launch on June 15, 2026.
+- FontsFirst v3.1 may launch on June 15, 2026 (FontsFirst launched on June 15, 2026)
