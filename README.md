@@ -1,5 +1,8 @@
 # Toollibs
 
+![Version](https://img.shields.io/badge/version-v3.2-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
 
 It goes beyond a simple library collection — providing a **build system, runtime verification pipeline, plugin architecture, and automated deployment system**.
