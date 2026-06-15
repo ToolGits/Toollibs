@@ -7,7 +7,6 @@
 ![Linux](https://img.shields.io/badge/Linux-Supported-orange)
 ![Windows](https://img.shields.io/badge/Windows-Supported-blue)
 ![Android](https://img.shields.io/badge/Android-Supported-success)
-![Stars](https://img.shields.io/github/stars/enzobobdevvideos04-ctrl/Toollibs)
 ![Forks](https://img.shields.io/github/forks/enzobobdevvideos04-ctrl/Toollibs)
 ![Issues](https://img.shields.io/github/issues/enzobobdevvideos04-ctrl/Toollibs)
 
