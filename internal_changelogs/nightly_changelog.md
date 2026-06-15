@@ -12,25 +12,8 @@ Initialization: 14/06/2026
 + [✓] Error-free compilation
 + [×] Compilation without warnings
 
-## Fonts
-
-+ Planning Toollibs Font System
-+ Collected 108 fonts from Samsung Galaxy Grand Prime SM-G530H
-+ SamsungSans available
-+ Roboto available
-+ NotoSans available
-+ AndroidClock available
-+ Clockopia available
-+ AndroidEmoji available
-
-## Experiments
-
-+ Font loading tests
-+ Font registry design
-+ Font cache planning
-
 ## Notes
 
-- Internal development log
-- May contain unfinished features
-- May contain abandoned experiments
+- Everything is going well, with just a few warnings, but we can rule out any instability
+
+- FontsFirst v3.1 may launch on June 15, 2026.
