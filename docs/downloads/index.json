@@ -5,14 +5,15 @@
   "battery_info-x86_64",
   "cpu_info-aarch64",
   "cpu_info-x86_64",
+  "font_preview-aarch64",
   "fs_emucmd-aarch64",
   "fs_emucmd-x86_64",
   "gpu_info-aarch64",
   "gpu_info-x86_64",
   "mainlogger-aarch64",
-  "mainlogger.exe",
   "mainlogger-x86_64",
+  "mainlogger.exe",
   "pop-aarch64",
-  "pop.exe",
-  "pop-x86_64"
+  "pop-x86_64",
+  "pop.exe"
 ]
