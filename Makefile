@@ -276,11 +276,11 @@ endif
 # BUILD GROUPS
 # ============================================================
 
-linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player
+linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player font_preview
 
 android: battery_info android_audio_player
 
-all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player font_preview
 
 # ============================================================
 # RUN
@@ -309,6 +309,9 @@ run_audio_linux:
 
 run_audio_android:
 	@echo "Android binary: $(AUDIO_PLAYER_ANDROID_TARGET)"
+
+run_font_preview:
+	@$(FONT_PREVIEW_TARGET)
 
 # ============================================================
 # INFORMATION
@@ -371,3 +374,5 @@ help:
 	@echo "make audio_player"
 	@echo "make run_audio_linux"
 	@echo "make run_audio_android"
+	@echo "make font_preview"
+	@echo "make run_font_preview"
