@@ -5,7 +5,6 @@
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
 ![Status](https://img.shields.io/badge/status-stable-brightgreen)
 ![Issues](https://img.shields.io/github/issues/ToolGits/Toollibs)
-![Pull Requests](https://img.shields.io/github/issues-pr/ToolGits/Toollibs)
 ![Main](https://img.shields.io/badge/main-stable-brightgreen)
 ![Nightly](https://img.shields.io/badge/nightly-active-orange)
 ![Community](https://img.shields.io/badge/community-legacy-lightgrey)
