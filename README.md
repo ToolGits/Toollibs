@@ -4,8 +4,8 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
 ![Status](https://img.shields.io/badge/status-stable-brightgreen)
-![Forks](https://img.shields.io/github/forks/enzobobdevvideos04-ctrl/Toollibs)
-![Issues](https://img.shields.io/github/issues/enzobobdevvideos04-ctrl/Toollibs)
+![Forks](https://img.shields.io/github/forks/ToolGits/Toollibs)
+![Issues](https://img.shields.io/github/issues/ToolGits/Toollibs)
 ![Main](https://img.shields.io/badge/main-stable-brightgreen)
 ![Nightly](https://img.shields.io/badge/nightly-active-orange)
 ![Community](https://img.shields.io/badge/community-legacy-lightgrey)
@@ -13,6 +13,10 @@
 Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
 
 It goes beyond a simple library collection — providing a **build system, runtime verification pipeline, plugin architecture, and automated deployment system**.
+
+## 🏢 Official maintainer of Toollibs
+
+Toollibs is maintained by the **ToolGits** organization (https://github.com/ToolGits) and created by **enzobobdevvideos04-ctrl** (https://github.com/enzobobdevvideos04-ctrl)
 
 ---
 
