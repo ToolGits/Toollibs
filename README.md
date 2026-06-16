@@ -16,7 +16,10 @@ It goes beyond a simple library collection — providing a **build system, runti
 
 ## 🏢 Official maintainer of Toollibs
 
-Toollibs is maintained by the **ToolGits** organization (https://github.com/ToolGits) and created by **enzobobdevvideos04-ctrl** (https://github.com/enzobobdevvideos04-ctrl)
+Toollibs is maintained by the **ToolGits** organization:
+
+- ToolGits: https://github.com/ToolGits
+- Created by: https://github.com/enzobobdevvideos04-ctrl
 
 ---
 
