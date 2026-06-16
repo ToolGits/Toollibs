@@ -56,9 +56,9 @@ Current focus:
 
 ## 🌿 Branches
 
-- "main" → Stable / Official Toollibs
-- "nightly" → Experimental Development
-- "community" → Legacy Archive
+- `main` → Stable / Official Toollibs
+- `nightly` → Experimental Development
+- `community` → Legacy Archive
 
 ---
 
