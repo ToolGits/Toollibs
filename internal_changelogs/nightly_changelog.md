@@ -16,14 +16,14 @@ Initialization: 14/06/2026 Official Release: 15/06/2026
 
 - Everything is going well, with just a few warnings, but we can rule out any instability
 
-- FontsFirst v3.1 may launch on June 15, 2026 (FontsFirst launched on June 15, 2026)
+- FontsFirst v3.2 may launch on June 15, 2026 (FontsFirst launched on June 15, 2026)
 
 ### [3.3-dev] No codename
 
 initialization: 15/06/2026
 
 + [✓] Development initiated
-+ [×] Website updated
++ [✓] Website updated
 
 ## Notes
 
