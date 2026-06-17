@@ -1,0 +1,2 @@
+Architectures: x86_64 and aarch64
+SubArchitectures: windows_x86_64, android
