@@ -1,2 +1,13 @@
-Architectures: x86_64 and aarch64
+           BININFO
+Architectures: x86_64, aarch64
 SubArchitectures: windows_x86_64, android
+
+Linux:
+bin/x86_64/
+bin/aarch64/
+
+Windows:
+bin/windows_x86_64/
+
+Android:
+bin/android/
