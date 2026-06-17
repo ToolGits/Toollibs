@@ -10,7 +10,7 @@ Initialization: 14/06/2026 Official Release: 15/06/2026
 + [✓] Started FontsFirst development
 + [✓] Create font_renderer.hpp and font_preview.cpp files in graphics/
 + [✓] Error-free compilation
-+ [×] Compilation without warnings
++ [~] Compilation without warnings
 
 ## Notes
 
@@ -18,13 +18,19 @@ Initialization: 14/06/2026 Official Release: 15/06/2026
 
 - FontsFirst v3.2 may launch on June 15, 2026 (FontsFirst launched on June 15, 2026)
 
-### [3.3-dev] No codename
+### [3.3-dev] NightlyPatcher
 
 initialization: 15/06/2026
 
 + [✓] Development initiated
 + [✓] Website updated
++ [✓] Selected codename
++ [~] Add internal information to the bin/
 
 ## Notes
 
-- Still planning the update.
+- Codename NightlyPatcher was chosen for v3.3
+
+- I'm thinking of updating the bin/ directory of nightly to include internal information
+
+- Toollibs are evolving too fast...
