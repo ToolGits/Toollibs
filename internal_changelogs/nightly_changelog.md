@@ -25,12 +25,14 @@ initialization: 15/06/2026
 + [✓] Development initiated
 + [✓] Website updated
 + [✓] Selected codename
-+ [~] Add internal information to the bin/
++ [✓] Add internal information to the bin/
 
 ## Notes
 
 - Codename NightlyPatcher was chosen for v3.3
 
 - I'm thinking of updating the bin/ directory of nightly to include internal information
+
+- NightlyPatcher is getting cool
 
 - Toollibs are evolving too fast...
