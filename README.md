@@ -47,7 +47,7 @@ It focuses on:
 - 💻 Linux-focused system tools (CPU/GPU modules)
 - 🌐 Download + version distribution via web interface
 - 📱 Official Android support available + battery_info to check your battery status
-- 👨‍💻 Mini **Terminal Emulator** FS Emulated CMD, fs module tool
+- 👨‍💻 Mini **Terminal Emulator** FS Emulated CMD (fs module tool)
 
 ---
 
@@ -140,4 +140,4 @@ You are welcome to:
 
 ## ⚡ License
 
-The license that Toollibs uses is the MIT License (Copyright © 2026)
+- The license that Toollibs uses is the MIT License (Copyright © 2026)
