@@ -506,6 +506,86 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script src="system.js"></script>
+  <script>
+    const canvas = document.getElementById('bg');
+    const ctx = canvas.getContext('2d');
+    let W, H, dots = [];
 
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function mkDot() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.4,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        a: Math.random()
+      };
+    }
+
+    function initDots() {
+      dots = Array.from({ length: 90 }, mkDot);
+    }
+
+    function drawDots() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        d.x += d.vx; d.y += d.vy;
+        if (d.x < 0) d.x = W;
+        if (d.x > W) d.x = 0;
+        if (d.y < 0) d.y = H;
+        if (d.y > H) d.y = 0;
+
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+          const dx = d.x - b.x, dy = d.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.strokeStyle = `rgba(79,142,247,${0.12 * (1 - dist / 130)})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+
+        ctx.fillStyle = `rgba(79,142,247,${d.a * 0.6})`;
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(drawDots);
+    }
+
+    window.addEventListener('resize', () => { resize(); initDots(); });
+    resize();
+    initDots();
+    drawDots();
+
+    const glow = document.getElementById('glow');
+    window.addEventListener('mousemove', e => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const delay = Array.from(el.parentElement.children).indexOf(el) * 90;
+          setTimeout(() => el.classList.add('visible'), delay);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('section').forEach(s => observer.observe(s));
+  </script>
 </body>
 </html>
