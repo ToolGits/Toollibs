@@ -1,14 +1,14 @@
 # Toollibs
 
-![Version](https://img.shields.io/badge/version-v3.3-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
-![Status](https://img.shields.io/badge/status-stable-brightgreen)
-![Issues](https://img.shields.io/github/issues/ToolGits/Toollibs)
-![Forks](https://img.shields.io/github/forks/ToolGits/Toollibs)
-![Main](https://img.shields.io/badge/main-stable-brightgreen)
-![Nightly](https://img.shields.io/badge/nightly-active-orange)
-![Community](https://img.shields.io/badge/community-legacy-lightgrey)
+                     ![Version](https://img.shields.io/badge/version-v3.3-blue)
+                     ![License](https://img.shields.io/badge/license-MIT-green)
+                     ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
+                     ![Status](https://img.shields.io/badge/status-stable-brightgreen)
+                     ![Issues](https://img.shields.io/github/issues/ToolGits/Toollibs)
+                     ![Forks](https://img.shields.io/github/forks/ToolGits/Toollibs)
+                     ![Main](https://img.shields.io/badge/main-stable-brightgreen)
+                     ![Nightly](https://img.shields.io/badge/nightly-active-orange)
+                     ![Community](https://img.shields.io/badge/community-legacy-lightgrey)
 
 Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
 
