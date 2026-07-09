@@ -20,6 +20,7 @@
   <img src="https://img.shields.io/badge/main-stable-brightgreen">
   <img src="https://img.shields.io/badge/nightly-active-orange">
   <img src="https://img.shields.io/badge/community-legacy-lightgrey">
+  <img src="https://img.shields.io/github/forks/ToolGits/Toollibs">
 </p>
 
 <p align="center">
