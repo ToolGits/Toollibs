@@ -64,6 +64,7 @@ It focuses on:
 - 🌐 Download + version distribution via web interface
 - 📱 Official Android support available + battery_info to check your battery status
 - 👨‍💻 Mini **Terminal Emulator** FS Emulated CMD (fs module tool)
+- 🔊 Audio system with audio_player and audio_buffer support
 
 ---
 
@@ -75,6 +76,7 @@ It focuses on:
 - **input** → input handling (keyboard, mouse, controller)
 - **fs** → file system utilities
 - **plugins** → modular extension system
+- **audio** → audio playback and audio processing utilities
 
 ---
 
