@@ -36,3 +36,9 @@ initialization: 15/06/2026 Official Release: June 27, 2026
 - NightlyPatcher is getting cool
 
 - Toollibs are evolving too fast...
+
+### [3.4] No codename
+
+Initialization: 09/07/2026
+
++ [✓] Update the README.md files
