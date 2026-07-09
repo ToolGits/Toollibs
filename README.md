@@ -1,18 +1,33 @@
-# Toollibs
+<p align="center">
+  <img
+    src=".github/assets/Toollibs_logo.png"
+    alt="Toollibs logo"
+    width="250"
+  />
+</p>
 
-![Version](https://img.shields.io/badge/version-v3.3-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange)
-![Status](https://img.shields.io/badge/status-stable-brightgreen)
-![Issues](https://img.shields.io/github/issues/ToolGits/Toollibs)
-![Forks](https://img.shields.io/github/forks/ToolGits/Toollibs)
-![Main](https://img.shields.io/badge/main-stable-brightgreen)
-![Nightly](https://img.shields.io/badge/nightly-active-orange)
-![Community](https://img.shields.io/badge/community-legacy-lightgrey)
+<h1 align="center">Toollibs</h1>
 
-Toollibs is a modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
+<p align="center">
+  A modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
+</p>
 
-It goes beyond a simple library collection — providing a **build system, runtime verification pipeline, plugin architecture, and automated deployment system**.
+<p align="center">
+  <img src="https://img.shields.io/badge/version-v3.3-blue">
+  <img src="https://img.shields.io/badge/license-MIT-green">
+  <img src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange">
+  <img src="https://img.shields.io/badge/status-stable-brightgreen">
+  <img src="https://img.shields.io/badge/main-stable-brightgreen">
+  <img src="https://img.shields.io/badge/nightly-active-orange">
+  <img src="https://img.shields.io/badge/community-legacy-lightgrey">
+</p>
+
+<p align="center">
+  <a href="https://toolgits.github.io/Toollibs/changelog.html">Changelog</a>
+  <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> ·
+  <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a> ·
+  <a href="https://toolgits.github.io/Toollibs/">Website</a>
+</p>
 
 ## 🏢 Official maintainer of Toollibs
 
