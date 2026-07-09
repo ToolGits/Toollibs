@@ -23,10 +23,10 @@
 </p>
 
 <p align="center">
-  <a href="https://toolgits.github.io/Toollibs/changelog.html">Changelog</a>
-  <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> ·
-  <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a> ·
-  <a href="https://toolgits.github.io/Toollibs/">Website</a>
+  <a href="https://toolgits.github.io/Toollibs/changelog.html">Changelog</a> •
+  <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> •
+  <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a> •
+  <a href="https://toolgits.github.io/Toollibs/">Website</a> •
 </p>
 
 ## 🏢 Official maintainer of Toollibs
