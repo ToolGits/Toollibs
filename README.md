@@ -40,20 +40,6 @@ Examples:
 
 ---
 
-## 🧪 Current Development
-
-Toollibs v3.2 — FontsFirst
-
-Current focus:
-
-- Toollibs Font System
-- Font Registry
-- Font Loading
-- Font Management
-- Graphics Module Expansion
-
----
-
 ## 🌿 Branches
 
 - `main` → Stable / Official Toollibs
