@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v3.3-blue">
+  <img src="https://img.shields.io/badge/version-v3.4-blue">
   <img src="https://img.shields.io/badge/license-MIT-green">
   <img src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange">
   <img src="https://img.shields.io/badge/status-stable-brightgreen">
