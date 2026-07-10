@@ -93,6 +93,7 @@ Toollibs uses a Makefile-based build pipeline:
 
 Example output:
 
+```text
 bin/
 ├── x86_64/
 │   ├── mainlogger
@@ -101,6 +102,7 @@ bin/
 │   └── mainlogger
 └── aarch64/
     └── cpu_info
+```
 
 ---
 
