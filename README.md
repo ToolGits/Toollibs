@@ -37,6 +37,9 @@ Toollibs is maintained by the **ToolGits** organization:
 - ToolGits: https://github.com/ToolGits
 - Created by: https://github.com/enzobobdevvideos04-ctrl
 
+> [!IMPORTANT]
+> Toollibs is actively developed. Stable releases are available in the `main` branch, while new features and experiments are developed in the `nightly` branch.
+
 ---
 
 ## 🚀 Core Philosophy
@@ -89,7 +92,15 @@ Toollibs uses a Makefile-based build pipeline:
 - Generates structured binaries per platform
 
 Example output:
-bin/x86_64/mainlogger bin/windows_x86_64/mainlogger bin/aarch64/cpu_info bin/x86_64/gpu_info
+
+bin/
+├── x86_64/
+│   ├── mainlogger
+│   └── gpu_info
+├── windows_x86_64/
+│   └── mainlogger
+└── aarch64/
+    └── cpu_info
 
 ---
 
@@ -134,28 +145,24 @@ To build a **modern, modular, and automated C++ ecosystem** that can serve as a 
 
 ## 📜 History
 
-Toollibs evolved from an earlier discontinued project called **ServerHub**.
-
-It was rebuilt to focus on:
-- stability
-- structure
-- continuous development
-- real deployment workflow
+> [!NOTE]
+> Toollibs originated from the discontinued **ServerHub** project and has since evolved into a complete modular C++ framework ecosystem
 
 ---
 
 ## 🌱 Community
 
-This is an open project built for learning, experimentation, and contribution.
-
-You are welcome to:
-- contribute code
-- suggest improvements
-- build modules
-- fork and experiment freely
+> [!TIP]
+> Toollibs is an open project built for learning, experimentation, and contribution.
+>
+> Feel free to:
+> - contribute code
+> - suggest improvements
+> - build new modules
+> - fork and experiment freely
 
 ---
 
 ## ⚡ License
 
-- The license that Toollibs uses is the MIT License (Copyright © 2026)
+- The license that Toollibs uses is the MIT License (Copyright © 2026).
