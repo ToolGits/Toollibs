@@ -44,3 +44,9 @@ Initialization: 09/07/2026
 + [✓] Update the README.md files
 + [✓] Website Visuals
 + [~] Improve the README.md file for the main branch
++ [✓] New logo for Toollibs
++ [✓] .github/assets/ created
+
+## Notes
+
+- I think this version might arrive tomorrow or on the 13th
