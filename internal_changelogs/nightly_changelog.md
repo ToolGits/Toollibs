@@ -10,7 +10,7 @@ Initialization: 14/06/2026 Official Release: 15/06/2026
 + [✓] Started FontsFirst development
 + [✓] Create font_renderer.hpp and font_preview.cpp files in graphics/
 + [✓] Error-free compilation
-+ [~] Compilation without warnings
++ [✓] Compilation without warnings
 
 ## Notes
 
@@ -37,8 +37,10 @@ initialization: 15/06/2026 Official Release: June 27, 2026
 
 - Toollibs are evolving too fast...
 
-### [3.4] No codename
+### [3.4] LetterVerse
 
 Initialization: 09/07/2026
 
 + [✓] Update the README.md files
++ [✓] Website Visuals
++ [~] Improve the README.md file for the main branch
