@@ -146,7 +146,7 @@ To build a **modern, modular, and automated C++ ecosystem** that can serve as a 
 ## 📜 History
 
 > [!NOTE]
-> Toollibs originated from the discontinued **ServerHub** project and has since evolved into a complete modular C++ framework ecosystem
+> Toollibs originated from the discontinued **ServerHub** project and has since evolved into a complete modular C++ framework ecosystem.
 
 ---
 
