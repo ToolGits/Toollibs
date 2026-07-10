@@ -1,6 +1,6 @@
 <p align="center">
   <img
-    src=".github/assets/Toollibs_logo.png"
+    src=".github/assets/Toollibs_newlogo.png"
     alt="Toollibs logo"
     width="250"
   />
