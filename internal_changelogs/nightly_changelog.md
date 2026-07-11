@@ -39,7 +39,7 @@ initialization: 15/06/2026 Official Release: June 27, 2026
 
 ### [3.4] LetterVerse
 
-Initialization: 09/07/2026
+Initialization: 09/07/2026 Official Release: July 10, 2026
 
 + [✓] Update the README.md files
 + [✓] Website Visuals
