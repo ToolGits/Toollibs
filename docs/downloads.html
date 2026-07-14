@@ -29,7 +29,7 @@
 
 <div class="page-header">
   <h1>Downloads</h1>
-  <p>Download Toollibs binaries, releases and source code.</p>
+  <p>Download Toollibs binaries and source code.</p>
 </div>
 
   <main>
@@ -39,18 +39,21 @@
       <section>
         <h2>Current Status</h2>
 
-        <span class="badge tested">Latest Build Available</span>
+<span class="badge tested">Latest Build Available</span>
 
-        <p>
-          Toollibs is actively evolving with multi-platform builds,
-          backend services and automated deployment system.
-        </p>
+<p>
+  Toollibs is actively evolving with multi-platform builds,
+  modular framework systems and automated deployment workflows.
+</p>
       </section>
 
       <section>
         <h2>Source Code</h2>
 
-        <p>Access the full Toollibs framework source code.</p>
+<p>
+  Access the complete Toollibs framework source code,
+  including modules, tools and development infrastructure.
+</p>
 
         <a class="button"
            href="https://github.com/ToolGits/Toollibs"
@@ -64,11 +67,29 @@
 
         <h2>Smart Downloads</h2>
 
-        <p id="archInfo">Detecting system architecture...</p>
+        <p id="archInfo">Detecting compatible builds...</p>
 
         <div id="downloadsList">Loading builds...</div>
 
       </section>
+
+<section>
+
+<h2>Build System</h2>
+
+<p>
+Toollibs uses an automated build and deployment workflow
+to compile, organize and distribute binaries across supported platforms.
+</p>
+
+<ul>
+  <li>Multi-architecture compilation</li>
+  <li>Automated binary deployment</li>
+  <li>Generated download index</li>
+  <li>Linux, Windows and Android support</li>
+</ul>
+
+</section>
 
       <section>
         <h2>Supported Architectures</h2>
@@ -76,9 +97,11 @@
         <ul>
           <li>x86_64 — 64-bit desktops and laptops</li>
           <li>x86 — 32-bit systems</li>
-          <li>aarch64 — modern ARM 64-bit devices</li>
+          <li>aarch64 — ARM 64-bit devices</li>
           <li>armv7l — ARM 32-bit legacy devices</li>
+          <li>armv6l — ARM 32-bit legacy devices (oldest)</li>
           <li><b>Windows builds available (x86_64 only)</b></li>
+          <li>Automatic architecture-based download selection</li>
         </ul>
       </section>
 
@@ -141,7 +164,7 @@ if (arch === "unknown") {
   show = true;
 } else {
   const isLinux = file.endsWith(`-${arch}`);
-  const isWindows = file.endsWith(`-x86_64.exe`);
+  const isWindows = file.toLowerCase().endsWith(".exe");
 
   show = isLinux || isWindows;
 }
