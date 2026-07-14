@@ -60,3 +60,9 @@ initialization: 13/07/2026
 + [✓] mainlogger updated
 + [✓] selected codename
 + [×] Public changelog (changelog.html) released
+
+## Notes
+
+- Changelog made in a hurry!
+
+- first version of the v4.x generation
