@@ -234,6 +234,12 @@ BADGES
   color: var(--accent);
 }
 
+.badge.partial {
+    background: #fbbf24;
+    color: #111827;
+    border: 1px solid #d97706;
+}
+
 /* ================================
 FOOTER
 ================================ */
