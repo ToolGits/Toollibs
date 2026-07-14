@@ -53,7 +53,7 @@ Initialization: 09/07/2026 Official Release: July 10, 2026
 
 ### [4.0XY] C++CoreLibs
 
-initialization: 13/07/2026 
+initialization: 13/07/2026 Official Release: July 14, 2026
 
 + [✓] Updated core
 + [✓] timertrigger launched
