@@ -118,20 +118,28 @@ to compile, organize and distribute binaries across supported platforms.
     // =========================
     // ARCH DETECTION
     // =========================
-    function detectArch() {
-      const ua = navigator.userAgent.toLowerCase();
+function detectArch() {
+  const ua = navigator.userAgent.toLowerCase();
 
-if (ua.includes("arm64") || ua.includes("aarch64"))
+  const isAndroid = ua.includes("android");
+
+  if (ua.includes("arm64") || ua.includes("aarch64"))
     return "aarch64";
 
-if (ua.includes("i386") || ua.includes("i686"))
+  if (ua.includes("arm") || ua.includes("armeabi"))
+    return "arm";
+
+  if (ua.includes("i386") || ua.includes("i686"))
     return "x86";
 
-if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
+  if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
     return "x86_64";
 
-      return "unknown";
-    }
+  if (isAndroid)
+    return "android";
+
+  return "unknown";
+}
 
     // =========================
     // LOAD DOWNLOADS
@@ -143,10 +151,12 @@ if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
 
       const arch = detectArch();
 
-      archInfo.innerHTML =
-        arch === "unknown"
-          ? "Architecture: unknown — showing all builds"
-          : `Detected architecture: <b>${arch}</b>`;
+archInfo.innerHTML =
+  arch === "android"
+    ? "Detected platform: <b>Android</b> — showing ARM builds"
+    : arch === "unknown"
+      ? "Architecture: unknown — showing all builds"
+      : `Detected architecture: <b>${arch}</b>`;
 
       try {
         const res = await fetch("./downloads/index.json");
@@ -161,8 +171,25 @@ if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
           let show = false;
 
 if (arch === "unknown") {
+
   show = true;
+
+} else if (arch === "android") {
+
+  show =
+    file.endsWith("-aarch64") ||
+    file.endsWith("-armv7l") ||
+    file.endsWith("-armv6l");
+
+} else if (arch === "arm") {
+
+  show =
+    file.endsWith("-aarch64") ||
+    file.endsWith("-armv7l") ||
+    file.endsWith("-armv6l");
+
 } else {
+
   const isLinux = file.endsWith(`-${arch}`);
   const isWindows = file.toLowerCase().endsWith(".exe");
 
