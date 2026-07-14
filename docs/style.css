@@ -308,6 +308,12 @@ strong {
   color: black;
 }
 
+.badge.partial {
+    background: #fbbf24;
+    color: #111827;
+    border: 1px solid #d97706;
+}
+
 /* =========================
    CHANGELONG SYSTEM
 ========================= */
