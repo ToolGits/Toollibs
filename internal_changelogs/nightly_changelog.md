@@ -50,3 +50,13 @@ Initialization: 09/07/2026 Official Release: July 10, 2026
 ## Notes
 
 - I think this version might arrive tomorrow or on the 13th
+
+### [4.0XY] C++CoreLibs
+
+initialization: 13/07/2026 
+
++ [✓] Updated core
++ [✓] timertrigger launched
++ [✓] mainlogger updated
++ [✓] selected codename
++ [×] Public changelog (changelog.html) released
