@@ -39,109 +39,69 @@
     <div class="grid">
 
       <!-- MOBILE -->
-      <section>
+<section>
 
-        <h2>📱 Mobile Devices</h2>
+  <h2>🤖 Android</h2>
 
-        <span class="badge tested">TESTED</span>
+  <span class="badge tested">TESTED</span>
 
-        <h3>Verified Devices</h3>
-        <ul>
-          <li>Samsung Galaxy Grand Prime</li>
-          <li>Samsung Galaxy A05</li>
-        </ul>
+  <h3>Verified Devices</h3>
+  <ul>
+    <li>Samsung Galaxy Grand Prime</li>
+    <li>Samsung Galaxy A05</li>
+    <li>Positivo Vision Tab 7</li>
+  </ul>
 
-        <h3>Expected Compatibility</h3>
-        <ul>
-          <li>Samsung Galaxy A Series</li>
-          <li>Motorola Moto G Series</li>
-          <li>Xiaomi Redmi Series</li>
-          <li>Other Android ARM devices</li>
-        </ul>
+  <h3>Supported Architectures</h3>
+  <ul>
+    <li>aarch64</li>
+    <li>armv7l</li>
+    <li>armv6l</li>
+  </ul>
 
-        <h3>Status Notes</h3>
-        <span class="badge unknown">UNKNOWN</span>
-        <p>Some low-end or custom ROM devices have not been fully tested.</p>
+  <h3>Status</h3>
+  <span class="badge compatible">OFFICIAL</span>
 
-      </section>
+  <p>
+    Official Toollibs platform with native support.
+  </p>
 
-      <!-- TABLETS -->
-      <section>
+</section>
 
-        <h2>📟 Tablets</h2>
+<section>
 
-        <span class="badge tested">TESTED</span>
+  <h2>🖥️ Desktop & Laptop</h2>
 
-        <h3>Verified Devices</h3>
-        <ul>
-          <li>Positivo Vision Tab 7</li>
-        </ul>
+  <span class="badge tested">TESTED</span>
 
-        <h3>Expected Compatibility</h3>
-        <ul>
-          <li>Samsung Galaxy Tab Series</li>
-          <li>Lenovo Tab Series</li>
-          <li>Other Android tablets</li>
-        </ul>
+  <h3>Verified Devices</h3>
+  <ul>
+    <li>AMD C-70 Notebook (Arch Linux)</li>
+  </ul>
 
-        <h3>Status Notes</h3>
-        <span class="badge unknown">UNKNOWN</span>
-        <p>Some older tablet architectures still require testing.</p>
+  <h3>Supported Systems</h3>
+  <ul>
+    <li>Linux PCs</li>
+    <li>Windows PCs</li>
+    <li>x86_64</li>
+    <li>x86</li>
+  </ul>
 
-      </section>
+  <h3>Status</h3>
+  <span class="badge compatible">OFFICIAL</span>
 
-      <!-- LAPTOPS -->
-      <section>
+  <p>
+    Official desktop platform for Toollibs development.
+  </p>
 
-        <h2>💻 Laptops</h2>
-
-        <span class="badge tested">TESTED</span>
-
-        <h3>Verified Devices</h3>
-        <ul>
-          <li>AMD C-70 Notebook (Arch Linux)</li>
-        </ul>
-
-        <h3>Expected Compatibility</h3>
-        <ul>
-          <li>Intel-based systems</li>
-          <li>AMD-based systems</li>
-          <li>Linux distributions</li>
-          <li>Windows systems (MinGW builds)</li>
-        </ul>
-
-        <h3>Status Notes</h3>
-        <span class="badge unknown">UNKNOWN</span>
-        <p>Performance on very low-end hardware is still under evaluation.</p>
-
-      </section>
-
-      <!-- DESKTOP -->
-      <section>
-
-        <h2>🖥️ Desktop Systems</h2>
-
-        <span class="badge compatible">SUPPORTED</span>
-
-        <ul>
-          <li>x86_64 architectures</li>
-          <li>x86 32-bit systems</li>
-          <li>Linux desktops</li>
-          <li>Windows desktops</li>
-        </ul>
-
-        <h3>Status Notes</h3>
-        <span class="badge unknown">UNKNOWN</span>
-        <p>Some exotic or legacy systems are not yet validated.</p>
-
-      </section>
+</section>
 
       <!-- SMART TV -->
       <section>
 
         <h2>📺 Smart TV</h2>
 
-        <span class="badge tested">TESTED</span>
+        <span class="badge partial">PARTIAL</span>
 
         <h3>Verified Devices</h3>
         <ul>
@@ -156,6 +116,47 @@
         <h3>Status Notes</h3>
         <span class="badge unknown">UNKNOWN</span>
         <p>Other TV operating systems are not yet validated.</p>
+        <p>
+        Browser compatibility has been tested on LG webOS.
+        Native Toollibs support is not available.
+        </p>
+
+</section>
+
+<section>
+
+<h2>💿 Operating Systems</h2>
+
+<table>
+
+<tr>
+<th>OS</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Android</td>
+<td>✅ Official</td>
+</tr>
+
+<tr>
+<td>Linux</td>
+<td>✅ Official</td>
+</tr>
+
+<tr>
+<td>Windows</td>
+<td>✅ Official</td>
+</tr>
+
+<tr>
+<td>webOS</td>
+<td>🟡 Partial</td>
+</tr>
+
+</table>
+
+</section>
 
       </section>
 
@@ -167,6 +168,7 @@
         <ul>
           <li><span class="badge tested">TESTED</span> Fully verified through execution</li>
           <li><span class="badge compatible">SUPPORTED</span> Expected to work based on architecture</li>
+          <li><span class="badge partial">PARTIAL</span> Browser compatibility or limited support.</li>
           <li><span class="badge unknown">UNKNOWN</span> Not yet evaluated or tested</li>
         </ul>
 
