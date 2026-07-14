@@ -20,7 +20,7 @@ HAS_MINGW := $(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes)
 # CORE FRAMEWORK
 # ============================================================
 
-CORE_SRC = core/logger.cpp core/mainlogger.cpp platform/platform.cpp
+CORE_SRC = core/logger.cpp core/mainlogger.cpp core/timertrigger.cpp platform/platform.cpp
 MATH_SRC = math/math.cpp
 GRAPHICS_SRC = graphics/graphics.cpp
 PLUGIN_SRC = plugins/MathPlugin/plugin.cpp
