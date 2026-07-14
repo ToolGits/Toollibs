@@ -126,8 +126,11 @@ function detectArch() {
   if (ua.includes("arm64") || ua.includes("aarch64"))
     return "aarch64";
 
-  if (ua.includes("arm") || ua.includes("armeabi"))
-    return "arm";
+  if (ua.includes("armeabi-v7a") || ua.includes("armv7"))
+    return "armv7l";
+
+  if (ua.includes("armeabi") || ua.includes("armv6"))
+    return "armv6l";
 
   if (ua.includes("i386") || ua.includes("i686"))
     return "x86";
