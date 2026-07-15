@@ -59,10 +59,28 @@ initialization: 13/07/2026 Official Release: July 14, 2026
 + [✓] timertrigger launched
 + [✓] mainlogger updated
 + [✓] selected codename
-+ [×] Public changelog (changelog.html) released
++ [✓] Public changelog (changelog.html) released
 
 ## Notes
 
 - Changelog made in a hurry!
 
 - first version of the v4.x generation
+
+### [4.0.1] BigBrowserPatchLibs
+
+initialization: July 14, 2026 Official Release: July 14, 2026
+
++ [✓] index.html updated
++ [✓] updated downloads.html
++ [✓] devices.html updated
++ [✓] Overall site improved
++ [✓] changelog.html of the created version
+
+## Notes
+
+- One of the patches that was released the fastest!
+
+- This version is quite similar to v2.1 BigBrowserToollibs
+
+- We've started the v4.x generation very well!
