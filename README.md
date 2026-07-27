@@ -17,17 +17,19 @@
   <img src="https://img.shields.io/badge/license-MIT-green">
   <img src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange">
   <img src="https://img.shields.io/badge/status-stable-brightgreen">
+  <img src="https://img.shields.io/github/forks/ToolGits/Toollibs">
   <img src="https://img.shields.io/badge/main-stable-brightgreen">
   <img src="https://img.shields.io/badge/nightly-active-orange">
   <img src="https://img.shields.io/badge/community-legacy-lightgrey">
-  <img src="https://img.shields.io/github/forks/ToolGits/Toollibs">
 </p>
 
 <p align="center">
   <a href="https://toolgits.github.io/Toollibs/changelog.html">Changelog</a> •
   <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> •
+  <a href="https://toolgits.github.io/Toollibs/">Website</a> •
   <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a> •
   <a href="https://toolgits.github.io/Toollibs/">Website</a>
+  <a href="https://discord.gg/NJY5BaxMZq">ToolGits Discord</a>
 </p>
 
 ## 🏢 Official maintainer of Toollibs
