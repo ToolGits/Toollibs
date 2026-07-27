@@ -52,7 +52,7 @@ Toollibs is built around a simple idea:
 It focuses on:
 
 - Clean modular design
-- Cross-platform compilation (Linux + Windows support)
+- Cross-platform compilation (Linux + Windows + Android support)
 - Lightweight system architecture
 - Developer-friendly tooling
 
