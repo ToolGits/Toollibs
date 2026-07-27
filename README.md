@@ -28,7 +28,6 @@
   <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> •
   <a href="https://toolgits.github.io/Toollibs/">Website</a> •
   <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a> •
-  <a href="https://toolgits.github.io/Toollibs/">Website</a> •
   <a href="https://discord.gg/NJY5BaxMZq">ToolGits Discord</a>
 </p>
 
