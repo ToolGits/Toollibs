@@ -14,7 +14,11 @@ BUILD_DIR_WIN = bin/windows_x86_64
 BUILD_DIR_ANDROID = bin/android
 
 # Detect MinGW automatically
-HAS_MINGW := $(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes)
+ifeq ($(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes),yes)
+HAS_MINGW = yes
+else
+HAS_MINGW = no
+endif
 
 # ============================================================
 # CORE FRAMEWORK
