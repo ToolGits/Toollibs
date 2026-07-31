@@ -84,3 +84,11 @@ initialization: July 14, 2026 Official Release: July 14, 2026
 - This version is quite similar to v2.1 BigBrowserToollibs
 
 - We've started the v4.x generation very well!
+
+### [4.2] TAether & TNether
+
+initialization: July 31, 2026 Official Release: July 31, 2026
+
+## Notes
+
+- Too lazy to write the changelog from here.
