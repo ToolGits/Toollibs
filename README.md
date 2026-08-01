@@ -18,6 +18,7 @@
   <img src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange">
   <img src="https://img.shields.io/badge/status-stable-brightgreen">
   <img src="https://img.shields.io/github/forks/ToolGits/Toollibs">
+  <img src="https://img.shields.io/github/issues/ToolGits/Toollibs">
   <img src="https://img.shields.io/badge/main-stable-brightgreen">
   <img src="https://img.shields.io/badge/nightly-active-orange">
   <img src="https://img.shields.io/badge/community-legacy-lightgrey">
