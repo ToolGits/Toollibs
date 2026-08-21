@@ -3,7 +3,7 @@ MINGW = x86_64-w64-mingw32-g++
 
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
 FS_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat
-FS_WIN_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat
+FS_WIN_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat -Wattributes
 
 # ============================================================
 # ARCHITECTURE DETECTION
