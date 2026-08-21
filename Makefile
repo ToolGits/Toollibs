@@ -221,14 +221,14 @@ android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
 ifeq ($(HAS_NDK),yes)
 	@echo "Building Android audio player..."
 
-$(CLANGXX) $(CXXFLAGS) \
-$(AUDIO_SRC) \
-platform/android/audio_android.cpp \
--o $(AUDIO_PLAYER_ANDROID_TARGET) \
--landroid -llog
+	$(CLANGXX) $(CXXFLAGS) \
+	$(AUDIO_SRC) \
+	platform/android/audio_android.cpp \
+	-o $(AUDIO_PLAYER_ANDROID_TARGET) \
+	-landroid -llog
 
 else
-@echo "Toollibs: Android NDK not found."
+	@echo "Toollibs: Android NDK not found."
 	@echo "Skipping android_audio_player build."
 endif
 
