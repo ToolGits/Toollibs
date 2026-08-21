@@ -57,6 +57,10 @@ BATTERY_SRC = \
 	platform/android/battery.cpp \
 	platform/android/battery_info.cpp
 
+ANDROID_DEVICE_DIAGNOSTIC_SRC = \
+        platform/android/android_device_diagnostic.cpp \
+        platform/android/android_device_diagnostic_jni.cpp
+
 # ============================================================
 # POP PLUGIN
 # ============================================================
@@ -148,6 +152,8 @@ GPU_TARGET = $(BUILD_DIR)/gpu_info
 BATTERY_TARGET = $(BUILD_DIR)/battery_info
 AUDIO_PLAYER_LINUX_TARGET = $(BUILD_DIR)/audio_player
 AUDIO_PLAYER_ANDROID_TARGET = $(BUILD_DIR_ANDROID)/android_audio_player
+ANDROID_DEVICE_DIAGNOSTIC_TARGET = \
+        $(BUILD_DIR_ANDROID)/libandroid_device_diagnostic.so
 
 POP_TARGET = $(BUILD_DIR)/pop
 
@@ -235,6 +241,24 @@ else
 endif
 
 # ============================================================
+# ANDROID DEVICE DIAGNOSTIC
+# ============================================================
+
+android_device_diagnostic: prepare
+ifeq ($(HAS_NDK),yes)
+        @echo "Building Android device diagnostic..."
+        $(CLANGXX) $(CXXFLAGS) \
+        -fPIC \
+        -shared \
+        $(ANDROID_DEVICE_DIAGNOSTIC_SRC) \
+        -o $(ANDROID_DEVICE_DIAGNOSTIC_TARGET) \
+        -llog
+else
+        @echo "Toollibs: Android NDK not found."
+        @echo "Skipping android_device_diagnostic build."
+endif
+
+# ============================================================
 # FONT PREVIEW BUILD
 # ============================================================
 
@@ -288,9 +312,9 @@ endif
 
 linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player font_preview
 
-android: battery_info android_audio_player
+android: battery_info android_audio_player android_device_diagnostic
 
-all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player font_preview
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player font_preview android_device_diagnostic
 
 # ============================================================
 # RUN
@@ -386,3 +410,4 @@ help:
 	@echo "make run_audio_android"
 	@echo "make font_preview"
 	@echo "make run_font_preview"
+  @echo "make android_device_diagnostic"
