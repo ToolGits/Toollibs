@@ -92,3 +92,7 @@ initialization: July 31, 2026 Official Release: July 31, 2026
 ## Notes
 
 - Too lazy to write the changelog from here.
+
+### End of nightly_changelog.md
+
+The nightly changelogs for TNether will be discontinued! But it won't disappear; it will remain as a legacy feature and serve as a showcase of the behind-the-scenes aspects of the versions, like a development diary.
