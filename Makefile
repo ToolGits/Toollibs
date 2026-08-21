@@ -246,16 +246,16 @@ endif
 
 android_device_diagnostic: prepare
 ifeq ($(HAS_NDK),yes)
-        @echo "Building Android device diagnostic..."
-        $(CLANGXX) $(CXXFLAGS) \
-        -fPIC \
-        -shared \
-        $(ANDROID_DEVICE_DIAGNOSTIC_SRC) \
-        -o $(ANDROID_DEVICE_DIAGNOSTIC_TARGET) \
-        -llog
+	@echo "Building Android device diagnostic..."
+	$(CLANGXX) $(CXXFLAGS) \
+	-fPIC \
+	-shared \
+	$(ANDROID_DEVICE_DIAGNOSTIC_SRC) \
+	-o $(ANDROID_DEVICE_DIAGNOSTIC_TARGET) \
+	-llog
 else
-        @echo "Toollibs: Android NDK not found."
-        @echo "Skipping android_device_diagnostic build."
+	@echo "Toollibs: Android NDK not found."
+	@echo "Skipping android_device_diagnostic build."
 endif
 
 # ============================================================
@@ -410,4 +410,4 @@ help:
 	@echo "make run_audio_android"
 	@echo "make font_preview"
 	@echo "make run_font_preview"
-  @echo "make android_device_diagnostic"
+	@echo "make android_device_diagnostic"
