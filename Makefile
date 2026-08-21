@@ -2,6 +2,8 @@ CXX = g++
 MINGW = x86_64-w64-mingw32-g++
 
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
+FS_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat
+FS_WIN_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat
 
 # ============================================================
 # ARCHITECTURE DETECTION
@@ -202,7 +204,7 @@ pop: prepare
 # ============================================================
 
 fs_emucmd: prepare
-	$(CXX) $(CXXFLAGS) $(FS_EMUCMD_SRC) $(REPLXX_SRC) -o $(FS_TARGET)
+	$(CXX) $(FS_CXXFLAGS) $(FS_EMUCMD_SRC) $(REPLXX_SRC) -o $(FS_TARGET)
 
 # ============================================================
 # AUDIO PLAYER
@@ -277,7 +279,7 @@ endif
 fs_emucmd_windows: prepare
 ifeq ($(HAS_MINGW),yes)
 	@mkdir -p $(BUILD_DIR_WIN)
-	$(MINGW) $(CXXFLAGS) $(FS_EMUCMD_SRC_WIN) -o $(FS_TARGET_WIN)
+	$(MINGW) $(FS_WIN_CXXFLAGS) $(FS_EMUCMD_SRC_WIN) -o $(FS_TARGET_WIN)
 endif
 
 # ============================================================
