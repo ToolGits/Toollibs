@@ -219,7 +219,7 @@ audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 
 android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
 ifeq ($(HAS_NDK),yes)
-@echo "Building Android audio player..."
+	@echo "Building Android audio player..."
 
 $(CLANGXX) $(CXXFLAGS) \
 $(AUDIO_SRC) \
