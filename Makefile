@@ -115,20 +115,22 @@ FREETYPE_LIBS := $(shell pkg-config --libs freetype2)
 # ANDROID NDK CONFIG
 # ============================================================
 
-ifneq ($(NDK_VERSION),)
+ANDROID_HOME ?= $(HOME)/Android/Sdk
+
+NDK_BASE := $(ANDROID_HOME)/ndk
+
+NDK_VERSION ?= 25.2.9519653
 
 NDK := $(NDK_BASE)/$(NDK_VERSION)
 
-ANDROID_API = 24
+ANDROID_API := 24
 
-CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
+CLANGXX := $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
 
-HAS_NDK = yes
-
+ifeq ($(wildcard $(CLANGXX)),)
+HAS_NDK := no
 else
-
-HAS_NDK = no
-
+HAS_NDK := yes
 endif
 
 # ============================================================
