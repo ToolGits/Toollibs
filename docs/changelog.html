@@ -105,6 +105,95 @@
 
 <main>
 
+<!-- v4.3 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v4.3 "Androck Horizon"
+      <span class="badge tested">LATEST</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+
+    <ul>
+
+      <li><strong>Android Ecosystem:</strong></li>
+
+      <li>Android platform development returned as a major focus</li>
+      <li>New <code>android_device_diagnostic</code> tool introduced</li>
+      <li>Native Android device diagnostic system introduced</li>
+      <li>Android NDK integration expanded</li>
+      <li>AArch64 Android build support added for the diagnostic system</li>
+
+      <br>
+
+      <li><strong>JNI:</strong></li>
+
+      <li>JNI integration introduced for <code>android_device_diagnostic</code></li>
+      <li><code>JNI_OnLoad()</code> initialization implemented</li>
+      <li><code>RegisterNatives()</code> integration implemented</li>
+      <li>Java ↔ native C++ communication layer introduced</li>
+
+      <br>
+
+      <li><strong>Build System:</strong></li>
+
+      <li>Android device diagnostic build target added to the Makefile</li>
+      <li>Android shared library generation added</li>
+      <li>Android NDK detection integrated into the build system</li>
+      <li>Android diagnostic library generated as an AArch64 <code>.so</code></li>
+      <li>Android build group updated with the new diagnostic system</li>
+      <li>Deployment system prepared for Android diagnostic binaries</li>
+
+      <br>
+
+      <li><strong>FileSystem:</strong></li>
+
+      <li><code>fs_emucmd</code> compatibility warnings addressed with dedicated compiler flags</li>
+      <li>Linux <code>fs_emucmd</code> build flags refined</li>
+      <li>Windows <code>fs_emucmd</code> build flags refined</li>
+
+      <br>
+
+      <li><strong>Android Ecosystem Cleanup:</strong></li>
+
+      <li>Toollibs Local Android officially discontinued</li>
+      <li>Android tooling direction reorganized around native diagnostic capabilities</li>
+
+      <br>
+
+      <li><strong>Generation Milestone:</strong></li>
+
+      <li>Fourth Toollibs generation expanded with renewed Android development</li>
+      <li>Android platform returns as a major ecosystem focus</li>
+      <li>New native diagnostic architecture established for future Android tooling</li>
+
+    </ul>
+
+    <p>
+      Androck Horizon marks the return of Android as a major focus of the
+      Toollibs ecosystem. The release introduces
+      <code>android_device_diagnostic</code>, native Android NDK support,
+      JNI integration, and a new foundation for future Android tooling while
+      officially retiring the previous Toollibs Local Android system.
+    </p>
+
+    <p>
+      This release also marks the end of the Samsung Galaxy Grand Prime
+      SM-G530H, known as <code>fortunave3g</code>, as a functional testing
+      device. The device became unable to boot after a Samsung Android 5.0.2
+      firmware boot update and is now limited to Download Mode / Bootloader.
+      Recovery is unavailable, and the micro-USB data connection suffered
+      D+ / D- failure.
+    </p>
+
+  </div>
+
+</div>
+
 <!-- v4.2 -->
 <div class="changelog-card open" onclick="toggleCard(this)">
 
@@ -112,7 +201,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v4.2 "TAether & TNether"
-      <span class="badge tested">LATEST</span>
+      <span class="badge stable">STABLE</span>
     </div>
   </div>
 
