@@ -155,8 +155,7 @@ canvas#bg {
 
 @media (hover: none) and (pointer: coarse) {
   .cursor-glow {
-    width: 270px;
-    height: 270px;
+    display: none;
   }
 }
 
