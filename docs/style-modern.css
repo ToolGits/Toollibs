@@ -153,6 +153,12 @@ canvas#bg {
   transform: translate(-50%, -50%);
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .cursor-glow {
+    width: 270px;
+    height: 270px;
+  }
+}
 
 /* =========================
    NAVIGATION
