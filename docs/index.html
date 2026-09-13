@@ -222,24 +222,19 @@ performance across supported platforms.
     });
   }
 
-  if (glow) {
-    function moveGlow(event) {
-      glow.style.left = `${event.clientX}px`;
-      glow.style.top = `${event.clientY}px`;
-      glow.style.opacity = '1';
-    }
-
-    window.addEventListener('pointerdown', moveGlow);
-    window.addEventListener('pointermove', moveGlow);
-
-    window.addEventListener('pointerup', () => {
-      glow.style.opacity = '0';
-    });
-
-    window.addEventListener('pointercancel', () => {
-      glow.style.opacity = '0';
-    });
+if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  function moveGlow(event) {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+    glow.style.opacity = '1';
   }
+
+  window.addEventListener('mousemove', moveGlow);
+
+  window.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+}
 
   const cards = document.querySelectorAll('.grid > section');
 
