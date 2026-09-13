@@ -9,164 +9,437 @@
 <h1 align="center">Toollibs</h1>
 
 <p align="center">
-  A modular C++ framework ecosystem designed for lightweight, structured, and extensible software development.
+  <strong>Modular C++ systems for lightweight, portable and extensible software.</strong>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v4.3-purple">
-  <img src="https://img.shields.io/badge/license-MIT-green">
-  <img src="https://img.shields.io/badge/platform-Linux%20%7C%20Windows%20%7C%20Android-orange">
-  <img src="https://img.shields.io/badge/status-stable-brightgreen">
-  <img src="https://img.shields.io/github/forks/ToolGits/Toollibs">
-  <img src="https://img.shields.io/github/issues/ToolGits/Toollibs">
-  <img src="https://img.shields.io/badge/main-stable-brightgreen">
-  <img src="https://img.shields.io/badge/nightly-active-orange">
-  <img src="https://img.shields.io/badge/community-legacy-lightgrey">
+  Build it. Verify it. Deploy it.
 </p>
 
 <p align="center">
+  <img src="https://img.shields.io/badge/version-v4.3-purple" alt="Version v4.3">
+  <img src="https://img.shields.io/badge/codename-Androck%20Horizon-blueviolet" alt="Codename Androck Horizon">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
+  <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Stable">
+  <img src="https://img.shields.io/badge/Linux-supported-orange" alt="Linux supported">
+  <img src="https://img.shields.io/badge/Windows-supported-orange" alt="Windows supported">
+  <img src="https://img.shields.io/badge/Android-supported-orange" alt="Android supported">
+</p>
+
+<p align="center">
+  <a href="https://toolgits.github.io/Toollibs/">Website</a> •
   <a href="https://toolgits.github.io/Toollibs/changelog.html">Changelog</a> •
   <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> •
-  <a href="https://toolgits.github.io/Toollibs/">Website</a> •
-  <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a> •
-  <a href="https://discord.gg/NJY5BaxMZq">ToolGits Discord</a>
+  <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a>
 </p>
 
-## 🏢 Official maintainer of Toollibs
-
-Toollibs is maintained by the **ToolGits** organization:
-
-- ToolGits: https://github.com/ToolGits
-- Created by: https://github.com/enzobobdevvideos04-ctrl
-
 > [!IMPORTANT]
-> Toollibs is actively developed. Stable releases are available in the `main` branch, while new features and experiments are developed in the `nightly` branch.
+> **Toollibs v4.3 — Androck Horizon is the current stable release.**
+>
+> The `main` branch contains the stable Toollibs line.
+> The `nightly` branch contains experimental development and may introduce breaking changes.
 
 ---
 
-## 🚀 Core Philosophy
+## 📖 About
 
-Toollibs is built around a simple idea:
+**Toollibs** is a modular C++ framework ecosystem designed for lightweight, portable and extensible software.
 
-> Build modular systems, verify at runtime, and deploy automatically across architectures.
+Instead of forcing every application into a single monolithic architecture, Toollibs is organized into focused systems that can be built, tested and used independently.
 
-It focuses on:
+The project combines:
 
-- Clean modular design
-- Cross-platform compilation (Linux + Windows + Android support)
-- Lightweight system architecture
-- Developer-friendly tooling
+- Modular C++ components
+- Cross-platform development
+- System and platform tooling
+- Plugin infrastructure
+- Graphics and mathematics utilities
+- Input handling
+- Audio support
+- Runtime verification
+- Automated deployment
+- Android development support
 
----
-
-## 🧠 Key Features
-
-- ⚙️ Multi-architecture build system (x86_64, ARM, etc.)
-- 🧪 Runtime verification pipeline (mainlogger system)
-- 🧩 Plugin system for extensibility
-- 📦 Automated deployment system (website integration)
-- 💻 Linux-focused system tools (CPU/GPU modules)
-- 🌐 Download + version distribution via web interface
-- 📱 Official Android support available + battery_info to check your battery status
-- 👨‍💻 Mini **Terminal Emulator** FS Emulated CMD (fs module tool)
-- 🔊 Audio system with audio_player and audio_buffer support
+Toollibs is designed to serve both practical software and experimental projects.
 
 ---
 
-## 🔧 Modules
+## 🧩 Architecture
 
-- **core** → logging system, runtime control, base utilities
-- **math** → mathematical helpers and vector structures
-- **graphics** → lightweight rendering utilities
-- **input** → input handling (keyboard, mouse, controller)
-- **fs** → file system utilities
-- **plugins** → modular extension system
-- **audio** → audio playback and audio processing utilities
+Toollibs is organized into focused modules and platform-specific systems.
 
----
-
-## 🏗️ Build System
-
-Toollibs uses a Makefile-based build pipeline:
-
-- Supports multi-architecture builds
-- Separates Linux-specific modules (cpu_info, gpu_info)
-- Generates structured binaries per platform
-
-Example output:
-
-```text
-bin/
-├── x86_64/
+~~~text
+Toollibs
+│
+├── core
+│   ├── logger
 │   ├── mainlogger
-│   └── gpu_info
-├── windows_x86_64/
-│   └── mainlogger
-└── aarch64/
-    └── cpu_info
-```
+│   └── timertrigger
+│
+├── math
+│   └── mathematics and vector systems
+│
+├── graphics
+│   ├── graphics
+│   ├── font_renderer
+│   └── font_preview
+│
+├── input
+│   └── input systems
+│
+├── fs
+│   ├── filesystem
+│   ├── FS Emulated CMD
+│   └── replxx integration
+│
+├── plugins
+│   ├── MathPlugin
+│   └── POP
+│
+├── audio
+│   ├── audio
+│   └── audio_player
+│
+└── platform
+    ├── linux
+    │   ├── cpu
+    │   └── gpu
+    │
+    └── android
+        ├── battery
+        ├── audio
+        └── android_device_diagnostic
+~~~
+
+Each area has a specific responsibility while remaining part of the same Toollibs ecosystem.
 
 ---
 
-## 🌐 Deployment System
+## ✨ Features
 
-Toollibs includes an automated deployment pipeline:
+### ⚙️ Core Systems
 
-- Builds are automatically packaged
-- Binaries are distributed to a web directory
-- Generates `index.json` for downloads
-- Powers the official Toollibs website
+The `core` module provides foundational runtime functionality, including:
+
+- Logging
+- MainLogger
+- Timer-based triggers
+- Platform integration
+
+### 🧮 Mathematics
+
+The `math` module provides reusable mathematical functionality for applications and other Toollibs components.
+
+### 🎨 Graphics
+
+The `graphics` module provides lightweight graphics-related systems, including font rendering and font preview functionality.
+
+### 🎮 Input
+
+The `input` module is intended for input-related systems such as keyboards, mice and controllers.
+
+### 📁 FS Emulated CMD
+
+Toollibs includes **FS Emulated CMD**, a terminal-emulator-style environment implemented inside the `fs` module.
+
+The system uses the project's filesystem components together with `replxx` integration for interactive terminal functionality.
+
+### 🔌 Plugins
+
+Toollibs includes a plugin infrastructure with built-in components such as:
+
+- **MathPlugin**
+- **POP**
+
+POP provides automation-oriented tooling for the Toollibs development workflow.
+
+### 🎵 Audio
+
+The `audio` module provides audio functionality and includes an audio player target.
+
+Linux audio builds use:
+
+- `libsndfile`
+- `SDL2`
+- `SDL2_mixer`
+
+### 🖥️ Platform Tools
+
+Toollibs provides platform-specific utilities for supported environments.
+
+Linux tooling includes:
+
+- `cpu_info`
+- `gpu_info`
+
+Android tooling includes:
+
+- `battery_info`
+- `android_audio_player`
+- `android_device_diagnostic`
+
+---
+
+## 🌍 Platform Support
+
+| Platform | Support | Architecture / Target |
+| --- | --- | --- |
+| 🐧 Linux | ✅ | Native host architecture |
+| 🪟 Windows | ✅ | x86_64 / MinGW |
+| 🤖 Android | ✅ | AArch64 / Android NDK |
+
+The build system automatically detects the host architecture and organizes generated binaries under architecture-specific directories.
+
+---
+
+## 🔨 Build System
+
+Toollibs uses a **Makefile-based C++17 build system**.
+
+The build system automatically detects:
+
+- Host architecture
+- MinGW availability
+- Android NDK availability
+
+### Basic Build Layout
+
+~~~text
+bin/
+├── <host-architecture>/
+│   ├── mainlogger
+│   ├── cpu_info
+│   ├── gpu_info
+│   ├── battery_info
+│   ├── pop
+│   ├── fs_emucmd
+│   ├── audio_player
+│   └── font_preview
+│
+├── windows_x86_64/
+│   ├── mainlogger.exe
+│   ├── pop.exe
+│   └── fs_emucmd.exe
+│
+└── android/
+    ├── android_audio_player
+    └── libandroid_device_diagnostic.so
+~~~
+
+### Main Targets
+
+~~~text
+make mainlogger
+make cpu_info
+make gpu_info
+make battery_info
+make tools
+make pop
+make fs_emucmd
+make audio_player
+make android_audio_player
+make android_device_diagnostic
+~~~
+
+The `tools` target builds the primary platform tools and audio components.
+
+---
+
+## 🤖 Android Development
+
+Android support is integrated directly into the Makefile through the Android NDK.
+
+The project uses an Android NDK toolchain and currently targets:
+
+~~~text
+Android API: 24
+NDK: 25.2.9519653
+Toolchain: aarch64-linux-android
+~~~
+
+Android targets include:
+
+- Android audio player
+- Battery information
+- Android device diagnostic shared library
+
+If the configured Android NDK is unavailable, Android-specific targets are skipped instead of stopping the regular build process.
 
 ---
 
 ## 🧪 Runtime Verification
 
-Each build can be validated using the MainLogger system:
+Toollibs includes **MainLogger** as part of its runtime-oriented verification and logging infrastructure.
 
-- Module integrity checks
-- Math, graphics, and plugin tests
-- System health report (HEALTHY / DEGRADED)
+The build system can produce a main runtime executable alongside the platform utilities and other Toollibs components.
 
----
-
-## 🌍 Platforms
-- Linux (primary development platform)
-- Windows (via MinGW for main modules)
-- Android (Official support for aarch64, ARMv7l and ARMv6l)
+This allows generated builds to be tested independently before deployment.
 
 ---
 
-## 🎯 Goal
+## 📦 Automated Deployment
 
-To build a **modern, modular, and automated C++ ecosystem** that can serve as a foundation for:
+Toollibs includes an automated multi-architecture deployment script:
 
-- system tools
-- game frameworks
-- plugin-based applications
-- lightweight engines
+~~~text
+.deploy.sh
+~~~
+
+The deployment pipeline:
+
+1. Checks the current Linux build output.
+2. Creates the download directory.
+3. Removes previous generated binaries.
+4. Deploys Linux executables.
+5. Deploys Windows x86_64 binaries.
+6. Deploys Android binaries.
+7. Generates `index.json`.
+
+Deployment output is placed under:
+
+~~~text
+docs/
+└── downloads/
+    ├── mainlogger-<arch>
+    ├── cpu_info-<arch>
+    ├── gpu_info-<arch>
+    ├── battery_info-<arch>
+    ├── pop-<arch>
+    ├── fs_emucmd-<arch>
+    ├── audio_player-<arch>
+    ├── font_preview-<arch>
+    ├── *.exe
+    ├── android_audio_player-android
+    └── index.json
+~~~
+
+The generated `index.json` provides a machine-readable list of the deployed downloads.
 
 ---
 
-## 📜 History
+## 🌙 Nightly Development
 
-> [!NOTE]
-> Toollibs originated from the discontinued **ServerHub** project and has since evolved into a complete modular C++ framework ecosystem.
+Toollibs maintains a dedicated **`nightly`** branch for experimental development.
+
+~~~text
+main
+  │
+  └── Stable Toollibs
+       │
+       └── v4.3 — Androck Horizon
+
+
+nightly
+  │
+  ├── New features
+  ├── Experimental APIs
+  ├── Internal redesigns
+  ├── New platform support
+  └── Future releases
+~~~
+
+The `nightly` branch is:
+
+- Experimental
+- Unstable
+- Under active development
+- Subject to breaking changes
+- Not recommended for production use
+
+Features developed in Nightly may eventually reach `main`, but they are not guaranteed to do so.
 
 ---
 
-## 🌱 Community
+## 🧭 Project Direction
 
-> [!TIP]
-> Toollibs is an open project built for learning, experimentation, and contribution.
->
-> Feel free to:
-> - contribute code
-> - suggest improvements
-> - build new modules
-> - fork and experiment freely
+Toollibs is designed to remain a flexible foundation for lightweight software.
+
+Possible applications include:
+
+- System utilities
+- Game development
+- Lightweight engines
+- Plugin-based applications
+- Development tools
+- Experimental software
+- Platform utilities
+
+The project focuses on:
+
+**Modularity • Portability • Verification • Automation**
 
 ---
 
-## ⚡ License
+## 🕰️ From ServerHub to Toollibs
 
-- The license that Toollibs uses is the MIT License (Copyright © 2026).
+Toollibs began after the discontinuation of **ServerHub**, initially serving as its replacement.
+
+However, the project soon took a different direction.
+
+Instead of continuing to focus entirely on server software, Toollibs evolved into a **C++ library and modular development project**. The original idea of replacing ServerHub gradually became something much larger.
+
+As development continued, Toollibs grew in both scope and ambition:
+
+- It evolved from a simple replacement project into a standalone library.
+- Its architecture became larger and more modular.
+- Its documentation and `README.md` went through major revisions and improvements.
+- The project's description and identity were continuously refined.
+- The Toollibs website was created.
+- The project expanded with new systems, modules and tools.
+- **ToollibsServer** was introduced as the **backend/API system for the Toollibs website**, providing the server-side infrastructure behind the project's web presence.
+- **Toollibs-workstation** was created as another branch of the project's evolution. It was later discontinued as an independent project and evolved into **ToolGits-workstation**.
+- Android support was introduced, expanding Toollibs beyond traditional desktop environments.
+- The project continued growing in functionality, infrastructure and scope.
+
+The development of Toollibs was therefore not a straight continuation of ServerHub. It was a process of transformation.
+
+What started as a replacement for a discontinued server project became a **large, independent C++ framework ecosystem** with its own architecture, website, documentation, tooling, platform support and identity.
+
+Today, Toollibs is no longer defined by ServerHub or by its original purpose.
+
+**ServerHub was the starting point. Toollibs became its own project.**
+
+From a replacement, to a library, to a growing ecosystem — Toollibs evolved into what it is today.
+
+---
+
+## 🌱 Contributing
+
+Toollibs is open to experimentation and contributions.
+
+You can:
+
+- Contribute code
+- Create new modules
+- Improve existing systems
+- Propose features
+- Experiment with the architecture
+- Report bugs
+- Fork the project
+
+For bugs and feature requests, use the repository's **Issues** section.
+
+---
+
+## 🏢 Maintained by ToolGits
+
+Toollibs is an official project of the **ToolGits** organization.
+
+- **Organization:** https://github.com/ToolGits
+- **Creator:** https://github.com/enzobobdevvideos04-ctrl
+
+Toollibs maintains its own identity within the ToolGits project family, including its own logo and modular C++ architecture.
+
+---
+
+## 📄 License
+
+Toollibs is released under the **MIT License**.
+
+**Copyright © 2026 ToolGits.**
+
+---
+
+<p align="center">
+  <strong>Toollibs — Modular systems. Verified runtime. Automated deployment.</strong>
+</p>
