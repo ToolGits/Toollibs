@@ -28,11 +28,11 @@
   .changelog-card {
     opacity: 0;
     transform:
-      translateY(20px)
+      translateY(18px)
       scale(0.985);
 
     animation:
-      changelogFadeIn 0.6s ease forwards;
+      changelogEntry 0.65s ease forwards;
 
     transition:
       transform 0.3s ease,
@@ -68,11 +68,11 @@
     animation-delay: 0.35s;
   }
 
-  @keyframes changelogFadeIn {
+  @keyframes changelogEntry {
     from {
       opacity: 0;
       transform:
-        translateY(20px)
+        translateY(18px)
         scale(0.985);
     }
 
@@ -95,12 +95,12 @@
       scale(1.002);
 
     border-color:
-      rgba(124, 95, 255, 0.45);
+      var(--border-strong);
 
     box-shadow:
-      0 12px 35px rgba(0, 0, 0, 0.28),
-      0 0 25px rgba(79, 142, 247, 0.08),
-      0 0 35px rgba(124, 95, 255, 0.06);
+      0 14px 38px rgba(0, 0, 0, 0.3),
+      0 0 24px rgba(79, 142, 247, 0.08),
+      0 0 32px rgba(124, 95, 255, 0.07);
   }
 
 
@@ -117,8 +117,9 @@
     content: "";
 
     position: absolute;
+
     top: 0;
-    left: -120%;
+    left: -130%;
 
     width: 70%;
     height: 100%;
@@ -134,18 +135,17 @@
     transform: skewX(-20deg);
 
     pointer-events: none;
-
-    transition: none;
   }
 
-  .changelog-card:hover .changelog-header::after {
+  .changelog-card:hover
+  .changelog-header::after {
     animation:
       headerShine 0.9s ease;
   }
 
   @keyframes headerShine {
     from {
-      left: -120%;
+      left: -130%;
     }
 
     to {
@@ -177,7 +177,8 @@
       transform 0.4s ease;
   }
 
-  .changelog-card.open .changelog-content {
+  .changelog-card.open
+  .changelog-content {
     max-height: 2000px;
 
     opacity: 1;
@@ -207,15 +208,18 @@
       filter 0.25s ease;
   }
 
-  .changelog-card:not(.open) .arrow {
+  .changelog-card:not(.open)
+  .arrow {
     transform: rotate(0deg);
   }
 
-  .changelog-card.open .arrow {
-    transform: rotate(-90deg);
+  .changelog-card.open
+  .arrow {
+    transform: rotate(90deg);
   }
 
-  .changelog-card:hover .arrow {
+  .changelog-card:hover
+  .arrow {
     color: var(--blue-light);
 
     filter:
@@ -227,13 +231,17 @@
 
 
   /* =========================
-     BADGES
+     BADGE BASE
   ========================= */
 
   .changelog-card .badge {
     position: relative;
 
+    display: inline-block;
+
     overflow: hidden;
+
+    border-radius: 999px;
 
     transition:
       transform 0.25s ease,
@@ -247,7 +255,7 @@
     position: absolute;
 
     top: 0;
-    left: -130%;
+    left: -140%;
 
     width: 65%;
     height: 100%;
@@ -256,26 +264,25 @@
       linear-gradient(
         110deg,
         transparent,
-        rgba(255, 255, 255, 0.45),
+        rgba(255, 255, 255, 0.55),
         transparent
       );
 
     transform: skewX(-20deg);
 
     pointer-events: none;
-  }
 
-  .changelog-card .badge:hover::after {
     animation:
-      badgeShine 0.8s ease;
+      badgeShine 3.2s ease-in-out infinite;
   }
 
   @keyframes badgeShine {
-    from {
-      left: -130%;
+    0% {
+      left: -140%;
     }
 
-    to {
+    35%,
+    100% {
       left: 150%;
     }
   }
@@ -289,32 +296,36 @@
     background:
       linear-gradient(
         135deg,
-        rgba(79, 142, 247, 0.18),
-        rgba(79, 142, 247, 0.08)
+        rgba(79, 142, 247, 0.24),
+        rgba(79, 142, 247, 0.09)
       );
 
     color: var(--blue-light);
 
     border:
       1px solid
-      rgba(79, 142, 247, 0.3);
+      rgba(79, 142, 247, 0.42);
+
+    box-shadow:
+      0 0 10px
+      rgba(79, 142, 247, 0.12);
 
     animation:
-      stableGlow 2.8s ease-in-out infinite;
+      stableGlow 2.6s ease-in-out infinite;
   }
 
   @keyframes stableGlow {
     0%,
     100% {
       box-shadow:
-        0 0 0
-        rgba(79, 142, 247, 0);
+        0 0 7px
+        rgba(79, 142, 247, 0.08);
     }
 
     50% {
       box-shadow:
-        0 0 14px
-        rgba(79, 142, 247, 0.2);
+        0 0 19px
+        rgba(79, 142, 247, 0.32);
     }
   }
 
@@ -323,19 +334,23 @@
      LATEST
   ========================= */
 
-  .changelog-card .badge.tested {
+  .changelog-card .badge.latest {
     background:
       linear-gradient(
         135deg,
-        rgba(74, 222, 128, 0.2),
-        rgba(74, 222, 128, 0.07)
+        rgba(74, 222, 128, 0.25),
+        rgba(74, 222, 128, 0.08)
       );
 
     color: var(--green);
 
     border:
       1px solid
-      rgba(74, 222, 128, 0.35);
+      rgba(74, 222, 128, 0.45);
+
+    box-shadow:
+      0 0 10px
+      rgba(74, 222, 128, 0.12);
 
     animation:
       latestGlow 2.2s ease-in-out infinite;
@@ -345,14 +360,14 @@
     0%,
     100% {
       box-shadow:
-        0 0 0
-        rgba(74, 222, 128, 0);
+        0 0 7px
+        rgba(74, 222, 128, 0.08);
     }
 
     50% {
       box-shadow:
-        0 0 16px
-        rgba(74, 222, 128, 0.25);
+        0 0 21px
+        rgba(74, 222, 128, 0.35);
     }
   }
 
@@ -366,11 +381,13 @@
       linear-gradient(
         120deg,
         #050505,
-        #222222,
-        #777777,
+        #181818,
+        #444444,
+        #a0a0a0,
         #ffffff,
-        #777777,
-        #222222,
+        #a0a0a0,
+        #444444,
+        #181818,
         #050505
       );
 
@@ -381,11 +398,11 @@
 
     border:
       1px solid
-      rgba(255, 255, 255, 0.2);
+      rgba(255, 255, 255, 0.24);
 
     box-shadow:
       0 0 10px
-      rgba(255, 255, 255, 0.04);
+      rgba(255, 255, 255, 0.05);
 
     animation:
       legacyGradient 5s linear infinite;
@@ -410,31 +427,31 @@
      BADGE HOVER
   ========================= */
 
-  .changelog-card .badge.stable:hover {
-    transform: translateY(-1px);
+  .changelog-card .badge:hover {
+    transform:
+      translateY(-1px)
+      scale(1.025);
 
-    box-shadow:
-      0 0 18px
-      rgba(79, 142, 247, 0.35);
+    filter:
+      brightness(1.08);
   }
 
-  .changelog-card .badge.tested:hover {
-    transform: translateY(-1px);
-
+  .changelog-card .badge.stable:hover {
     box-shadow:
-      0 0 20px
-      rgba(74, 222, 128, 0.35);
+      0 0 22px
+      rgba(79, 142, 247, 0.4);
+  }
+
+  .changelog-card .badge.latest:hover {
+    box-shadow:
+      0 0 24px
+      rgba(74, 222, 128, 0.42);
   }
 
   .changelog-card .badge.legacy:hover {
-    transform: translateY(-1px);
-
-    filter:
-      brightness(1.15);
-
     box-shadow:
-      0 0 18px
-      rgba(255, 255, 255, 0.12);
+      0 0 20px
+      rgba(255, 255, 255, 0.16);
   }
 
 
@@ -443,9 +460,12 @@
   ========================= */
 
   @media (prefers-reduced-motion: reduce) {
+
     .changelog-card {
       opacity: 1;
+
       transform: none;
+
       animation: none;
     }
 
@@ -459,14 +479,15 @@
     }
 
     .changelog-card .badge.stable,
-    .changelog-card .badge.tested,
+    .changelog-card .badge.latest,
     .changelog-card .badge.legacy {
       animation: none;
     }
 
     .changelog-content,
     .arrow,
-    .changelog-card {
+    .changelog-card,
+    .changelog-card .badge {
       transition: none;
     }
   }
