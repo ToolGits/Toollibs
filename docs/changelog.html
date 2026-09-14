@@ -372,56 +372,42 @@
   }
 
 
-  /* =========================
-     LEGACY
-  ========================= */
+/* =========================
+   LEGACY
+========================= */
 
-  .changelog-card .badge.legacy {
-    background:
-      linear-gradient(
-        120deg,
-        #050505,
-        #181818,
-        #444444,
-        #a0a0a0,
-        #ffffff,
-        #a0a0a0,
-        #444444,
-        #181818,
-        #050505
-      );
+.changelog-card .badge.legacy {
+  background:
+    linear-gradient(
+      135deg,
+      #050505,
+      #202020 45%,
+      #555555 70%,
+      #151515
+    );
 
-    background-size:
-      250% 100%;
+  color: #ffffff;
 
-    color: #ffffff;
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
 
-    border:
-      1px solid
-      rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 0 8px
+    rgba(255, 255, 255, 0.04);
+}
 
-    box-shadow:
-      0 0 10px
-      rgba(255, 255, 255, 0.05);
+.changelog-card .badge.legacy:hover {
+  transform:
+    translateY(-1px)
+    scale(1.025);
 
-    animation:
-      legacyGradient 5s linear infinite;
-  }
+  filter: brightness(1.08);
 
-  @keyframes legacyGradient {
-    0% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
+  box-shadow:
+    0 0 14px
+    rgba(255, 255, 255, 0.1);
+}
 
   /* =========================
      BADGE HOVER
