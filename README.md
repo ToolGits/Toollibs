@@ -1,4 +1,4 @@
-p align="center">
+  align="center">
   <img
     src=".github/assets/Toollibs_newlogo.png"
     alt="Toollibs logo"
