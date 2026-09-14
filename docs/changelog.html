@@ -16,76 +16,461 @@
 
   <link rel="stylesheet" href="style-modern.css">
 
-  <style>
-    /* =========================
-       EXTRA ANIMATIONS LAYER
-    ========================= */
+<style>
+  /* =========================
+     EXTRA ANIMATIONS LAYER
+  ========================= */
 
-    .changelog-card {
+  /* =========================
+     CARD ENTRY
+  ========================= */
+
+  .changelog-card {
+    opacity: 0;
+    transform:
+      translateY(20px)
+      scale(0.985);
+
+    animation:
+      changelogFadeIn 0.6s ease forwards;
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .changelog-card:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  .changelog-card:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .changelog-card:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+
+  .changelog-card:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+
+  .changelog-card:nth-child(5) {
+    animation-delay: 0.25s;
+  }
+
+  .changelog-card:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+
+  .changelog-card:nth-child(7) {
+    animation-delay: 0.35s;
+  }
+
+  @keyframes changelogFadeIn {
+    from {
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
+      transform:
+        translateY(20px)
+        scale(0.985);
     }
 
-    .changelog-card:nth-child(1) { animation-delay: 0.05s; }
-    .changelog-card:nth-child(2) { animation-delay: 0.1s; }
-    .changelog-card:nth-child(3) { animation-delay: 0.15s; }
-    .changelog-card:nth-child(4) { animation-delay: 0.2s; }
-    .changelog-card:nth-child(5) { animation-delay: 0.25s; }
-    .changelog-card:nth-child(6) { animation-delay: 0.3s; }
-    .changelog-card:nth-child(7) { animation-delay: 0.35s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .changelog-content {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: scaleY(0.98);
-      transform-origin: top;
-      transition: all 0.35s ease;
-    }
-
-    .changelog-card.open .changelog-content {
-      max-height: 2000px;
+    to {
       opacity: 1;
-      transform: scaleY(1);
+      transform:
+        translateY(0)
+        scale(1);
+    }
+  }
+
+
+  /* =========================
+     CARD HOVER
+  ========================= */
+
+  .changelog-card:hover {
+    transform:
+      translateY(-3px)
+      scale(1.002);
+
+    border-color:
+      rgba(124, 95, 255, 0.45);
+
+    box-shadow:
+      0 12px 35px rgba(0, 0, 0, 0.28),
+      0 0 25px rgba(79, 142, 247, 0.08),
+      0 0 35px rgba(124, 95, 255, 0.06);
+  }
+
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .changelog-header {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .changelog-header::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+      linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+      );
+
+    transform: skewX(-20deg);
+
+    pointer-events: none;
+
+    transition: none;
+  }
+
+  .changelog-card:hover .changelog-header::after {
+    animation:
+      headerShine 0.9s ease;
+  }
+
+  @keyframes headerShine {
+    from {
+      left: -120%;
     }
 
-    .arrow {
-      transition: transform 0.3s ease;
-      display: inline-block;
-      margin-right: 6px;
+    to {
+      left: 150%;
+    }
+  }
+
+
+  /* =========================
+     CONTENT
+  ========================= */
+
+  .changelog-content {
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform:
+      translateY(-6px)
+      scaleY(0.98);
+
+    transform-origin: top;
+
+    transition:
+      max-height 0.4s ease,
+      opacity 0.35s ease,
+      transform 0.4s ease;
+  }
+
+  .changelog-card.open .changelog-content {
+    max-height: 2000px;
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scaleY(1);
+  }
+
+
+  /* =========================
+     ARROW
+  ========================= */
+
+  .arrow {
+    display: inline-block;
+
+    margin-right: 6px;
+
+    color: var(--purple-light);
+
+    transform: rotate(0deg);
+
+    transition:
+      transform 0.35s ease,
+      color 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .changelog-card:not(.open) .arrow {
+    transform: rotate(0deg);
+  }
+
+  .changelog-card.open .arrow {
+    transform: rotate(90deg);
+  }
+
+  .changelog-card:hover .arrow {
+    color: var(--blue-light);
+
+    filter:
+      drop-shadow(
+        0 0 7px
+        rgba(79, 142, 247, 0.5)
+      );
+  }
+
+
+  /* =========================
+     BADGES
+  ========================= */
+
+  .changelog-card .badge {
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .changelog-card .badge::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -130%;
+
+    width: 65%;
+    height: 100%;
+
+    background:
+      linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.45),
+        transparent
+      );
+
+    transform: skewX(-20deg);
+
+    pointer-events: none;
+  }
+
+  .changelog-card .badge:hover::after {
+    animation:
+      badgeShine 0.8s ease;
+  }
+
+  @keyframes badgeShine {
+    from {
+      left: -130%;
     }
 
-    .changelog-card.open .arrow {
-      transform: rotate(0deg);
+    to {
+      left: 150%;
+    }
+  }
+
+
+  /* =========================
+     STABLE
+  ========================= */
+
+  .changelog-card .badge.stable {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(79, 142, 247, 0.18),
+        rgba(79, 142, 247, 0.08)
+      );
+
+    color: var(--blue-light);
+
+    border:
+      1px solid
+      rgba(79, 142, 247, 0.3);
+
+    animation:
+      stableGlow 2.8s ease-in-out infinite;
+  }
+
+  @keyframes stableGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0
+        rgba(79, 142, 247, 0);
     }
 
-    .changelog-card:not(.open) .arrow {
-      transform: rotate(-90deg);
+    50% {
+      box-shadow:
+        0 0 14px
+        rgba(79, 142, 247, 0.2);
+    }
+  }
+
+
+  /* =========================
+     LATEST
+  ========================= */
+
+  .changelog-card .badge.tested {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(74, 222, 128, 0.2),
+        rgba(74, 222, 128, 0.07)
+      );
+
+    color: var(--green);
+
+    border:
+      1px solid
+      rgba(74, 222, 128, 0.35);
+
+    animation:
+      latestGlow 2.2s ease-in-out infinite;
+  }
+
+  @keyframes latestGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0
+        rgba(74, 222, 128, 0);
+    }
+
+    50% {
+      box-shadow:
+        0 0 16px
+        rgba(74, 222, 128, 0.25);
+    }
+  }
+
+
+  /* =========================
+     LEGACY
+  ========================= */
+
+  .changelog-card .badge.legacy {
+    background:
+      linear-gradient(
+        120deg,
+        #050505,
+        #222222,
+        #777777,
+        #ffffff,
+        #777777,
+        #222222,
+        #050505
+      );
+
+    background-size:
+      250% 100%;
+
+    color: #ffffff;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+      0 0 10px
+      rgba(255, 255, 255, 0.04);
+
+    animation:
+      legacyGradient 5s linear infinite;
+  }
+
+  @keyframes legacyGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+
+  /* =========================
+     BADGE HOVER
+  ========================= */
+
+  .changelog-card .badge.stable:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+      0 0 18px
+      rgba(79, 142, 247, 0.35);
+  }
+
+  .changelog-card .badge.tested:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+      0 0 20px
+      rgba(74, 222, 128, 0.35);
+  }
+
+  .changelog-card .badge.legacy:hover {
+    transform: translateY(-1px);
+
+    filter:
+      brightness(1.15);
+
+    box-shadow:
+      0 0 18px
+      rgba(255, 255, 255, 0.12);
+  }
+
+
+  /* =========================
+     REDUCED MOTION
+  ========================= */
+
+  @media (prefers-reduced-motion: reduce) {
+    .changelog-card {
+      opacity: 1;
+      transform: none;
+      animation: none;
     }
 
     .changelog-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(79,142,247,0.08);
+      transform: none;
     }
 
-    .badge.tested {
-      animation: pulse 2s infinite;
+    .changelog-header::after,
+    .changelog-card .badge::after {
+      display: none;
     }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    .changelog-card .badge.stable,
+    .changelog-card .badge.tested,
+    .changelog-card .badge.legacy {
+      animation: none;
     }
 
-  </style>
+    .changelog-content,
+    .arrow,
+    .changelog-card {
+      transition: none;
+    }
+  }
+ </style>
 </head>
 
 <body>
@@ -114,7 +499,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v4.4 "RebirthCatalyst"
-      <span class="badge tested">LATEST</span>
+      <span class="badge latest">LATEST</span>
     </div>
   </div>
 
@@ -580,7 +965,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.4 "LetterVerse"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -611,7 +996,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.3 "NightlyPatcher"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -640,7 +1025,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.2 "FontsFirst"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -669,7 +1054,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.1 "FileFirstSystem"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -701,7 +1086,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.0 "Harmonic Duality"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -746,7 +1131,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.5 "Fortunav3.0egg.log"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -791,7 +1176,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4.5 "FortunaHorizon3g"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -812,7 +1197,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4 "HorizonDroid"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -831,7 +1216,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.3 "CPUnix"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -849,7 +1234,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.1.2 "LoggerPatch"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -866,7 +1251,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.1 "BigBrowserToollibs"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -884,7 +1269,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.0 "Forgelibs"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -903,7 +1288,7 @@
         <div class="changelog-title">
           <span class="arrow">▶</span>
           v1.1 Beta
-          <span class="badge">LEGACY</span>
+          <span class="badge legacy">LEGACY</span>
         </div>
       </div>
 
@@ -927,7 +1312,7 @@
         <div class="changelog-title">
           <span class="arrow">▶</span>
           v1.0 Beta
-          <span class="badge">LEGACY</span>
+          <span class="badge legacy">LEGACY</span>
         </div>
       </div>
 
@@ -950,7 +1335,7 @@
         <div class="changelog-title">
           <span class="arrow">▶</span>
           v0.1 Alpha
-          <span class="badge">LEGACY</span>
+          <span class="badge legacy">LEGACY</span>
         </div>
       </div>
 
