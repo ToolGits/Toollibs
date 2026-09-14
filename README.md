@@ -1,4 +1,4 @@
-<p align="center">
+p align="center">
   <img
     src=".github/assets/Toollibs_newlogo.png"
     alt="Toollibs logo"
@@ -17,27 +17,45 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/version-v4.3-purple" alt="Version v4.3">
-  <img src="https://img.shields.io/badge/codename-Androck%20Horizon-blueviolet" alt="Codename Androck Horizon">
+  <img src="https://img.shields.io/badge/version-v4.4-purple" alt="Version v4.4">
+  <img src="https://img.shields.io/badge/codename-RebirthCatalyst-blueviolet" alt="Codename RebirthCatalyst">
   <img src="https://img.shields.io/badge/license-MIT-green" alt="MIT License">
   <img src="https://img.shields.io/badge/status-stable-brightgreen" alt="Stable">
-  <img src="https://img.shields.io/badge/Linux-supported-orange" alt="Linux supported">
-  <img src="https://img.shields.io/badge/Windows-supported-orange" alt="Windows supported">
-  <img src="https://img.shields.io/badge/Android-supported-orange" alt="Android supported">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Linux-supported-6b7280" alt="Linux supported">
+  <img src="https://img.shields.io/badge/Windows-supported-0078D4" alt="Windows supported">
+  <img src="https://img.shields.io/badge/Android-supported-3DDC84" alt="Android supported">
 </p>
 
 <p align="center">
   <a href="https://toolgits.github.io/Toollibs/">Website</a> •
   <a href="https://toolgits.github.io/Toollibs/changelog.html">Changelog</a> •
   <a href="https://toolgits.github.io/Toollibs/downloads.html">Downloads</a> •
+  <a href="https://toolgits.github.io/Toollibs/devices.html">Devices</a> •
   <a href="https://github.com/ToolGits/Toollibs/issues">Issues</a>
 </p>
 
 > [!IMPORTANT]
-> **Toollibs v4.3 — Androck Horizon is the current stable release.**
+> **Toollibs v4.4 — RebirthCatalyst is the current stable release.**
 >
-> The `main` branch contains the stable Toollibs line.
-> The `nightly` branch contains experimental development and may introduce breaking changes.
+> The `main` branch, also known as **TAether**, represents the stable Toollibs line.
+> It contains released and verified changes intended for regular use.
+>
+> The `nightly` branch, also known as **TNether**, is the current experimental development line.
+> It may contain unfinished features, internal changes, regressions, or breaking changes before they reach a stable release.
+>
+> For the most reliable and predictable experience, use **TAether**.
+> If you want to follow ongoing development and test upcoming changes, **TNether** is the experimental option.
+>
+> The `community` branch is a **legacy branch** and is no longer used for active development.
+> It originally served a similar purpose to the current `nightly` branch, providing an experimental development space designed with the Toollibs community in mind.
+>
+> The `community` branch was eventually discontinued and replaced by **TNether** as the project's experimental development line.
+> Although it is no longer maintained, the branch remains available as part of Toollibs' history.
+>
+> If you want to explore what Toollibs looked like during that period and discover a small piece of its older development history, you can still visit the **`community` branch**.
 
 ---
 
