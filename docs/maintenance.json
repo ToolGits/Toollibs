@@ -1,5 +1,5 @@
 {
-  "active": "normal",
+  "active": "degraded",
 
   "normal": {
     "mode": "normal"
