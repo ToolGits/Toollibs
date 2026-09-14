@@ -489,7 +489,7 @@ Toollibs maintains its own identity within the ToolGits project family, includin
 
 Toollibs is released under the [MIT License](./LICENSE).
 
-Copyright © 2026 ToolGits.
+Copyright © 2026 enzobobdevvideos04-ctrl / ToolGits.
 
 ---
 
