@@ -1,65 +1,165 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <title>System Status</title>
-  <link rel="stylesheet" href="style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Toollibs — System Status</title>
+
+  <meta
+    name="description"
+    content="Toollibs system status and service availability."
+  >
+
+  <link rel="stylesheet" href="style-modern.css">
 
 </head>
 
 <body>
 
-<div class="login-card" style="text-align:center;">
+  <main class="container">
 
-  <h1 id="title">Loading...</h1>
+    <section class="card" style="text-align:center;">
 
-  <p id="desc" style="margin-top:10px; color:#8b949e;"></p>
+      <h1 id="title">Loading...</h1>
 
-  <button class="button" onclick="goHome()" style="margin-top:20px;">
-    Return Home
-  </button>
+      <p
+        id="desc"
+        style="margin-top:10px; color:#8b949e;"
+      ></p>
 
-</div>
+      <p
+        id="code"
+        style="margin-top:8px; color:#8b949e;"
+      ></p>
+
+      <button
+        class="button"
+        onclick="goHome()"
+        style="margin-top:20px;"
+      >
+        Return Home
+      </button>
+
+    </section>
+
+  </main>
 
 <script>
 
 async function loadStatus() {
 
-  const res = await fetch("maintenance.json");
-  const data = await res.json();
-
-  const mode = data.active;
-
   const title = document.getElementById("title");
   const desc = document.getElementById("desc");
+  const code = document.getElementById("code");
 
-  if (mode === "maintenance") {
+  try {
 
-    title.textContent = "🔴 Maintenance Mode";
-    desc.textContent = data.maintenance.reason;
+    const res = await fetch("maintenance.json");
+
+    if (!res.ok) {
+      throw new Error("Failed to load system status.");
+    }
+
+    const data = await res.json();
+
+    const mode = data.active;
+
+    /*
+     * NORMAL MODE
+     * Return to the main website.
+     */
+
+    if (mode === "normal") {
+
+      window.location.href = "index.html";
+      return;
+
+    }
+
+    /*
+     * Resolve the active status dynamically.
+     */
+
+    const status = data[mode];
+
+    if (!status) {
+
+      title.textContent = "⚠️ Unknown Status";
+
+      desc.textContent =
+        "The current system status is unknown.";
+
+      code.textContent = "";
+
+      return;
+
+    }
+
+    /*
+     * Status title.
+     */
+
+    if (status.mode === "degraded") {
+
+      title.textContent = "🟡 Degraded Mode";
+
+    } else {
+
+      title.textContent = "🔴 Maintenance Mode";
+
+    }
+
+    /*
+     * Status information.
+     */
+
+    desc.textContent =
+      status.reason || "No additional information available.";
+
+    /*
+     * HTTP status code.
+     */
+
+    code.textContent =
+      status.code ? `HTTP ${status.code}` : "";
 
   }
 
-  else if (mode === "degraded") {
+  catch (error) {
 
-    title.textContent = "🟡 Degraded Mode";
-    desc.textContent = "System is partially unstable.";
+    console.error(error);
+
+    title.textContent = "⚠️ Status Unavailable";
+
+    desc.textContent =
+      "Unable to retrieve the current system status.";
+
+    code.textContent = "";
 
   }
 
-  else {
-
-    window.location.href = "index.html";
-  }
 }
+
+
+/*
+ * Return to the Toollibs homepage.
+ */
 
 function goHome() {
+
   window.location.href = "index.html";
+
 }
+
 
 loadStatus();
 
 </script>
 
 </body>
+
 </html>
