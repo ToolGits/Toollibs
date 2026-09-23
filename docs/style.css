@@ -1,6 +1,9 @@
+/* LEGACY — Retired in Toollibs v4.4 */
+
 /* =========================================
      TOOLLIBS UI SYSTEM
    Modern Framework Design
+           LEGACY!
 ========================================= */
 
 /* =========================
@@ -306,6 +309,12 @@ strong {
 .badge.planned {
   background: var(--yellow);
   color: black;
+}
+
+.badge.partial {
+    background: #fbbf24;
+    color: #111827;
+    border: 1px solid #d97706;
 }
 
 /* =========================

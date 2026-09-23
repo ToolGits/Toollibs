@@ -4,86 +4,480 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Toollibs Changelog</title>
+  <title>Toollibs — Changelog & Version History</title>
+
+  <meta name="description" content="Explore Toollibs development history, releases, milestones and framework evolution.">
+  <link rel="canonical" href="https://toolgits.github.io/Toollibs/changelog.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style-modern.css">
 
-  <style>
-    /* =========================
-       EXTRA ANIMATIONS LAYER
-    ========================= */
+<style>
+  /* =========================
+     EXTRA ANIMATIONS LAYER
+  ========================= */
+
+  /* =========================
+     CARD ENTRY
+  ========================= */
+
+  .changelog-card {
+    opacity: 0;
+    transform:
+      translateY(18px)
+      scale(0.985);
+
+    animation:
+      changelogEntry 0.65s ease forwards;
+
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .changelog-card:nth-child(1) {
+    animation-delay: 0.05s;
+  }
+
+  .changelog-card:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .changelog-card:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+
+  .changelog-card:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+
+  .changelog-card:nth-child(5) {
+    animation-delay: 0.25s;
+  }
+
+  .changelog-card:nth-child(6) {
+    animation-delay: 0.3s;
+  }
+
+  .changelog-card:nth-child(7) {
+    animation-delay: 0.35s;
+  }
+
+  @keyframes changelogEntry {
+    from {
+      opacity: 0;
+      transform:
+        translateY(18px)
+        scale(0.985);
+    }
+
+    to {
+      opacity: 1;
+      transform:
+        translateY(0)
+        scale(1);
+    }
+  }
+
+
+  /* =========================
+     CARD HOVER
+  ========================= */
+
+  .changelog-card:hover {
+    transform:
+      translateY(-3px)
+      scale(1.002);
+
+    border-color:
+      var(--border-strong);
+
+    box-shadow:
+      0 14px 38px rgba(0, 0, 0, 0.3),
+      0 0 24px rgba(79, 142, 247, 0.08),
+      0 0 32px rgba(124, 95, 255, 0.07);
+  }
+
+
+  /* =========================
+     HEADER
+  ========================= */
+
+  .changelog-header {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .changelog-header::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -130%;
+
+    width: 70%;
+    height: 100%;
+
+    background:
+      linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+      );
+
+    transform: skewX(-20deg);
+
+    pointer-events: none;
+  }
+
+  .changelog-card:hover
+  .changelog-header::after {
+    animation:
+      headerShine 0.9s ease;
+  }
+
+  @keyframes headerShine {
+    from {
+      left: -130%;
+    }
+
+    to {
+      left: 150%;
+    }
+  }
+
+
+  /* =========================
+     CONTENT
+  ========================= */
+
+  .changelog-content {
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform:
+      translateY(-6px)
+      scaleY(0.98);
+
+    transform-origin: top;
+
+    transition:
+      max-height 0.4s ease,
+      opacity 0.35s ease,
+      transform 0.4s ease;
+  }
+
+  .changelog-card.open
+  .changelog-content {
+    max-height: 2000px;
+
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scaleY(1);
+  }
+
+
+  /* =========================
+     ARROW
+  ========================= */
+
+  .arrow {
+    display: inline-block;
+
+    margin-right: 6px;
+
+    color: var(--purple-light);
+
+    transform: rotate(0deg);
+
+    transition:
+      transform 0.35s ease,
+      color 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .changelog-card:not(.open)
+  .arrow {
+    transform: rotate(0deg);
+  }
+
+  .changelog-card.open
+  .arrow {
+    transform: rotate(90deg);
+  }
+
+  .changelog-card:hover
+  .arrow {
+    color: var(--blue-light);
+
+    filter:
+      drop-shadow(
+        0 0 7px
+        rgba(79, 142, 247, 0.5)
+      );
+  }
+
+
+  /* =========================
+     BADGE BASE
+  ========================= */
+
+  .changelog-card .badge {
+    position: relative;
+
+    display: inline-block;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      filter 0.25s ease;
+  }
+
+  .changelog-card .badge::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -140%;
+
+    width: 65%;
+    height: 100%;
+
+    background:
+      linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent
+      );
+
+    transform: skewX(-20deg);
+
+    pointer-events: none;
+
+    animation:
+      badgeShine 3.2s ease-in-out infinite;
+  }
+
+  @keyframes badgeShine {
+    0% {
+      left: -140%;
+    }
+
+    35%,
+    100% {
+      left: 150%;
+    }
+  }
+
+
+  /* =========================
+     STABLE
+  ========================= */
+
+  .changelog-card .badge.stable {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(79, 142, 247, 0.24),
+        rgba(79, 142, 247, 0.09)
+      );
+
+    color: var(--blue-light);
+
+    border:
+      1px solid
+      rgba(79, 142, 247, 0.42);
+
+    box-shadow:
+      0 0 10px
+      rgba(79, 142, 247, 0.12);
+
+    animation:
+      stableGlow 2.6s ease-in-out infinite;
+  }
+
+  @keyframes stableGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 7px
+        rgba(79, 142, 247, 0.08);
+    }
+
+    50% {
+      box-shadow:
+        0 0 19px
+        rgba(79, 142, 247, 0.32);
+    }
+  }
+
+
+  /* =========================
+     LATEST
+  ========================= */
+
+  .changelog-card .badge.latest {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(74, 222, 128, 0.25),
+        rgba(74, 222, 128, 0.08)
+      );
+
+    color: var(--green);
+
+    border:
+      1px solid
+      rgba(74, 222, 128, 0.45);
+
+    box-shadow:
+      0 0 10px
+      rgba(74, 222, 128, 0.12);
+
+    animation:
+      latestGlow 2.2s ease-in-out infinite;
+  }
+
+  @keyframes latestGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 7px
+        rgba(74, 222, 128, 0.08);
+    }
+
+    50% {
+      box-shadow:
+        0 0 21px
+        rgba(74, 222, 128, 0.35);
+    }
+  }
+
+
+/* =========================
+   LEGACY
+========================= */
+
+.changelog-card .badge.legacy {
+  background:
+    linear-gradient(
+      135deg,
+      #050505,
+      #202020 45%,
+      #555555 70%,
+      #151515
+    );
+
+  color: #ffffff;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  box-shadow:
+    0 0 8px
+    rgba(255, 255, 255, 0.04);
+}
+
+.changelog-card .badge.legacy:hover {
+  transform:
+    translateY(-1px)
+    scale(1.025);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 0 14px
+    rgba(255, 255, 255, 0.1);
+}
+
+  /* =========================
+     BADGE HOVER
+  ========================= */
+
+  .changelog-card .badge:hover {
+    transform:
+      translateY(-1px)
+      scale(1.025);
+
+    filter:
+      brightness(1.08);
+  }
+
+  .changelog-card .badge.stable:hover {
+    box-shadow:
+      0 0 22px
+      rgba(79, 142, 247, 0.4);
+  }
+
+  .changelog-card .badge.latest:hover {
+    box-shadow:
+      0 0 24px
+      rgba(74, 222, 128, 0.42);
+  }
+
+  .changelog-card .badge.legacy:hover {
+    box-shadow:
+      0 0 20px
+      rgba(255, 255, 255, 0.16);
+  }
+
+
+  /* =========================
+     REDUCED MOTION
+  ========================= */
+
+  @media (prefers-reduced-motion: reduce) {
 
     .changelog-card {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease forwards;
-    }
-
-    .changelog-card:nth-child(1) { animation-delay: 0.05s; }
-    .changelog-card:nth-child(2) { animation-delay: 0.1s; }
-    .changelog-card:nth-child(3) { animation-delay: 0.15s; }
-    .changelog-card:nth-child(4) { animation-delay: 0.2s; }
-    .changelog-card:nth-child(5) { animation-delay: 0.25s; }
-    .changelog-card:nth-child(6) { animation-delay: 0.3s; }
-    .changelog-card:nth-child(7) { animation-delay: 0.35s; }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .changelog-content {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: scaleY(0.98);
-      transform-origin: top;
-      transition: all 0.35s ease;
-    }
-
-    .changelog-card.open .changelog-content {
-      max-height: 2000px;
       opacity: 1;
-      transform: scaleY(1);
-    }
 
-    .arrow {
-      transition: transform 0.3s ease;
-      display: inline-block;
-      margin-right: 6px;
-    }
+      transform: none;
 
-    .changelog-card.open .arrow {
-      transform: rotate(0deg);
-    }
-
-    .changelog-card:not(.open) .arrow {
-      transform: rotate(-90deg);
+      animation: none;
     }
 
     .changelog-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px rgba(79,142,247,0.08);
+      transform: none;
     }
 
-    .badge.tested {
-      animation: pulse 2s infinite;
+    .changelog-header::after,
+    .changelog-card .badge::after {
+      display: none;
     }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    .changelog-card .badge.stable,
+    .changelog-card .badge.latest,
+    .changelog-card .badge.legacy {
+      animation: none;
     }
 
-  </style>
+    .changelog-content,
+    .arrow,
+    .changelog-card,
+    .changelog-card .badge {
+      transition: none;
+    }
+  }
+ </style>
 </head>
 
 <body>
@@ -105,6 +499,532 @@
 
 <main>
 
+<!-- v4.4 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v4.4 "RebirthCatalyst"
+      <span class="badge latest">LATEST</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+
+    <ul>
+
+      <li><strong>Website Modernization:</strong></li>
+
+      <li>Official Toollibs website completely modernized</li>
+      <li>Website presentation redesigned around a unified modern visual identity</li>
+      <li>All four main website pages migrated to the modern design system</li>
+      <li>Active pages standardized around <code>style-modern.css</code></li>
+      <li>Legacy <code>style.css</code> compatibility removed from active pages</li>
+      <li>Website structure reorganized for a cleaner and more consistent presentation</li>
+
+      <br>
+
+      <li><strong>Modern Visual System:</strong></li>
+
+      <li>New dark and minimal visual direction introduced across the website</li>
+      <li>Purple, blue and white visual language established</li>
+      <li>Glass-style surfaces and modern content cards added</li>
+      <li>Modern navigation, page headers, buttons and badges introduced</li>
+      <li>Typography, spacing, borders and transitions refined throughout the website</li>
+      <li>Responsive layout improvements applied across the main pages</li>
+      <li>Canvas-based particles and connection effects added to the website background</li>
+      <li>Cursor glow interaction added for compatible pointer devices</li>
+      <li>Intersection-based card reveal animations added</li>
+      <li>Reduced-motion considerations added for users who prefer less animation</li>
+
+      <br>
+
+      <li><strong>README.md Rework:</strong></li>
+
+      <li>Toollibs README completely reworked</li>
+      <li>README presentation expanded and modernized</li>
+      <li>Documentation aligned with the modern ToolGits visual and presentation language</li>
+      <li>Project introduction and identity refined</li>
+      <li>Architecture documentation expanded</li>
+      <li>Features documentation expanded</li>
+      <li>Platform support information reorganized</li>
+      <li>Build System documentation expanded</li>
+      <li>Android Development documentation expanded</li>
+      <li>Runtime Verification documentation expanded</li>
+      <li>Automated Deployment documentation expanded</li>
+      <li>Nightly Development information expanded</li>
+      <li>Project Direction and History sections expanded</li>
+      <li>Contributing and project maintenance information refined</li>
+      <li>Overall README structure redesigned for a more complete project overview</li>
+
+      <br>
+
+      <li><strong>SEO Foundation:</strong></li>
+
+      <li>Basic SEO foundation added to the official website</li>
+      <li>Page-specific titles introduced</li>
+      <li>Page-specific meta descriptions added</li>
+      <li>Canonical URLs added to the main website pages</li>
+      <li>Open Graph metadata added for social sharing</li>
+      <li>Toollibs logo configured as the Open Graph image</li>
+      <li>Public website assets reorganized to support GitHub Pages delivery</li>
+      <li><code>sitemap.xml</code> added</li>
+      <li>Sitemap configured with the four main Toollibs website pages</li>
+      <li><code>robots.txt</code> added</li>
+      <li>Robots configuration allows website crawling</li>
+      <li>Sitemap location registered inside <code>robots.txt</code></li>
+
+      <br>
+
+      <li><strong>Homepage:</strong></li>
+
+      <li><code>index.html</code> migrated to the modern visual system</li>
+      <li>Homepage presentation redesigned with the new Toollibs visual identity</li>
+      <li>Modern website interactions and visual effects integrated</li>
+      <li>Page metadata updated for search engines and social sharing</li>
+      <li>Dedicated canonical URL established</li>
+
+      <br>
+
+      <li><strong>Downloads Page:</strong></li>
+
+      <li><code>downloads.html</code> migrated to the modern visual system</li>
+      <li>Existing Smart Download functionality preserved</li>
+      <li>Existing platform and architecture detection retained</li>
+      <li>Existing compatible-build filtering retained</li>
+      <li>Downloads presentation redesigned to match the modern website</li>
+      <li>Page metadata updated for search engines and social sharing</li>
+      <li>Dedicated canonical URL established</li>
+
+      <br>
+
+      <li><strong>Changelog Page:</strong></li>
+
+      <li><code>changelog.html</code> migrated to the modern visual system</li>
+      <li>Existing expandable release-card structure preserved</li>
+      <li>Release history presentation integrated with the new website identity</li>
+      <li>Page metadata updated for search engines and social sharing</li>
+      <li>Dedicated canonical URL established</li>
+
+      <br>
+
+      <li><strong>Devices Page:</strong></li>
+
+      <li><code>devices.html</code> migrated to the modern visual system</li>
+      <li>Device and platform information presentation redesigned</li>
+      <li>Responsive presentation improvements applied</li>
+      <li>Page metadata updated for search engines and social sharing</li>
+      <li>Dedicated canonical URL established</li>
+
+      <br>
+
+      <li><strong>Web Assets & Structure:</strong></li>
+
+      <li>Toollibs website logo made available through the public <code>docs/assets/</code> directory</li>
+      <li>Website assets reorganized to work correctly with the GitHub Pages structure</li>
+      <li>Active website pages standardized around the modern stylesheet</li>
+      <li>Legacy visual dependencies removed from active pages</li>
+      <li>Website presentation made more consistent across all major sections</li>
+
+      <br>
+
+      <li><strong>Release Milestone:</strong></li>
+
+      <li>Toollibs fourth generation receives a major presentation modernization</li>
+      <li>Official website receives its largest visual redesign in the current generation</li>
+      <li>Project documentation receives a major README rework</li>
+      <li>Search and social discoverability foundations established</li>
+      <li>Existing Toollibs functionality preserved while its public presentation is modernized</li>
+      <li>RebirthCatalyst establishes a new visual and documentation foundation for future Toollibs development</li>
+
+    </ul>
+
+    <p>
+      RebirthCatalyst is a major modernization release for the Toollibs
+      project. Rather than changing the identity or core purpose of the
+      framework ecosystem, this release focuses on rebuilding its public
+      presentation through a completely modernized website, a substantially
+      reworked README, improved documentation structure, and a new SEO
+      foundation.
+    </p>
+
+    <p>
+      The four main Toollibs website pages were migrated to the new visual
+      system, establishing a consistent experience across the homepage,
+      downloads, changelog and devices sections. Existing functionality,
+      including Smart Download, was preserved while the pages themselves
+      received their visual and metadata modernization.
+    </p>
+
+    <p>
+      RebirthCatalyst also establishes the foundation for better public
+      discoverability through page-specific metadata, canonical URLs,
+      Open Graph integration, <code>sitemap.xml</code>, and
+      <code>robots.txt</code>. Together with the new README and website
+      structure, these changes give Toollibs a significantly more refined
+      public identity while preserving the framework ecosystem itself.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- v4.3 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v4.3 "Androck Horizon"
+      <span class="badge stable">STABLE</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+
+    <ul>
+
+      <li><strong>Android Ecosystem:</strong></li>
+
+      <li>Android platform development returned as a major focus</li>
+      <li>New <code>android_device_diagnostic</code> tool introduced</li>
+      <li>Native Android device diagnostic system introduced</li>
+      <li>Android NDK integration expanded</li>
+      <li>AArch64 Android build support added for the diagnostic system</li>
+
+      <br>
+
+      <li><strong>JNI:</strong></li>
+
+      <li>JNI integration introduced for <code>android_device_diagnostic</code></li>
+      <li><code>JNI_OnLoad()</code> initialization implemented</li>
+      <li><code>RegisterNatives()</code> integration implemented</li>
+      <li>Java ↔ native C++ communication layer introduced</li>
+
+      <br>
+
+      <li><strong>Build System:</strong></li>
+
+      <li>Android device diagnostic build target added to the Makefile</li>
+      <li>Android shared library generation added</li>
+      <li>Android NDK detection integrated into the build system</li>
+      <li>Android diagnostic library generated as an AArch64 <code>.so</code></li>
+      <li>Android build group updated with the new diagnostic system</li>
+      <li>Deployment system prepared for Android diagnostic binaries</li>
+
+      <br>
+
+      <li><strong>FileSystem:</strong></li>
+
+      <li><code>fs_emucmd</code> compatibility warnings addressed with dedicated compiler flags</li>
+      <li>Linux <code>fs_emucmd</code> build flags refined</li>
+      <li>Windows <code>fs_emucmd</code> build flags refined</li>
+
+      <br>
+
+      <li><strong>Android Ecosystem Cleanup:</strong></li>
+
+      <li>Toollibs Local Android officially discontinued</li>
+      <li>Android tooling direction reorganized around native diagnostic capabilities</li>
+
+      <br>
+
+      <li><strong>Generation Milestone:</strong></li>
+
+      <li>Fourth Toollibs generation expanded with renewed Android development</li>
+      <li>Android platform returns as a major ecosystem focus</li>
+      <li>New native diagnostic architecture established for future Android tooling</li>
+
+    </ul>
+
+    <p>
+      Androck Horizon marks the return of Android as a major focus of the
+      Toollibs ecosystem. The release introduces
+      <code>android_device_diagnostic</code>, native Android NDK support,
+      JNI integration, and a new foundation for future Android tooling while
+      officially retiring the previous Toollibs Local Android system.
+    </p>
+
+    <p>
+      This release also marks the end of the Samsung Galaxy Grand Prime
+      SM-G530H, known as <code>fortunave3g</code>, as a functional testing
+      device. The device became unable to boot after a Samsung Android 5.0.2
+      firmware boot update and is now limited to Download Mode / Bootloader.
+      Recovery is unavailable, and the micro-USB data connection suffered
+      D+ / D- failure.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- v4.2 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v4.2 "TAether & TNether"
+      <span class="badge stable">STABLE</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+
+    <ul>
+
+      <li><strong>Toollibs Architecture System:</strong></li>
+
+      <li>Official architecture naming system introduced</li>
+      <li>TAether (Toollibs Aether) established as the main branch architecture</li>
+      <li>TNether (Toollibs Nether) introduced as the nightly branch architecture</li>
+      <li>Architecture identities separated between stable and experimental development</li>
+
+      <br>
+
+      <li><strong>Build System:</strong></li>
+
+      <li>Makefile architecture detection improved</li>
+      <li>HAS_MINGW detection now reports MinGW availability using yes/no status</li>
+      <li>Build information output improved</li>
+
+      <br>
+
+      <li><strong>Community:</strong></li>
+
+      <li>ToolGits SV Discord server introduced</li>
+      <li>Developer communication ecosystem expanded</li>
+
+      <br>
+
+      <li><strong>Documentation:</strong></li>
+
+      <li>Architecture naming documented across Toollibs documentation</li>
+      <li>Project identity and ecosystem organization refined</li>
+
+    </ul>
+
+    <p>
+      v4.2 "TAether & TNether" introduces the official Toollibs architecture naming system.
+      TAether defines the stable main branch architecture, while TNether defines
+      the nightly development architecture, creating a clearer separation between
+      production and experimental environments.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- v4.0.1 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v4.0.1 "BigBrowserPatchLibs"
+      <span class="badge stable">STABLE</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+
+    <ul>
+
+      <li><strong>Home:</strong></li>
+
+      <li>Homepage redesigned with a cleaner and stronger presentation</li>
+      <li>Hero section modernized</li>
+      <li>Project Status section updated</li>
+      <li>About section rewritten</li>
+      <li>Core Modules reorganized</li>
+      <li>Official Platforms section introduced</li>
+      <li>General homepage layout improved</li>
+
+      <br>
+
+      <li><strong>Downloads:</strong></li>
+
+      <li>Automatic Android platform detection improved</li>
+      <li>aarch64 builds automatically recommended for Android devices</li>
+      <li>armv7l architecture detection added</li>
+      <li>armv6l architecture detection added</li>
+      <li>Platform filtering logic improved</li>
+      <li>Download experience refined</li>
+
+      <br>
+
+      <li><strong>Devices:</strong></li>
+
+      <li>Android phones and tablets unified into a single Android category</li>
+      <li>Desktop and Laptop merged into one platform section</li>
+      <li>Operating Systems compatibility table introduced</li>
+      <li>Official compatibility system added</li>
+      <li>Partial compatibility system introduced</li>
+      <li>Smart TV documentation updated</li>
+      <li>Compatibility legend expanded</li>
+      <li>Overall layout and readability improved</li>
+
+      <br>
+
+      <li><strong>Documentation:</strong></li>
+
+      <li>Website documentation reorganized</li>
+      <li>Platform descriptions updated</li>
+      <li>Improved consistency across website pages</li>
+      <li>Navigation experience refined</li>
+      <li>General readability improvements</li>
+
+      <br>
+
+      <li><strong>General:</strong></li>
+
+      <li>Overall website polish and refinement</li>
+      <li>Visual consistency improved across multiple pages</li>
+      <li>Maintenance update for the Toollibs Web Platform</li>
+
+    </ul>
+
+    <p>
+
+      BigBrowserPatchLibs is the first maintenance update of the Toollibs v4 generation.
+      It focuses on improving the Toollibs Web Platform by modernizing the homepage,
+      refining Downloads, reorganizing Devices, expanding documentation, and delivering
+      a cleaner and more consistent browsing experience across the entire website.
+
+    </p>
+
+  </div>
+
+</div>
+
+<!-- v4.0XY -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v4.0XY "C++CoreLibs"
+      <span class="badge stable">STABLE</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+
+    <ul>
+
+      <li><strong>Core System:</strong></li>
+
+      <li>Core module redesigned</li>
+      <li>Internal Core architecture improved</li>
+      <li>Preparation for future Core expansion</li>
+
+      <br>
+
+      <li><strong>Logger:</strong></li>
+
+      <li>MainLogger verification pipeline rewritten</li>
+      <li>Logger verification tests added</li>
+      <li>Improved runtime validation</li>
+
+      <br>
+
+      <li><strong>TimerTrigger:</strong></li>
+
+      <li>New TimerTrigger module introduced</li>
+      <li>Automatic callback execution</li>
+      <li>Integrated with MainLogger verification pipeline</li>
+      <li>Runtime timer validation added</li>
+
+      <br>
+
+      <li><strong>Verification Pipeline:</strong></li>
+
+      <li>Module integrity verification expanded</li>
+      <li>Improved runtime diagnostics</li>
+      <li>Healthy / Degraded / Critical system status reporting</li>
+
+      <br>
+
+      <li><strong>Generation Milestone:</strong></li>
+
+      <li>First official release of the Toollibs v4 generation</li>
+      <li>Beginning of the C++CoreLibs architecture</li>
+
+    </ul>
+
+    <p>
+
+      C++CoreLibs marks the beginning of Toollibs v4,
+      introducing a redesigned Core architecture focused on
+      verification, diagnostics and future extensibility.
+
+    </p>
+
+  </div>
+
+</div>
+
+<!-- v3.4 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v3.4 "LetterVerse"
+      <span class="badge legacy">LEGACY</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+    <ul>
+
+      <li>New Toollibs logo introduced</li>
+      <li>Updated project visual identity</li>
+      <li>README documentation improved</li>
+      <li>Audio module officially documented as part of the Toollibs ecosystem</li>
+      <li>Improved project presentation across documentation pages</li>
+
+    </ul>
+
+    <p>
+      LetterVerse focuses on refining the Toollibs identity, documentation,
+      and overall project presentation while continuing the evolution of the framework ecosystem.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- v3.3 -->
+<div class="changelog-card open" onclick="toggleCard(this)">
+
+  <div class="changelog-header">
+    <div class="changelog-title">
+      <span class="arrow">▶</span>
+      v3.3 "NightlyPatcher"
+      <span class="badge legacy">LEGACY</span>
+    </div>
+  </div>
+
+  <div class="changelog-content">
+    <ul>
+      <li>Website updated with minor and subtle improvements</li>
+      <li>Nightly system improved with a stronger and more stable base</li>
+      <li>Additional internal information added to the nightly/bin structure</li>
+    </ul>
+
+    <p>
+      NightlyPatcher introduces small refinements across the Toollibs ecosystem, focusing on stability and internal improvements.
+    </p>
+
+    <ul>
+      <li><strong>Quick notes:</strong> v3.3 NightlyPatcher contains additional internal details in the Nightly branch.</li>
+      <li>Go to repository → branches → nightly → internal_changelogs → nightly_changelog.md for more information.</li>
+    </ul>
+  </div>
+</div>
+
 <!-- v3.2 -->
 <div class="changelog-card open" onclick="toggleCard(this)">
 
@@ -112,7 +1032,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.2 "FontsFirst"
-      <span class="badge tested">LATEST</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -141,7 +1061,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.1 "FileFirstSystem"
-      <span class="badge tested">LATEST</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -173,7 +1093,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v3.0 "Harmonic Duality"
-      <span class="badge stable">STABLE</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
 
@@ -218,7 +1138,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.5 "Fortunav3.0egg.log"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -263,7 +1183,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4.5 "FortunaHorizon3g"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -284,7 +1204,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.4 "HorizonDroid"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -303,7 +1223,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.3 "CPUnix"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -321,7 +1241,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.1.2 "LoggerPatch"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -338,7 +1258,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.1 "BigBrowserToollibs"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -356,7 +1276,7 @@
     <div class="changelog-title">
       <span class="arrow">▶</span>
       v2.0 "Forgelibs"
-      <span class="badge">LEGACY</span>
+      <span class="badge legacy">LEGACY</span>
     </div>
   </div>
   <div class="changelog-content">
@@ -375,7 +1295,7 @@
         <div class="changelog-title">
           <span class="arrow">▶</span>
           v1.1 Beta
-          <span class="badge">LEGACY</span>
+          <span class="badge legacy">LEGACY</span>
         </div>
       </div>
 
@@ -399,7 +1319,7 @@
         <div class="changelog-title">
           <span class="arrow">▶</span>
           v1.0 Beta
-          <span class="badge">LEGACY</span>
+          <span class="badge legacy">LEGACY</span>
         </div>
       </div>
 
@@ -422,7 +1342,7 @@
         <div class="changelog-title">
           <span class="arrow">▶</span>
           v0.1 Alpha
-          <span class="badge">LEGACY</span>
+          <span class="badge legacy">LEGACY</span>
         </div>
       </div>
 
@@ -477,6 +1397,146 @@ window.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <script src="system.js"></script>
+<script>
+  const canvas = document.getElementById('bg');
+  const glow = document.getElementById('glow');
 
+  const colors = [
+    [79, 142, 247],
+    [124, 95, 255],
+    [255, 255, 255]
+  ];
+
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+
+    let W = 0;
+    let H = 0;
+    let dots = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function mkDot() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.4,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        a: Math.random(),
+        color: colors[Math.floor(Math.random() * colors.length)]
+      };
+    }
+
+    function initDots() {
+      const count = window.innerWidth < 768 ? 55 : 90;
+      dots = Array.from({ length: count }, mkDot);
+    }
+
+    function drawDots() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+
+        d.x += d.vx;
+        d.y += d.vy;
+
+        if (d.x < 0) d.x = W;
+        if (d.x > W) d.x = 0;
+        if (d.y < 0) d.y = H;
+        if (d.y > H) d.y = 0;
+
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+
+          const dx = d.x - b.x;
+          const dy = d.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            ctx.strokeStyle =
+              `rgba(124,95,255,${0.12 * (1 - dist / 130)})`;
+
+            ctx.lineWidth = 0.5;
+
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+
+        const [r, g, b] = d.color;
+
+        ctx.fillStyle =
+          `rgba(${r},${g},${b},${d.a * 0.6})`;
+
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(drawDots);
+    }
+
+    resize();
+    initDots();
+    drawDots();
+
+    window.addEventListener('resize', () => {
+      resize();
+      initDots();
+    });
+  }
+
+if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  function moveGlow(event) {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+    glow.style.opacity = '1';
+  }
+
+  window.addEventListener('mousemove', moveGlow);
+
+  window.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+}
+
+  const cards = document.querySelectorAll('.grid > section');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const card = entry.target;
+        const index = Array.from(
+          card.parentElement.children
+        ).indexOf(card);
+
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 90);
+
+        observer.unobserve(card);
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  } else {
+    cards.forEach((card) => {
+      card.classList.add('visible');
+    });
+  }
+</script>
 </body>
 </html>

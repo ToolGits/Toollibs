@@ -2,6 +2,8 @@ CXX = g++
 MINGW = x86_64-w64-mingw32-g++
 
 CXXFLAGS = -std=c++17 -Wall -Wextra -O2 -I.
+FS_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat
+FS_WIN_CXXFLAGS = $(CXXFLAGS) -Wc++20-compat -Wattributes
 
 # ============================================================
 # ARCHITECTURE DETECTION
@@ -14,13 +16,17 @@ BUILD_DIR_WIN = bin/windows_x86_64
 BUILD_DIR_ANDROID = bin/android
 
 # Detect MinGW automatically
-HAS_MINGW := $(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes)
+ifeq ($(shell command -v $(MINGW) >/dev/null 2>&1 && echo yes),yes)
+HAS_MINGW = yes
+else
+HAS_MINGW = no
+endif
 
 # ============================================================
 # CORE FRAMEWORK
 # ============================================================
 
-CORE_SRC = core/logger.cpp core/mainlogger.cpp platform/platform.cpp
+CORE_SRC = core/logger.cpp core/mainlogger.cpp core/timertrigger.cpp platform/platform.cpp
 MATH_SRC = math/math.cpp
 GRAPHICS_SRC = graphics/graphics.cpp
 PLUGIN_SRC = plugins/MathPlugin/plugin.cpp
@@ -50,6 +56,10 @@ GPU_SRC = \
 BATTERY_SRC = \
 	platform/android/battery.cpp \
 	platform/android/battery_info.cpp
+
+ANDROID_DEVICE_DIAGNOSTIC_SRC = \
+        platform/android/android_device_diagnostic.cpp \
+        platform/android/android_device_diagnostic_jni.cpp
 
 # ============================================================
 # POP PLUGIN
@@ -111,20 +121,22 @@ FREETYPE_LIBS := $(shell pkg-config --libs freetype2)
 # ANDROID NDK CONFIG
 # ============================================================
 
-ifneq ($(NDK_VERSION),)
+ANDROID_HOME ?= $(HOME)/Android/Sdk
+
+NDK_BASE := $(ANDROID_HOME)/ndk
+
+NDK_VERSION ?= 25.2.9519653
 
 NDK := $(NDK_BASE)/$(NDK_VERSION)
 
-ANDROID_API = 24
+ANDROID_API := 24
 
-CLANGXX = $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
+CLANGXX := $(NDK)/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android$(ANDROID_API)-clang++
 
-HAS_NDK = yes
-
+ifeq ($(wildcard $(CLANGXX)),)
+HAS_NDK := no
 else
-
-HAS_NDK = no
-
+HAS_NDK := yes
 endif
 
 # ============================================================
@@ -140,6 +152,8 @@ GPU_TARGET = $(BUILD_DIR)/gpu_info
 BATTERY_TARGET = $(BUILD_DIR)/battery_info
 AUDIO_PLAYER_LINUX_TARGET = $(BUILD_DIR)/audio_player
 AUDIO_PLAYER_ANDROID_TARGET = $(BUILD_DIR_ANDROID)/android_audio_player
+ANDROID_DEVICE_DIAGNOSTIC_TARGET = \
+        $(BUILD_DIR_ANDROID)/libandroid_device_diagnostic.so
 
 POP_TARGET = $(BUILD_DIR)/pop
 
@@ -196,7 +210,7 @@ pop: prepare
 # ============================================================
 
 fs_emucmd: prepare
-	$(CXX) $(CXXFLAGS) $(FS_EMUCMD_SRC) $(REPLXX_SRC) -o $(FS_TARGET)
+	$(CXX) $(FS_CXXFLAGS) $(FS_EMUCMD_SRC) $(REPLXX_SRC) -o $(FS_TARGET)
 
 # ============================================================
 # AUDIO PLAYER
@@ -213,17 +227,35 @@ audio_player: prepare $(AUDIO_SRC) $(AUDIO_PLAYER_SRC)
 
 android_audio_player: prepare $(AUDIO_SRC) platform/android/audio_android.cpp
 ifeq ($(HAS_NDK),yes)
-@echo "Building Android audio player..."
+	@echo "Building Android audio player..."
 
-$(CLANGXX) $(CXXFLAGS) \
-$(AUDIO_SRC) \
-platform/android/audio_android.cpp \
--o $(AUDIO_PLAYER_ANDROID_TARGET) \
--landroid -llog
+	$(CLANGXX) $(CXXFLAGS) \
+	$(AUDIO_SRC) \
+	platform/android/audio_android.cpp \
+	-o $(AUDIO_PLAYER_ANDROID_TARGET) \
+	-landroid -llog
 
 else
-@echo "Toollibs: Android NDK not found."
+	@echo "Toollibs: Android NDK not found."
 	@echo "Skipping android_audio_player build."
+endif
+
+# ============================================================
+# ANDROID DEVICE DIAGNOSTIC
+# ============================================================
+
+android_device_diagnostic: prepare
+ifeq ($(HAS_NDK),yes)
+	@echo "Building Android device diagnostic..."
+	$(CLANGXX) $(CXXFLAGS) \
+	-fPIC \
+	-shared \
+	$(ANDROID_DEVICE_DIAGNOSTIC_SRC) \
+	-o $(ANDROID_DEVICE_DIAGNOSTIC_TARGET) \
+	-llog
+else
+	@echo "Toollibs: Android NDK not found."
+	@echo "Skipping android_device_diagnostic build."
 endif
 
 # ============================================================
@@ -271,7 +303,7 @@ endif
 fs_emucmd_windows: prepare
 ifeq ($(HAS_MINGW),yes)
 	@mkdir -p $(BUILD_DIR_WIN)
-	$(MINGW) $(CXXFLAGS) $(FS_EMUCMD_SRC_WIN) -o $(FS_TARGET_WIN)
+	$(MINGW) $(FS_WIN_CXXFLAGS) $(FS_EMUCMD_SRC_WIN) -o $(FS_TARGET_WIN)
 endif
 
 # ============================================================
@@ -280,9 +312,9 @@ endif
 
 linux: mainlogger cpu_info gpu_info pop fs_emucmd audio_player font_preview
 
-android: battery_info android_audio_player
+android: battery_info android_audio_player android_device_diagnostic
 
-all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player font_preview
+all: prepare mainlogger tools pop windows pop_windows fs_emucmd fs_emucmd_windows audio_player android_audio_player font_preview android_device_diagnostic
 
 # ============================================================
 # RUN
@@ -378,3 +410,4 @@ help:
 	@echo "make run_audio_android"
 	@echo "make font_preview"
 	@echo "make run_font_preview"
+	@echo "make android_device_diagnostic"

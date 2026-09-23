@@ -3,11 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toollibs</title>
+  <title>Toollibs — Modern Modular C++ Framework Ecosystem</title>
+  <meta name="description" content="Toollibs is a modern modular C++ framework ecosystem for Linux, Windows and Android.">
+  <link rel="canonical" href="https://toolgits.github.io/Toollibs/">
+  <meta property="og:title" content="Toollibs — Modern Modular C++ Framework Ecosystem">
+  <meta property="og:description" content="Modern modular C++ framework ecosystem for Linux, Windows and Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://toolgits.github.io/Toollibs/">
+  <meta property="og:image" content="https://toolgits.github.io/Toollibs/assets/Toollibs_newlogo.png">
+  <meta property="og:image:alt" content="Toollibs logo">
+  <meta name="google-site-verification" content="HNL-tHTLrDzS2yHfzAWBgTxmeaYajcRFndB6JZFLwmE" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="style-modern.css">
 
 </head>
@@ -25,14 +33,14 @@
   <header class="hero">
     <h1>Toollibs</h1>
     <p class="subtitle">
-      Modular open-source C++ framework for tools, systems and scalable architecture.
+      Modern modular C++ framework ecosystem.
     </p>
     <p class="tagline">
-      Lightweight · Modular · Cross-platform · Runtime-driven · Ecosystem-based
+      Lightweight • Modular • Cross-platform • Runtime-driven • Ecosystem-based
     </p>
     <div class="hero-buttons">
       <a class="button"
-         href="https://github.com/enzobobdevvideos04-ctrl/Toollibs"
+         href="https://github.com/ToolGits/Toollibs"
          target="_blank"
          rel="noopener noreferrer">
         GitHub
@@ -48,31 +56,42 @@
 
   <main>
     <div class="grid">
-      <section>
-        <h2>Project Status</h2>
-        <p>
-          Toollibs is actively evolving into a full ecosystem with multi-platform builds,
-          runtime verification and automated deployment system.
-        </p>
-      </section>
+<section>
 
-      <section>
-        <h2>About</h2>
-        <p>
-          Toollibs is a modular C++ framework designed to provide reusable components,
-          system utilities, plugin-based architecture and development tools for scalable projects.
-        </p>
-      </section>
+<h2>Project Status</h2>
+
+<p>
+Toollibs is under active development with official support for
+Linux, Windows and Android. The ecosystem includes modular libraries,
+system utilities, automated deployment and a continuously evolving
+documentation platform.
+</p>
+
+</section>
+
+<section>
+
+<h2>About</h2>
+
+<p>
+Toollibs is an open-source modular C++ framework ecosystem designed
+for building reusable libraries, development tools and cross-platform
+applications. It focuses on simplicity, scalability and native
+performance across supported platforms.
+</p>
+
+</section>
 
       <section>
         <h2>Core Modules</h2>
         <ul>
-          <li><strong>core</strong> — logging system + runtime control</li>
-          <li><strong>math</strong> — vector and math utilities</li>
-          <li><strong>graphics</strong> — rendering helpers</li>
-          <li><strong>input</strong> — input abstraction layer</li>
-          <li><strong>fs</strong> — filesystem utilities</li>
-          <li><strong>plugins</strong> — extensibility system</li>
+          <li><strong>core</strong></li>
+          <li><strong>math</strong></li>
+          <li><strong>graphics</strong></li>
+          <li><strong>input</strong></li>
+          <li><strong>fs</strong></li>
+          <li><strong>plugins</strong></li>
+          <li><strong>audio</strong></li>
         </ul>
       </section>
 
@@ -81,17 +100,30 @@
         <ul>
           <li><strong>ToollibsServer</strong> — backend/API system</li>
           <li><strong>Deploy System</strong> — automated build & distribution pipeline</li>
-          <li><strong>Toollibs Workstation</strong> — Debian-based development environment</li>
+          <li><strong>ToolGits Workstation</strong> — Debian-based development environment</li>
           <li><strong>cpu_info / gpu_info</strong> — Linux hardware inspection tools</li>
+          <li><strong>audio_player</strong> — Simple music player for Linux and Android</li>
           <li><strong>Web Platform</strong> — documentation, downloads and changelog system</li>
         </ul>
       </section>
 
+<section>
+
+<h2>Official Platforms</h2>
+
+<ul>
+  <li>🤖 Android — Official</li>
+  <li>🐧 Linux — Official</li>
+  <li>🪟 Windows — Official</li>
+</ul>
+
+</section>
+
       <section>
         <h2>Version System</h2>
         <p>
-          Toollibs uses a codename-based versioning system introduced in the stable era,
-          integrating backend, tools and web platform into a unified ecosystem.
+          Toollibs uses a codename-based versioning system introduced in the v2.0 Forgelibs version,
+          generations such as v1.x, v2.x and v3.x, and everything is recorded in the Changelog.
         </p>
       </section>
     </div>
@@ -102,13 +134,25 @@
   </footer>
 
   <script src="system.js"></script>
-  <script>
-    const canvas = document.getElementById('bg');
+<script>
+  const canvas = document.getElementById('bg');
+  const glow = document.getElementById('glow');
+
+  const colors = [
+    [79, 142, 247],
+    [124, 95, 255],
+    [255, 255, 255]
+  ];
+
+  if (canvas) {
     const ctx = canvas.getContext('2d');
-    let W, H, dots = [];
+
+    let W = 0;
+    let H = 0;
+    let dots = [];
 
     function resize() {
-      W = canvas.width  = window.innerWidth;
+      W = canvas.width = window.innerWidth;
       H = canvas.height = window.innerHeight;
     }
 
@@ -119,19 +163,25 @@
         r: Math.random() * 1.4 + 0.4,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
-        a: Math.random()
+        a: Math.random(),
+        color: colors[Math.floor(Math.random() * colors.length)]
       };
     }
 
     function initDots() {
-      dots = Array.from({ length: 90 }, mkDot);
+      const count = window.innerWidth < 768 ? 55 : 90;
+      dots = Array.from({ length: count }, mkDot);
     }
 
     function drawDots() {
       ctx.clearRect(0, 0, W, H);
+
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
-        d.x += d.vx; d.y += d.vy;
+
+        d.x += d.vx;
+        d.y += d.vy;
+
         if (d.x < 0) d.x = W;
         if (d.x > W) d.x = 0;
         if (d.y < 0) d.y = H;
@@ -139,11 +189,17 @@
 
         for (let j = i + 1; j < dots.length; j++) {
           const b = dots[j];
-          const dx = d.x - b.x, dy = d.y - b.y;
+
+          const dx = d.x - b.x;
+          const dy = d.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
+
           if (dist < 130) {
-            ctx.strokeStyle = `rgba(79,142,247,${0.12 * (1 - dist / 130)})`;
+            ctx.strokeStyle =
+              `rgba(124,95,255,${0.12 * (1 - dist / 130)})`;
+
             ctx.lineWidth = 0.5;
+
             ctx.beginPath();
             ctx.moveTo(d.x, d.y);
             ctx.lineTo(b.x, b.y);
@@ -151,37 +207,73 @@
           }
         }
 
-        ctx.fillStyle = `rgba(79,142,247,${d.a * 0.6})`;
+        const [r, g, b] = d.color;
+
+        ctx.fillStyle =
+          `rgba(${r},${g},${b},${d.a * 0.6})`;
+
         ctx.beginPath();
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
         ctx.fill();
       }
+
       requestAnimationFrame(drawDots);
     }
 
-    window.addEventListener('resize', () => { resize(); initDots(); });
     resize();
     initDots();
     drawDots();
 
-    const glow = document.getElementById('glow');
-    window.addEventListener('mousemove', e => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
+    window.addEventListener('resize', () => {
+      resize();
+      initDots();
+    });
+  }
+
+if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  function moveGlow(event) {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+    glow.style.opacity = '1';
+  }
+
+  window.addEventListener('mousemove', moveGlow);
+
+  window.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+}
+
+  const cards = document.querySelectorAll('.grid > section');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const card = entry.target;
+        const index = Array.from(
+          card.parentElement.children
+        ).indexOf(card);
+
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 90);
+
+        observer.unobserve(card);
+      });
+    }, {
+      threshold: 0.12
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const delay = Array.from(el.parentElement.children).indexOf(el) * 90;
-          setTimeout(() => el.classList.add('visible'), delay);
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('section').forEach(s => observer.observe(s));
-  </script>
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  } else {
+    cards.forEach((card) => {
+      card.classList.add('visible');
+    });
+  }
+</script>
 </body>
 </html>

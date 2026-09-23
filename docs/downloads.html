@@ -5,14 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Toollibs Downloads</title>
+  <title>Toollibs — Downloads & Releases</title>
+  <meta name="description" content="Download Toollibs binaries and source code with Smart Download, automatically detecting your platform and architecture.">
+  <link rel="canonical" href="https://toolgits.github.io/Toollibs/downloads.html">
+
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
- <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="style-modern.css">
 
 </head>
 
@@ -29,7 +32,7 @@
 
 <div class="page-header">
   <h1>Downloads</h1>
-  <p>Download Toollibs binaries, releases and source code.</p>
+  <p>Download Toollibs binaries and source code.</p>
 </div>
 
   <main>
@@ -39,21 +42,24 @@
       <section>
         <h2>Current Status</h2>
 
-        <span class="badge tested">Latest Build Available</span>
+<span class="badge tested">Latest Build Available</span>
 
-        <p>
-          Toollibs is actively evolving with multi-platform builds,
-          backend services and automated deployment system.
-        </p>
+<p>
+  Toollibs is actively evolving with multi-platform builds,
+  modular framework systems and automated deployment workflows.
+</p>
       </section>
 
       <section>
         <h2>Source Code</h2>
 
-        <p>Access the full Toollibs framework source code.</p>
+<p>
+  Access the complete Toollibs framework source code,
+  including modules, tools and development infrastructure.
+</p>
 
         <a class="button"
-           href="https://github.com/enzobobdevvideos04-ctrl/Toollibs"
+           href="https://github.com/ToolGits/Toollibs"
            target="_blank"
            rel="noopener noreferrer">
           GitHub Repository
@@ -64,11 +70,29 @@
 
         <h2>Smart Downloads</h2>
 
-        <p id="archInfo">Detecting system architecture...</p>
+        <p id="archInfo">Detecting compatible builds...</p>
 
         <div id="downloadsList">Loading builds...</div>
 
       </section>
+
+<section>
+
+<h2>Build System</h2>
+
+<p>
+Toollibs uses an automated build and deployment workflow
+to compile, organize and distribute binaries across supported platforms.
+</p>
+
+<ul>
+  <li>Multi-architecture compilation</li>
+  <li>Automated binary deployment</li>
+  <li>Generated download index</li>
+  <li>Linux, Windows and Android support</li>
+</ul>
+
+</section>
 
       <section>
         <h2>Supported Architectures</h2>
@@ -76,9 +100,11 @@
         <ul>
           <li>x86_64 — 64-bit desktops and laptops</li>
           <li>x86 — 32-bit systems</li>
-          <li>aarch64 — modern ARM 64-bit devices</li>
+          <li>aarch64 — ARM 64-bit devices</li>
           <li>armv7l — ARM 32-bit legacy devices</li>
+          <li>armv6l — ARM 32-bit legacy devices (oldest)</li>
           <li><b>Windows builds available (x86_64 only)</b></li>
+          <li>Automatic architecture-based download selection</li>
         </ul>
       </section>
 
@@ -95,20 +121,31 @@
     // =========================
     // ARCH DETECTION
     // =========================
-    function detectArch() {
-      const ua = navigator.userAgent.toLowerCase();
+function detectArch() {
+  const ua = navigator.userAgent.toLowerCase();
 
-if (ua.includes("arm64") || ua.includes("aarch64"))
+  const isAndroid = ua.includes("android");
+
+  if (ua.includes("arm64") || ua.includes("aarch64"))
     return "aarch64";
 
-if (ua.includes("i386") || ua.includes("i686"))
+  if (ua.includes("armeabi-v7a") || ua.includes("armv7"))
+    return "armv7l";
+
+  if (ua.includes("armeabi") || ua.includes("armv6"))
+    return "armv6l";
+
+  if (ua.includes("i386") || ua.includes("i686"))
     return "x86";
 
-if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
+  if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
     return "x86_64";
 
-      return "unknown";
-    }
+  if (isAndroid)
+    return "android";
+
+  return "unknown";
+}
 
     // =========================
     // LOAD DOWNLOADS
@@ -120,10 +157,12 @@ if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
 
       const arch = detectArch();
 
-      archInfo.innerHTML =
-        arch === "unknown"
-          ? "Architecture: unknown — showing all builds"
-          : `Detected architecture: <b>${arch}</b>`;
+archInfo.innerHTML =
+  arch === "android"
+    ? "Detected platform: <b>Android</b> — showing ARM builds"
+    : arch === "unknown"
+      ? "Architecture: unknown — showing all builds"
+      : `Detected architecture: <b>${arch}</b>`;
 
       try {
         const res = await fetch("./downloads/index.json");
@@ -138,10 +177,27 @@ if (ua.includes("x86_64") || ua.includes("amd64") || ua.includes("win64"))
           let show = false;
 
 if (arch === "unknown") {
+
   show = true;
+
+} else if (arch === "android") {
+
+  show =
+    file.endsWith("-aarch64") ||
+    file.endsWith("-armv7l") ||
+    file.endsWith("-armv6l");
+
+} else if (arch === "arm") {
+
+  show =
+    file.endsWith("-aarch64") ||
+    file.endsWith("-armv7l") ||
+    file.endsWith("-armv6l");
+
 } else {
+
   const isLinux = file.endsWith(`-${arch}`);
-  const isWindows = file.endsWith(`-x86_64.exe`);
+  const isWindows = file.toLowerCase().endsWith(".exe");
 
   show = isLinux || isWindows;
 }
@@ -176,6 +232,146 @@ if (html === "<div class='download-grid'>")
 
   <!-- SYSTEM CONTROL LAYER -->
   <script src="system.js"></script>
+<script>
+  const canvas = document.getElementById('bg');
+  const glow = document.getElementById('glow');
 
+  const colors = [
+    [79, 142, 247],
+    [124, 95, 255],
+    [255, 255, 255]
+  ];
+
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+
+    let W = 0;
+    let H = 0;
+    let dots = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function mkDot() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.4,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        a: Math.random(),
+        color: colors[Math.floor(Math.random() * colors.length)]
+      };
+    }
+
+    function initDots() {
+      const count = window.innerWidth < 768 ? 55 : 90;
+      dots = Array.from({ length: count }, mkDot);
+    }
+
+    function drawDots() {
+      ctx.clearRect(0, 0, W, H);
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+
+        d.x += d.vx;
+        d.y += d.vy;
+
+        if (d.x < 0) d.x = W;
+        if (d.x > W) d.x = 0;
+        if (d.y < 0) d.y = H;
+        if (d.y > H) d.y = 0;
+
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+
+          const dx = d.x - b.x;
+          const dy = d.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 130) {
+            ctx.strokeStyle =
+              `rgba(124,95,255,${0.12 * (1 - dist / 130)})`;
+
+            ctx.lineWidth = 0.5;
+
+            ctx.beginPath();
+            ctx.moveTo(d.x, d.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+
+        const [r, g, b] = d.color;
+
+        ctx.fillStyle =
+          `rgba(${r},${g},${b},${d.a * 0.6})`;
+
+        ctx.beginPath();
+        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(drawDots);
+    }
+
+    resize();
+    initDots();
+    drawDots();
+
+    window.addEventListener('resize', () => {
+      resize();
+      initDots();
+    });
+  }
+
+if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  function moveGlow(event) {
+    glow.style.left = `${event.clientX}px`;
+    glow.style.top = `${event.clientY}px`;
+    glow.style.opacity = '1';
+  }
+
+  window.addEventListener('mousemove', moveGlow);
+
+  window.addEventListener('mouseleave', () => {
+    glow.style.opacity = '0';
+  });
+}
+
+  const cards = document.querySelectorAll('.grid > section');
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const card = entry.target;
+        const index = Array.from(
+          card.parentElement.children
+        ).indexOf(card);
+
+        setTimeout(() => {
+          card.classList.add('visible');
+        }, index * 90);
+
+        observer.unobserve(card);
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    cards.forEach((card) => {
+      observer.observe(card);
+    });
+  } else {
+    cards.forEach((card) => {
+      card.classList.add('visible');
+    });
+  }
+</script>
 </body>
 </html>

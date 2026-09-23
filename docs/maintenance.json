@@ -8,7 +8,25 @@
   "maintenance": {
     "mode": "maintenance",
     "code": "503",
-    "reason": "Unstable deployment"
+    "reason": "Maintenance"
+  },
+
+  "site_issue": {
+    "mode": "maintenance",
+    "code": "503",
+    "reason": "Site issue"
+  },
+
+  "backend_issue": {
+    "mode": "maintenance",
+    "code": "503",
+    "reason": "ToollibsServer backend issue"
+  },
+
+  "deployment_issue": {
+    "mode": "maintenance",
+    "code": "503",
+    "reason": "Deployment issue"
   },
 
   "degraded": {

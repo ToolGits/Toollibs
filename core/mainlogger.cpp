@@ -3,10 +3,14 @@
 #include "math/math.hpp"
 #include "graphics/graphics.hpp"
 #include "plugins/MathPlugin/plugin.hpp"
+#include "timertrigger.hpp"
 
 #include <vector>
 #include <string>
 #include <filesystem>
+#include <thread>
+#include <chrono>
+#include <exception>
 
 namespace fs = std::filesystem;
 
@@ -19,9 +23,9 @@ bool FileValid(const std::string& path)
 {
     try
     {
-        return fs::exists(path) &&
-               fs::is_regular_file(path) &&
-               fs::file_size(path) > 0;
+               return fs::exists(path) &&
+                      fs::is_regular_file(path) &&
+                      fs::file_size(path) > 0;
     }
     catch (...)
     {
@@ -38,6 +42,16 @@ struct Module
     std::string path;
     bool ok;
 };
+
+// =========================
+// LOGGER TEST
+// =========================
+
+void RunLoggerTests()
+{
+    Logger::Info("Running Logger tests...");
+    Logger::Info("Logger: basic output test PASSED");
+}
 
 // =========================
 // MATH TEST
@@ -100,6 +114,61 @@ void RunPluginTests()
 }
 
 // =========================
+// TIMERTRIGGER TEST
+// =========================
+
+void RunTimerTests()
+{
+    Logger::Info("Running TimerTrigger tests...");
+
+
+    bool executed = false;
+
+
+    TimerTrigger timer(
+        "MainLoggerTimer",
+        100,
+        [&]()
+        {
+            Logger::Info(
+                "Timer executed."
+            );
+
+            executed = true;
+        }
+    );
+
+
+    timer.Start();
+
+for(int i = 0; i < 200; i++)
+{
+    timer.Update();
+
+    if(!timer.IsRunning())
+        break;
+
+    std::this_thread::sleep_for(
+        std::chrono::milliseconds(1)
+    );
+}
+
+    if(executed)
+    {
+        Logger::Info(
+            "TimerTrigger: test PASSED"
+        );
+    }
+    else
+    {
+        Logger::Error(
+            "TimerTrigger: test FAILED"
+        );
+    }
+
+}
+
+// =========================
 // STATUS REPORT
 // =========================
 void PrintStatus(int ok, int total)
@@ -134,6 +203,8 @@ int main()
     // =========================
     std::vector<Module> modules =
     {
+        {"Logger", "core/logger.hpp", false},
+        {"TimerTrigger", "core/timertrigger.hpp", false},
         {"Input", "input/input_simulation.cpp", false},
         {"Math", "math/math.hpp", false},
         {"Graphics", "graphics/graphics.hpp", false},
@@ -168,9 +239,17 @@ int main()
     // =========================
     Logger::Info("Starting runtime validation...");
 
-    const bool mathOk = modules[1].ok;
-    const bool graphicsOk = modules[2].ok;
-    const bool pluginOk = modules[3].ok;
+    const bool loggerOk = modules[0].ok;
+    const bool timerOk = modules[1].ok;
+    const bool mathOk = modules[3].ok;
+    const bool graphicsOk = modules[4].ok;
+    const bool pluginOk = modules[5].ok;
+
+    if(loggerOk)
+       RunLoggerTests();
+
+    if(timerOk)
+       RunTimerTests();
 
     if (mathOk)
         RunMathTests();

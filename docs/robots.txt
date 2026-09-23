@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://toolgits.github.io/Toollibs/sitemap.xml
