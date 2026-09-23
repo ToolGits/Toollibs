@@ -1,15 +1,16 @@
 package com.toollibs.audio;
 
-public class ToollibsAudio {
+public final class ToollibsAudio {
 
     static {
         System.loadLibrary("toollibs_audio");
     }
 
-    // JNI bridge
+    private ToollibsAudio() {}
+
     public static native boolean init();
     public static native void load(String path);
-    public static native void play();
+    public static native void play(String path);
     public static native void pause();
     public static native void stop();
     public static native void shutdown();

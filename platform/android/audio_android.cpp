@@ -3,71 +3,79 @@
 
 #include "audio/audio.hpp"
 
-using namespace toollibs;
+using namespace Toollibs;
 
 extern "C" {
 
-// =========================
-// INIT
-// =========================
-
 JNIEXPORT jboolean JNICALL
-Java_com_toollibs_audio_ToollibsAudio_init(JNIEnv*, jclass) {
+Java_com_toollibs_audio_ToollibsAudio_init(
+    JNIEnv*,
+    jclass
+) {
     return Audio::init();
 }
 
-// =========================
-// LOAD
-// =========================
-
 JNIEXPORT void JNICALL
-Java_com_toollibs_audio_ToollibsAudio_load(JNIEnv* env, jclass, jstring path) {
+Java_com_toollibs_audio_ToollibsAudio_load(
+    JNIEnv* env,
+    jclass,
+    jstring path
+) {
+    if (!path)
+        return;
 
-    const char* cpath = env->GetStringUTFChars(path, nullptr);
+    const char* cpath =
+        env->GetStringUTFChars(path, nullptr);
+
+    if (!cpath)
+        return;
 
     Audio::load(std::string(cpath));
 
     env->ReleaseStringUTFChars(path, cpath);
 }
 
-// =========================
-// PLAY
-// =========================
-
 JNIEXPORT void JNICALL
-Java_com_toollibs_audio_ToollibsAudio_play(JNIEnv* env, jclass, jstring path) {
+Java_com_toollibs_audio_ToollibsAudio_play(
+    JNIEnv* env,
+    jclass,
+    jstring path
+) {
+    if (!path)
+        return;
 
-    const char* cpath = env->GetStringUTFChars(path, nullptr);
+    const char* cpath =
+        env->GetStringUTFChars(path, nullptr);
+
+    if (!cpath)
+        return;
 
     Audio::play(std::string(cpath));
 
     env->ReleaseStringUTFChars(path, cpath);
 }
 
-// =========================
-// PAUSE
-// =========================
-
 JNIEXPORT void JNICALL
-Java_com_toollibs_audio_ToollibsAudio_pause(JNIEnv*, jclass) {
+Java_com_toollibs_audio_ToollibsAudio_pause(
+    JNIEnv*,
+    jclass
+) {
     Audio::pause();
 }
 
-// =========================
-// STOP
-// =========================
-
 JNIEXPORT void JNICALL
-Java_com_toollibs_audio_ToollibsAudio_stop(JNIEnv*, jclass) {
+Java_com_toollibs_audio_ToollibsAudio_stop(
+    JNIEnv*,
+    jclass
+) {
     Audio::stop();
 }
 
-// =========================
-// SHUTDOWN
-// =========================
-
 JNIEXPORT void JNICALL
-Java_com_toollibs_audio_ToollibsAudio_shutdown(JNIEnv*, jclass) {
+Java_com_toollibs_audio_ToollibsAudio_shutdown(
+    JNIEnv*,
+    jclass
+) {
     Audio::shutdown();
 }
 

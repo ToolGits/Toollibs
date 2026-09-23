@@ -3,19 +3,16 @@
 
 #include <string>
 
-namespace toollibs {
+namespace Toollibs {
 
 class Audio {
 public:
     static bool init();
     static void shutdown();
-
     static bool load(const std::string& path);
     static void play(const std::string& file);
-
     static void pause();
     static void stop();
-
     static bool isLoaded();
 
 private:
