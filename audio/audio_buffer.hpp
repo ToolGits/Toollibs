@@ -1,7 +1,8 @@
 #pragma once
+
 #include <vector>
 
-namespace toollibs {
+namespace Toollibs {
 
 struct AudioBuffer {
     std::vector<float> samples;

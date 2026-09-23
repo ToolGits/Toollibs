@@ -1,27 +1,32 @@
 #include "fs.hpp"
 
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
-#include <algorithm>
 
 namespace fsys = std::filesystem;
 
 namespace toollibs {
 namespace fs {
 
-// =========================
-// SAFE PATH CHECK
-// =========================
+static bool hasParentTraversal(const fsys::path& path)
+{
+    for (const auto& component : path.lexically_normal())
+    {
+        if (component == "..")
+            return true;
+    }
+
+    return false;
+}
 
 bool isSafePath(const std::string& path)
 {
     try
     {
-        fsys::path p = fsys::weakly_canonical(path);
+        fsys::path p(path);
 
-        std::string str = p.string();
-
-        if (str.find("..") != std::string::npos)
+        if (hasParentTraversal(p))
             return false;
 
         return true;
@@ -32,94 +37,140 @@ bool isSafePath(const std::string& path)
     }
 }
 
-// =========================
-// BASIC
-// =========================
-
 bool exists(const std::string& path)
 {
-    return fsys::exists(path);
+    try
+    {
+        return fsys::exists(path);
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
-
-// =========================
-// FILE OPS
-// =========================
 
 std::string readFile(const std::string& path)
 {
-    if (!isSafePath(path)) return "";
+    if (!isSafePath(path))
+        return "";
 
-    std::ifstream file(path);
-    if (!file.is_open()) return "";
+    try
+    {
+        std::ifstream file(path);
 
-    std::string content, line;
-    while (std::getline(file, line))
-        content += line + "\n";
+        if (!file.is_open())
+            return "";
 
-    return content;
+        std::string content;
+        std::string line;
+
+        while (std::getline(file, line))
+            content += line + "\n";
+
+        return content;
+    }
+    catch (...)
+    {
+        return "";
+    }
 }
 
 bool write(const std::string& path, const std::string& data)
 {
-    if (!isSafePath(path)) return false;
+    if (!isSafePath(path))
+        return false;
 
-    std::ofstream file(path);
-    if (!file.is_open()) return false;
+    try
+    {
+        std::ofstream file(path);
 
-    file << data;
-    return true;
+        if (!file.is_open())
+            return false;
+
+        file << data;
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
 
 bool append(const std::string& path, const std::string& data)
 {
-    if (!isSafePath(path)) return false;
+    if (!isSafePath(path))
+        return false;
 
-    std::ofstream file(path, std::ios::app);
-    if (!file.is_open()) return false;
+    try
+    {
+        std::ofstream file(path, std::ios::app);
 
-    file << data;
-    return true;
+        if (!file.is_open())
+            return false;
+
+        file << data;
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
-
-// =========================
-// DIR OPS
-// =========================
 
 bool mkdir(const std::string& path)
 {
-    if (!isSafePath(path)) return false;
-    return fsys::create_directories(path);
+    if (!isSafePath(path))
+        return false;
+
+    try
+    {
+        return fsys::create_directories(path);
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
 
 std::vector<Entry> listDir(const std::string& path)
 {
     std::vector<Entry> items;
 
-    if (!isSafePath(path)) return items;
-    if (!fsys::exists(path)) return items;
+    if (!isSafePath(path))
+        return items;
 
-    for (auto& entry : fsys::directory_iterator(path))
+    try
     {
-        Entry e;
-        e.name = entry.path().filename().string();
-        e.isDir = entry.is_directory();
-        items.push_back(e);
+        if (!fsys::exists(path))
+            return items;
+
+        for (const auto& entry :
+             fsys::directory_iterator(path))
+        {
+            Entry e;
+            e.name = entry.path().filename().string();
+            e.isDir = entry.is_directory();
+            items.push_back(e);
+        }
+    }
+    catch (...)
+    {
+        return {};
     }
 
     return items;
 }
 
-// =========================
-// REMOVE
-// =========================
-
 bool remove(const std::string& path)
 {
-    if (!isSafePath(path)) return false;
-    if (!fsys::exists(path)) return false;
+    if (!isSafePath(path))
+        return false;
 
     try
     {
+        if (!fsys::exists(path))
+            return false;
+
         return fsys::remove_all(path) > 0;
     }
     catch (...)
@@ -128,21 +179,23 @@ bool remove(const std::string& path)
     }
 }
 
-// =========================
-// COPY / PASTE
-// =========================
-
 bool copy(const std::string& from, const std::string& to)
 {
-    if (!isSafePath(from) || !isSafePath(to)) return false;
-    if (!fsys::exists(from)) return false;
+    if (!isSafePath(from) || !isSafePath(to))
+        return false;
 
     try
     {
-        fsys::copy(from, to,
+        if (!fsys::exists(from))
+            return false;
+
+        fsys::copy(
+            from,
+            to,
             fsys::copy_options::recursive |
             fsys::copy_options::overwrite_existing
         );
+
         return true;
     }
     catch (...)
@@ -156,17 +209,19 @@ bool paste(const std::string& from, const std::string& to)
     return copy(from, to);
 }
 
-// =========================
-// RENAME / MOVE
-// =========================
-
-bool rename(const std::string& oldPath, const std::string& newPath)
+bool rename(
+    const std::string& oldPath,
+    const std::string& newPath
+)
 {
-    if (!isSafePath(oldPath) || !isSafePath(newPath)) return false;
-    if (!fsys::exists(oldPath)) return false;
+    if (!isSafePath(oldPath) || !isSafePath(newPath))
+        return false;
 
     try
     {
+        if (!fsys::exists(oldPath))
+            return false;
+
         fsys::rename(oldPath, newPath);
         return true;
     }
@@ -176,23 +231,30 @@ bool rename(const std::string& oldPath, const std::string& newPath)
     }
 }
 
-bool move(const std::string& from, const std::string& to)
+bool move(
+    const std::string& from,
+    const std::string& to
+)
 {
     return rename(from, to);
 }
 
-// =========================
-// NAVIGATION
-// =========================
-
 std::string currentPath()
 {
-    return fsys::current_path().string();
+    try
+    {
+        return fsys::current_path().string();
+    }
+    catch (...)
+    {
+        return "";
+    }
 }
 
 bool setCurrentPath(const std::string& path)
 {
-    if (!isSafePath(path)) return false;
+    if (!isSafePath(path))
+        return false;
 
     try
     {

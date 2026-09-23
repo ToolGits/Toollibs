@@ -1,169 +1,143 @@
 #include "audio/audio.hpp"
 
-#include <iostream>
-#include <vector>
-#include <string>
+#include <algorithm>
+#include <cctype>
 #include <filesystem>
-#include <thread>
-#include <chrono>
+#include <iostream>
+#include <limits>
+#include <string>
+#include <vector>
 
 namespace fs = std::filesystem;
 
-// =========================
-// UTIL
-// =========================
+static std::string lowerExtension(const fs::path& path) {
+    std::string ext = path.extension().string();
 
-static bool endsWith(const std::string& s, const std::string& suf) {
-    return s.size() >= suf.size() &&
-           s.compare(s.size() - suf.size(), suf.size(), suf) == 0;
+    std::transform(
+        ext.begin(),
+        ext.end(),
+        ext.begin(),
+        [](unsigned char c) {
+            return static_cast<char>(std::tolower(c));
+        }
+    );
+
+    return ext;
 }
 
-// =========================
-// SCANNER SAFE
-// =========================
+static std::vector<fs::path> findAudioFiles(const fs::path& directory) {
+    std::vector<fs::path> files;
 
-static std::vector<std::string> scanAudio(const std::string& path) {
+    try {
+        if (!fs::exists(directory) || !fs::is_directory(directory))
+            return files;
 
-    std::vector<std::string> files;
+        for (const auto& entry : fs::directory_iterator(directory)) {
+            if (!entry.is_regular_file())
+                continue;
 
-    if (!fs::exists(path)) {
-        std::cout << "[Audio] Folder not found: " << path << "\n";
-        return files;
-    }
+            const std::string ext = lowerExtension(entry.path());
 
-    for (const auto& entry : fs::directory_iterator(path)) {
-
-        if (!entry.is_regular_file())
-            continue;
-
-        std::string file = entry.path().string();
-
-        if (endsWith(file, ".wav") ||
-            endsWith(file, ".ogg") ||
-            endsWith(file, ".mp3")) {
-            files.push_back(file);
+            if (ext == ".wav" ||
+                ext == ".ogg" ||
+                ext == ".mp3") {
+                files.push_back(entry.path());
+            }
         }
     }
+    catch (const fs::filesystem_error& e) {
+        std::cout << "[AudioPlayer] Filesystem error: "
+                  << e.what() << "\n";
+    }
+
+    std::sort(
+        files.begin(),
+        files.end(),
+        [](const fs::path& a, const fs::path& b) {
+            return a.filename().string() < b.filename().string();
+        }
+    );
 
     return files;
 }
 
-// =========================
-// UI
-// =========================
-
-static void header() {
-    std::cout <<
-R"(
-
-╔══════════════════════════════════════╗
-║           TOOLLIBS AUDIO            ║
-║           Terminal Player           ║
-╚══════════════════════════════════════╝
-
-)";
-}
-
-static void menu() {
-    std::cout <<
-R"(
-┌──────────── MENU ────────────┐
-│  1 - List songs              │
-│  2 - Play song               │
-│  3 - Stop                    │
-│  4 - Exit                    │
-└──────────────────────────────┘
-> 
-)";
-}
-
-// =========================
-// MAIN
-// =========================
-
 int main() {
-
-    toollibs::Audio audio;
-
-    if (!audio.init()) {
-        std::cout << "[Audio] Failed to initialize system\n";
+    if (!Toollibs::Audio::init())
         return 1;
-    }
 
-    std::string path = "./audio_files";
-
-    header();
+    const fs::path audioDirectory = "./audio_files";
 
     while (true) {
+        std::vector<fs::path> files =
+            findAudioFiles(audioDirectory);
 
-        menu();
+        std::cout << "\n=== Toollibs Audio Player ===\n";
+        std::cout << "1. List audio files\n";
+        std::cout << "2. Play audio\n";
+        std::cout << "3. Stop\n";
+        std::cout << "4. Exit\n";
+        std::cout << "> ";
 
-        int opt;
-        std::cin >> opt;
+        int option;
 
-        if (opt == 1) {
-
-            auto files = scanAudio(path);
-
-            std::cout << "\n[AUDIO FILES]\n";
-
-            if (files.empty()) {
-                std::cout << "No audio files found.\n\n";
-            } else {
-                for (size_t i = 0; i < files.size(); i++) {
-                    std::cout << " [" << i << "] " << files[i] << "\n";
-                }
-                std::cout << "\n";
-            }
+        if (!(std::cin >> option)) {
+            std::cin.clear();
+            std::cin.ignore(
+                std::numeric_limits<std::streamsize>::max(),
+                '\n'
+            );
+            std::cout << "[AudioPlayer] Invalid input.\n";
+            continue;
         }
 
-        else if (opt == 2) {
-
-            auto files = scanAudio(path);
-
+        if (option == 1) {
             if (files.empty()) {
-                std::cout << "No audio available.\n";
+                std::cout << "[AudioPlayer] No audio files found.\n";
                 continue;
             }
 
-            std::cout << "Select index: ";
-
-            int idx;
-            std::cin >> idx;
-
-            if (idx < 0 || idx >= (int)files.size()) {
-                std::cout << "Invalid index\n";
+            for (std::size_t i = 0; i < files.size(); ++i) {
+                std::cout << i + 1
+                          << ". "
+                          << files[i].filename().string()
+                          << "\n";
+            }
+        }
+        else if (option == 2) {
+            if (files.empty()) {
+                std::cout << "[AudioPlayer] No audio files found.\n";
                 continue;
             }
 
-            std::cout << "\n▶ Playing: " << files[idx] << "\n\n";
+            std::cout << "Select file: ";
 
-            audio.play(files[idx]);
+            std::size_t index;
+
+            if (!(std::cin >> index) ||
+                index < 1 ||
+                index > files.size()) {
+                std::cin.clear();
+                std::cin.ignore(
+                    std::numeric_limits<std::streamsize>::max(),
+                    '\n'
+                );
+                std::cout << "[AudioPlayer] Invalid selection.\n";
+                continue;
+            }
+
+            Toollibs::Audio::play(files[index - 1].string());
         }
-
-        else if (opt == 3) {
-
-            std::cout << "■ Stopping audio...\n";
-
-            audio.stop();
+        else if (option == 3) {
+            Toollibs::Audio::stop();
         }
-
-        else if (opt == 4) {
-
-            std::cout << "Bye!\n";
+        else if (option == 4) {
             break;
         }
-
         else {
-            std::cout << "Invalid option\n";
+            std::cout << "[AudioPlayer] Unknown option.\n";
         }
-
-        std::this_thread::sleep_for(
-            std::chrono::milliseconds(100)
-        );
     }
 
-    audio.shutdown();
-
+    Toollibs::Audio::shutdown();
     return 0;
 }
