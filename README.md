@@ -39,7 +39,8 @@
 
 > [!IMPORTANT]
 > **Toollibs v4.4 — RebirthCatalyst** is the current stable release.
-> **Toollibs is officially frozen; there will be no more updates, but you can still use it, view the website, etc.
+>
+> **Toollibs is officially frozen;** there will be no more updates, but you can still use it, view the website, etc.
 >
 > The [`main`](https://github.com/ToolGits/Toollibs/tree/main) branch, also known as **TAether**, represents the stable Toollibs development line.
 > It contains released and verified changes intended for regular use.
